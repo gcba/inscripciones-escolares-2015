@@ -1,6 +1,5 @@
 # Visualización Inscripción Escolar 2015
 
-## Visualización interactiva realizada con D3 
+## Visualización interactiva realizada con [d3.js](http://d3js.org/)
 
-El usuario podrá conocer más acerca de cómo respondió el Gobierno de la Ciudad de Buenos Aires ante la inscripción del 2015. 
-La visualización se enfoca en los nuevos estudiantes que se suman al sistema educativo de la ciudad.
+Proyecto desarrollado entre Gobierno Abierto y el Ministerio de Educación.
