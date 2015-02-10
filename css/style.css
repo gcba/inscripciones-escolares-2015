@@ -1,0 +1,55 @@
+/*
+ * CSS styles para la visualización de educación
+ */
+
+h1 {
+	text-align: center;
+	font-size: 48px;
+	font-weight: 300;
+	margin-top: 0px;
+	padding-top: 20px;
+}
+
+h2 {
+	margin-top: 0px;
+	padding-top: 40px;
+	text-align: center;
+}
+
+form.filtro{
+	text-align: center;
+	position: fixed;
+	width: 100%;
+	top: 100px;
+	z-index: 999;
+}
+
+div#circles {
+	top: 100px;
+	width: 100%;
+	position: fixed;
+	z-index: 888;
+}
+
+div#circles svg {
+	margin: auto;
+	display: block;
+	margin-top: 10px;
+	background-color: #FFF;
+}
+
+section {
+	width: 100%;
+	height: 100vh;
+	position: relative;
+}
+
+a.next-section {
+	position: absolute;
+	bottom: 100px;
+}
+
+a.prev-section {
+	position: absolute;
+	bottom: 140px;
+}

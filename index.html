@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  	<link rel="stylesheet" type="text/css" href="css/onepage-scroll.css">
+  	<link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="js/d3.v3.min.js"></script>
+    <script type="text/javascript" src="js/jquery-onepage-scroll.js"></script>
+  </head>
+  <body>
+
+  	<!-- Filtro por Género o Procedencia -->
+  	<form class="form-inline filtro">
+		<div class="form-group">
+			<label class="radio-inline">Filtrar estudiantes por: </label>
+			<label class="radio-inline">
+				<input id="radio-genero" name="filtro" value="genero" type="radio">Genero
+			</label>
+			<label class="radio-inline">
+				<input id="radio-procedencia" name="filtro" value="procedencia" type="radio">Procedencia
+			</label>
+		</div>
+	</form>
+
+	<!-- Circulitos -->
+  	<div id="circles"></div>
+  	
+  	<div class="main">
+	  	<!-- Secciones --> 
+	  	<section id="general">
+	  		<h1>Inscripcion Escolar 2015</h1>
+	  		<a href="#" class="next-section">
+	  			<span class="flechita">Flecha Next</span>
+	  		</a>
+	  	</section>
+	  	<section id="niveles">
+	  		<h2>Inscripcion Escolar 2015</h2>
+	  		<a href="#" class="prev-section">
+	  			<span class="flechita">Flecha Prev</span>
+	  		</a>
+	  		<a href="#" class="next-section">
+	  			<span class="flechita">Flecha Next</span>
+	  		</a>
+	  	</section>
+	  	<section id="comuna">
+	  		<h2>Inscripcion Escolar 2015</h2>
+	  		<a href="#" class="prev-section">
+	  			<span class="flechita">Flecha Prev</span>
+	  		</a>
+	  		<a href="#" class="next-section">
+	  			<span class="flechita">Flecha Next</span>
+	  		</a>
+	  	</section>
+	</div>
+
+  	<script type="text/javascript" src="js/viz_educacion.js"></script>
+  	<script type="text/javascript" src="js/scrolling.js"></script>
+  </body>
+</html>

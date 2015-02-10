@@ -1,0 +1,17 @@
+{
+	"general": {
+		"genero": 
+		{
+			"femenino": 52,
+			"masculino": 48
+		},
+		"procedencia":
+		{
+			"caba": 80,
+			"provincia": 20
+		}
+	},
+	"inicial": {
+
+	} 
+}
