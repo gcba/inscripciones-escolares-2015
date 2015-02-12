@@ -1,9 +1,6 @@
 /*
  * JS para scrolling
  */
-
-var currentSeccion;
-
 $(".main").onepage_scroll({
 	sectionContainer: "section",     
 	easing: "ease",                  
@@ -11,16 +8,18 @@ $(".main").onepage_scroll({
 	pagination: true,                
 	updateURL: false,                
 	beforeMove: function() {
-		resetCambioSeccion();
+		resetCambioSeccion();		
 	},  
 	afterMove: function(index) { 
 		switch(index) {
 			case 1:
-				currentSeccion = "General";
+				$("section.active").removeClass("active");
+				$("section#general").addClass("active");
 				juntarCirculitos();
 				break;
 			case 2:
-				currentSeccion = "Niveles";
+				$("section.active").removeClass("active");
+				$("section#niveles").addClass("active");
 				separarNiveles();
 				break;
 			case 3:
@@ -89,13 +88,11 @@ var json = (function() {
     return json;
 })();
 
-// General Genero
-var generalFemenino = json.general.genero.femenino;
-var generalMasculino = json.general.genero.masculino;
-
-// General Procedencia
-var generalCABA = json.general.procedencia.caba;
-var generalProvincia = json.general.procedencia.provincia;
+// General
+var generalFemenino = Math.round(json.general.genero.femenino*totalCirculos/100);
+var generalMasculino = Math.round(json.general.genero.masculino*totalCirculos/100);
+var generalCABA = Math.round(json.general.procedencia.caba*totalCirculos/100);
+var generalProvincia = Math.round(json.general.procedencia.provincia*totalCirculos/100);
 
 // Niveles
 var jsonNiveles = json.niveles;
@@ -104,9 +101,21 @@ var cantidadNiveles = Object.keys(jsonNiveles).length;
 var niveles = [];
 
 for (var i = 0; i < cantidadNiveles; i++) {
-	var porcentajeNivel = jsonNiveles[Object.keys(jsonNiveles)[i]].total;
-	var circulosNivel = Math.round(porcentajeNivel*totalCirculos/100);
-	var newNivel = { x0: coordinadasNiveles[i], circulos: circulosNivel };
+	var nivelActual = jsonNiveles[Object.keys(jsonNiveles)[i]]; 
+	
+	var cantidadTotal = Math.round(nivelActual.total*totalCirculos/100);
+	var cantidadFemenino = Math.round(nivelActual.genero.femenino*cantidadTotal/100);
+	var cantidadMasculino = Math.round(nivelActual.genero.masculino*cantidadTotal/100);
+	var cantidadCABA = Math.round(nivelActual.procedencia.caba*cantidadTotal/100);
+	var cantidadProvincia = Math.round(nivelActual.procedencia.provincia*cantidadTotal/100);
+
+	var newNivel = { x0: coordinadasNiveles[i], 
+					 total: cantidadTotal, 
+					 femenino: cantidadFemenino, 
+					 masculino: cantidadMasculino,
+					 caba: cantidadCABA,
+					 provincia: cantidadProvincia };
+	
 	niveles.push(newNivel);
 }
 
@@ -129,43 +138,105 @@ juntarCirculitos();
 // Filtrar por genero
 d3.select("#radio-genero")
 	.on("click", function(){ 
-		filtrarPorGenero(generalFemenino); 
+		filtrarPorGenero(); 
 		$(this).blur(); 
 	});
 
 // Filtrar por procedencia
 d3.select("#radio-procedencia")
 	.on("click", function() { 
-		filtrarPorProcedencia(generalCABA); 
+		filtrarPorProcedencia(); 
 		$(this).blur(); 
 	});
 
-function filtrarPorGenero(porcentajeFemenino) {
-	var circulosFemeninos = (porcentajeFemenino * totalCirculos) / 100;
+function filtrarPorGenero() {
+	var currentSeccion = $("section.active").attr("id");
+	switch (currentSeccion) {
+		case "general":
+			filtrarGeneral();	
+			break;
+		case "niveles":
+			filtrarNiveles();
+			break;
+		default:
+			break;
+	}
 
-	// Pintar circulos
-	d3.selectAll("circle").transition().attr("fill", function(d,i){ 
-		if (i < circulosFemeninos) {
-			return colorFemenino;
-		}
-		else {
-			return colorMasculino;
-		}
-	});	
+	function filtrarGeneral(){
+		d3.selectAll("circle").transition().attr("fill", function(d,i){ 
+			if (i < generalFemenino) { return colorFemenino; } else { return colorMasculino; }
+		});	
+	}
+
+	function filtrarNiveles() {
+		var currentNivel = 0;
+		var currentCirculos = niveles[currentNivel].total;
+		var previousCirculos = 0;
+		var currentIndex;
+
+		d3.selectAll("circle").transition().attr("fill", function(d,i){
+			if (i >= currentCirculos) {
+				currentNivel++;
+				currentCirculos += niveles[currentNivel].total;
+			}
+			if (currentNivel > 0) {
+				var count = currentNivel;
+				previousCirculos = 0;
+				while (count > 0) {
+					previousCirculos += niveles[count-1].total;
+					count--;
+				}
+			}
+			currentIndex = i - previousCirculos;
+			var femCurrentNivel = niveles[currentNivel].femenino;
+			if (currentIndex < femCurrentNivel) { return colorFemenino; } else { return colorMasculino; }
+		});
+	}
 }
 
-function filtrarPorProcedencia(porcentajeCABA) {
-	var circulosCABA = (porcentajeCABA * totalCirculos) / 100;
+function filtrarPorProcedencia() {
+	var currentSeccion = $("section.active").attr("id");
+	switch (currentSeccion) {
+		case "general":
+			filtrarGeneral();				
+	 		break;
+	 	case "niveles":
+	 		filtrarNiveles();
+	 		break;
+	 	default:
+	 		break;
+	}
 
-	// Pintar circulos
-	d3.selectAll("circle").transition().attr("fill", function(d,i){ 
-		if (i < circulosCABA) {
-			return colorCABA;
-		}
-		else {
-			return colorProvincia;
-		}
-	});	
+	function filtrarGeneral() {
+		d3.selectAll("circle").transition().attr("fill", function(d,i){ 
+			if (i < generalCABA) { return colorCABA; } else { return colorProvincia; }
+ 		});
+	}	
+
+	function filtrarNiveles() {
+		var currentNivel = 0;
+		var currentCirculos = niveles[currentNivel].total;
+		var previousCirculos = 0;
+		var currentIndex;
+
+		d3.selectAll("circle").transition().attr("fill", function(d,i){
+			if (i >= currentCirculos) {
+				currentNivel++;
+				currentCirculos += niveles[currentNivel].total;
+			}
+			if (currentNivel > 0) {
+				var count = currentNivel;
+				previousCirculos = 0;
+				while (count > 0) {
+					previousCirculos += niveles[count-1].total;
+					count--;
+				}
+			}
+			currentIndex = i - previousCirculos;
+			var cabaCurrentNivel = niveles[currentNivel].caba;
+			if (currentIndex < cabaCurrentNivel) { return colorCABA; } else { return colorProvincia; }
+		});
+	}
 }
 
 /*
@@ -190,7 +261,7 @@ function juntarCirculitos() {
 function separarNiveles() {
 	// Inicializar variables de posicion
 	var currentNivel = 0;
-	var currentCirculos = niveles[currentNivel].circulos;
+	var currentCirculos = niveles[currentNivel].total;
 	var previousCirculos = 0;
 	var currentIndex;
 
@@ -199,7 +270,7 @@ function separarNiveles() {
 		return calcularNuevaPosicion("x", i);
 	}).attr("cy", function(d,i){		
 		currentNivel = 0;
-		currentCirculos = niveles[currentNivel].circulos;
+		currentCirculos = niveles[currentNivel].total;
 		previousCirculos = 0;
 
 		return calcularNuevaPosicion("y", i);
@@ -209,13 +280,13 @@ function separarNiveles() {
 		var result;
 		while (index >= currentCirculos) {
 			currentNivel++;
-			currentCirculos += niveles[currentNivel].circulos;
+			currentCirculos += niveles[currentNivel].total;
 		}
 		if (currentNivel > 0) {
 			var count = currentNivel;
 			previousCirculos = 0;
 			while (count > 0) {
-				previousCirculos += niveles[count-1].circulos;
+				previousCirculos += niveles[count-1].total;
 				count--;
 			}
 		}
