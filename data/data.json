@@ -1,17 +1,59 @@
 {
 	"general": {
-		"genero": 
-		{
+		"genero": {
 			"femenino": 52,
 			"masculino": 48
 		},
-		"procedencia":
-		{
+		"procedencia": {
 			"caba": 80,
 			"provincia": 20
 		}
 	},
-	"inicial": {
-
-	} 
+	"niveles": {
+		"inicial": {
+			"total": 30,
+			"genero": {
+				"femenino": 62,
+				"masculino": 38	
+			},
+			"procedencia": {
+				"caba": 70,
+				"provincia": 30
+			}						
+		},
+		"primario": {
+			"total": 20,
+			"genero": {
+				"femenino": 54,
+				"masculino": 46		
+			},
+			"procedencia": {
+				"caba": 75,
+				"provincia": 25
+			}	
+		},
+		"secundario": {
+			"total": 27,
+			"genero": {
+				"femenino": 35,
+				"masculino": 65	
+			},
+			"procedencia": {
+				"caba": 62,
+				"provincia": 38
+			}	
+		},
+		"terciario": {
+			"total": 23,
+			"genero": {
+				"femenino": 50,
+				"masculino": 50	
+			},
+			"procedencia": {
+				"caba": 78,
+				"provincia": 22
+			}	
+		}	
+	}
+	 
 }
