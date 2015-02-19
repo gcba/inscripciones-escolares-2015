@@ -54,6 +54,11 @@
 				"provincia": 22
 			}	
 		}	
+	}, 
+	"comunas": {
+		"inicial":{
+			"1": 1000
+		}
 	}
 	 
 }

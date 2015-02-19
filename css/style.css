@@ -24,18 +24,28 @@ form.filtro{
 	z-index: 999;
 }
 
-div#circles {
+div#viz {
 	top: 100px;
 	width: 100%;
 	position: fixed;
 	z-index: 888;
 }
 
-div#circles svg {
+div#viz svg {
 	margin: auto;
 	display: block;
 	margin-top: 10px;
 	background-color: #FFF;
+}
+
+div.info {
+	position: relative;
+	width: 100%;
+}
+div.explicativo{
+	position: absolute;
+	right: 100px;
+	top: 200px;
 }
 
 section {
@@ -44,12 +54,17 @@ section {
 	position: relative;
 }
 
-a.next-section {
-	position: absolute;
-	bottom: 100px;
+a.arrow {
+	position: absolute;	
+	left: 50%;
+	color: #333333;
 }
-
-a.prev-section {
-	position: absolute;
-	bottom: 140px;
+	a.arrow span {
+		font-size: 24px;
+	}
+.next-section {
+	bottom: 70px;
+}
+.prev-section {
+	bottom: 110px;
 }

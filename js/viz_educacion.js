@@ -16,11 +16,13 @@ $(".main").onepage_scroll({
 				$("section.active").removeClass("active");
 				$("section#general").addClass("active");
 				juntarCirculitos();
+				mostrarExplicativos();
 				break;
 			case 2:
 				$("section.active").removeClass("active");
 				$("section#niveles").addClass("active");
 				separarNiveles();
+				mostrarExplicativos();
 				break;
 			case 3:
 				break;
@@ -48,7 +50,7 @@ var svgWidth = 960;
 var svgHeight = 400;
 
 // Crear SVG para los circulos
-var grilla = d3.select("#circles")
+var grilla = d3.select("#viz")
   .append("svg")
   .attr("width", svgWidth)
   .attr("height", svgHeight);
@@ -59,11 +61,12 @@ var posx = 200;
 var posy = 20;	
 var margin = 25;
 
-// Colores de filtrado
-var colorFemenino = "#FF63D6";
-var colorMasculino = "#6392FF";
+// Colores
+var colorFemenino = "#BA1135";
+var colorMasculino = "#05a381";
 var colorCABA = "#FFD300";
 var colorProvincia = "#F2803A";
+var colorNeutro = "#888888"; 
 
 // Filas y columnas de la grilla general y niveles
 var filasGeneral = 9;
@@ -119,15 +122,35 @@ for (var i = 0; i < cantidadNiveles; i++) {
 	niveles.push(newNivel);
 }
 
+// Explicativos
+var explicativos = (function() {
+    var json = null;
+    $.ajax({
+        'async': false,
+        'global': false,
+        'url': "data/explicativos.json",
+        'dataType': "json",
+        'success': function (data) {
+            json = data;
+        }
+    });
+    return json;
+})();
+
+/*
+ *	End Datos
+ */
+
 // Generar circulitos en estado cero
 for (i = 0; i < filasGeneral; i++) {
 	for (j = 0; j < columnasGeneral; j++) {
 		grilla.append("circle")
-		  .attr("fill", "grey")
+		  .attr("fill", colorNeutro)
 		  .attr("r", radio);
 	}
 }
 juntarCirculitos();
+mostrarExplicativos();
 
 /***********************************************/
 
@@ -249,6 +272,40 @@ function filtrarPorProcedencia() {
  * Funciones
  */
 
+function mostrarExplicativos() {
+	var currentSeccion = $("section.active").attr("id");
+	switch (currentSeccion) {
+		case "general":
+			mostrarExplicativosGeneral();
+	 		break;
+	 	case "niveles":
+	 		mostrarExplicativosNiveles();
+	 		break;
+	 	default:
+	 		break;
+	}	
+
+	function mostrarExplicativosGeneral() {
+		var radioSeleccionado = $("input[type=radio]:checked");
+		if (radioSeleccionado.length == 0) {
+			// Estado Reset
+			d3.select("div.explicativo").transition().text(explicativos.secciones.general.reset);
+		}
+		else {
+			if (radioSeleccionado.val() == "genero") {
+
+			}
+			else if (radioSeleccionado.val() == "procedencia") {
+
+			}
+		}
+	}
+
+	function mostrarExplicativosNiveles() {
+
+	}
+}
+
 function juntarCirculitos() {
 	d3.selectAll("circle").transition().attr("cx", function(d,i){
 		return posx + (margin+radio) * ((i % columnasGeneral)+1);
@@ -307,5 +364,5 @@ function separarNiveles() {
 
 function resetCambioSeccion() {
 	d3.selectAll("input[type=radio]").property("checked", false);
-	d3.selectAll("circle").transition().attr("fill", "grey");	
+	d3.selectAll("circle").transition().attr("fill", colorNeutro);	
 }

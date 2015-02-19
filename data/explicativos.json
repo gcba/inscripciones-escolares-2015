@@ -1,0 +1,62 @@
+{
+	"secciones": {
+		"general": {
+			"reset": "Hay muchos estudiantes nuevos",
+			"genero": {
+				"femenino": "Mucha mina",
+				"masculino": "Mucho pibe"
+			},
+			"procedencia": {
+				"caba": "Mucha gente cheta",
+				"provincia": "Poca gente del extranjero"
+			}
+		},
+		"niveles": {
+			"reset": "Un monton de gente en un monton de niveles",
+			"inicial": {
+				"general": "Wow inicial",
+				"genero": {
+					"femenino": "En inicial mucha mina",
+					"masculino": "En inicial mucho pibe"
+				},
+				"procedencia": {
+					"caba": "En inicial chetos",
+					"provincia": "En inicial extranjeros"
+				}	
+			},
+			"primario": {
+				"general": "Wow primario",
+				"genero": {
+					"femenino": "En primario mucha mina",
+					"masculino": "En primario mucho pibe"
+				},
+				"procedencia": {
+					"caba": "En primario chetos",
+					"provincia": "En primario extranjeros"
+				}	
+			},
+			"secundario": {
+				"general": "Wow secundario",
+				"genero": {
+					"femenino": "En secundario mucha mina",
+					"masculino": "En secundario mucho pibe"
+				},
+				"procedencia": {
+					"caba": "En secundario chetos",
+					"provincia": "En secundario extranjeros"
+				}	
+			},
+			"terciario": {
+				"general": "Wow terciario",
+				"genero": {
+					"femenino": "En terciario mucha mina",
+					"masculino": "En terciario mucho pibe"
+				},
+				"procedencia": {
+					"caba": "En terciario chetos",
+					"provincia": "En terciario extranjeros"
+				}	
+			}
+		}
+	}
+}
