@@ -15,14 +15,12 @@ $(".main").onepage_scroll({
 			case 1:
 				$("section.active").removeClass("active");
 				$("section#general").addClass("active");
-				juntarCirculitos();
-				mostrarExplicativos();
+				juntarCirculitos();				
 				break;
 			case 2:
 				$("section.active").removeClass("active");
 				$("section#niveles").addClass("active");
 				separarCirculitos();
-				mostrarExplicativos();
 				break;
 			case 3:
 				break;
@@ -149,18 +147,24 @@ for (i = 0; i < filasGeneral; i++) {
 		var grupo = grilla.append("g").attr("class", "circulo");
 		grupo.append("circle")
 			.attr("fill", colorNeutro)
-			.attr("r", radio);
+			.attr("r", radio)
+			.attr("class", "general");
 		grupo.append("rect")
 			.attr("width", radio*2+margin-radio)
 			.attr("height", radio*2+margin-radio)
 			.attr("fill", "transparent")
-			.on("mouseover", function(d,i){
-				//TODO
+			.on("mouseover", function(d){
+				// Buscar círculo que corresponde a este rectángulo
+				var circulo = $(this).parent().children("circle");
+				var claseCirculo = circulo.attr("class");
+				d3.selectAll("circle." + claseCirculo.split(' ').join('.')).transition().duration(150).style("opacity", 0.4);
+			})
+			.on("mouseout", function(d){
+				d3.selectAll("circle").transition().duration(100).style("opacity", 1);
 			});
 	}
 }
 juntarCirculitos();
-mostrarExplicativos();
 
 /***********************************************/
 
@@ -196,11 +200,12 @@ function filtrarPorGenero() {
 	}
 
 	function filtrarGeneral(){
+		d3.selectAll("circle").attr("class", function(d,i){
+			if (i < generalFemenino) { return "general femenino"; } else { return "general masculino"; }
+		});	
 		d3.selectAll("circle").transition().attr("fill", function(d,i){ 
 			if (i < generalFemenino) { return colorFemenino; } else { return colorMasculino; }
-		}).attr("class", function(d,i){
-			if (i < generalFemenino) { return "femenino"; } else { return "masculino"; }
-		});	
+		});
 	}
 
 	function filtrarNiveles() {
@@ -210,7 +215,9 @@ function filtrarPorGenero() {
 		var currentIndex;
 
 		d3.selectAll("circle").attr("class", function(d,i){			
-			return calcularSexo(i);
+			//TODO: utilizar RegEx para buscar la clase de nivel
+			var nivel = d3.select(this).attr("class").split(" ")[0];
+			return nivel + " " + calcularSexo(i);
 		});
 
 		currentNivel = 0;
@@ -255,10 +262,11 @@ function filtrarPorProcedencia() {
 	}
 
 	function filtrarGeneral() {
+		d3.selectAll("circle").attr("class", function(d,i){
+ 			if (i < generalCABA) { return "general caba"; } else { return "general provincia"; }
+ 		});
 		d3.selectAll("circle").transition().attr("fill", function(d,i){ 
 			if (i < generalCABA) { return colorCABA; } else { return colorProvincia; }
- 		}).attr("class", function(d,i){
- 			if (i < generalCABA) { return "caba"; } else { return "provincia"; }
  		});
 	}	
 
@@ -269,7 +277,9 @@ function filtrarPorProcedencia() {
 		var currentIndex;
 
 		d3.selectAll("circle").attr("class", function(d,i){
-			return calcularProcedencia(i);
+			//TODO: utilizar RegEx para buscar la clase de nivel
+			var nivel = d3.select(this).attr("class").split(" ")[0];
+			return nivel + " " + calcularProcedencia(i);
 		});
 
 		currentNivel = 0;
@@ -310,39 +320,6 @@ function filtrarPorProcedencia() {
  * Funciones
  */
 
-function mostrarExplicativos() {
-	var currentSeccion = $("section.active").attr("id");
-	switch (currentSeccion) {
-		case "general":
-			mostrarExplicativosGeneral();
-	 		break;
-	 	case "niveles":
-	 		mostrarExplicativosNiveles();
-	 		break;
-	 	default:
-	 		break;
-	}	
-
-	function mostrarExplicativosGeneral() {
-		var radioSeleccionado = $("input[type=radio]:checked");
-		if (radioSeleccionado.length == 0) {
-			// Estado Reset
-			d3.select("div.explicativo").transition().text(explicativos.secciones.general.reset);
-		}
-		else {
-			if (radioSeleccionado.val() == "genero") {
-
-			}
-			else if (radioSeleccionado.val() == "procedencia") {
-
-			}
-		}
-	}
-
-	function mostrarExplicativosNiveles() {
-
-	}
-}
 
 function endall(transition, callback) { 
 	var n = 0; 
@@ -363,6 +340,7 @@ function juntarCirculitos() {
 	}).attr("cy", function(d,i){
 		return posy + (margin+radio) * (Math.floor(i/columnasGeneral)+1);
 	});
+	d3.selectAll("circle").attr("class", "general");	
 }
 
 // Función que divide los circulitos en niveles
@@ -377,10 +355,7 @@ function separarCirculitos() {
 	d3.selectAll("circle").transition().attr("cx", function(d,i){
 		return calcularNuevaPosicion("x", i);
 	}).attr("cy", function(d,i){		
-		currentNivel = 0;
-		currentCirculos = niveles[currentNivel].total;
 		previousCirculos = 0;
-
 		return calcularNuevaPosicion("y", i);
 	})
 	.call(endall, function() { 
@@ -390,15 +365,26 @@ function separarCirculitos() {
 		}).attr("y", function(d,i){						
 			var circleNuevoY = $(this).parent().children("circle").attr("cy");
 			return circleNuevoY - radio - (margin-radio)/2;
-		});
+		});		
+
+		d3.selectAll("circle").attr("class", function(d,i){
+			return "nivel" + calcularNivel(i);
+		})
 	});
 
-	function calcularNuevaPosicion(axis, index){
-		var result;
+	function calcularNivel(index) {
+		var currentNivel = 0;
+		var currentCirculos = niveles[currentNivel].total;
 		while (index >= currentCirculos) {
 			currentNivel++;
 			currentCirculos += niveles[currentNivel].total;
 		}
+		return currentNivel;
+	}
+
+	function calcularNuevaPosicion(axis, index){
+		var result;
+		var currentNivel = calcularNivel(index);
 		if (currentNivel > 0) {
 			var count = currentNivel;
 			previousCirculos = 0;
