@@ -8,7 +8,12 @@ $(".main").onepage_scroll({
 	pagination: true,                
 	updateURL: false,                
 	beforeMove: function(index) {
-		resetCambioSeccion();		
+		resetCambioSeccion();	
+		switch(index) {
+			case 5:
+				$("svg").hide();
+				break;
+		}	
 	},  
 	afterMove: function(index) { 
 		switch(index) {
@@ -32,6 +37,7 @@ $(".main").onepage_scroll({
 				break;
 			case 4:								
 				$("form.filtro").hide();
+				$("svg").show();
 				break;
 		}
 	},   
