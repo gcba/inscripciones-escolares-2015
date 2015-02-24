@@ -1,0 +1,29 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+#mapaInteractivo {
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    z-index: 900;
+}
+.cartodb-popup,
+.cartodb-popup-tip-container {
+    background: transparent !important;
+    z-index: 999;
+}
+.cartodb-infowindow {
+    position: fixed !important;
+}
+.cartodb-popup-content-wrapper {
+    background: steelblue !important;
+    max-width: 1024px;
+}
+.cartodb-popup-cont .close {
+    color: #000000;
+    text-align: right;
+}
