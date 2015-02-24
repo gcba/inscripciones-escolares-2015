@@ -7,22 +7,31 @@ $(".main").onepage_scroll({
 	animationTime: 1000,             
 	pagination: true,                
 	updateURL: false,                
-	beforeMove: function() {
+	beforeMove: function(index) {
 		resetCambioSeccion();		
 	},  
 	afterMove: function(index) { 
 		switch(index) {
 			case 1:
 				$("section.active").removeClass("active");
-				$("section#general").addClass("active");
-				juntarCirculitos();				
-				break;
+				$("section#landing").addClass("active");				
+				showOneCirculito();
+				break;				
 			case 2:
 				$("section.active").removeClass("active");
-				$("section#niveles").addClass("active");
-				separarCirculitos();
+				$("section#general").addClass("active");
+				$(".circulo").show();
+				$("form.filtro").show();
+				hideOneCirculitoYJuntar();
 				break;
 			case 3:
+				$("section.active").removeClass("active");
+				$("section#niveles").addClass("active");				
+				$("form.filtro").show();
+				separarCirculitos();
+				break;
+			case 4:								
+				$("form.filtro").hide();
 				break;
 		}
 	},   
@@ -141,7 +150,7 @@ var explicativos = (function() {
  *	End Datos
  */
 
-// Generar circulitos en estado cero
+// Generar todos los circulitos en estado cero (sin mostrarlos)
 for (i = 0; i < filasGeneral; i++) {
 	for (j = 0; j < columnasGeneral; j++) {
 		var grupo = grilla.append("g").attr("class", "circulo");
@@ -157,14 +166,22 @@ for (i = 0; i < filasGeneral; i++) {
 				// Buscar círculo que corresponde a este rectángulo
 				var circulo = $(this).parent().children("circle");
 				var claseCirculo = circulo.attr("class");
-				d3.selectAll("circle." + claseCirculo.split(' ').join('.')).transition().duration(150).style("opacity", 0.4);
+				d3.selectAll("circle." + claseCirculo.split(' ').join('.')).style("opacity", 0.4);
 			})
 			.on("mouseout", function(d){
-				d3.selectAll("circle").transition().duration(100).style("opacity", 1);
+				d3.selectAll("circle").style("opacity", 1);	
 			});
 	}
 }
+
+var middleIndex = (Math.floor(totalCirculos/2));
+var grupoCirculoMedio = d3.selectAll("g.circulo").filter(function(d, i){ return i == middleIndex; });
+var circuloMedio = d3.selectAll("circle").filter(function(d, i){ return i == middleIndex; });
+var posxMedio = posx + (margin+radio) * ((middleIndex % columnasGeneral)+1);
+var posyMedio = posy + (margin+radio) * (Math.floor(middleIndex/columnasGeneral)+1);
+
 juntarCirculitos();
+showOneCirculito();
 
 /***********************************************/
 
@@ -328,6 +345,18 @@ function endall(transition, callback) {
     .each("end", function() { if (!--n) callback.apply(this, arguments); }); 
 } 
 
+function showOneCirculito() {
+	$(".circulo").hide();
+	grupoCirculoMedio.style("display", "block");
+	circuloMedio.attr("cx", posxMedio).attr("cy", posyMedio);
+	circuloMedio.transition().duration(500).attr("r", radio*10);
+}
+
+function hideOneCirculitoYJuntar() {		
+	circuloMedio.transition().duration(500).attr("r", radio).call(endall, function(){
+		juntarCirculitos();
+	});
+}
 
 function juntarCirculitos() {
 	d3.selectAll("rect").transition().attr("x", function(d,i){
@@ -340,7 +369,7 @@ function juntarCirculitos() {
 	}).attr("cy", function(d,i){
 		return posy + (margin+radio) * (Math.floor(i/columnasGeneral)+1);
 	});
-	d3.selectAll("circle").attr("class", "general");	
+	d3.selectAll("circle").attr("class", "general");
 }
 
 // Función que divide los circulitos en niveles
@@ -349,7 +378,7 @@ function separarCirculitos() {
 	var currentNivel = 0;
 	var currentCirculos = niveles[currentNivel].total;
 	var previousCirculos = 0;
-	var currentIndex;
+	var currentIndex;	
 
 	//TODO: Arreglar el tema del reseteo de las variables para el cy
 	d3.selectAll("circle").transition().attr("cx", function(d,i){
@@ -408,7 +437,7 @@ function separarCirculitos() {
 	}
 }
 
-function resetCambioSeccion() {
+function resetCambioSeccion() {	
 	d3.selectAll("input[type=radio]").property("checked", false);
 	d3.selectAll("circle").transition().attr("fill", colorNeutro);	
 }

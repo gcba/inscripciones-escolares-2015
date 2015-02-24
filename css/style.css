@@ -16,16 +16,25 @@ h2 {
 	text-align: center;
 }
 
+h3 {
+	margin-top: 10px;
+	font-size: 16px;
+	font-weight: 200;
+	color: #555;
+	text-align: center;
+}
+
 form.filtro{
 	text-align: center;
 	position: fixed;
 	width: 100%;
-	top: 100px;
+	top: 120px;
 	z-index: 800;
+	display: none;
 }
 
 div#viz {
-	top: 100px;
+	top: 120px;
 	width: 100%;
 	position: fixed;
 	z-index: 700;
