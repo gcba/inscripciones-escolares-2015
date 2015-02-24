@@ -21,14 +21,14 @@ form.filtro{
 	position: fixed;
 	width: 100%;
 	top: 100px;
-	z-index: 999;
+	z-index: 800;
 }
 
 div#viz {
 	top: 100px;
 	width: 100%;
 	position: fixed;
-	z-index: 888;
+	z-index: 700;
 }
 
 div#viz svg {
