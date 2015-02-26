@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head> 
+   	<meta charset="utf-8">
+		<title>Inscripción Escolar 2015</title>
+    <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.11/themes/css/cartodb.css" />
+    <script type="text/javascript" src="http://libs.cartocdn.com/cartodb.js/v3/3.11/cartodb.js"></script>
+  	<link rel="stylesheet" type="text/css" href="css/estilosMapaInteractivo.css">
+  </head>
+  <body>
+
+
+		<div id="mapaInteractivo"></div>
+		<!--
+      Infowindows Mapa Interactivo
+    -->
+    <script type="infowindow/html" id="infowindow_template">
+        <div class="cartodb-popup">
+            <a href="#close" class="cartodb-popup-close-button close">x</a>
+            <div class="cartodb-popup-content-wrapper">
+                <div class="cartodb-popup-cont">
+
+                    <h4>{{content.data.nombresc}}</h4>
+                    <p>
+                        {{content.data.nombresc}}
+                    </p>
+
+                </div>
+            </div>
+            <div class="cartodb-popup-tip-container"></div>
+        </div>
+    </script>
+  	<script type="text/javascript" src="js/mapaInteractivo.js"></script>  	
+  </body>
+</html>
