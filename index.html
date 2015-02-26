@@ -3,7 +3,7 @@
   <head> 
    	<meta charset="utf-8">
 		<title>Inscripción Escolar 2015</title>
-  	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+  	<link href="css/bootstrap.min.css" rel="stylesheet">
   	<link rel="stylesheet" type="text/css" href="css/onepage-scroll.css">
   	<link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.11/themes/css/cartodb.css" />
@@ -14,7 +14,6 @@
     <script type="text/javascript" src="js/topojson.v1.min.js"></script>
     <script type="text/javascript" src="js/jquery-onepage-scroll.js"></script>
     <script type="text/javascript" src="http://libs.cartocdn.com/cartodb.js/v3/3.11/cartodb.js"></script>
-  	
   </head>
   <body>
 
@@ -66,8 +65,11 @@
 	  		</a>	  		
 	  	</section>
 	  	<section id="mapa">
-	  		<h2>Inscripcion Escolar 2015</h2>
-	  		<div id="mapaInteractivo"></div>
+	  			<div id="volverDelMapa">
+	  				<a href="#" class="prev-section"><button class="btn btn-default"><span class="glyphicon glyphicon-menu-up"></span> VOLVER</button></a>
+					</div>
+	  			
+	  		<iframe src="mapaInteractivo.html"></iframe>
 	  	</section>
 	</div>
 
