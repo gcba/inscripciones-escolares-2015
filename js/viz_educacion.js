@@ -8,36 +8,39 @@ $(".main").onepage_scroll({
 	pagination: true,                
 	updateURL: false,                
 	beforeMove: function(index) {
-		resetCambioSeccion();	
-		switch(index) {
-			case 5:
-				$("svg").hide();
-				break;
-		}	
+		resetCambioSeccion();			
 	},  
 	afterMove: function(index) { 
-		switch(index) {
-			case 1:
-				$("section.active").removeClass("active");
-				$("section#landing").addClass("active");				
+		var currentSeccion = $("section.active").attr("id");
+		$("section.active").removeClass("active");
+		$("section#" + currentSeccion).addClass("active");
+		switch(currentSeccion) {
+			case "landing":			
 				showOneCirculito();
 				break;				
-			case 2:
-				$("section.active").removeClass("active");
-				$("section#general").addClass("active");
+			case "general":
 				$(".circulo").show();
 				$("form.filtro").show();
-				hideOneCirculitoYJuntar();
+				if (circuloMedio.attr("r") == circulo.radio) {
+					juntarCirculitos();
+				}				
+				else {
+					hideOneCirculitoYJuntar();	
+				}
 				break;
-			case 3:
-				$("section.active").removeClass("active");
-				$("section#niveles").addClass("active");				
+			case "niveles":
 				$("form.filtro").show();
+				$(".circulo").show();
+				$("text").show();
 				separarCirculitos();
 				break;
-			case 4:								
-				$("form.filtro").hide();
+			case "comuna":								
+				$("#mapaCABA").show();
+				$("form.filtro").show();				
 				$("svg").show();
+				mostrarMapaComunas();				
+				break;
+			case "mapa":
 				break;
 		}
 	},   
@@ -59,35 +62,44 @@ $('.prev-section').click(function(e){
  * JS para visualizacion
  */ 
 
-var svgWidth = 960;
-var svgHeight = 400;
+var grillaSvg = {
+	ancho: 960,
+	alto: 470,
+	labelSpace: 70,
+	filasGeneral: 9,
+	columnasGeneral: 15,
+	columnasPorNivel: 5
+}
 
-// Crear SVG para los circulos
-var grilla = d3.select("#viz")
-			   .append("svg")
-			   .attr("width", svgWidth)
-			   .attr("height", svgHeight)
-			   .append("g")
-			   .attr("class", "contenedor");
+var totalCirculos = grillaSvg.filasGeneral * grillaSvg.columnasGeneral;
 
-// Variables iniciales de los círculos
-var radio = 10;
-var posx = 200;
-var posy = 20;	
-var margin = 25;
+var svgGeneral = d3.select("#viz")
+			   	   .append("svg")
+			   	   .attr("width", grillaSvg.ancho)
+			   	   .attr("height", grillaSvg.alto)
+
+var grilla = svgGeneral.append("g").attr("class", "contenedor");
+
+var mapaComunas = svgGeneral.append("g")
+					.attr("id", "mapaCABA");
+
+// Detalles de los círculos
+var circulo = {
+	radio: 10,
+	radioGrande: 100,
+	posx: 200,
+	posy: 20,
+	margin: 25
+}
 
 // Colores
-var colorFemenino = "#BA1135";
-var colorMasculino = "#05a381";
-var colorCABA = "#FFD300";
-var colorProvincia = "#F2803A";
-var colorNeutro = "#888888"; 
-
-// Filas y columnas de la grilla general y niveles
-var filasGeneral = 9;
-var columnasGeneral = 15;
-var totalCirculos = filasGeneral * columnasGeneral;
-var columnasPorNivel = 5;
+var colores = {
+	femenino: "#BA1135",
+	masculino: "#05a381",
+	caba: "#FFD300",
+	provincia: "#F2803A",
+	neutro: "#888888"
+}
 
 /*
  *	Datos
@@ -107,10 +119,10 @@ var json = (function() {
 })();
 
 // General
-var generalFemenino = Math.round(json.general.genero.femenino*totalCirculos/100);
-var generalMasculino = Math.round(json.general.genero.masculino*totalCirculos/100);
-var generalCABA = Math.round(json.general.procedencia.caba*totalCirculos/100);
-var generalProvincia = Math.round(json.general.procedencia.provincia*totalCirculos/100);
+var generalFemenino = Math.round(json.general.genero.femenino*totalCirculos/100),
+	generalMasculino = Math.round(json.general.genero.masculino*totalCirculos/100),
+	generalCABA = Math.round(json.general.procedencia.caba*totalCirculos/100),
+	generalProvincia = Math.round(json.general.procedencia.provincia*totalCirculos/100);
 
 // Niveles
 var jsonNiveles = json.niveles;
@@ -122,10 +134,10 @@ for (var i = 0; i < cantidadNiveles; i++) {
 	var nivelActual = jsonNiveles[Object.keys(jsonNiveles)[i]]; 
 	
 	var cantidadTotal = Math.round(nivelActual.total*totalCirculos/100);
-	var cantidadFemenino = Math.round(nivelActual.genero.femenino*cantidadTotal/100);
-	var cantidadMasculino = Math.round(nivelActual.genero.masculino*cantidadTotal/100);
-	var cantidadCABA = Math.round(nivelActual.procedencia.caba*cantidadTotal/100);
-	var cantidadProvincia = Math.round(nivelActual.procedencia.provincia*cantidadTotal/100);
+	var cantidadFemenino = Math.round(nivelActual.genero.femenino*cantidadTotal/100),
+		cantidadMasculino = Math.round(nivelActual.genero.masculino*cantidadTotal/100),
+		cantidadCABA = Math.round(nivelActual.procedencia.caba*cantidadTotal/100),
+		cantidadProvincia = Math.round(nivelActual.procedencia.provincia*cantidadTotal/100);
 
 	var newNivel = { x0: coordinadasNiveles[i], 
 					 total: cantidadTotal, 
@@ -157,22 +169,23 @@ var explicativos = (function() {
  */
 
 // Generar todos los circulitos en estado cero (sin mostrarlos)
-for (i = 0; i < filasGeneral; i++) {
-	for (j = 0; j < columnasGeneral; j++) {
+for (i = 0; i < grillaSvg.filasGeneral; i++) {
+	for (j = 0; j < grillaSvg.columnasGeneral; j++) {
 		var grupo = grilla.append("g").attr("class", "circulo");
 		grupo.append("circle")
-			.attr("fill", colorNeutro)
-			.attr("r", radio)
+			.attr("fill", colores.neutro)
+			.attr("r", circulo.radio)
 			.attr("class", "general");
 		grupo.append("rect")
-			.attr("width", radio*2+margin-radio)
-			.attr("height", radio*2+margin-radio)
+			.attr("width", circulo.radio*2+circulo.margin-circulo.radio)
+			.attr("height", circulo.radio*2+circulo.margin-circulo.radio)
 			.attr("fill", "transparent")
 			.on("mouseover", function(d){
 				// Buscar círculo que corresponde a este rectángulo
 				var circulo = $(this).parent().children("circle");
 				var claseCirculo = circulo.attr("class");
-				d3.selectAll("circle." + claseCirculo.split(' ').join('.')).style("opacity", 0.4);
+				d3.selectAll($("circle:not(." + claseCirculo.split(' ').join('.') + ")"))
+					.style("opacity", 0.2);
 			})
 			.on("mouseout", function(d){
 				d3.selectAll("circle").style("opacity", 1);	
@@ -183,11 +196,13 @@ for (i = 0; i < filasGeneral; i++) {
 var middleIndex = (Math.floor(totalCirculos/2));
 var grupoCirculoMedio = d3.selectAll("g.circulo").filter(function(d, i){ return i == middleIndex; });
 var circuloMedio = d3.selectAll("circle").filter(function(d, i){ return i == middleIndex; });
-var posxMedio = posx + (margin+radio) * ((middleIndex % columnasGeneral)+1);
-var posyMedio = posy + (margin+radio) * (Math.floor(middleIndex/columnasGeneral)+1);
+var posxMedio = circulo.posx + (circulo.margin+circulo.radio) * ((middleIndex % grillaSvg.columnasGeneral)+1);
+var posyMedio = circulo.posy + (circulo.margin+circulo.radio) * (Math.floor(middleIndex/grillaSvg.columnasGeneral)+1);
 
 juntarCirculitos();
 showOneCirculito();
+
+generarLabelsNiveles();
 
 /***********************************************/
 
@@ -227,7 +242,7 @@ function filtrarPorGenero() {
 			if (i < generalFemenino) { return "general femenino"; } else { return "general masculino"; }
 		});	
 		d3.selectAll("circle").transition().attr("fill", function(d,i){ 
-			if (i < generalFemenino) { return colorFemenino; } else { return colorMasculino; }
+			if (i < generalFemenino) { return colores.femenino; } else { return colores.masculino; }
 		});
 	}
 
@@ -248,7 +263,7 @@ function filtrarPorGenero() {
 		previousCirculos = 0;
 
 		d3.selectAll("circle").transition().attr("fill", function(d,i) {
-			if (calcularSexo(i) == "femenino") { return colorFemenino; } else { return colorMasculino; }
+			if (calcularSexo(i) == "femenino") { return colores.femenino; } else { return colores.masculino; }
 		});
 
 		function calcularSexo(index){
@@ -289,7 +304,7 @@ function filtrarPorProcedencia() {
  			if (i < generalCABA) { return "general caba"; } else { return "general provincia"; }
  		});
 		d3.selectAll("circle").transition().attr("fill", function(d,i){ 
-			if (i < generalCABA) { return colorCABA; } else { return colorProvincia; }
+			if (i < generalCABA) { return colores.caba; } else { return colores.provincia; }
  		});
 	}	
 
@@ -310,7 +325,7 @@ function filtrarPorProcedencia() {
 		previousCirculos = 0;	
 
 		d3.selectAll("circle").transition().attr("fill", function(d,i){
-			if (calcularProcedencia(i) == "caba") { return colorCABA; } else { return colorProvincia; }
+			if (calcularProcedencia(i) == "caba") { return colores.caba; } else { return colores.provincia; }
 		})
 
 		function calcularProcedencia(index) {
@@ -355,25 +370,25 @@ function showOneCirculito() {
 	$(".circulo").hide();
 	grupoCirculoMedio.style("display", "block");
 	circuloMedio.attr("cx", posxMedio).attr("cy", posyMedio);
-	circuloMedio.transition().duration(500).attr("r", radio*10);
+	circuloMedio.transition().duration(500).attr("r", circulo.radioGrande);
 }
 
 function hideOneCirculitoYJuntar() {		
-	circuloMedio.transition().duration(500).attr("r", radio).call(endall, function(){
+	circuloMedio.transition().duration(500).attr("r", circulo.radio).call(endall, function(){
 		juntarCirculitos();
 	});
 }
 
 function juntarCirculitos() {
 	d3.selectAll("rect").transition().attr("x", function(d,i){
-		return posx + (margin+radio) * ((i % columnasGeneral)+1) - radio - (margin-radio)/2;
+		return circulo.posx + (circulo.margin+circulo.radio) * ((i % grillaSvg.columnasGeneral)+1) - circulo.radio - (circulo.margin-circulo.radio)/2;
 	}).attr("y", function(d,i){
-		return posy + (margin+radio) * (Math.floor(i/columnasGeneral)+1) - radio - (margin-radio)/2;
+		return circulo.posy + (circulo.margin+circulo.radio) * (Math.floor(i/grillaSvg.columnasGeneral)+1) - circulo.radio - (circulo.margin-circulo.radio)/2;
 	});
 	d3.selectAll("circle").transition().attr("cx", function(d,i){
-		return posx + (margin+radio) * ((i % columnasGeneral)+1);
+		return circulo.posx + (circulo.margin+circulo.radio) * ((i % grillaSvg.columnasGeneral)+1);
 	}).attr("cy", function(d,i){
-		return posy + (margin+radio) * (Math.floor(i/columnasGeneral)+1);
+		return circulo.posy + (circulo.margin+circulo.radio) * (Math.floor(i/grillaSvg.columnasGeneral)+1);
 	});
 	d3.selectAll("circle").attr("class", "general");
 }
@@ -381,10 +396,10 @@ function juntarCirculitos() {
 // Función que divide los circulitos en niveles
 function separarCirculitos() {
 	// Inicializar variables de posicion
-	var currentNivel = 0;
-	var currentCirculos = niveles[currentNivel].total;
-	var previousCirculos = 0;
-	var currentIndex;	
+	var currentNivel = 0,
+		currentCirculos = niveles[currentNivel].total,
+		previousCirculos = 0,
+		currentIndex;	
 
 	//TODO: Arreglar el tema del reseteo de las variables para el cy
 	d3.selectAll("circle").transition().attr("cx", function(d,i){
@@ -396,10 +411,10 @@ function separarCirculitos() {
 	.call(endall, function() { 
 		d3.selectAll("rect").attr("x", function(d,i){		
 			var circleNuevoX = $(this).parent().children("circle").attr("cx");
-			return circleNuevoX - radio - (margin-radio)/2;
+			return circleNuevoX - circulo.radio - (circulo.margin-circulo.radio)/2;
 		}).attr("y", function(d,i){						
 			var circleNuevoY = $(this).parent().children("circle").attr("cy");
-			return circleNuevoY - radio - (margin-radio)/2;
+			return circleNuevoY - circulo.radio - (circulo.margin-circulo.radio)/2;
 		});		
 
 		d3.selectAll("circle").attr("class", function(d,i){
@@ -431,19 +446,76 @@ function separarCirculitos() {
 		currentIndex = index - previousCirculos;		
 		if (axis == "x") {
 			x0 = niveles[currentNivel].x0;
-			result = x0+((currentIndex+1)*(margin+radio)-(margin+radio)*columnasPorNivel*Math.floor(currentIndex/columnasPorNivel));	
+			result = x0 +
+					 ((currentIndex+1)*(circulo.margin+circulo.radio)-(circulo.margin+circulo.radio)*grillaSvg.columnasPorNivel*Math.floor(currentIndex/grillaSvg.columnasPorNivel));
 		}
 		else if (axis == "y"){
-			result = svgHeight - (posy + Math.floor(currentIndex/columnasPorNivel) * (margin+radio)); 			
+			result = grillaSvg.alto - 
+					 grillaSvg.labelSpace - 
+					 (circulo.posy + Math.floor(currentIndex/grillaSvg.columnasPorNivel) * (circulo.margin+circulo.radio));
 		}
 		else {
 			console.log("Hubo un error con el calculo de posiciones de los ejes X e Y");
 		}
 		return result;
-	}
+	}	
+}
+
+function mostrarMapaComunas() {
+	d3.selectAll("circle.nivel0").attr("class", "nivel_activo");
+	$(".circulo").hide();
+	$("circle.nivel_activo").parent().show();	
+
+	d3.select("#mapaCABA svg").transition().duration(400).attr("x", 300);
+}
+
+function generarLabelsNiveles() {
+	var labelsNiveles = [{texto: "Inicial", posx: niveles[0].x0+100, posy: 440, clase: "nivel0"},
+						 {texto: "Primario", posx: niveles[1].x0+100, posy: 440, clase: "nivel1"},
+						 {texto: "Secundario", posx: niveles[2].x0+100, posy: 440, clase: "nivel2"},
+						 {texto: "Terciario", posx: niveles[3].x0+100, posy: 440, clase: "nivel3"}];		
+
+	svgGeneral.selectAll("text")
+		.data(labelsNiveles)
+		.enter()
+		.append("text")
+		.attr("x", function(d) { return d.posx; })
+		.attr("y", function(d) { return d.posy; })
+		.attr("text-anchor", "middle")
+		.text(function(d) { return d.texto; })
+		.attr("class", function(d) { return d.clase});
 }
 
 function resetCambioSeccion() {	
 	d3.selectAll("input[type=radio]").property("checked", false);
-	d3.selectAll("circle").transition().attr("fill", colorNeutro);	
+	d3.selectAll("circle").transition().attr("fill", colores.neutro);	
+	
+	var currentSeccion = $("section.active").attr("id");
+	
+	if (currentSeccion != "comuna") { resetMapaCaba(); }
+	if (currentSeccion != "niveles") { $("text").hide(); }
+
+	switch(currentSeccion) {		
+		case "niveles":
+			resetCirculoMedio();
+			break;
+		case "comuna":
+			resetCirculoMedio();
+			break;
+		case "mapa":	
+			$("svg").hide();
+			$("form.filtro").hide();
+			break;
+	}
+
+	function resetCirculoMedio() {
+		circuloMedio.attr("r", circulo.radio);
+	}
+
+	function resetMapaCaba() {
+		$("#mapaCABA").hide();
+		d3.select("#mapaCABA svg")
+			.attr("x", mapaSvg.posInicialX)
+			.attr("y", mapaSvg.posInicialY);
+	}
 }
