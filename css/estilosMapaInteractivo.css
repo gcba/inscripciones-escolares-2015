@@ -20,7 +20,7 @@ body {
     position: fixed !important;
 }
 .cartodb-popup-content-wrapper {
-    background: steelblue !important;
+    background: white !important;
     max-width: 1024px;
 }
 .cartodb-popup-cont .close {

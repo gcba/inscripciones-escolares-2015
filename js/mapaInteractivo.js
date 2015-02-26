@@ -15,7 +15,7 @@ function loadMap() {
             var sublayer = layers[1].getSubLayer(0);
 
             // Reescribo HTML de infowindows por el definido en el primer script 
-//            sublayer.infowindow.set('template', $('#infowindow_template').html());
+            sublayer.infowindow.set('template', $('#infowindow_template').html());
         });
 }
 
