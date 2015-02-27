@@ -68,7 +68,6 @@ a.arrow {
 	bottom: 110px;
 }
 
-<<<<<<< HEAD
 .comuna {
 	fill: #c0c0c0;
 	stroke: #fafafa;
@@ -82,7 +81,7 @@ a.arrow {
 text {
 	display: none;
 }
-=======
+
 iframe {
   padding: 0;
   margin: 0;
@@ -98,4 +97,3 @@ iframe {
     text-align: center;
     width: 100px;
 }
->>>>>>> 756da27cfdcce0805c5e6868b14af17b538d6e68
