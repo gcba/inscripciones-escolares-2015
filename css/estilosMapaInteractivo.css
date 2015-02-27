@@ -13,18 +13,13 @@ body {
 }
 
 #filtros{
-position: absolute;
-background-color: rgba(255,255,255,0.5);
-text-align: center;
-width: 100%;
-height: 100px;
-margin: 0px;
-bottom: 0px;
-}
-
-#filtros div{
-    position: relative;
-    display: inline;    
+    padding: 10px;
+    position: absolute;
+    background-color: rgba(255,255,255,0.5);
+    width: 100%;
+    height: 100px;
+    margin: 0px;
+    bottom: 0px;
 }
 
 .cartodb-popup{
