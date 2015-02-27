@@ -12,6 +12,9 @@ $(".main").onepage_scroll({
 	},  
 	afterMove: function(index) { 
 		var currentSeccion = $("section.active").attr("id");
+		
+		// generarInfoText(currentSeccion);
+
 		$("section.active").removeClass("active");
 		$("section#" + currentSeccion).addClass("active");
 		switch(currentSeccion) {
@@ -101,6 +104,10 @@ var colores = {
 	neutro: "#888888"
 }
 
+var infoDetails = {
+	palabrasPorLinea: 3,
+	verticalMargin: 20
+}
 /*
  *	Datos
  */ 
@@ -199,9 +206,13 @@ var circuloMedio = d3.selectAll("circle").filter(function(d, i){ return i == mid
 var posxMedio = circulo.posx + (circulo.margin+circulo.radio) * ((middleIndex % grillaSvg.columnasGeneral)+1);
 var posyMedio = circulo.posy + (circulo.margin+circulo.radio) * (Math.floor(middleIndex/grillaSvg.columnasGeneral)+1);
 
+//TODO: Extraer a funcion de init
 juntarCirculitos();
 showOneCirculito();
 
+var infoText = svgGeneral.append("text").attr("class", "info");
+
+generarInfoText("landing");
 generarLabelsNiveles();
 
 /***********************************************/
@@ -358,7 +369,6 @@ function filtrarPorProcedencia() {
  * Funciones
  */
 
-
 function endall(transition, callback) { 
 	var n = 0; 
 	transition 
@@ -475,7 +485,7 @@ function generarLabelsNiveles() {
 						 {texto: "Secundario", posx: niveles[2].x0+100, posy: 440, clase: "nivel2"},
 						 {texto: "Terciario", posx: niveles[3].x0+100, posy: 440, clase: "nivel3"}];		
 
-	svgGeneral.selectAll("text")
+	svgGeneral.selectAll("text.labelNivel")
 		.data(labelsNiveles)
 		.enter()
 		.append("text")
@@ -483,7 +493,7 @@ function generarLabelsNiveles() {
 		.attr("y", function(d) { return d.posy; })
 		.attr("text-anchor", "middle")
 		.text(function(d) { return d.texto; })
-		.attr("class", function(d) { return d.clase});
+		.attr("class", function(d) { return d.clase + " labelNivel"});
 }
 
 function resetCambioSeccion() {	
@@ -517,5 +527,46 @@ function resetCambioSeccion() {
 		d3.select("#mapaCABA svg")
 			.attr("x", mapaSvg.posInicialX)
 			.attr("y", mapaSvg.posInicialY);
+	}
+}
+
+function generarInfoText(currentSeccion, hover) {	
+	hover = (typeof hover === "undefined") ? "estadoCero" : hover;
+	var explicativo = explicativos.secciones[currentSeccion][hover],
+		palabras = explicativo.split(" "),
+		lineas = [];
+	
+	for (var i=0; i<palabras.length; i = i + infoDetails.palabrasPorLinea) {
+		var fraseCortada = palabras.slice(i, i+infoDetails.palabrasPorLinea),
+			frase = fraseCortada.join(" ");
+		
+		lineas.push(frase);
+	}
+
+	switch (currentSeccion) {		
+		case "landing":
+			var posTextoX = parseInt(circuloMedio.attr("cx")) +
+						    circulo.radioGrande + circulo.margin*2,
+				posTextoY = parseInt(circuloMedio.attr("cy")) - 
+							  Math.floor(lineas.length/2) * infoDetails.verticalMargin;
+
+			var texto = d3.select(".info")
+				.text(lineas[0])
+				.attr("x", posTextoX)
+				.attr("y", posTextoY);
+			
+			for (var i=1; i<lineas.length; i++) {
+				texto.append("tspan")
+					.text(lineas[i])
+					.attr("x", posTextoX)
+					.attr("y", posTextoY + infoDetails.verticalMargin*i);	
+			}
+			break;
+		case "general":
+			break;
+		case "niveles":
+			break;
+		case "comuna":
+			break;
 	}
 }

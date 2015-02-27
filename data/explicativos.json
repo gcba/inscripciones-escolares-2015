@@ -1,5 +1,8 @@
 {
 	"secciones": {
+		"landing": {
+			"estadoCero": "Este círculo representa 500 nuevos alumnos en el sistema."
+			},
 		"general": {
 			"reset": "Hay muchos estudiantes nuevos",
 			"genero": {
@@ -12,8 +15,8 @@
 			}
 		},
 		"niveles": {
-			"reset": "Un monton de gente en un monton de niveles",
-			"inicial": {
+			"estadoCero": "Un monton de gente en un monton de niveles",
+			"nivel0": {
 				"general": "Wow inicial",
 				"genero": {
 					"femenino": "En inicial mucha mina",
