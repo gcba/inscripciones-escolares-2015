@@ -82,6 +82,11 @@ text.labelNivel {
 	display: none;
 }
 
+.onepage-pagination{
+	pointer-events: none;
+}
+
+
 iframe {
   padding: 0;
   margin: 0;
