@@ -1,4 +1,4 @@
-var nivel = "secundario";
+var nivel = "inicial";
 
 var grillaSvg = {
   ancho: 960,
@@ -34,8 +34,8 @@ queue()
 function ready(error, comunas, data) {
 
   var color = d3.scale.linear()
-    .domain([500, 1500, 2000, 2800, 3800])
-    .range(["#f2f0f7", "#dadaeb", "#bcbddc", "#9e9ac8", "#756bb1", "#54278f"]);
+  .domain([0, 5000])
+  .range(["#f2f0f7", "#54278f"]);
 
   // function calcularColor(nivel){
   //   color = d3.scale.linear()
@@ -44,13 +44,11 @@ function ready(error, comunas, data) {
   //   console.log(d3.max(data.comunas.inicial));
   // }
 
-  console.log(data.comunas[nivel]);
+  // console.log(data.comunas[nivel]);
 
   // console.log(d3.max(data));
   // console.log(nivel);
-  // console.log(d3.min(data.comunas[nivel]));
-
-  // console.log(data.comunas.inicial);
+  // console.log(d3.extent(data.comunas.inicial[comunas.properties.comuna]));
 
   svg.append("g")
       .attr("class", "caba")
