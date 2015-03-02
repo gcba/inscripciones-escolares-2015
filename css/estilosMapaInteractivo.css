@@ -11,17 +11,35 @@ body {
     background: #ffffff;
     z-index: 900;
 }
+
+.cartodb-popup{
+    width: 450px !important;
+}
+
 .cartodb-popup,
 .cartodb-popup-tip-container {
-    background: transparent !important;
     z-index: 999;
+    background: rgba(255, 255, 255, 0) !important;
+}
+
+.cartodb-popup-close-button{
+    background: url("img/light.png") no-repeat scroll 0 -23px rgba(255, 255, 255, 0) !important;
+}
+.cartodb-popup-tip-container{
+    background: url("img/light.png") no-repeat scroll 0 0 rgba(255, 255, 255, 0) !important;
+}
+
+.cartodb-popup-cont{
+    width: 450px !important;;
+    height: 250px !important;;
 }
 .cartodb-infowindow {
     position: fixed !important;
 }
 .cartodb-popup-content-wrapper {
-    background: steelblue !important;
-    max-width: 1024px;
+    background: rgba(255, 255, 255, 1) !important;
+    width: 450px !important;
+    max-width: 450px !important;
 }
 .cartodb-popup-cont .close {
     color: #000000;

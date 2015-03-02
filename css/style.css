@@ -16,22 +16,47 @@ h2 {
 	text-align: center;
 }
 
+h3 {
+	margin-top: 10px;
+	font-size: 16px;
+	font-weight: 200;
+	color: #555;
+	text-align: center;
+}
+
 form.filtro{
 	text-align: center;
 	position: fixed;
 	width: 100%;
-	top: 100px;
-	z-index: 999;
+	top: 120px;
+	z-index: 800;
+	display: none;
 }
 
-div#circles {
-	top: 100px;
+.femenino {
+	fill: #BA1135;
+}
+
+.masculino {
+	fill: #05a381;
+}
+
+.caba {
+	fill: #FFD300;
+}
+
+.provincia {
+	fill: #F2803A;
+}
+
+div#viz {
+	top: 120px;
 	width: 100%;
 	position: fixed;
-	z-index: 888;
+	z-index: 700;
 }
 
-div#circles svg {
+div#viz svg {
 	margin: auto;
 	display: block;
 	margin-top: 10px;
@@ -44,12 +69,52 @@ section {
 	position: relative;
 }
 
-a.next-section {
-	position: absolute;
-	bottom: 100px;
+a.arrow {
+	position: absolute;	
+	left: 50%;
+	color: #333333;
+}
+	a.arrow span {
+		font-size: 24px;
+	}
+.next-section {
+	bottom: 70px;
+}
+.prev-section {
+	bottom: 110px;
 }
 
-a.prev-section {
-	position: absolute;
-	bottom: 140px;
+.comuna {
+	fill: #c0c0c0;
+	stroke: #fafafa;
+	stroke-width: 1px;
+}
+
+#mapaCABA {
+	display: none;
+}
+
+text.labelNivel {
+	display: none;
+}
+
+.onepage-pagination{
+	pointer-events: none;
+}
+
+
+iframe {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+	border: 0;  
+}
+
+#volverDelMapa{
+    height: 50px;
+    position: inherit;
+    right: 0;
+    text-align: center;
+    width: 100px;
 }

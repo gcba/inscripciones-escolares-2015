@@ -1,19 +1,26 @@
+
 {
 	"secciones": {
+		"landing": {
+			"estadoCero": {
+				"general": "Este círculo representa 500 nuevos alumnos en el sistema." }
+			},
 		"general": {
-			"reset": "Hay muchos estudiantes nuevos",
+			"estadoCero": {
+				"general": "Este conjunto de círculos representa a los 70.000 nuevos alumnos del sistema."
+				},
 			"genero": {
-				"femenino": "Mucha mina",
-				"masculino": "Mucho pibe"
+				"femenino": "48% mujeres",
+				"masculino": "52% varones"
 			},
 			"procedencia": {
-				"caba": "Mucha gente cheta",
-				"provincia": "Poca gente del extranjero"
+				"caba": "90% Ciudad Autónoma de Buenos Aires.",
+				"provincia": "10% Otras jurisdicciones."
 			}
 		},
 		"niveles": {
-			"reset": "Un monton de gente en un monton de niveles",
-			"inicial": {
+			"estadoCero": "Un monton de gente en un monton de niveles",
+			"nivel0": {
 				"general": "Wow inicial",
 				"genero": {
 					"femenino": "En inicial mucha mina",
@@ -22,7 +29,7 @@
 				"procedencia": {
 					"caba": "En inicial chetos",
 					"provincia": "En inicial extranjeros"
-				}	
+				}
 			},
 			"primario": {
 				"general": "Wow primario",
@@ -33,7 +40,7 @@
 				"procedencia": {
 					"caba": "En primario chetos",
 					"provincia": "En primario extranjeros"
-				}	
+				}
 			},
 			"secundario": {
 				"general": "Wow secundario",
@@ -44,7 +51,7 @@
 				"procedencia": {
 					"caba": "En secundario chetos",
 					"provincia": "En secundario extranjeros"
-				}	
+				}
 			},
 			"terciario": {
 				"general": "Wow terciario",
@@ -55,7 +62,7 @@
 				"procedencia": {
 					"caba": "En terciario chetos",
 					"provincia": "En terciario extranjeros"
-				}	
+				}
 			}
 		}
 	}
