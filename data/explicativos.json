@@ -1,17 +1,20 @@
 {
 	"secciones": {
 		"landing": {
-			"estadoCero": "Este círculo representa 500 nuevos alumnos en el sistema."
+			"estadoCero": {
+				"general": "Este círculo representa 500 nuevos alumnos en el sistema." }
 			},
 		"general": {
-			"reset": "Hay muchos estudiantes nuevos",
+			"estadoCero": {
+				"general": "Este conjunto de círculos representa a los 70.000 nuevos alumnos del sistema."
+				},
 			"genero": {
-				"femenino": "Mucha mina",
-				"masculino": "Mucho pibe"
+				"femenino": "48% mujeres",
+				"masculino": "52% varones"
 			},
 			"procedencia": {
-				"caba": "Mucha gente cheta",
-				"provincia": "Poca gente del extranjero"
+				"caba": "90% Ciudad Autónoma de Buenos Aires.",
+				"provincia": "10% Otras jurisdicciones."
 			}
 		},
 		"niveles": {

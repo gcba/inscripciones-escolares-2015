@@ -1,6 +1,9 @@
 /*
  * JS para scrolling
  */
+
+var currentSeccion = "landing";
+
 $(".main").onepage_scroll({
 	sectionContainer: "section",     
 	easing: "ease",                  
@@ -11,9 +14,7 @@ $(".main").onepage_scroll({
 		resetCambioSeccion();			
 	},  
 	afterMove: function(index) { 
-		var currentSeccion = $("section.active").attr("id");
-		
-		// generarInfoText(currentSeccion);
+		currentSeccion = $("section.active").attr("id");
 
 		$("section.active").removeClass("active");
 		$("section#" + currentSeccion).addClass("active");
@@ -34,7 +35,7 @@ $(".main").onepage_scroll({
 			case "niveles":
 				$("form.filtro").show();
 				$(".circulo").show();
-				$("text").show();
+				$("text.labelNivel").show();
 				separarCirculitos();
 				break;
 			case "comuna":								
@@ -46,6 +47,7 @@ $(".main").onepage_scroll({
 			case "mapa":
 				break;
 		}
+		generarInfoText();
 	},   
 	loop: false,                     
 	keyboard: true,                  
@@ -71,7 +73,7 @@ var grillaSvg = {
 	labelSpace: 70,
 	filasGeneral: 9,
 	columnasGeneral: 15,
-	columnasPorNivel: 5
+	columnasPorNivel: 4
 }
 
 var totalCirculos = grillaSvg.filasGeneral * grillaSvg.columnasGeneral;
@@ -88,11 +90,11 @@ var mapaComunas = svgGeneral.append("g")
 
 // Detalles de los círculos
 var circulo = {
-	radio: 10,
+	radio: 8,
 	radioGrande: 100,
 	posx: 200,
 	posy: 20,
-	margin: 25
+	margin: 22
 }
 
 // Colores
@@ -182,7 +184,7 @@ for (i = 0; i < grillaSvg.filasGeneral; i++) {
 		grupo.append("circle")
 			.attr("fill", colores.neutro)
 			.attr("r", circulo.radio)
-			.attr("class", "general");
+			.attr("class", currentSeccion);
 		grupo.append("rect")
 			.attr("width", circulo.radio*2+circulo.margin-circulo.radio)
 			.attr("height", circulo.radio*2+circulo.margin-circulo.radio)
@@ -193,9 +195,12 @@ for (i = 0; i < grillaSvg.filasGeneral; i++) {
 				var claseCirculo = circulo.attr("class");
 				d3.selectAll($("circle:not(." + claseCirculo.split(' ').join('.') + ")"))
 					.style("opacity", 0.2);
+				d3.selectAll($("text:not(." + claseCirculo.split(' ').join('.') + ")"))
+					.style("opacity", 0.2);
 			})
 			.on("mouseout", function(d){
 				d3.selectAll("circle").style("opacity", 1);	
+				d3.selectAll("text").style("opacity", 1);
 			});
 	}
 }
@@ -210,9 +215,9 @@ var posyMedio = circulo.posy + (circulo.margin+circulo.radio) * (Math.floor(midd
 juntarCirculitos();
 showOneCirculito();
 
-var infoText = svgGeneral.append("text").attr("class", "info");
+var infoGroup = svgGeneral.append("g").attr("class", "info");
 
-generarInfoText("landing");
+generarInfoText();
 generarLabelsNiveles();
 
 /***********************************************/
@@ -224,7 +229,8 @@ generarLabelsNiveles();
 // Filtrar por genero
 d3.select("#radio-genero")
 	.on("click", function(){ 
-		filtrarPorGenero(); 
+		filtrarPorGenero();
+		generarInfoText("genero");		
 		$(this).blur(); 
 	});
 
@@ -232,11 +238,11 @@ d3.select("#radio-genero")
 d3.select("#radio-procedencia")
 	.on("click", function() { 
 		filtrarPorProcedencia(); 
+		generarInfoText("procedencia")
 		$(this).blur(); 
 	});
 
 function filtrarPorGenero() {
-	var currentSeccion = $("section.active").attr("id");
 	switch (currentSeccion) {
 		case "general":
 			filtrarGeneral();	
@@ -250,7 +256,7 @@ function filtrarPorGenero() {
 
 	function filtrarGeneral(){
 		d3.selectAll("circle").attr("class", function(d,i){
-			if (i < generalFemenino) { return "general femenino"; } else { return "general masculino"; }
+			if (i < generalFemenino) { return currentSeccion + " femenino"; } else { return currentSeccion + " masculino"; }
 		});	
 		d3.selectAll("circle").transition().attr("fill", function(d,i){ 
 			if (i < generalFemenino) { return colores.femenino; } else { return colores.masculino; }
@@ -298,7 +304,6 @@ function filtrarPorGenero() {
 }
 
 function filtrarPorProcedencia() {
-	var currentSeccion = $("section.active").attr("id");
 	switch (currentSeccion) {
 		case "general":
 			filtrarGeneral();				
@@ -312,7 +317,7 @@ function filtrarPorProcedencia() {
 
 	function filtrarGeneral() {
 		d3.selectAll("circle").attr("class", function(d,i){
- 			if (i < generalCABA) { return "general caba"; } else { return "general provincia"; }
+ 			if (i < generalCABA) { return currentSeccion + " caba"; } else { return currentSeccion + " provincia"; }
  		});
 		d3.selectAll("circle").transition().attr("fill", function(d,i){ 
 			if (i < generalCABA) { return colores.caba; } else { return colores.provincia; }
@@ -400,7 +405,7 @@ function juntarCirculitos() {
 	}).attr("cy", function(d,i){
 		return circulo.posy + (circulo.margin+circulo.radio) * (Math.floor(i/grillaSvg.columnasGeneral)+1);
 	});
-	d3.selectAll("circle").attr("class", "general");
+	d3.selectAll("circle").attr("class", currentSeccion + " " + general);
 }
 
 // Función que divide los circulitos en niveles
@@ -497,15 +502,17 @@ function generarLabelsNiveles() {
 }
 
 function resetCambioSeccion() {	
+	currentSeccion = $("section.active").attr("id"); 
+
 	d3.selectAll("input[type=radio]").property("checked", false);
 	d3.selectAll("circle").transition().attr("fill", colores.neutro);	
 	
-	var currentSeccion = $("section.active").attr("id");
-	
 	if (currentSeccion != "comuna") { resetMapaCaba(); }
-	if (currentSeccion != "niveles") { $("text").hide(); }
+	if (currentSeccion != "niveles") { $("text.labelNivel").hide(); }
 
-	switch(currentSeccion) {		
+	$("g.info").hide();
+
+	switch(currentSeccion) {				
 		case "niveles":
 			resetCirculoMedio();
 			break;
@@ -530,43 +537,74 @@ function resetCambioSeccion() {
 	}
 }
 
-function generarInfoText(currentSeccion, hover) {	
+function generarInfoText(hover) {	
+	$("g.info").show();
 	hover = (typeof hover === "undefined") ? "estadoCero" : hover;
-	var explicativo = explicativos.secciones[currentSeccion][hover],
-		palabras = explicativo.split(" "),
-		lineas = [];
 	
-	for (var i=0; i<palabras.length; i = i + infoDetails.palabrasPorLinea) {
-		var fraseCortada = palabras.slice(i, i+infoDetails.palabrasPorLinea),
-			frase = fraseCortada.join(" ");
-		
-		lineas.push(frase);
-	}
+	var explicativosSeccion = explicativos.secciones[currentSeccion][hover],
+		explicativosKeys = Object.keys(explicativosSeccion);
 
-	switch (currentSeccion) {		
-		case "landing":
-			var posTextoX = parseInt(circuloMedio.attr("cx")) +
-						    circulo.radioGrande + circulo.margin*2,
-				posTextoY = parseInt(circuloMedio.attr("cy")) - 
-							  Math.floor(lineas.length/2) * infoDetails.verticalMargin;
+	infoGroup.selectAll("text").remove();
+	infoGroup.selectAll("text").data(explicativosKeys).enter().append("text");
 
-			var texto = d3.select(".info")
-				.text(lineas[0])
-				.attr("x", posTextoX)
-				.attr("y", posTextoY);
+	var posTextoX = 0,
+		posTextoY = 0,
+		coordenadasX = [],
+		coordenadasY = [];
+
+	var topY = circulo.posy + circulo.radio + circulo.margin,
+		bottomY = grillaSvg.filasGeneral * (circulo.radio + circulo.margin) +
+				  circulo.posy;
+	var posicionesY = [topY, bottomY];
+
+	for (var i=0; i<explicativosKeys.length; i++) {
+		var palabras = explicativosSeccion[explicativosKeys[i]].split(" "),
+			lineas = [];	
+
+		for (var j=0; j<palabras.length; j = j + infoDetails.palabrasPorLinea) {
+			var fraseCortada = palabras.slice(j, j+infoDetails.palabrasPorLinea),
+				frase = fraseCortada.join(" ");
 			
-			for (var i=1; i<lineas.length; i++) {
-				texto.append("tspan")
-					.text(lineas[i])
-					.attr("x", posTextoX)
-					.attr("y", posTextoY + infoDetails.verticalMargin*i);	
-			}
-			break;
-		case "general":
-			break;
-		case "niveles":
-			break;
-		case "comuna":
-			break;
+			lineas.push(frase);
+		}
+
+		switch (currentSeccion) {		
+			case "landing":
+				posTextoX = parseInt(circuloMedio.attr("cx")) +
+							circulo.radioGrande + circulo.margin*2;
+				coordenadasX.push(posTextoX);
+				posTextoY = parseInt(circuloMedio.attr("cy")) - 
+							Math.floor(lineas.length/2) * infoDetails.verticalMargin;
+				coordenadasY.push(posTextoY);
+				break;
+			case "general":
+				posTextoX = grillaSvg.columnasGeneral * (circulo.radio + circulo.margin) + 
+							circulo.posx + circulo.radio + circulo.margin*2;					
+				coordenadasX.push(posTextoX);			
+				if (hover == "estadoCero") {
+					posTextoY = grillaSvg.filasGeneral * (circulo.radio + circulo.margin) / 2 +
+								circulo.posy -
+								Math.floor(lineas.length/2) * infoDetails.verticalMargin;					
+					coordenadasY.push(posTextoY);
+				}
+				else { 										
+					coordenadasY.push(posicionesY[i]);
+				}
+				break;
+		}
+
+		var texto = d3.selectAll("g.info text").filter(function(d,index){return index == i });
+		texto.text(lineas[0])
+			.attr("x", coordenadasX[i])
+			.attr("y", coordenadasY[i])
+			.attr("class", currentSeccion + " " + explicativosKeys[i]);
+		
+		for (var k=1; k<lineas.length; k++) {
+			texto.append("tspan")
+				.text(lineas[k])
+				.attr("x", coordenadasX[i])
+				.attr("y", coordenadasY[i] + infoDetails.verticalMargin*k)
+				.attr("class", currentSeccion + " " + explicativosKeys[i]);	
+		}
 	}
 }

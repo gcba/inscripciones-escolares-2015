@@ -33,6 +33,22 @@ form.filtro{
 	display: none;
 }
 
+.femenino {
+	fill: #BA1135;
+}
+
+.masculino {
+	fill: #05a381;
+}
+
+.caba {
+	fill: #FFD300;
+}
+
+.provincia {
+	fill: #F2803A;
+}
+
 div#viz {
 	top: 120px;
 	width: 100%;
