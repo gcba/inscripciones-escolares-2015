@@ -1,4 +1,4 @@
-var nivel = "inicial";
+var nivel = "primario";
 
 var grillaSvg = {
   ancho: 960,
@@ -33,6 +33,12 @@ queue()
 
 function ready(error, comunas, data) {
 
+// http://roadtolarissa.com/blog/2014/06/23/even-fewer-lamdas-with-d3/
+
+  var getLevel = function(d){ return d[nivel]; }
+
+  // console.log(getLevel(data.comunas));
+
   var color = d3.scale.linear()
   .domain([0, 5000])
   .range(["#f2f0f7", "#54278f"]);
@@ -45,6 +51,13 @@ function ready(error, comunas, data) {
   // }
 
   // console.log(data.comunas[nivel]);
+
+
+  //
+
+
+
+
 
   // console.log(d3.max(data));
   // console.log(nivel);
