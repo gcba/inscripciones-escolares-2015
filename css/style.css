@@ -33,21 +33,11 @@ form.filtro{
 	display: none;
 }
 
-.femenino {
-	fill: #BA1135;
-}
-
-.masculino {
-	fill: #05a381;
-}
-
-.caba {
-	fill: #FFD300;
-}
-
-.provincia {
-	fill: #F2803A;
-}
+text.general { fill: #666666;}
+text.femenino { fill: #BA1135; }
+text.masculino { fill: #05a381; }
+text.caba { fill: #FFD300; }
+text.provincia { fill: #F2803A; }
 
 div#viz {
 	top: 120px;
