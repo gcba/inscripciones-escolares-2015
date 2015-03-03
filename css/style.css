@@ -84,8 +84,17 @@ a.arrow {
 	display: none;
 }
 
-text.labelNivel {
+g.labels {
 	display: none;
+}
+
+g.labels text, g.info text {
+	cursor: default;
+}
+
+tspan.nivelLink:hover {
+	cursor: pointer;
+	text-decoration: none;
 }
 
 .onepage-pagination{

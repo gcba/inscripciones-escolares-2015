@@ -271,8 +271,8 @@ function filtrarPorGenero() {
 
 		d3.selectAll("circle").attr("class", function(d,i){			
 			//TODO: utilizar RegEx para buscar la clase de nivel
-			var nivel = d3.select(this).attr("class").split(" ")[0];
-			return nivel + " " + calcularSexo(i);
+			var nivel = d3.select(this).attr("class").split(" ")[1];
+			return currentSeccion + " " + nivel + " " + calcularSexo(i);
 		});
 
 		currentNivel = 0;
@@ -332,8 +332,8 @@ function filtrarPorProcedencia() {
 
 		d3.selectAll("circle").attr("class", function(d,i){
 			//TODO: utilizar RegEx para buscar la clase de nivel
-			var nivel = d3.select(this).attr("class").split(" ")[0];
-			return nivel + " " + calcularProcedencia(i);
+			var nivel = d3.select(this).attr("class").split(" ")[1];
+			return currentSeccion + " " + nivel + " " + calcularProcedencia(i);
 		});
 
 		currentNivel = 0;
@@ -434,7 +434,7 @@ function separarCirculitos() {
 		});		
 
 		d3.selectAll("circle").attr("class", function(d,i){
-			return "nivel" + calcularNivel(i);
+			return currentSeccion + " nivel" + calcularNivel(i) + " general";
 		})
 	});
 
@@ -478,7 +478,10 @@ function separarCirculitos() {
 }
 
 function mostrarMapaComunas() {
-	d3.selectAll("circle.nivel0").attr("class", "nivel_activo");
+	if ($("circle.nivel_activo").length == 0){
+		var nivelComunas = "nivel0";
+		d3.selectAll("circle." + nivelComunas).attr("class", "nivel_activo");
+	}
 	$(".circulo").hide();
 	$("circle.nivel_activo").parent().show();	
 
@@ -596,7 +599,19 @@ function generarInfoTextGeneral(filtro) {
 		texto.text(lineas[0])
 			.attr("x", posInfoX)
 			.attr("y", posInfoY - (lineas.length-1)*infoDetails.verticalMargin)
-			.attr("class", currentSeccion + " " + explicativosKeys[i]);
+			.attr("class", currentSeccion + " " + explicativosKeys[i])
+			.on("mouseover", function(d){
+				// Buscar círculos que corresponden a este texto						
+				var claseText = $(this).attr("class").split(' ').slice(0,2);
+				d3.selectAll($("circle:not(." + claseText.join('.') + ")"))
+					.style("opacity", 0.2);
+				d3.selectAll($("text:not(." + claseText.join('.') + ")"))
+					.style("opacity", 0.2);
+			})
+			.on("mouseout", function(d){
+				d3.selectAll("circle").style("opacity", 1);	
+				d3.selectAll("text").style("opacity", 1);
+			});
 		
 		counterLineas++;
 
@@ -630,7 +645,9 @@ function generarInfoTextNiveles(filtro) {
 			for (var i=0; i<nivelesKeys.length; i++) {
 				explicativoNivel = explicativosSeccion[nivelesKeys[i]][filtro]["general"];
 				
-				var lineas = calcularLineas(explicativoNivel);
+				var lineas = calcularLineas(explicativoNivel),
+					lineaNivel = lineas[lineas.length-1].split(" "),
+					nivelText = lineaNivel[lineaNivel.length-1];
 
 				posInfoX = coordenadasNiveles[i] + circulo.margin;
 				posInfoY = grillaSvg.alto - grillaSvg.labelSpace + infoDetails.verticalMargin*2;
@@ -639,16 +656,45 @@ function generarInfoTextNiveles(filtro) {
 				texto.text(lineas[0])
 					.attr("x", posInfoX)
 					.attr("y", posInfoY)
-					.attr("class", currentSeccion + " " + nivelesKeys[i] + " general");
+					.attr("class", currentSeccion + " " + nivelesKeys[i] + " general")
+					.on("mouseover", function(d){
+						// Buscar círculos que corresponden a este texto						
+						var claseText = $(this).attr("class").split(' ').slice(0,2);
+						d3.selectAll($("circle:not(." + claseText.join('.') + ")"))
+							.style("opacity", 0.2);
+						d3.selectAll($("text:not(." + claseText.join('.') + ")"))
+							.style("opacity", 0.2);
+					})
+					.on("mouseout", function(d){
+						d3.selectAll("circle").style("opacity", 1);	
+						d3.selectAll("text").style("opacity", 1);
+					});
 
-				var tspanY = 0;
+				var tspanY = 0,
+					lineaText = "";
 				for (var j=1; j<lineas.length; j++) {
 					tspanY = posInfoY + infoDetails.verticalMargin*j;
-					texto.append("tspan")
-						.text(lineas[j])
-						.attr("x", posInfoX)
-						.attr("y", tspanY)
-						.attr("class", currentSeccion + " " + nivelesKeys[i] + " general");
+					lineaText = lineas[j];
+					if (j == lineas.length-1) {
+						lineaText = lineas[j].split(" ").slice(0,2).join(" ") + " ";						
+					}
+					var tspan = texto.append("tspan")
+									.text(lineaText)
+									.attr("x", posInfoX)
+									.attr("y", tspanY)
+									.attr("class", currentSeccion + " " + nivelesKeys[i] + " general");
+					if (j == lineas.length-1) {
+						tspan.append("tspan")
+							.text(nivelText)
+							.attr("font-weight", "bold")
+							.attr("text-decoration", "underline")
+							.attr("class", "nivelLink " + nivelText)
+							.on("click", function(d){
+								$(".main").moveDown();
+								var claseNivel = $(this).parent().attr("class").split(" ")[1];
+								d3.selectAll("circle." + claseNivel).attr("class", "nivel_activo");
+							});							
+					}
 				}
 			}
 		}
@@ -690,7 +736,19 @@ function generarInfoTextNiveles(filtro) {
 				texto.text(lineas[0])
 					.attr("x", posInfoX)
 					.attr("y", posInfoY - (lineas.length-1)*infoDetails.verticalMargin)
-					.attr("class", currentSeccion + " " + nivelesKeys[i] + " " + explicativosNivelKeys[j]);
+					.attr("class", currentSeccion + " " + nivelesKeys[i] + " " + explicativosNivelKeys[j])
+					.on("mouseover", function(d){
+						// Buscar círculos que corresponden a este texto						
+						var claseText = $(this).attr("class").split(' ');
+						d3.selectAll($("circle:not(." + claseText.join('.') + ")"))
+							.style("opacity", 0.2);
+						d3.selectAll($("text:not(." + claseText.join('.') + ")"))
+							.style("opacity", 0.2);
+					})
+					.on("mouseout", function(d){
+						d3.selectAll("circle").style("opacity", 1);	
+						d3.selectAll("text").style("opacity", 1);
+					});
 				
 				counterLineas++;
 
