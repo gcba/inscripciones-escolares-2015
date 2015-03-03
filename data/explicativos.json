@@ -19,49 +19,56 @@
 			}
 		},
 		"niveles": {
-			"estadoCero": "Un monton de gente en un monton de niveles",
 			"nivel0": {
-				"general": "Wow inicial",
+				"estadoCero": {
+					"general": "El 37% del total de alumnos nuevos se incorporó al nivel inicial."
+				},
 				"genero": {
-					"femenino": "En inicial mucha mina",
-					"masculino": "En inicial mucho pibe"
+					"femenino": "48% mujeres",
+					"masculino": "52% varones"
 				},
 				"procedencia": {
-					"caba": "En inicial chetos",
-					"provincia": "En inicial extranjeros"
+					"caba": "93% Ciudad Autónoma de Buenos Aires",
+					"provincia": "7% Otras jurisdicciones"
 				}
 			},
-			"primario": {
-				"general": "Wow primario",
+			"nivel1": {
+				"estadoCero": {
+					"general": "El 35% del total de alumnos nuevos se incorporó al nivel primario."
+				},
 				"genero": {
-					"femenino": "En primario mucha mina",
-					"masculino": "En primario mucho pibe"
+					"femenino": "49% mujeres",
+					"masculino": "51% varones"
 				},
 				"procedencia": {
-					"caba": "En primario chetos",
-					"provincia": "En primario extranjeros"
+					"caba": "90% Ciudad Autónoma de Buenos Aires",
+					"provincia": "10% Otras jurisdicciones"
 				}
 			},
-			"secundario": {
-				"general": "Wow secundario",
+			"nivel2": {
+				"estadoCero": {
+					"general": "El 28% del total de alumnos nuevos se incorporó al nivel secundario."
+				},
 				"genero": {
-					"femenino": "En secundario mucha mina",
-					"masculino": "En secundario mucho pibe"
+					"femenino": "46% mujeres",
+					"masculino": "54% varones"
 				},
 				"procedencia": {
-					"caba": "En secundario chetos",
-					"provincia": "En secundario extranjeros"
+					"caba": "87% Ciudad Autónoma de Buenos Aires",
+					"provincia": "13% Otras jurisdicciones"
 				}
 			},
-			"terciario": {
-				"general": "Wow terciario",
+			"nivel3": {
+				"estadoCero": {
+					"general": "El 23% del total de alumnos nuevos se incorporó al nivel terciario."
+				},
 				"genero": {
-					"femenino": "En terciario mucha mina",
-					"masculino": "En terciario mucho pibe"
+					"femenino": "50% mujeres",
+					"masculino": "50% varones"
 				},
 				"procedencia": {
-					"caba": "En terciario chetos",
-					"provincia": "En terciario extranjeros"
+					"caba": "78% Ciudad Autónoma de Buenos Aires",
+					"provincia": "22% Otras jurisdicciones"
 				}
 			}
 		}

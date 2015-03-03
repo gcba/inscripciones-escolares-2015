@@ -35,7 +35,7 @@ $(".main").onepage_scroll({
 			case "niveles":
 				$("form.filtro").show();
 				$(".circulo").show();
-				$("text.labelNivel").show();
+				$("g.labels").show();
 				separarCirculitos();
 				break;
 			case "comuna":								
@@ -70,7 +70,7 @@ $('.prev-section').click(function(e){
 var grillaSvg = {
 	ancho: 960,
 	alto: 470,
-	labelSpace: 70,
+	labelSpace: 110,
 	filasGeneral: 9,
 	columnasGeneral: 15,
 	columnasPorNivel: 4
@@ -90,11 +90,11 @@ var mapaComunas = svgGeneral.append("g")
 
 // Detalles de los círculos
 var circulo = {
-	radio: 8,
+	radio: 7,
 	radioGrande: 100,
-	posx: 200,
-	posy: 20,
-	margin: 22
+	posx: 270,
+	posy: 50,
+	margin: 20
 }
 
 // Colores
@@ -103,12 +103,12 @@ var colores = {
 	masculino: "#05a381",
 	caba: "#FFD300",
 	provincia: "#F2803A",
-	neutro: "#888888"
+	neutro: "#666666"
 }
 
 var infoDetails = {
-	palabrasPorLinea: 3,
-	verticalMargin: 20
+	verticalMargin: 20,
+	palabrasPorLinea: 3
 }
 /*
  *	Datos
@@ -135,7 +135,7 @@ var generalFemenino = Math.round(json.general.genero.femenino*totalCirculos/100)
 
 // Niveles
 var jsonNiveles = json.niveles;
-var coordinadasNiveles = [0,250,500,750];
+var coordenadasNiveles = [0,240,480,720];
 var cantidadNiveles = Object.keys(jsonNiveles).length; 
 var niveles = [];
 
@@ -148,7 +148,7 @@ for (var i = 0; i < cantidadNiveles; i++) {
 		cantidadCABA = Math.round(nivelActual.procedencia.caba*cantidadTotal/100),
 		cantidadProvincia = Math.round(nivelActual.procedencia.provincia*cantidadTotal/100);
 
-	var newNivel = { x0: coordinadasNiveles[i], 
+	var newNivel = { x0: coordenadasNiveles[i], 
 					 total: cantidadTotal, 
 					 femenino: cantidadFemenino, 
 					 masculino: cantidadMasculino,
@@ -216,9 +216,9 @@ juntarCirculitos();
 showOneCirculito();
 
 var infoGroup = svgGeneral.append("g").attr("class", "info");
+var labelsGroup = svgGeneral.append("g").attr("class", "labels");
 
 generarInfoText();
-generarLabelsNiveles();
 
 /***********************************************/
 
@@ -382,6 +382,7 @@ function endall(transition, callback) {
 } 
 
 function showOneCirculito() {
+	d3.selectAll("circle").attr("class", currentSeccion + " " + "general");
 	$(".circulo").hide();
 	grupoCirculoMedio.style("display", "block");
 	circuloMedio.attr("cx", posxMedio).attr("cy", posyMedio);
@@ -405,7 +406,7 @@ function juntarCirculitos() {
 	}).attr("cy", function(d,i){
 		return circulo.posy + (circulo.margin+circulo.radio) * (Math.floor(i/grillaSvg.columnasGeneral)+1);
 	});
-	d3.selectAll("circle").attr("class", currentSeccion + " " + general);
+	d3.selectAll("circle").attr("class", currentSeccion + " " + "general");
 }
 
 // Función que divide los circulitos en niveles
@@ -467,7 +468,7 @@ function separarCirculitos() {
 		else if (axis == "y"){
 			result = grillaSvg.alto - 
 					 grillaSvg.labelSpace - 
-					 (circulo.posy + Math.floor(currentIndex/grillaSvg.columnasPorNivel) * (circulo.margin+circulo.radio));
+					 (Math.floor(currentIndex/grillaSvg.columnasPorNivel) * (circulo.margin+circulo.radio));
 		}
 		else {
 			console.log("Hubo un error con el calculo de posiciones de los ejes X e Y");
@@ -484,35 +485,21 @@ function mostrarMapaComunas() {
 	d3.select("#mapaCABA svg").transition().duration(400).attr("x", 300);
 }
 
-function generarLabelsNiveles() {
-	var labelsNiveles = [{texto: "Inicial", posx: niveles[0].x0+100, posy: 440, clase: "nivel0"},
-						 {texto: "Primario", posx: niveles[1].x0+100, posy: 440, clase: "nivel1"},
-						 {texto: "Secundario", posx: niveles[2].x0+100, posy: 440, clase: "nivel2"},
-						 {texto: "Terciario", posx: niveles[3].x0+100, posy: 440, clase: "nivel3"}];		
-
-	svgGeneral.selectAll("text.labelNivel")
-		.data(labelsNiveles)
-		.enter()
-		.append("text")
-		.attr("x", function(d) { return d.posx; })
-		.attr("y", function(d) { return d.posy; })
-		.attr("text-anchor", "middle")
-		.text(function(d) { return d.texto; })
-		.attr("class", function(d) { return d.clase + " labelNivel"});
-}
-
 function resetCambioSeccion() {	
 	currentSeccion = $("section.active").attr("id"); 
 
 	d3.selectAll("input[type=radio]").property("checked", false);
-	d3.selectAll("circle").transition().attr("fill", colores.neutro);	
+	d3.selectAll("circle").attr("fill", colores.neutro);	
 	
 	if (currentSeccion != "comuna") { resetMapaCaba(); }
-	if (currentSeccion != "niveles") { $("text.labelNivel").hide(); }
+	if (currentSeccion != "niveles") { $("g.labels").hide(); }
 
 	$("g.info").hide();
 
 	switch(currentSeccion) {				
+		case "landing":
+			$("form.filtro").hide();
+			break;
 		case "niveles":
 			resetCirculoMedio();
 			break;
@@ -537,74 +524,206 @@ function resetCambioSeccion() {
 	}
 }
 
-function generarInfoText(hover) {	
-	$("g.info").show();
-	hover = (typeof hover === "undefined") ? "estadoCero" : hover;
+function calcularLineas(explicativoEntero, cantidadPalabras){
+	cantidadPalabras = (typeof cantidadPalabras === "undefined") ? infoDetails.palabrasPorLinea : cantidadPalabras;
+	var palabras = explicativoEntero.split(" "),
+		lineas = [];	
+
+	for (var i=0; i<palabras.length; i = i + cantidadPalabras) {
+		var fraseCortada = palabras.slice(i, i+cantidadPalabras),
+			frase = fraseCortada.join(" ");
+		
+		lineas.push(frase);
+	}	
+	return lineas;
+}
+
+function generarInfoTextLanding() {
+	var explicativosSeccion = explicativos.secciones["landing"]["estadoCero"];		
+
+	infoGroup.append("text");
+
+	var lineas = calcularLineas(explicativosSeccion["general"]);
+
+	var posInfoX = parseInt(circuloMedio.attr("cx")) +
+			   circulo.radioGrande + circulo.margin*2;
+	var posInfoY = parseInt(circuloMedio.attr("cy")) - 
+				Math.floor(lineas.length/2) * infoDetails.verticalMargin;
+
+	var texto = d3.select("g.info text").text(lineas[0])
+		.attr("x", posInfoX)
+		.attr("y", posInfoY)
+		.attr("class", currentSeccion + " general");
 	
-	var explicativosSeccion = explicativos.secciones[currentSeccion][hover],
-		explicativosKeys = Object.keys(explicativosSeccion);
+	for (var i=1; i<lineas.length; i++) {
+		texto.append("tspan")
+			.text(lineas[i])
+			.attr("x", posInfoX)
+			.attr("y", posInfoY + infoDetails.verticalMargin*i)
+			.attr("class", currentSeccion + " general");	
+	}		
+}
 
-	infoGroup.selectAll("text").remove();
-	infoGroup.selectAll("text").data(explicativosKeys).enter().append("text");
+function generarInfoTextGeneral(filtro) {
+	var explicativosSeccion = explicativos.secciones["general"][filtro],
+		explicativosKeys = Object.keys(explicativosSeccion);		
 
-	var posTextoX = 0,
-		posTextoY = 0,
-		coordenadasX = [],
-		coordenadasY = [];
+	infoGroup.selectAll("g.info text").data(explicativosKeys).enter().append("text");
+	
+	var posInfoY = 0,
+		posInfoX = 0,		
+		counterLineas = 0;
+	
+	for (var i = explicativosKeys.length - 1; i >= 0; i--) {
+		var lineas = calcularLineas(explicativosSeccion[explicativosKeys[i]]);
 
-	var topY = circulo.posy + circulo.radio + circulo.margin,
-		bottomY = grillaSvg.filasGeneral * (circulo.radio + circulo.margin) +
-				  circulo.posy;
-	var posicionesY = [topY, bottomY];
+		posInfoX = grillaSvg.columnasGeneral * (circulo.radio + circulo.margin) + 
+				   circulo.posx + circulo.radio + circulo.margin*2 ;
 
-	for (var i=0; i<explicativosKeys.length; i++) {
-		var palabras = explicativosSeccion[explicativosKeys[i]].split(" "),
-			lineas = [];	
-
-		for (var j=0; j<palabras.length; j = j + infoDetails.palabrasPorLinea) {
-			var fraseCortada = palabras.slice(j, j+infoDetails.palabrasPorLinea),
-				frase = fraseCortada.join(" ");
-			
-			lineas.push(frase);
+		if (filtro == "estadoCero") { 
+			// posY al bottom del texto, porque escribimos de abajo para arriba
+			posInfoY = grillaSvg.filasGeneral * (circulo.radio + circulo.margin) / 2 +
+					   circulo.posy +
+					   Math.floor(lineas.length/2) * infoDetails.verticalMargin;
+		} 
+		else {
+			// bottom of the grid
+			posInfoY = grillaSvg.filasGeneral * (circulo.radio + circulo.margin) + 
+					   circulo.posy - counterLineas*infoDetails.verticalMargin;
 		}
-
-		switch (currentSeccion) {		
-			case "landing":
-				posTextoX = parseInt(circuloMedio.attr("cx")) +
-							circulo.radioGrande + circulo.margin*2;
-				coordenadasX.push(posTextoX);
-				posTextoY = parseInt(circuloMedio.attr("cy")) - 
-							Math.floor(lineas.length/2) * infoDetails.verticalMargin;
-				coordenadasY.push(posTextoY);
-				break;
-			case "general":
-				posTextoX = grillaSvg.columnasGeneral * (circulo.radio + circulo.margin) + 
-							circulo.posx + circulo.radio + circulo.margin*2;					
-				coordenadasX.push(posTextoX);			
-				if (hover == "estadoCero") {
-					posTextoY = grillaSvg.filasGeneral * (circulo.radio + circulo.margin) / 2 +
-								circulo.posy -
-								Math.floor(lineas.length/2) * infoDetails.verticalMargin;					
-					coordenadasY.push(posTextoY);
-				}
-				else { 										
-					coordenadasY.push(posicionesY[i]);
-				}
-				break;
-		}
-
-		var texto = d3.selectAll("g.info text").filter(function(d,index){return index == i });
+		
+		var texto = d3.selectAll("g.info text").filter(function(d,index){return index == i});
 		texto.text(lineas[0])
-			.attr("x", coordenadasX[i])
-			.attr("y", coordenadasY[i])
+			.attr("x", posInfoX)
+			.attr("y", posInfoY - (lineas.length-1)*infoDetails.verticalMargin)
 			.attr("class", currentSeccion + " " + explicativosKeys[i]);
 		
-		for (var k=1; k<lineas.length; k++) {
+		counterLineas++;
+
+		var tspanY = 0;
+		for (var j= lineas.length - 1; j>=1; j--) {
+			tspanY = posInfoY - (lineas.length-j-1)*infoDetails.verticalMargin;
 			texto.append("tspan")
-				.text(lineas[k])
-				.attr("x", coordenadasX[i])
-				.attr("y", coordenadasY[i] + infoDetails.verticalMargin*k)
-				.attr("class", currentSeccion + " " + explicativosKeys[i]);	
+				.text(lineas[j])
+				.attr("x", posInfoX)
+				.attr("y", tspanY)
+				.attr("class", currentSeccion + " " + explicativosKeys[i]);
+
+			counterLineas++;
 		}
 	}
+}
+
+function generarInfoTextNiveles(filtro) {
+	var explicativosSeccion = explicativos.secciones["niveles"],
+		nivelesKeys = Object.keys(explicativosSeccion);
+
+	var posInfoX = 0,
+		posInfoY = 0;
+
+	if (filtro == "estadoCero") {
+		var labels = labelsGroup.selectAll("text");
+		if (labels.empty()) {
+			labels.data(nivelesKeys).enter().append("text");
+			var explicativoNivel = "";
+
+			for (var i=0; i<nivelesKeys.length; i++) {
+				explicativoNivel = explicativosSeccion[nivelesKeys[i]][filtro]["general"];
+				
+				var lineas = calcularLineas(explicativoNivel);
+
+				posInfoX = coordenadasNiveles[i] + circulo.margin;
+				posInfoY = grillaSvg.alto - grillaSvg.labelSpace + infoDetails.verticalMargin*2;
+
+				var texto = d3.selectAll("g.labels text").filter(function(d,index){return index == i});
+				texto.text(lineas[0])
+					.attr("x", posInfoX)
+					.attr("y", posInfoY)
+					.attr("class", currentSeccion + " " + nivelesKeys[i] + " general");
+
+				var tspanY = 0;
+				for (var j=1; j<lineas.length; j++) {
+					tspanY = posInfoY + infoDetails.verticalMargin*j;
+					texto.append("tspan")
+						.text(lineas[j])
+						.attr("x", posInfoX)
+						.attr("y", tspanY)
+						.attr("class", currentSeccion + " " + nivelesKeys[i] + " general");
+				}
+			}
+		}
+	}
+	else {
+		var filtroKeys = [];
+		for (var i=0; i<nivelesKeys.length; i++) {
+			var explicativosNivel = explicativosSeccion[nivelesKeys[i]][filtro],
+				explicativosNivelKeys = Object.keys(explicativosNivel);
+			for (var j=0; j<explicativosNivelKeys.length; j++) {
+				filtroKeys.push(explicativosNivelKeys[j]);
+			}
+		} 
+
+		infoGroup.selectAll("g.info text").data(filtroKeys).enter().append("text");
+		
+		var grosorColumna = grillaSvg.columnasPorNivel * (circulo.margin + circulo.radio*2);
+
+		for (var i=0; i<nivelesKeys.length; i++) {
+			var explicativosNivel = explicativosSeccion[nivelesKeys[i]][filtro],
+				explicativosNivelKeys = Object.keys(explicativosNivel);
+			
+			var counterLineas = 0;
+
+			for (var j=0; j<explicativosNivelKeys.length; j++) {
+				var lineas = [];	
+				if (filtro == "procedencia"){
+					lineas = calcularLineas(explicativosNivel[explicativosNivelKeys[j]], 2);
+				}
+				else {
+					lineas = calcularLineas(explicativosNivel[explicativosNivelKeys[j]]);
+				}
+
+				posInfoX = coordenadasNiveles[i] + grosorColumna;
+				posInfoY = grillaSvg.alto - grillaSvg.labelSpace -
+						   counterLineas*infoDetails.verticalMargin;
+
+				var texto = d3.selectAll("g.info text").filter(function(d,index){return index == i*explicativosNivelKeys.length + j});
+				texto.text(lineas[0])
+					.attr("x", posInfoX)
+					.attr("y", posInfoY - (lineas.length-1)*infoDetails.verticalMargin)
+					.attr("class", currentSeccion + " " + nivelesKeys[i] + " " + explicativosNivelKeys[j]);
+				
+				counterLineas++;
+
+				var tspanY = 0;
+				for (var k= lineas.length - 1; k>=1; k--) {
+					tspanY = posInfoY - (lineas.length-k-1)*infoDetails.verticalMargin;
+					texto.append("tspan")
+						.text(lineas[k])
+						.attr("x", posInfoX)
+						.attr("y", tspanY)
+						.attr("class", currentSeccion + " " + nivelesKeys[i] + " " + explicativosNivelKeys[j]);
+
+					counterLineas++;
+				}
+			}
+		}		
+	}
+}
+
+function generarInfoText(filtro) {	
+	$("g.info").show();
+	filtro = (typeof filtro === "undefined") ? "estadoCero" : filtro;
+	infoGroup.selectAll("text").remove();
+
+	switch (currentSeccion) {		
+			case "landing":
+				generarInfoTextLanding();
+				break;
+			case "general":
+				generarInfoTextGeneral(filtro);
+				break;
+			case "niveles":
+				generarInfoTextNiveles(filtro);
+				break;
+		}	
 }
