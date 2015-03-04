@@ -117,3 +117,11 @@ iframe {
     text-align: center;
     width: 100px;
 }
+
+div#dropdown-nivel {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 800;
+}
