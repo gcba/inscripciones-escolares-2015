@@ -47,6 +47,8 @@ var color = d3.scale.linear()
   .domain([minimo, maximo])
   .range(["#f2f0f7", "#54278f", "#ff0000"]);
 
+  svg.select(".caba").remove();
+
   svg.append("g")
       .attr("class", "caba")
     .selectAll("path")
@@ -57,7 +59,3 @@ var color = d3.scale.linear()
       });
 
 }
-
-
-
-
