@@ -1,9 +1,93 @@
 @import "../public/components/bourbon/app/assets/stylesheets/_bourbon.scss";
-@import "../public/components/bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins";
+
+@include font-face('Gotham', 'fonts/gotham');
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+
+/* ########
+   Colores
+   ######## */
+
+
+$black: #000;
+$white: #FFF;
+
+
+/* ########
+   Fuentes
+   ######## */
+
+$fontset-default: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$fontset-gotham: "Gotham", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 
 /*
  * CSS styles para la visualización de educación
  */
+
+$navbar-default-bg: transparent;
+$navbar-default-border: none;
+
+@import "../public/components/bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+
+
+body {
+  @include background-image(url("img/linedpaper.png"));
+  font-family: $fontset-default;
+}
+html,
+body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+header{
+    pointer-events: none;
+    position: fixed;
+    top: 0px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 999;
+    font-family: $fontset-gotham;
+
+
+    .header-gcba {
+        height:50px;
+        padding:10px 0;
+        overflow:visible;
+        background-color: transparent;
+    }
+
+    .header-inner {
+        padding-right:20px;
+        padding-left:20px
+    }
+
+    .header-gcba .logo {
+        float:left;
+        width:172px;
+        height:33px;
+        @include retina-image("img/logo-normal", 172px 34px);
+    }
+
+    .header-gcba h2.slogan {
+        float: right;
+        font-weight: bold;
+        margin-top: 0.75em;
+        font-size: 0.85em;
+        font-size:12px;
+        letter-spacing:-1px;
+        color: $black;
+        text-transform: uppercase;
+        min-width: 150px;
+    }
+
+
+}
+
 
 h1 {
   text-align: center;
@@ -13,11 +97,11 @@ h1 {
   padding-top: 20px;
 }
 
-h2 {
-  margin-top: 0px;
-  padding-top: 40px;
-  text-align: center;
-}
+// h2 {
+//   margin-top: 0px;
+//   padding-top: 40px;
+//   text-align: center;
+// }
 
 h3 {
   margin-top: 10px;
@@ -43,7 +127,7 @@ text.caba { fill: #FFD300; }
 text.provincia { fill: #F2803A; }
 
 #viz-container {
-  top: 0;
+  top: 120px;
   left: 0;
   width: 100%;
   height: 600px;
@@ -216,13 +300,7 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
   position: inherit;
 }
 
-html,
-body {
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    margin: 0;
-}
+
 #mapaInteractivo {
     width: 100%;
     height: 100%;
