@@ -5667,20 +5667,21 @@ text.provincia {
   fill: #F2803A; }
 
 #viz-container {
-  top: 120px;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  position: fixed;
+  position: relative;
   z-index: 700; }
 
 svg#viz {
-  margin: auto;
-  background-color: #FFF;
-  width: 100%;
-  height: 100%;
+  width: 960px;
+  height: 470px;
+  padding: 20px;
   position: absolute;
-  left: 0;
-  top: 0; }
+  top: 50%;
+  left: 50%;
+  margin: -70px 0 0 -170px; }
 
 section {
   width: 100%;
