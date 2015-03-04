@@ -14,47 +14,47 @@
 			"total": 37,
 			"genero": {
 				"femenino": 48,
-				"masculino": 52	
+				"masculino": 52
 			},
 			"procedencia": {
 				"caba": 93,
 				"provincia": 7
-			}						
+			}
 		},
 		"primario": {
 			"total": 35,
 			"genero": {
 				"femenino": 49,
-				"masculino": 51		
+				"masculino": 51
 			},
 			"procedencia": {
 				"caba": 90,
 				"provincia": 10
-			}	
+			}
 		},
 		"secundario": {
 			"total": 28,
 			"genero": {
 				"femenino": 46,
-				"masculino": 54	
+				"masculino": 54
 			},
 			"procedencia": {
 				"caba": 87,
 				"provincia": 13
-			}	
+			}
 		},
 		"terciario": {
 			"total": 23,
 			"genero": {
 				"femenino": 50,
-				"masculino": 50	
+				"masculino": 50
 			},
 			"procedencia": {
 				"caba": 78,
 				"provincia": 22
-			}	
-		}	
-	}, 
+			}
+		}
+	},
 	"comunas": {
 		"inicial":{
 			"1": 1434,
@@ -125,5 +125,5 @@
 			"15": 1000
 		}
 	}
-	 
+
 }
