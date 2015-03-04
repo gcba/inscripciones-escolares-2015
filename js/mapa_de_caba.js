@@ -31,14 +31,20 @@ queue()
     .await(ready);
 
 function ready(error, comunas, data) {
-  var maximo = 0;
+  var maximo = 0,
+      minimo = Number.MAX_VALUE;
+
   for (var i = 1 ; i < 16 ; i++){
     if (maximo < data.comunas[nivel][i]){
       maximo = data.comunas[nivel][i];
     }
+
+    if (minimo > data.comunas[nivel][i]){
+      minimo = data.comunas[nivel][i];
+    }
   }
 var color = d3.scale.linear()
-  .domain([0, maximo])
+  .domain([minimo, maximo])
   .range(["#f2f0f7", "#54278f", "#ff0000"]);
 
   svg.append("g")
