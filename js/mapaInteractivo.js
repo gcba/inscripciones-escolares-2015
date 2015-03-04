@@ -4,6 +4,7 @@
 Crea la vizualizacion del mapa interactivo del ultimo slide
 */
 
+var sublayers = [];
 
 function loadMap() {
 
@@ -14,19 +15,38 @@ function loadMap() {
             // El infowindows está en la segunda layer
             var sublayer = layers[1].getSubLayer(0);
 
+            sublayers.push( sublayer );
+
             // Reescribo HTML de infowindows por el definido en el primer script
             sublayer.infowindow.set('template', $('#infowindow_template').html());
         });
 }
-
+ 
 window.onload = loadMap;
 
 // Filtros de DropUP
-$(".dropdown-menu li a").click(function(){
+$("#filtro1 li a").click(function(){
   var selText = $(this).text();
+  $("#filtro2 a")[0].innerHTML = 'Ver todas' + '<span class="caret"></span>';
   $(this).parents('.btn-group').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
+  filtro (selText, "niveldescr");
 });
 
-$("#btnSearch").click(function(){
-  alert($('.btn-select').text()+", "+$('.btn-select2').text());
+
+$("#filtro2 li a").click(function(){
+  var selText = $(this).text();
+  $("#filtro1 a")[0].innerHTML = 'Ver todos' + '<span class="caret"></span>';
+  $(this).parents('.btn-group').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
+  filtro (selText, "modalidadd");
 });
+
+function filtro (accion,campo){
+  switch (accion) {
+    case "Ver Todos":
+      sublayers[0].set({sql: "SELECT * FROM escuelas"});
+      break;
+    default:
+      sublayers[0].set({sql: "SELECT * FROM escuelas WHERE " + campo + " LIKE '%" + accion + "'"});
+      break;
+  }
+}
