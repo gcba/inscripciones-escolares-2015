@@ -74,8 +74,8 @@ var margin = 60,
 
 
 var grillaSvg = {
-		ancho: width,
-		alto: height,
+		ancho: 960,
+		alto: 470,
 		labelSpace: 110,
 		filasGeneral: 9,
 		columnasGeneral: 15,
@@ -99,35 +99,35 @@ var totalCirculos = grillaSvg.filasGeneral * grillaSvg.columnasGeneral;
 var svgGeneral = d3.select("svg#viz")
 								.attr("width", width + margin*2)
 								.attr("height", height + margin*2)
-								.attr("viewBox","0 0 "+(width + margin*.7)+ ' '+ (height + margin*.7))
+								// .attr("viewBox","0 0 "+(width + margin*.7)+ ' '+ (height + margin*.7))
 
 
-function resize() {
-  var margin = 60,
-  		width = parseInt(d3.select("#viz").style("width")) - margin*2,
-  		height = parseInt(d3.select("#viz").style("height")) - margin*2;
-  // console.log(width, height);
+// function resize() {
+//   var margin = 60,
+//   		width = parseInt(d3.select("#viz").style("width")) - margin*2,
+//   		height = parseInt(d3.select("#viz").style("height")) - margin*2;
+//   // console.log(width, height);
 
-  if (width > 960) {
+//   if (width > 960) {
 
-  			// circulo.radio = 7;
-  			// d3.selectAll("circle").transition().attr("r", circulo.radio);
+//   			// circulo.radio = 7;
+//   			// d3.selectAll("circle").transition().attr("r", circulo.radio);
 
-}
-
-
-  svgGeneral = d3.select("svg#viz")
-        .attr("width", width + margin*2)
-        .attr("height", height + margin*2)
-        .attr("viewBox","0 0 "+(width + margin*.7)+ ' '+ (height + margin*.7));
+// }
 
 
+//   svgGeneral = d3.select("svg#viz")
+//         .attr("width", width + margin*2)
+//         .attr("height", height + margin*2)
+//         .attr("viewBox","0 0 "+(width + margin*.7)+ ' '+ (height + margin*.7));
 
-}
 
-d3.select(window).on('resize', resize);
 
-resize();
+// }
+
+// d3.select(window).on('resize', resize);
+
+// resize();
 
 
 var grilla = svgGeneral.append("g").attr("class", "contenedor");
