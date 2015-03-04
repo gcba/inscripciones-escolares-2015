@@ -1,3 +1,4 @@
+//solo para el select de ejemplo.
 var nivel = "inicial";
 
 var grillaSvg = {
@@ -50,3 +51,7 @@ var color = d3.scale.linear()
       });
 
 }
+
+
+
+

@@ -25,6 +25,35 @@
   <body>
   	<div id="mapaCABA">
   	</div>
+
+
+
+
   	<script type="text/javascript" src="js/mapa_de_caba.js"></script>
+
+
+
+
+      <!-- EJEMPLO DE COMO UTILIZAR EL CAMBIO DE CHOROPLETH -->
+
+     <select id="seleccionMapa" onchange="cambiaNivel()">
+        <option value="inicial" selected>Inicial
+        <option value="primario">Primario
+        <option value="secundario">Secundario
+        <option value="terciario">Terciario
+      </select>
+
+      <script>
+      function cambiaNivel() {
+        
+        nivel = document.getElementById("seleccionMapa").value;
+        queue()
+          .defer(d3.json, "data/comunas.json")
+          .defer(d3.json, "data/data.json")
+          .await(ready);
+            
+      }
+      </script>
+
   </body>
 </html>
