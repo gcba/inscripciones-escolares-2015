@@ -33,6 +33,12 @@ form.filtro{
 	display: none;
 }
 
+text.general { fill: #666666;}
+text.femenino { fill: #BA1135; }
+text.masculino { fill: #05a381; }
+text.caba { fill: #FFD300; }
+text.provincia { fill: #F2803A; }
+
 div#viz {
 	top: 120px;
 	width: 100%;
@@ -78,8 +84,17 @@ a.arrow {
 	display: none;
 }
 
-text {
+g.labels {
 	display: none;
+}
+
+g.labels text, g.info text {
+	cursor: default;
+}
+
+tspan.nivelLink:hover {
+	cursor: pointer;
+	text-decoration: none;
 }
 
 .onepage-pagination{
@@ -101,4 +116,12 @@ iframe {
     right: 0;
     text-align: center;
     width: 100px;
+}
+
+div#dropdown-nivel {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 800;
 }
