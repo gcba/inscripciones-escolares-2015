@@ -32,6 +32,16 @@ body {
     background: rgba(255, 255, 255, 0) !important;
 }
 
+.cartodb-popup-content{
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+.cartodb-popup-content p {
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
 .cartodb-popup-close-button{
     background: url("img/light.png") no-repeat scroll 0 -23px rgba(255, 255, 255, 0) !important;
 }
@@ -55,4 +65,5 @@ body {
     color: #000000;
     text-align: right;
 }
+
 
