@@ -1,4 +1,4 @@
-var nivel = "primario";
+var nivel = "secundario";
 
 var grillaSvg = {
   ancho: 960,
@@ -37,11 +37,11 @@ function ready(error, comunas, data) {
 
   var getLevel = function(d){ return d[nivel]; }
 
-  // console.log(getLevel(data.comunas));
+  console.log(getLevel(data.comunas));
 
   var color = d3.scale.linear()
-  .domain([0, 5000])
-  .range(["#f2f0f7", "#54278f"]);
+  .domain([0, 3000])
+  .range(["#f2f0f7", "#54278f", "#ff0000"]);
 
   // function calcularColor(nivel){
   //   color = d3.scale.linear()
@@ -51,7 +51,6 @@ function ready(error, comunas, data) {
   // }
 
   // console.log(data.comunas[nivel]);
-
 
   //
 
