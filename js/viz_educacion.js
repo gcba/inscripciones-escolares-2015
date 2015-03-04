@@ -92,7 +92,7 @@ var mapaComunas = svgGeneral.append("g")
 // Detalles de los círculos
 var circulo = {
 	radio: 7,
-	radioGrande: 100,
+	radioGrande: 150,
 	posx: 270,
 	posy: 50,
 	margin: 20
