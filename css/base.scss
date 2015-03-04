@@ -46,8 +46,8 @@ text.provincia { fill: #F2803A; }
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  position: relative;
+  height: 600px;
+  position: fixed;
   z-index: 700;
 }
 
@@ -55,21 +55,19 @@ text.provincia { fill: #F2803A; }
   // margin: auto;
   width: 960px;
   height: 470px;
-
-  padding: 20px;
-
   position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
 
-  margin: -70px 0 0 -170px;
-
+  margin-top: 50px;
 }
 
 section {
   width: 100%;
   height: 100vh;
   position: relative;
+  z-index: 699;
 }
 
 a.arrow {
