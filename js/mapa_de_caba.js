@@ -1,4 +1,4 @@
-var nivel = "secundario";
+var nivel = "inicial";
 
 var grillaSvg = {
   ancho: 960,
@@ -16,8 +16,6 @@ var mapaSvg = {
   posInicialY: grillaSvg.alto - grillaSvg.labelSpace - 300
 }
 
-
-
 // Crear SVG para los circulos
 var svg = d3.select("#mapaCABA")
          .append("svg")
@@ -32,35 +30,15 @@ queue()
     .await(ready);
 
 function ready(error, comunas, data) {
-
-// http://roadtolarissa.com/blog/2014/06/23/even-fewer-lamdas-with-d3/
-
-  var getLevel = function(d){ return d[nivel]; }
-
-  console.log(getLevel(data.comunas));
-
-  var color = d3.scale.linear()
-  .domain([0, 3000])
+  var maximo = 0;
+  for (var i = 1 ; i < 16 ; i++){
+    if (maximo < data.comunas[nivel][i]){
+      maximo = data.comunas[nivel][i];
+    }
+  }
+var color = d3.scale.linear()
+  .domain([0, maximo])
   .range(["#f2f0f7", "#54278f", "#ff0000"]);
-
-  // function calcularColor(nivel){
-  //   color = d3.scale.linear()
-  //   .domain([500, d3.max(data.comunas[nivel],function(d){ return parseInt(d[0]); }) ])
-  //   .range(["#f2f0f7", "#dadaeb", "#bcbddc", "#9e9ac8", "#756bb1", "#54278f"]);
-  //   console.log(d3.max(data.comunas.inicial));
-  // }
-
-  // console.log(data.comunas[nivel]);
-
-  //
-
-
-
-
-
-  // console.log(d3.max(data));
-  // console.log(nivel);
-  // console.log(d3.extent(data.comunas.inicial[comunas.properties.comuna]));
 
   svg.append("g")
       .attr("class", "caba")
