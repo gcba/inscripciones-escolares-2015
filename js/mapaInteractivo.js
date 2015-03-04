@@ -42,8 +42,11 @@ $("#filtro2 li a").click(function(){
 
 function filtro (accion,campo){
   switch (accion) {
-    case "Ver Todos":
-      sublayers[0].set({sql: "SELECT * FROM escuelas"});
+    case "Ver todos":
+      sublayers[0].set({sql: "SELECT * FROM escuelas" });
+      break;
+    case "Ver todas":
+      sublayers[0].set({sql: "SELECT * FROM escuelas" });
       break;
     default:
       sublayers[0].set({sql: "SELECT * FROM escuelas WHERE " + campo + " LIKE '%" + accion + "'"});
