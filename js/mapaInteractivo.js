@@ -41,15 +41,24 @@ $("#filtro2 li a").click(function(){
 });
 
 function filtro (accion,campo){
+
+  // sacar resets de consulta
+  // la funcion no recibe parámetros
+  // dependiendo que esté seleccionado
+  // armo string de SQL
+
+  var consulta = "SELECT * FROM escuelas";
+
+
   switch (accion) {
     case "Ver todos":
-      sublayers[0].set({sql: "SELECT * FROM escuelas" });
+      sublayers[0].set({sql: consulta });
       break;
     case "Ver todas":
-      sublayers[0].set({sql: "SELECT * FROM escuelas" });
+      sublayers[0].set({sql: consulta });
       break;
     default:
-      sublayers[0].set({sql: "SELECT * FROM escuelas WHERE " + campo + " LIKE '%" + accion + "'"});
+      sublayers[0].set({sql: consulta +  " WHERE " + campo + " LIKE '%" + accion + "'"});
       break;
   }
 }
