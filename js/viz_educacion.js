@@ -507,7 +507,7 @@ function resetCambioSeccion() {
 			nivelMapaCaba = "inicial";
 			break;
 		case "mapa":
-			$("svg").hide();
+			$("#viz-container").hide();
 			$("form.filtro").hide();
 			break;
 	}
