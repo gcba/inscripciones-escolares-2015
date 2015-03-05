@@ -1,5 +1,6 @@
 @import "../public/components/bourbon/app/assets/stylesheets/_bourbon.scss";
 @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins";
+@import "mixins/breakpoint.scss";
 
 @include font-face('Gotham', 'fonts/gotham');
 @import url('http://fonts.googleapis.com/css?family=Lato:300,400,700');
@@ -27,17 +28,43 @@ $fontset-gotham: "Gotham", "Helvetica Neue", Helvetica, Arial, sans-serif !defau
 $navbar-default-bg: transparent;
 $navbar-default-border: none;
 
-//$icon-font-path: if($bootstrap-sass-asset-helper, "bootstrap/", "../public/components/bootstrap-sass-official/assets/fonts/bootstrap/") !default;
 
 $icon-font-path: "fonts/" !default;
 
 
 @import "../public/components/bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 
+html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -webkit-backface-visibility: hidden;
+    moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -webkit-touch-callout: none;
+    margin: 0;
+    padding: 0;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
 
 body {
   @include background-image(url("img/linedpaper.png"));
   font-family: $fontset-default;
+
+    // Breakpoints en la base del cuerpo, para referenciar cambios.
+    @include breakpoint(xs) {
+      border-bottom: 15px solid #F17E2A;
+    }
+    @include breakpoint(sm) {
+      border-bottom: 15px solid #CC4A59;
+    }
+    @include breakpoint(md) {
+      border-bottom: 15px solid #772626;
+    }
+    @include breakpoint(lg) {
+      border-bottom: 15px solid #30013F;
+    }
 }
 html,
 body {
@@ -59,6 +86,7 @@ header{
     font-family: $fontset-gotham;
 
 
+
     .header-gcba {
         height:50px;
         padding:10px 0;
@@ -72,22 +100,28 @@ header{
     }
 
     .header-gcba .logo {
-        float:left;
-        width:172px;
-        height:33px;
+        float: left;
+        width: 172px;
+        height: 33px;
         @include retina-image("img/logo-normal", 172px 34px);
+        background-repeat: no-repeat;
+        background-size: 100%;
+        @include breakpoint(xs) {
+          background-size: 80%;
+        }
     }
 
     .header-gcba h2.slogan {
         float: right;
         font-weight: bold;
         margin-top: 0.75em;
-        font-size: 0.85em;
-        font-size:12px;
-        letter-spacing:-1px;
+        font-size: 1.3rem;
         color: $black;
         text-transform: uppercase;
         min-width: 150px;
+        @include breakpoint(xs) {
+          font-size: 1rem;
+        }
     }
 
 
@@ -96,31 +130,35 @@ header{
 
 h1 {
   text-align: center;
-  font-size: 48px;
   font-weight: 300;
   margin-top: 0px;
-  padding-top: 20px;
+  padding-top: 0px;
+
+  font-size: 4.5rem;
+
+    @include breakpoint(xs) {
+      font-size: 3.5rem;
+    }
 }
 
-// h2 {
-//   margin-top: 0px;
-//   padding-top: 40px;
-//   text-align: center;
-// }
-
-h3 {
+h2 {
   margin-top: 10px;
-  font-size: 16px;
-  font-weight: 200;
+  font-weight: 400;
   color: #555;
   text-align: center;
+
+  font-size: 1.45rem;
+
+    @include breakpoint(xs) {
+      font-size: 1.21rem;
+    }
 }
 
 form.filtro{
   text-align: center;
   position: fixed;
   width: 100%;
-  top: 120px;
+  top: 170px;
   z-index: 800;
   display: none;
 }
@@ -132,20 +170,20 @@ text.caba { fill: #FFD300; }
 text.provincia { fill: #F2803A; }
 
 #viz-container {
-  top: 120px;
-  left: 0;
+  top: 10%;
+  left: 0px;
   width: 100%;
-  height: 600px;
+  height: 90%;
   position: fixed;
   z-index: 700;
 
    svg#viz {
+    // visibility: hidden;
     width: 90%;
     height: 90%;
     position: absolute;
     top: 50%;
     left: 50%;
-    margin: 0 auto;
     transform: translate(-50%, -50%);
     // max-width: 960px;
     // height: 470px;
@@ -169,16 +207,19 @@ a.arrow {
   position: absolute;
   left: 50%;
   color: #333333;
+  z-index: 701;
+  span {
+     font-size: 24px;
+   }
 }
-  a.arrow span {
-    font-size: 24px;
-  }
 .next-section {
-  bottom: 70px;
+  bottom: 50px;
 }
 .prev-section {
-  bottom: 110px;
+  bottom: 150px;
 }
+
+
 
 .comuna {
   fill: #c0c0c0;
@@ -213,6 +254,14 @@ iframe {
     right: 0;
     text-align: center;
     width: 100px;
+}
+
+#dropdown-nivel {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 800;
 }
 
 body, html {

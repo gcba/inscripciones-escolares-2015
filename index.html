@@ -6,7 +6,8 @@
     <meta http-equiv="cleartype" content="on">
     <meta name="HandheldFriendly" content="True">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
   	<link href="css/base.css" rel="stylesheet">
     <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.11/themes/css/cartodb.css" />
@@ -17,20 +18,39 @@
     <script type="text/javascript" src="js/d3.v3.min.js"></script>
     <script type="text/javascript" src="js/topojson.v1.min.js"></script>
     <script type="text/javascript" src="js/jquery-onepage-scroll.js"></script>
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:domain" content="http://buenosaires.gob.ar">
+    <meta name="twitter:site" content="@LABgcba">
+    <meta name="twitter:creator" content="@LABgcba">
+    <meta name="twitter:image:src" content="http://i.imgur.com/srxz0wW.png">
+    <meta name="twitter:description" content="Explorá cómo se distribuye el presupuesto 2014 sancionado por la Legislatura de la Ciudad de Buenos Aires">
+    <meta name="twitter:title" content="¿A dónde van nuestros impuestos?">
+    <meta name="twitter:url" content="http://gcba.github.io/presupuesto-gcba/">
+
+    <meta property="og:title" content="¿A dónde van nuestros impuestos?"/>
+    <meta property="og:site_name" content="Visualización del Presupuesto 2014"/>
+    <meta property="og:description" content="Explorá cómo se distribuye el presupuesto 2014 sancionado por la Legislatura de la Ciudad de Buenos Aires"/>
+    <meta property="og:image" content="http://i.imgur.com/oA7xlzX.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="250" />
+    <meta property="og:image:height" content="250" />
+    <meta property="og:url" content="http://gcba.github.io/presupuesto-gcba/">
+
+
   </head>
   <body>
-  <header class="navbar navbar-default navbar-static-top" id="top" role="navigation">
-      <div class="header-gcba">
-          <div class="header-inner">
-              <div class="container">
-                  <a href="http://buenosaires.gob.ar" target="_blank">
-                      <div class="logo"></div>
-                  </a>
-                  <h2 class="slogan">En todo estás vos</h2>
-              </div>
-          </div>
+  <header>
+    <div class="header-gcba navbar navbar-default navbar-static-top" id="top" role="navigation">
+      <div class="header-inner">
+        <div class="container">
+          <a href="http://buenosaires.gob.ar" target="_blank">
+              <div class="logo"></div>
+          </a>
+          <h2 class="slogan">En todo estás vos</h2>
+        </div>
       </div>
-      </div>
+    </div>
   </header>
 
   	<!-- Filtro por Género o Procedencia -->
@@ -46,50 +66,44 @@
 		</div>
 	</form>
 
-	<!-- Dropdown para ver comunas por nivel -->
-	<div id="dropdown-nivel">
-		<select>
-		  <option value="nivel0" selected="selected">Inicial</option>
-		  <option value="nivel1">Primario</option>
-		  <option value="nivel2">Secundario</option>
-		  <option value="nivel3">Terciario</option>
-		</select>
-	</div>
+
 
 	<!-- Visualización -->
   	<div id="viz-container">
-      <svg id="viz" width="90%" height="90%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 960 470"></svg>
+
+      <h1>Inscripci&oacute;n Escolar 2015</h1>
+      <h2>Nuevos alumnos del sistema educativo de gestión estatal de la Ciudad.</h2>
+
+      <svg id="viz" width="90%" height="90%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 960 520"></svg>
+      <!-- Dropdown para ver comunas por nivel -->
+      <div id="dropdown-nivel">
+        <select>
+          <option value="nivel0" selected="selected">Inicial</option>
+          <option value="nivel1">Primario</option>
+          <option value="nivel2">Secundario</option>
+          <option value="nivel3">Terciario</option>
+        </select>
+      </div>
+
     </div>
 
   	<div class="main">
 	  	<!-- Secciones -->
 	  	<section id="landing" class="active">
-        <h1>Inscripci&oacute;n Escolar 2015</h1>
-        <h3>Nuevos alumnos del sistema educativo de gestión estatal de la Ciudad.</h3>
-	  		<a href="#" class="arrow next-section">
-	  			<span class="glyphicon glyphicon-chevron-down"></span>
-	  		</a>
+
+
+        <a href="#" class="arrow next-section"><span class="glyphicon glyphicon-chevron-down"></span></a>
+
 	  	</section>
 	  	<section id="general">
-	  		<a href="#" class="arrow next-section">
-	  			<span class="glyphicon glyphicon-chevron-down"></span>
-	  		</a>
+          <a href="#" class="arrow next-section"><span class="glyphicon glyphicon-chevron-down"></span></a>
 	  	</section>
-	  	<section id="niveles">
-	  		<a href="#" class="arrow next-section">
-	  			<span class="glyphicon glyphicon-chevron-down"></span>
-	  		</a>
-	  	</section>
-	  	<section id="comuna">
-	  		<a href="#" class="arrow next-section">
-	  			<span class="glyphicon glyphicon-chevron-down"></span>
-	  		</a>
-	  	</section>
+	  	<section id="niveles"></section>
+	  	<section id="comuna"></section>
 	  	<section id="mapa">
 	  			<div id="volverDelMapa">
 	  				<a href="#" class="prev-section"><button class="btn btn-default"><span class="glyphicon glyphicon-menu-up"></span> VOLVER</button></a>
 					</div>
-
 	  		<iframe src="mapaInteractivo.html"></iframe>
 	  	</section>
 	</div>

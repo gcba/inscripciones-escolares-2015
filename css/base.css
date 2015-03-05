@@ -5636,10 +5636,34 @@ button.close {
 @media print {
   .hidden-print {
     display: none !important; } }
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -webkit-backface-visibility: hidden;
+  moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -webkit-touch-callout: none;
+  margin: 0;
+  padding: 0;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%; }
+
 body {
   background-image: url("img/linedpaper.png");
   background-image: url("img/linedpaper.png");
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  @media (max-width: 767px) {
+    body {
+      border-bottom: 15px solid #F17E2A; } }
+  @media (min-width: 768px) {
+    body {
+      border-bottom: 15px solid #CC4A59; } }
+  @media (min-width: 992px) {
+    body {
+      border-bottom: 15px solid #772626; } }
+  @media (min-width: 1200px) {
+    body {
+      border-bottom: 15px solid #30013F; } }
 
 html,
 body {
@@ -5670,41 +5694,53 @@ header {
     float: left;
     width: 172px;
     height: 33px;
-    background-image: url("img/logo-normal.png"); }
+    background-image: url("img/logo-normal.png");
+    background-repeat: no-repeat;
+    background-size: 100%; }
     @media only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 1.3 / 1), only screen and (min-resolution: 125dpi), only screen and (min-resolution: 1.3dppx) {
       header .header-gcba .logo {
         background-image: url("img/logo-normal_2x.png");
         background-size: 172px 34px; } }
+    @media (max-width: 767px) {
+      header .header-gcba .logo {
+        background-size: 80%; } }
   header .header-gcba h2.slogan {
     float: right;
     font-weight: bold;
     margin-top: 0.75em;
-    font-size: 0.85em;
-    font-size: 12px;
-    letter-spacing: -1px;
+    font-size: 1.3rem;
     color: black;
     text-transform: uppercase;
     min-width: 150px; }
+    @media (max-width: 767px) {
+      header .header-gcba h2.slogan {
+        font-size: 1rem; } }
 
 h1 {
   text-align: center;
-  font-size: 48px;
   font-weight: 300;
   margin-top: 0px;
-  padding-top: 20px; }
+  padding-top: 0px;
+  font-size: 4.5rem; }
+  @media (max-width: 767px) {
+    h1 {
+      font-size: 3.5rem; } }
 
-h3 {
+h2 {
   margin-top: 10px;
-  font-size: 16px;
-  font-weight: 200;
+  font-weight: 400;
   color: #555;
-  text-align: center; }
+  text-align: center;
+  font-size: 1.45rem; }
+  @media (max-width: 767px) {
+    h2 {
+      font-size: 1.21rem; } }
 
 form.filtro {
   text-align: center;
   position: fixed;
   width: 100%;
-  top: 120px;
+  top: 170px;
   z-index: 800;
   display: none; }
 
@@ -5724,10 +5760,10 @@ text.provincia {
   fill: #F2803A; }
 
 #viz-container {
-  top: 120px;
-  left: 0;
+  top: 10%;
+  left: 0px;
   width: 100%;
-  height: 600px;
+  height: 90%;
   position: fixed;
   z-index: 700; }
   #viz-container svg#viz {
@@ -5736,7 +5772,6 @@ text.provincia {
     position: absolute;
     top: 50%;
     left: 50%;
-    margin: 0 auto;
     transform: translate(-50%, -50%);
     box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -5751,16 +5786,16 @@ section {
 a.arrow {
   position: absolute;
   left: 50%;
-  color: #333333; }
-
-a.arrow span {
-  font-size: 24px; }
+  color: #333333;
+  z-index: 701; }
+  a.arrow span {
+    font-size: 24px; }
 
 .next-section {
-  bottom: 70px; }
+  bottom: 50px; }
 
 .prev-section {
-  bottom: 110px; }
+  bottom: 150px; }
 
 .comuna {
   fill: #c0c0c0;
@@ -5789,6 +5824,13 @@ iframe {
   right: 0;
   text-align: center;
   width: 100px; }
+
+#dropdown-nivel {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 800; }
 
 body, html {
   margin: 0;
