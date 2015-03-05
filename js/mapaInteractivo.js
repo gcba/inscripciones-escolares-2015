@@ -22,11 +22,11 @@ function loadMap() {
 
             // Reescribo HTML de infowindows por el definido en el primer script
             sublayer.infowindow.set('template', $('#infowindow_template').html());
-
+/*
             sublayer.on('featureClick', function(e, pos, latlng, data) {
-              console.log( "clickeado el " + data.cartodb_id);
+              //si hay click
             });
-
+*/
         });
 }
  
@@ -64,7 +64,6 @@ function filtro (){
     }
     consulta = consulta + " modalidadd LIKE '"+ $("#filtro2 a")[0].text.trim() +"'";
   }
-  console.log (consulta);
   sublayers[0].set({sql: consulta });
 }
 
@@ -140,10 +139,12 @@ function verDetallesEscuela(idEscuela){
     var nro = idEscuela.split("ESC");
 
     var sql_statement = "SELECT * FROM escuelas WHERE cartodb_id = " + nro[1];
+  
+    resetFiltros();
+    capas.setZoom(16);
 
     $.getJSON('http://gcba.cartodb.com/api/v2/sql/?q='+sql_statement, function(data) {
         // zoom al marker
-        capas.setZoom(16);
         setTimeout(function(){ 
           capas.setCenter([data.rows[0].lat, data.rows[0].lng]);
           openInfowindow(capaInfowindows,[data.rows[0].lat, data.rows[0].lng],data.rows[0].cartodb_id,0);
@@ -153,3 +154,9 @@ function verDetallesEscuela(idEscuela){
     });
 }
 
+function resetFiltros(){
+  sublayers[0].set({sql: "SELECT * FROM escuelas" });
+
+  $("#filtro1 li a").parents('.btn-group').find('.dropdown-toggle').html('Ver todos <span class="caret"></span>');
+  $("#filtro2 li a").parents('.btn-group').find('.dropdown-toggle').html('Ver todas <span class="caret"></span>');
+}
