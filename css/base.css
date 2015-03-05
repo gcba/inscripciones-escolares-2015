@@ -5932,6 +5932,17 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
   background: #ffffff;
   z-index: 900; }
 
+#filtros {
+  padding: 10px;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-top: 1px solid #c0c0c0;
+  border-bottom: 1px solid #c0c0c0;
+  width: 100%;
+  height: 56px;
+  margin: 0px;
+  bottom: 16px; }
+
 .cartodb-popup {
   width: 450px !important; }
 
@@ -5939,6 +5950,14 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
 .cartodb-popup-tip-container {
   z-index: 999;
   background: rgba(255, 255, 255, 0) !important; }
+
+.cartodb-popup-content {
+  max-width: 100% !important;
+  width: 100% !important; }
+
+.cartodb-popup-content p {
+  max-width: 100% !important;
+  width: 100% !important; }
 
 .cartodb-popup-close-button {
   background: url("img/light.png") no-repeat scroll 0 -23px rgba(255, 255, 255, 0) !important; }
@@ -5956,8 +5975,43 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
 .cartodb-popup-content-wrapper {
   background: white !important;
   width: 450px !important;
-  max-width: 450px !important; }
+  max-width: 450px !important;
+  -webkit-box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.25); }
 
 .cartodb-popup-cont .close {
   color: #000000;
   text-align: right; }
+
+.etiquetaFiltro {
+  font-size: 10px;
+  color: #999999;
+  text-transform: uppercase; }
+
+.cartodb-logo {
+  display: none !important; }
+
+#listado {
+  display: none;
+  height: 170px;
+  position: fixed;
+  bottom: 70px;
+  overflow: scroll;
+  overflow-x: hidden;
+  background-color: white;
+  opacity: 0.95;
+  overflow-y: scroll;
+  width: 33%;
+  -webkit-box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.25);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: 1px solid #c0c0c0;
+  font-size: 12px;
+  text-transform: capitalize; }
+
+.nombreEscuela {
+  text-transform: capitalize !important; }
