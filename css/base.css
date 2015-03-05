@@ -5664,9 +5664,12 @@ body {
   @media (min-width: 1200px) {
     body {
       border-bottom: 15px solid #30013F; } }
-  @media (max-height: 720px) {
+  @media (max-height: 700px) {
     body {
       border-bottom: 15px solid red; } }
+  @media (max-height: 815px) {
+    body {
+      border-bottom: 15px solid yellow; } }
 
 html,
 body {
@@ -5728,9 +5731,12 @@ h1 {
   @media (max-width: 767px) {
     h1 {
       font-size: 3.5rem; } }
-  @media (max-height: 720px) {
+  @media (max-height: 700px) {
     h1 {
       margin-top: -50px; } }
+  @media (max-height: 815px) {
+    h1 {
+      margin-top: -100px; } }
 
 h2 {
   margin-top: 10px;
@@ -5764,10 +5770,14 @@ text.provincia {
   height: 90%;
   position: fixed;
   z-index: 700; }
-  @media (max-height: 720px) {
+  @media (max-height: 700px) {
     #viz-container {
       top: 15%;
       height: 85%; } }
+  @media (max-height: 815px) {
+    #viz-container {
+      top: 20%;
+      height: 80%; } }
   #viz-container svg#viz {
     width: 90%;
     height: 90%;
@@ -5786,7 +5796,7 @@ text.provincia {
     margin-top: 50px;
     display: none;
     z-index: 701; }
-    @media (max-height: 720px) {
+    @media (max-height: 700px) {
       #viz-container .filtro {
         margin-top: 20px; } }
     #viz-container .filtro #dropdown-nivel {
