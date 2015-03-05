@@ -24,7 +24,7 @@ $(".main").onepage_scroll({
 				break;
 			case "general":
 				$(".circulo").show();
-				$("form.filtro").show();
+				$(".filtro").show();
 				if (circuloMedio.attr("r") == circulo.radio) {
 					juntarCirculitos();
 				} else {
@@ -32,15 +32,15 @@ $(".main").onepage_scroll({
 				}
 				break;
 			case "niveles":
-				$("form.filtro").show();
+				$(".filtro").show();
 				$(".circulo").show();
 				$("g.labels").show();
 				separarCirculitos();
 				break;
 			case "comuna":
 				$("#mapaCABA").show();
-				$("form.filtro").show();
-				$("svg").show();
+				$(".filtro").show();
+				$("#viz-container").show();
 				$("#dropdown-nivel").show();
 				mostrarMapaComunas();
 				queue()
@@ -497,7 +497,7 @@ function resetCambioSeccion() {
 
 	switch(currentSeccion) {
 		case "landing":
-			$("form.filtro").hide();
+			$(".filtro").hide();
 			break;
 		case "niveles":
 			resetCirculoMedio();
@@ -508,7 +508,7 @@ function resetCambioSeccion() {
 			break;
 		case "mapa":
 			$("#viz-container").hide();
-			$("form.filtro").hide();
+			$(".filtro").hide();
 			break;
 	}
 

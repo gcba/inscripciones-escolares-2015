@@ -65,6 +65,9 @@ body {
     @include breakpoint(lg) {
       border-bottom: 15px solid #30013F;
     }
+    @media (max-height:720px) {
+      border-bottom: 15px solid red;
+    }
 }
 html,
 body {
@@ -136,9 +139,15 @@ h1 {
 
   font-size: 4.5rem;
 
-    @include breakpoint(xs) {
-      font-size: 3.5rem;
-    }
+  @include breakpoint(xs) {
+    font-size: 3.5rem;
+  }
+
+  @media (max-height:720px) {
+    margin-top: -50px;
+  }
+
+
 }
 
 h2 {
@@ -170,6 +179,11 @@ text.provincia { fill: #F2803A; }
   position: fixed;
   z-index: 700;
 
+  @media (max-height:720px) {
+      top: 15%;
+      height: 85%;
+  }
+
    svg#viz {
     // visibility: hidden;
     width: 90%;
@@ -189,10 +203,25 @@ text.provincia { fill: #F2803A; }
     position: relative;
     margin: 0 auto;
     text-align: center;
-    width: 100%;
+    width: auto;
     margin-top: 50px;
     display: none;
     z-index: 701;
+
+
+
+    @media (max-height:720px) {
+        margin-top: 20px;
+    }
+
+
+
+    #dropdown-nivel {
+      display: none;
+      display: inline-block;
+      z-index: 800;
+    }
+
   }
 
 
@@ -203,13 +232,6 @@ text.provincia { fill: #F2803A; }
 
 }
 
-#dropdown-nivel {
-  display: none;
-  position: relative;
-  top: 0;
-  left: 0;
-  z-index: 800;
-}
 
 
 section {

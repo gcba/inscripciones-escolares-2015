@@ -5664,6 +5664,9 @@ body {
   @media (min-width: 1200px) {
     body {
       border-bottom: 15px solid #30013F; } }
+  @media (max-height: 720px) {
+    body {
+      border-bottom: 15px solid red; } }
 
 html,
 body {
@@ -5725,6 +5728,9 @@ h1 {
   @media (max-width: 767px) {
     h1 {
       font-size: 3.5rem; } }
+  @media (max-height: 720px) {
+    h1 {
+      margin-top: -50px; } }
 
 h2 {
   margin-top: 10px;
@@ -5758,6 +5764,10 @@ text.provincia {
   height: 90%;
   position: fixed;
   z-index: 700; }
+  @media (max-height: 720px) {
+    #viz-container {
+      top: 15%;
+      height: 85%; } }
   #viz-container svg#viz {
     width: 90%;
     height: 90%;
@@ -5772,17 +5782,17 @@ text.provincia {
     position: relative;
     margin: 0 auto;
     text-align: center;
-    width: 100%;
+    width: auto;
     margin-top: 50px;
     display: none;
     z-index: 701; }
-
-#dropdown-nivel {
-  display: none;
-  position: relative;
-  top: 0;
-  left: 0;
-  z-index: 800; }
+    @media (max-height: 720px) {
+      #viz-container .filtro {
+        margin-top: 20px; } }
+    #viz-container .filtro #dropdown-nivel {
+      display: none;
+      display: inline-block;
+      z-index: 800; }
 
 section {
   width: 100%;
