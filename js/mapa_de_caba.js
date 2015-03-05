@@ -1,15 +1,6 @@
 //solo para el select de ejemplo.
 var nivel = "inicial";
 
-var grillaSvg = {
-  ancho: 960,
-  alto: 470,
-  labelSpace: 70,
-  filasGeneral: 9,
-  columnasGeneral: 15,
-  columnasPorNivel: 4
-}
-
 var mapaSvg = {
   ancho: 300,
   alto: 300,

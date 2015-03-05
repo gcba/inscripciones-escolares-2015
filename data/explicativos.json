@@ -57,19 +57,6 @@
 					"caba": "87% Ciudad Autónoma de Buenos Aires",
 					"provincia": "13% Otras jurisdicciones"
 				}
-			},
-			"nivel3": {
-				"estadoCero": {
-					"general": "El 23% de los alumnos corresponde al nivel terciario."
-				},
-				"genero": {
-					"femenino": "50% mujeres",
-					"masculino": "50% varones"
-				},
-				"procedencia": {
-					"caba": "78% Ciudad Autónoma de Buenos Aires",
-					"provincia": "22% Otras jurisdicciones"
-				}
 			}
 		}
 	}

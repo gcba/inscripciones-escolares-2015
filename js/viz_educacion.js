@@ -135,7 +135,7 @@ var generalFemenino = Math.round(json.general.genero.femenino*totalCirculos/100)
 
 // Niveles
 var jsonNiveles = json.niveles;
-var coordenadasNiveles = [0,240,480,720];
+var coordenadasNiveles = [80,380,680];
 var cantidadNiveles = Object.keys(jsonNiveles).length; 
 var niveles = [];
 
