@@ -80,3 +80,16 @@ body {
 .cartodb-logo{
     display: none !important;
 }
+
+#listado{
+    display: none;
+    height: 170px;
+    position: fixed;
+    bottom: 72px;
+    overflow: scroll;
+    overflow-x: hidden;
+    background-color: rgb(255, 255, 255);
+    opacity: 0.95;
+    overflow-y: scroll;
+    width: 40%;    
+}
