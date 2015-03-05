@@ -42,7 +42,11 @@ $(".main").onepage_scroll({
 				$("form.filtro").show();				
 				$("svg").show();
 				$("#dropdown-nivel").show();
-				mostrarMapaComunas();		
+				mostrarMapaComunas();	
+				queue()
+					.defer(d3.json, "data/comunas.json")
+					.defer(d3.json, "data/data.json")
+					.await(ready);	
 				break;
 			case "mapa":
 				break;
