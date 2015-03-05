@@ -1,6 +1,7 @@
 @import "../public/components/bourbon/app/assets/stylesheets/_bourbon.scss";
 @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins";
 @import "mixins/breakpoint.scss";
+@import "animate.min.css";
 
 @include font-face('Gotham', 'fonts/gotham');
 @import url('http://fonts.googleapis.com/css?family=Lato:300,400,700');

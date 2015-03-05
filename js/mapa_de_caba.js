@@ -27,7 +27,7 @@ function ready(error, comunas, data) {
 
   var color = d3.scale.linear()
     .domain([minimo, maximo])
-    .range(["#f2f0f7", "#54278f", "#ff0000"]);
+    .range(["#ffff00", "#ff0000"]);
 
   svg.select(".caba").remove();
 
