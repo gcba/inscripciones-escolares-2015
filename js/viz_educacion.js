@@ -2,7 +2,7 @@
  * JS para scrolling
  */
 
-var currentSeccion = "landing";
+var currentSeccion = $("section.active").attr("id");
 
 $(".main").onepage_scroll({
 	sectionContainer: "section",     
@@ -27,8 +27,7 @@ $(".main").onepage_scroll({
 				$("form.filtro").show();
 				if (circuloMedio.attr("r") == circulo.radio) {
 					juntarCirculitos();
-				}				
-				else {
+				} else {
 					hideOneCirculitoYJuntar();	
 				}
 				break;
@@ -445,11 +444,9 @@ function calcularNuevaPosicion(axis, index){
 	if (axis == "x") {
 		x0 = niveles[currentNivel].x0;
 		result = calcularPosxNivel(x0,currentIndex);
-	}
-	else if (axis == "y"){
+	} else if (axis == "y"){
 		result = calcularPosyNivel(currentIndex);
-	}
-	else {
+	} else {
 		console.log("Hubo un error con el calculo de posiciones de los ejes X e Y");
 	}
 	return result;
@@ -617,8 +614,7 @@ function generarInfoTextGeneral(filtro) {
 			posInfoY = grillaSvg.filasGeneral * (circulo.radio + circulo.margin) / 2 +
 					   circulo.posy +
 					   Math.floor(lineas.length/2) * infoDetails.verticalMargin;
-		} 
-		else {
+		} else {
 			// bottom of the grid
 			posInfoY = grillaSvg.filasGeneral * (circulo.radio + circulo.margin) + 
 					   circulo.posy - counterLineas*infoDetails.verticalMargin;
@@ -732,8 +728,7 @@ function generarInfoTextNiveles(filtro) {
 				}
 			}
 		}
-	}
-	else {
+	} else {
 		var filtroKeys = [];
 		for (var i=0; i<nivelesKeys.length; i++) {
 			var explicativosNivel = explicativosSeccion[nivelesKeys[i]][filtro],
@@ -757,8 +752,7 @@ function generarInfoTextNiveles(filtro) {
 				var lineas = [];	
 				if (filtro == "procedencia"){
 					lineas = calcularLineas(explicativosNivel[explicativosNivelKeys[j]], 2);
-				}
-				else {
+				} else {
 					lineas = calcularLineas(explicativosNivel[explicativosNivelKeys[j]]);
 				}
 
