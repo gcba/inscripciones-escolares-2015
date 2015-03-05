@@ -42,7 +42,7 @@ $(".main").onepage_scroll({
 				$("form.filtro").show();				
 				$("svg").show();
 				$("#dropdown-nivel").show();
-				mostrarMapaComunas();				
+				mostrarMapaComunas();		
 				break;
 			case "mapa":
 				break;
@@ -476,6 +476,11 @@ function mostrarMapaComunas() {
 	});
 	
 	d3.select("#mapaCABA svg").transition().duration(400).attr("x", 300);
+
+	// Make sure que la opcion seleccionada corresponde a los circulos activos
+	var nivelComuna = $("circle.nivel_activo").attr("nivel");
+	var opcionSeleccionar = $("#dropdown-nivel option[value='nivel"+nivelComuna+"']").attr("selected", "selected");
+	nivelActivo = $("#dropdown-nivel :selected").text().toLowerCase();
 }
 
 function resetCambioSeccion() {	
@@ -498,6 +503,7 @@ function resetCambioSeccion() {
 			break;
 		case "comuna":
 			resetCirculoMedio();
+			nivelMapaCaba = "inicial";
 			break;
 		case "mapa":	
 			$("svg").hide();
@@ -797,4 +803,9 @@ $("#dropdown-nivel select").change(function(){
 	var claseNivel = d3.select("circle." + nivelSeleccionado).attr("class").split(" ").join(".");
 	d3.selectAll("circle." + claseNivel).attr("class", claseNivel.split(".").join(" ") + " nivel_activo");
 	mostrarMapaComunas();
+
+    queue()
+      .defer(d3.json, "data/comunas.json")
+      .defer(d3.json, "data/data.json")
+      .await(ready);
 });
