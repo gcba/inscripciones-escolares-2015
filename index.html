@@ -6,14 +6,11 @@
   	<link href="css/bootstrap.min.css" rel="stylesheet">
   	<link rel="stylesheet" type="text/css" href="css/onepage-scroll.css">
   	<link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.11/themes/css/cartodb.css" />
-    <link rel="stylesheet" type="text/css" href="css/estilosMapaInteractivo.css">
-
     <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="js/queue.v1.min.js"></script>
     <script type="text/javascript" src="js/d3.v3.min.js"></script>
     <script type="text/javascript" src="js/topojson.v1.min.js"></script>
     <script type="text/javascript" src="js/jquery-onepage-scroll.js"></script>
-    <script type="text/javascript" src="http://libs.cartocdn.com/cartodb.js/v3/3.11/cartodb.js"></script>
   </head>
   <body>
 
@@ -83,28 +80,7 @@
 	  	</section>
 	</div>
 
-    <!--
-      Infowindows Mapa Interactivo
-    -->
-    <script type="infowindow/html" id="infowindow_template">
-        <div class="cartodb-popup">
-            <a href="#close" class="cartodb-popup-close-button close">x</a>
-            <div class="cartodb-popup-content-wrapper">
-                <div class="cartodb-popup-cont">
-
-                    <h4>{{content.data.nombresc}}</h4>
-                    <p>
-                        {{content.data.nombresc}}
-                    </p>
-
-                </div>
-            </div>
-            <div class="cartodb-popup-tip-container"></div>
-        </div>
-    </script>
-
   	<script type="text/javascript" src="js/viz_educacion.js"></script>
   	<script type="text/javascript" src="js/mapa_de_caba.js"></script>
-  	<script type="text/javascript" src="js/mapaInteractivo.js"></script>  	
   </body>
 </html>

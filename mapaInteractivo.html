@@ -21,10 +21,12 @@
 
     <div id="filtros">
         <div class="row">
-            <div class="col-md-2"> </div>
             <div class="col-md-2">
-                <div class="btn-group dropup"> <a class="btn btn-default dropdown-toggle btn-select" data-toggle="dropdown" href="#">Filtrar por Nivel <span class="caret"></span></a>
+                <label class="etiquetaFiltro">Nivel</label>
+                <div id="filtro1" class="btn-group dropup"> <a class="btn btn-default dropdown-toggle btn-select" data-toggle="dropdown" href="#">Ver todos <span class="caret"></span></a>
                     <ul class="dropdown-menu">
+                        <li><a href="#">Ver todos</a>
+                        </li>
                         <li><a href="#">Inicial</a>
                         </li>
                         <li><a href="#">Primario</a>
@@ -34,9 +36,12 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-md-2">
-                <div class="btn-group dropup"> <a class="btn btn-default dropdown-toggle btn-select2" data-toggle="dropdown" href="#">Filtrar por Modalidad <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
+            <div class="col-md-4">
+                <label class="etiquetaFiltro">Modalidad</label>
+                <div id="filtro2" class="btn-group dropup" style="width: 80%;"> <a class="btn btn-default dropdown-toggle btn-select2" data-toggle="dropdown" href="#">Ver todas <span class="caret"></span></a>
+                    <ul class="dropdown-menu" style="width: 80%;">
+                        <li><a href="#">Ver todas</a>
+                        </li>
                         <li><a href="#">Inicial</a>
                         </li>
                         <li><a href="#">Primario</a>
@@ -57,9 +62,10 @@
                     <input type="text" class="form-control" placeholder="Buscar escuela por Nombre">
                 </div>
             </div>
-            <div class="col-md-2"></div>
+            <div class="col-md-2"> </div>
         </div>
     </div>
+
     <!--
       Infowindows Mapa Interactivo
     -->
