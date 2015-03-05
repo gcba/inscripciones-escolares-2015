@@ -1,6 +1,4 @@
 /*
- * JS para scrolling
-/*
 Crea la vizualizacion del mapa interactivo del ultimo slide
 */
 
@@ -27,38 +25,35 @@ window.onload = loadMap;
 // Filtros de DropUP
 $("#filtro1 li a").click(function(){
   var selText = $(this).text();
-  $("#filtro2 a")[0].innerHTML = 'Ver todas' + '<span class="caret"></span>';
   $(this).parents('.btn-group').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
-  filtro (selText, "niveldescr");
+  filtro ();
 });
 
 
 $("#filtro2 li a").click(function(){
   var selText = $(this).text();
-  $("#filtro1 a")[0].innerHTML = 'Ver todos' + '<span class="caret"></span>';
   $(this).parents('.btn-group').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
-  filtro (selText, "modalidadd");
+  filtro ();
 });
 
-function filtro (accion,campo){
-
-  // sacar resets de consulta
-  // la funcion no recibe parámetros
-  // dependiendo que esté seleccionado
-  // armo string de SQL
-
+function filtro (){
+  
   var consulta = "SELECT * FROM escuelas";
+  var flag = false;
 
-
-  switch (accion) {
-    case "Ver todos":
-      sublayers[0].set({sql: consulta });
-      break;
-    case "Ver todas":
-      sublayers[0].set({sql: consulta });
-      break;
-    default:
-      sublayers[0].set({sql: consulta +  " WHERE " + campo + " LIKE '%" + accion + "'"});
-      break;
+  if ( $("#filtro1 a")[0].text.trim() !== "Ver todos"){
+    consulta = consulta + " WHERE niveldescr LIKE '"+ $("#filtro1 a")[0].text.trim() +"'";
+    flag = true;
   }
+
+  if ( $("#filtro2 a")[0].text.trim() !== "Ver todas"){
+    if (flag){
+      consulta = consulta + " AND"
+    }else{
+      consulta = consulta + " WHERE"
+    }
+    consulta = consulta + " modalidadd LIKE '"+ $("#filtro2 a")[0].text.trim() +"'";
+  }
+
+  sublayers[0].set({sql: consulta });
 }
