@@ -24,9 +24,10 @@ function ready(error, comunas, data) {
       minimo = data.comunas[nivelActivo][i];
     }
   }
-var color = d3.scale.linear()
-  .domain([minimo, maximo])
-  .range(["#f2f0f7", "#54278f", "#ff0000"]);
+
+  var color = d3.scale.linear()
+    .domain([minimo, maximo])
+    .range(["#f2f0f7", "#54278f", "#ff0000"]);
 
   svg.select(".caba").remove();
 
@@ -36,7 +37,10 @@ var color = d3.scale.linear()
       .data(topojson.feature(comunas, comunas.objects.comunas).features)
     .enter().append("path")
       .attr("d", d3.geo.path().projection(d3.geo.mercator().scale(157000/2).center([-58.20000,-34.68102])))
-      .style("fill", function(d) { return color(data.comunas[nivelActivo][d.properties.comuna]);
-      });
+      .style("fill", function(d) { return color(data.comunas[nivelActivo][d.properties.comuna]);})
+      .attr("class", "tooltip")
+      .attr("title", function(d) { console.log("pase");return data.comunas[nivelActivo][d.properties.comuna];})
+      .on("mouseover", function(){d3.select(this).style("stroke", "#ffffff");})
+      .on("mouseout", function(){d3.select(this).style("stroke", "transparent");});
 
 }
