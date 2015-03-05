@@ -1,0 +1,485 @@
+@import "../public/components/bourbon/app/assets/stylesheets/_bourbon.scss";
+@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins";
+@import "mixins/breakpoint.scss";
+
+@include font-face('Gotham', 'fonts/gotham');
+@import url('http://fonts.googleapis.com/css?family=Lato:300,400,700');
+
+/* ########
+   Colores
+   ######## */
+
+
+$black: #000;
+$white: #FFF;
+
+
+/* ########
+   Fuentes
+   ######## */
+
+$fontset-default: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$fontset-gotham: "Gotham", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+
+/*
+ * CSS styles para la visualización de educación
+ */
+
+$navbar-default-bg: transparent;
+$navbar-default-border: none;
+
+
+$icon-font-path: "fonts/" !default;
+
+
+@import "../public/components/bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+
+html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -webkit-backface-visibility: hidden;
+    moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -webkit-touch-callout: none;
+    margin: 0;
+    padding: 0;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+
+body {
+  @include background-image(url("img/linedpaper.png"));
+  font-family: $fontset-default;
+
+    // Breakpoints en la base del cuerpo, para referenciar cambios.
+    @include breakpoint(xs) {
+      border-bottom: 15px solid #F17E2A;
+    }
+    @include breakpoint(sm) {
+      border-bottom: 15px solid #CC4A59;
+    }
+    @include breakpoint(md) {
+      border-bottom: 15px solid #772626;
+    }
+    @include breakpoint(lg) {
+      border-bottom: 15px solid #30013F;
+    }
+}
+html,
+body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+header{
+    pointer-events: none;
+    position: fixed;
+    top: 0px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 999;
+    font-family: $fontset-gotham;
+
+
+
+    .header-gcba {
+        height:50px;
+        padding:10px 0;
+        overflow:visible;
+        background-color: transparent;
+    }
+
+    .header-inner {
+        padding-right:20px;
+        padding-left:20px
+    }
+
+    .header-gcba .logo {
+        float: left;
+        width: 172px;
+        height: 33px;
+        @include retina-image("img/logo-normal", 172px 34px);
+        background-repeat: no-repeat;
+        background-size: 100%;
+        @include breakpoint(xs) {
+          background-size: 80%;
+        }
+    }
+
+    .header-gcba h2.slogan {
+        float: right;
+        font-weight: bold;
+        margin-top: 0.75em;
+        font-size: 1.3rem;
+        color: $black;
+        text-transform: uppercase;
+        min-width: 150px;
+        @include breakpoint(xs) {
+          font-size: 1rem;
+        }
+    }
+
+
+}
+
+
+h1 {
+  text-align: center;
+  font-weight: 300;
+  margin-top: 0px;
+  padding-top: 0px;
+
+  font-size: 4.5rem;
+
+    @include breakpoint(xs) {
+      font-size: 3.5rem;
+    }
+}
+
+h2 {
+  margin-top: 10px;
+  font-weight: 400;
+  color: #555;
+  text-align: center;
+
+  font-size: 1.45rem;
+
+    @include breakpoint(xs) {
+      font-size: 1.21rem;
+    }
+}
+
+
+
+text.general { fill: #666666;}
+text.femenino { fill: #BA1135; }
+text.masculino { fill: #05a381; }
+text.caba { fill: #FFD300; }
+text.provincia { fill: #F2803A; }
+
+#viz-container {
+  top: 10%;
+  left: 0px;
+  width: 100%;
+  height: 90%;
+  position: fixed;
+  z-index: 700;
+
+   svg#viz {
+    // visibility: hidden;
+    width: 90%;
+    height: 90%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    // max-width: 960px;
+    // height: 470px;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+  }
+
+  .filtro {
+    position: relative;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+    margin-top: 50px;
+    display: none;
+    z-index: 701;
+  }
+
+
+
+
+
+
+
+}
+
+#dropdown-nivel {
+  display: none;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 800;
+}
+
+
+section {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  z-index: 699;
+}
+
+a.arrow {
+  position: absolute;
+  left: 50%;
+  color: #333333;
+  z-index: 701;
+  span {
+     font-size: 24px;
+   }
+}
+.next-section {
+  bottom: 50px;
+}
+.prev-section {
+  bottom: 150px;
+}
+
+
+
+.comuna {
+  fill: #c0c0c0;
+  stroke: #fafafa;
+  stroke-width: 1px;
+}
+
+#mapaCABA {
+  display: none;
+}
+
+g.labels {
+  display: none;
+}
+
+g.labels text, g.info text {
+  cursor: default;
+}
+
+tspan.nivelLink:hover {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+text.labelNivel {
+  display: none;
+}
+
+.onepage-pagination{
+  pointer-events: none;
+}
+
+
+iframe {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+#volverDelMapa{
+    height: 50px;
+    position: inherit;
+    right: 0;
+    text-align: center;
+    width: 100px;
+}
+
+
+
+body, html {
+  margin: 0;
+  overflow: hidden;
+  -webkit-transition: opacity 400ms;
+  -moz-transition: opacity 400ms;
+  transition: opacity 400ms;
+}
+
+body, .onepage-wrapper, html {
+  display: block;
+  position: static;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.onepage-wrapper {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: relative;
+  padding: 0;
+  -webkit-transform-style: preserve-3d;
+}
+
+.onepage-wrapper .section {
+  width: 100%;
+  height: 100%;
+}
+
+.onepage-pagination {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  z-index: 5;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.onepage-pagination li {
+  padding: 0;
+  text-align: center;
+}
+.onepage-pagination li a{
+  padding: 10px;
+  width: 4px;
+  height: 4px;
+  display: block;
+
+}
+.onepage-pagination li a:before{
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(0,0,0,0.85);
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+}
+
+.onepage-pagination li a.active:before{
+  width: 10px;
+  height: 10px;
+  background: none;
+  border: 1px solid black;
+  margin-top: -4px;
+  left: 8px;
+}
+
+.disabled-onepage-scroll, .disabled-onepage-scroll .wrapper {
+  overflow: auto;
+}
+
+.disabled-onepage-scroll .onepage-wrapper .section {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+}
+.disabled-onepage-scroll .onepage-wrapper {
+  -webkit-transform: none !important;
+  -moz-transform: none !important;
+  transform: none !important;
+  -ms-transform: none !important;
+  min-height: 100%;
+}
+
+
+.disabled-onepage-scroll .onepage-pagination {
+  display: none;
+}
+
+body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
+  position: inherit;
+}
+#mapaInteractivo {
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    z-index: 900;
+}
+
+#filtros{
+    padding: 10px;
+    position: absolute;
+    background-color: rgba(255,255,255,0.8);
+    border-top: 1px solid #c0c0c0;
+    border-bottom: 1px solid #c0c0c0;
+    width: 100%;
+    height: 56px;
+    margin: 0px;
+    bottom: 16px;
+}
+
+.cartodb-popup{
+    width: 450px !important;
+}
+
+.cartodb-popup,
+.cartodb-popup-tip-container {
+    z-index: 999;
+    background: rgba(255, 255, 255, 0) !important;
+}
+
+.cartodb-popup-content{
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+.cartodb-popup-content p {
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+.cartodb-popup-close-button{
+    background: url("img/light.png") no-repeat scroll 0 -23px rgba(255, 255, 255, 0) !important;
+}
+.cartodb-popup-tip-container{
+    background: url("img/light.png") no-repeat scroll 0 0 rgba(255, 255, 255, 0) !important;
+}
+
+.cartodb-popup-cont{
+    width: 450px !important;;
+    height: 250px !important;;
+}
+.cartodb-infowindow {
+    position: fixed !important;
+}
+.cartodb-popup-content-wrapper {
+    background: rgba(255, 255, 255, 1) !important;
+    width: 450px !important;
+    max-width: 450px !important;
+    -webkit-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.25);
+    box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.25)
+}
+.cartodb-popup-cont .close {
+    color: #000000;
+    text-align: right;
+}
+
+.etiquetaFiltro{
+    font-size: 10px;
+    color: #999999;
+    text-transform: uppercase;
+}
+
+.cartodb-logo{
+    display: none !important;
+}
+
+#listado{
+    display: none;
+    height: 170px;
+    position: fixed;
+    bottom: 70px;
+    overflow: scroll;
+    overflow-x: hidden;
+    background-color: rgb(255, 255, 255);
+    opacity: 0.95;
+    overflow-y: scroll;
+    width: 33%;
+    -webkit-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.25);
+    box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.25);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid #c0c0c0;
+    font-size: 12px;
+    text-transform: capitalize;
+}
+
+.nombreEscuela{
+    text-transform: capitalize !important;
+}
