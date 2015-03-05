@@ -195,13 +195,7 @@ text.provincia { fill: #F2803A; }
     z-index: 701;
   }
 
-  #dropdown-nivel {
-    display: none;
-    position: relative;
-    top: 0;
-    left: 0;
-    z-index: 800;
-  }
+
 
 
 
@@ -209,7 +203,13 @@ text.provincia { fill: #F2803A; }
 
 }
 
-
+#dropdown-nivel {
+  display: none;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 800;
+}
 
 
 section {
@@ -245,6 +245,19 @@ a.arrow {
 
 #mapaCABA {
   display: none;
+}
+
+g.labels {
+  display: none;
+}
+
+g.labels text, g.info text {
+  cursor: default;
+}
+
+tspan.nivelLink:hover {
+  cursor: pointer;
+  text-decoration: none;
 }
 
 text.labelNivel {

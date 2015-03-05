@@ -58,8 +58,12 @@
                 </div>
             </div>
             <div class="col-md-4">
+                <div id="listado">
+                    <ul class="nav nav-pills nav-stacked" id="resultados"></ul>
+                </div>
+
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Buscar escuela por Nombre">
+                    <input type="text" class="form-control" placeholder="Buscar escuela por Nombre" id="buscadorEscuelas">
                 </div>
             </div>
             <div class="col-md-2"> </div>
@@ -75,11 +79,13 @@
             <div class="cartodb-popup-content-wrapper">
                 <div class="cartodb-popup-content">
                     <h4>{{comunaescu}}</h4>
-                    <p>{{nombresc}}</p>
+                    <p class="nombreEscuela">{{nombresc}}</p>
                     <h4>modalidad</h4>
                     <p>{{modalidadd}}</p>
                     <h4>nivel</h4>
                     <p>{{niveldescr}}</p>
+                    <h4>Dirección</h4>
+                    <p class="nombreEscuela">{{calle}}</p>
                 </div>
             </div>
             <div class="cartodb-popup-tip-container"></div>

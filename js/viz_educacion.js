@@ -2,7 +2,7 @@
  * JS para scrolling
  */
 
-var currentSeccion = "landing";
+var currentSeccion = $("section.active").attr("id");
 
 $(".main").onepage_scroll({
 	sectionContainer: "section",
@@ -27,8 +27,7 @@ $(".main").onepage_scroll({
 				$("form.filtro").show();
 				if (circuloMedio.attr("r") == circulo.radio) {
 					juntarCirculitos();
-				}
-				else {
+				} else {
 					hideOneCirculitoYJuntar();
 				}
 				break;
@@ -44,6 +43,10 @@ $(".main").onepage_scroll({
 				$("svg").show();
 				$("#dropdown-nivel").show();
 				mostrarMapaComunas();
+				queue()
+					.defer(d3.json, "data/comunas.json")
+					.defer(d3.json, "data/data.json")
+					.await(ready);
 				break;
 			case "mapa":
 				break;
@@ -68,46 +71,13 @@ $('.prev-section').click(function(e){
  * JS para visualizacion
  */
 
-var grillaSvg = {
-	ancho: 960,
-	alto: 470,
-	labelSpace: 110,
-	filasGeneral: 9,
-	columnasGeneral: 15,
-	columnasPorNivel: 4
-}
-
-var totalCirculos = grillaSvg.filasGeneral * grillaSvg.columnasGeneral;
-
-var svgGeneral = d3.select("svg#viz")
+var svgGeneral = d3.select("svg#viz");
 
 var grilla = svgGeneral.append("g").attr("class", "contenedor");
 
 var mapaComunas = svgGeneral.append("g")
 					.attr("id", "mapaCABA");
 
-// Detalles de los círculos
-var circulo = {
-	radio: 7,
-	radioGrande: 100,
-	posx: 270,
-	posy: 50,
-	margin: 20
-}
-
-// Colores
-var colores = {
-	femenino: "#BA1135",
-	masculino: "#05a381",
-	caba: "#FFD300",
-	provincia: "#F2803A",
-	neutro: "#666666"
-}
-
-var infoDetails = {
-	verticalMargin: 20,
-	palabrasPorLinea: 3
-}
 /*
  *	Datos
  */
@@ -133,7 +103,6 @@ var generalFemenino = Math.round(json.general.genero.femenino*totalCirculos/100)
 
 // Niveles
 var jsonNiveles = json.niveles;
-var coordenadasNiveles = [0,240,480,720];
 var cantidadNiveles = Object.keys(jsonNiveles).length;
 var niveles = [];
 
@@ -442,11 +411,9 @@ function calcularNuevaPosicion(axis, index){
 	if (axis == "x") {
 		x0 = niveles[currentNivel].x0;
 		result = calcularPosxNivel(x0,currentIndex);
-	}
-	else if (axis == "y"){
+	} else if (axis == "y"){
 		result = calcularPosyNivel(currentIndex);
-	}
-	else {
+	} else {
 		console.log("Hubo un error con el calculo de posiciones de los ejes X e Y");
 	}
 	return result;
@@ -483,7 +450,7 @@ function separarCirculitos() {
 }
 
 function mostrarMapaComunas() {
-	var dropdownTop = parseInt(d3.select("div#viz").style("top").split("px")[0]) + grillaSvg.alto - grillaSvg.labelSpace + circulo.margin*2,
+	var dropdownTop = parseInt(d3.select("svg#viz").style("top").split("px")[0]) + grillaSvg.alto - grillaSvg.labelSpace + circulo.margin*2,
 		dropdownTopString = dropdownTop.toString() + "px",
 		dropdownLeft = $(window).width()/2 - grillaSvg.ancho/2 + circulo.margin,
 		dropdownLeftString = dropdownLeft.toString() + "px";
@@ -510,6 +477,11 @@ function mostrarMapaComunas() {
 	});
 
 	d3.select("#mapaCABA svg").transition().duration(400).attr("x", 300);
+
+	// Make sure que la opcion seleccionada corresponde a los circulos activos
+	var nivelComuna = $("circle.nivel_activo").attr("nivel");
+	var opcionSeleccionar = $("#dropdown-nivel option[value='nivel"+nivelComuna+"']").attr("selected", "selected");
+	nivelActivo = $("#dropdown-nivel :selected").text().toLowerCase();
 }
 
 function resetCambioSeccion() {
@@ -532,6 +504,7 @@ function resetCambioSeccion() {
 			break;
 		case "comuna":
 			resetCirculoMedio();
+			nivelMapaCaba = "inicial";
 			break;
 		case "mapa":
 			$("svg").hide();
@@ -614,8 +587,7 @@ function generarInfoTextGeneral(filtro) {
 			posInfoY = grillaSvg.filasGeneral * (circulo.radio + circulo.margin) / 2 +
 					   circulo.posy +
 					   Math.floor(lineas.length/2) * infoDetails.verticalMargin;
-		}
-		else {
+		} else {
 			// bottom of the grid
 			posInfoY = grillaSvg.filasGeneral * (circulo.radio + circulo.margin) +
 					   circulo.posy - counterLineas*infoDetails.verticalMargin;
@@ -729,8 +701,7 @@ function generarInfoTextNiveles(filtro) {
 				}
 			}
 		}
-	}
-	else {
+	} else {
 		var filtroKeys = [];
 		for (var i=0; i<nivelesKeys.length; i++) {
 			var explicativosNivel = explicativosSeccion[nivelesKeys[i]][filtro],
@@ -754,8 +725,7 @@ function generarInfoTextNiveles(filtro) {
 				var lineas = [];
 				if (filtro == "procedencia"){
 					lineas = calcularLineas(explicativosNivel[explicativosNivelKeys[j]], 2);
-				}
-				else {
+				} else {
 					lineas = calcularLineas(explicativosNivel[explicativosNivelKeys[j]]);
 				}
 
@@ -834,4 +804,9 @@ $("#dropdown-nivel select").change(function(){
 	var claseNivel = d3.select("circle." + nivelSeleccionado).attr("class").split(" ").join(".");
 	d3.selectAll("circle." + claseNivel).attr("class", claseNivel.split(".").join(" ") + " nivel_activo");
 	mostrarMapaComunas();
+
+    queue()
+      .defer(d3.json, "data/comunas.json")
+      .defer(d3.json, "data/data.json")
+      .await(ready);
 });

@@ -5776,12 +5776,13 @@ text.provincia {
     margin-top: 50px;
     display: none;
     z-index: 701; }
-  #viz-container #dropdown-nivel {
-    display: none;
-    position: relative;
-    top: 0;
-    left: 0;
-    z-index: 800; }
+
+#dropdown-nivel {
+  display: none;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 800; }
 
 section {
   width: 100%;
@@ -5810,6 +5811,16 @@ a.arrow {
 
 #mapaCABA {
   display: none; }
+
+g.labels {
+  display: none; }
+
+g.labels text, g.info text {
+  cursor: default; }
+
+tspan.nivelLink:hover {
+  cursor: pointer;
+  text-decoration: none; }
 
 text.labelNivel {
   display: none; }
