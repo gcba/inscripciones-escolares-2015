@@ -7,7 +7,7 @@ var capas;
 var capaInfowindows;
 
 function loadMap() {
-
+                  
     var ulrViz = "http://gcba.cartodb.com/api/v2/viz/2d6d581c-bc5d-11e4-b17e-0e9d821ea90d/viz.json";
 
     cartodb.createVis('mapaInteractivo', ulrViz)
@@ -22,6 +22,11 @@ function loadMap() {
 
             // Reescribo HTML de infowindows por el definido en el primer script
             sublayer.infowindow.set('template', $('#infowindow_template').html());
+
+            sublayer.on('featureClick', function(e, pos, latlng, data) {
+              console.log( "clickeado el " + data.cartodb_id);
+            });
+
         });
 }
  
@@ -42,7 +47,7 @@ $("#filtro2 li a").click(function(){
 });
 
 function filtro (){
-  
+  $('.close')[0].click()  
   var consulta = "SELECT * FROM escuelas";
   var flag = false;
 
@@ -59,7 +64,7 @@ function filtro (){
     }
     consulta = consulta + " modalidadd LIKE '"+ $("#filtro2 a")[0].text.trim() +"'";
   }
-
+  console.log (consulta);
   sublayers[0].set({sql: consulta });
 }
 
@@ -96,7 +101,7 @@ function busquedaKeyword(key) {
                         "<a href='#' id='ESC" +
                             data.rows[i].cartodb_id +
                             "' onclick='verEscuela(this.id)'>" + 
-                            data.rows[i].nombresc +
+                            data.rows[i].nombresc.toLowerCase() +
                         "</a>" +
                     "</li>"
                 );
@@ -120,16 +125,15 @@ function verEscuela(escuela){
   $("#listado").css("display","none");
   $('#buscadorEscuelas').val("");
   verDetallesEscuela(escuela)
-  console.log(escuela);
 }
 
 
 /**
- * Cuando se selecciona una empresa se hace zoom sobre el marcador y se abre el infowindows
+ * Cuando se selecciona una escuela se hace zoom sobre el marcador y se abre el infowindows
  */
 
 function openInfowindow(layer, latlng, cartodb_id) {
-    layer.trigger('featureClick', null, [-34.609879, -58.391900], null, { cartodb_id: cartodb_id }, 0);
+    layer.trigger('featureClick', null, latlng, null, { cartodb_id: cartodb_id }, 0);
 }
 
 function verDetallesEscuela(idEscuela){
@@ -140,8 +144,8 @@ function verDetallesEscuela(idEscuela){
     $.getJSON('http://gcba.cartodb.com/api/v2/sql/?q='+sql_statement, function(data) {
         // zoom al marker
         capas.setZoom(16);
-//        capas.setCenter([data.rows[0].lat, data.rows[0].lng]);
-        openInfowindow(capaInfowindows,[data.rows[0].lat, data.rows[0].lon],data.rows[0].cartodb_id,0);
+        capas.setCenter([data.rows[0].lat, data.rows[0].lng]);
+        openInfowindow(capaInfowindows,[data.rows[0].lat, data.rows[0].lng],data.rows[0].cartodb_id,0);
 
     });
 }
