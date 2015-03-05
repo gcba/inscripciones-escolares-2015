@@ -144,8 +144,11 @@ function verDetallesEscuela(idEscuela){
     $.getJSON('http://gcba.cartodb.com/api/v2/sql/?q='+sql_statement, function(data) {
         // zoom al marker
         capas.setZoom(16);
-        capas.setCenter([data.rows[0].lat, data.rows[0].lng]);
-        openInfowindow(capaInfowindows,[data.rows[0].lat, data.rows[0].lng],data.rows[0].cartodb_id,0);
+        setTimeout(function(){ 
+          capas.setCenter([data.rows[0].lat, data.rows[0].lng]);
+          openInfowindow(capaInfowindows,[data.rows[0].lat, data.rows[0].lng],data.rows[0].cartodb_id,0);
+        }, 1500); 
+
 
     });
 }
