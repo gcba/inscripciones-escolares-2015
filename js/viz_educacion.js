@@ -67,17 +67,6 @@ $('.prev-section').click(function(e){
  * JS para visualizacion
  */ 
 
-var grillaSvg = {
-	ancho: 960,
-	alto: 470,
-	labelSpace: 110,
-	filasGeneral: 9,
-	columnasGeneral: 15,
-	columnasPorNivel: 4
-}
-
-var totalCirculos = grillaSvg.filasGeneral * grillaSvg.columnasGeneral;
-
 var svgGeneral = d3.select("#viz")
 			   	   .append("svg")
 			   	   .attr("width", grillaSvg.ancho)
@@ -88,28 +77,6 @@ var grilla = svgGeneral.append("g").attr("class", "contenedor");
 var mapaComunas = svgGeneral.append("g")
 					.attr("id", "mapaCABA");
 
-// Detalles de los círculos
-var circulo = {
-	radio: 7,
-	radioGrande: 100,
-	posx: 270,
-	posy: 50,
-	margin: 20
-}
-
-// Colores
-var colores = {
-	femenino: "#BA1135",
-	masculino: "#05a381",
-	caba: "#FFD300",
-	provincia: "#F2803A",
-	neutro: "#666666"
-}
-
-var infoDetails = {
-	verticalMargin: 20,
-	palabrasPorLinea: 3
-}
 /*
  *	Datos
  */ 
@@ -135,7 +102,6 @@ var generalFemenino = Math.round(json.general.genero.femenino*totalCirculos/100)
 
 // Niveles
 var jsonNiveles = json.niveles;
-var coordenadasNiveles = [80,380,680];
 var cantidadNiveles = Object.keys(jsonNiveles).length; 
 var niveles = [];
 
