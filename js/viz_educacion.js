@@ -79,10 +79,7 @@ var grillaSvg = {
 
 var totalCirculos = grillaSvg.filasGeneral * grillaSvg.columnasGeneral;
 
-var svgGeneral = d3.select("#viz")
-			   	   .append("svg")
-			   	   .attr("width", grillaSvg.ancho)
-			   	   .attr("height", grillaSvg.alto)
+var svgGeneral = d3.select("svg#viz")
 
 var grilla = svgGeneral.append("g").attr("class", "contenedor");
 
