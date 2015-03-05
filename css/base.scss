@@ -154,14 +154,7 @@ h2 {
     }
 }
 
-form.filtro{
-  text-align: center;
-  position: fixed;
-  width: 100%;
-  top: 170px;
-  z-index: 800;
-  display: none;
-}
+
 
 text.general { fill: #666666;}
 text.femenino { fill: #BA1135; }
@@ -192,7 +185,30 @@ text.provincia { fill: #F2803A; }
     -webkit-box-sizing:border-box;
   }
 
+  .filtro {
+    position: relative;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+    margin-top: 50px;
+    display: none;
+    z-index: 701;
+  }
+
+  #dropdown-nivel {
+    display: none;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 800;
+  }
+
+
+
+
+
 }
+
 
 
 
@@ -256,13 +272,7 @@ iframe {
     width: 100px;
 }
 
-#dropdown-nivel {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 800;
-}
+
 
 body, html {
   margin: 0;
