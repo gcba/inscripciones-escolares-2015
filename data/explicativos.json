@@ -21,7 +21,7 @@
 		"niveles": {
 			"nivel0": {
 				"estadoCero": {
-					"general": "El 37% del total de alumnos nuevos se incorporó al nivel inicial."
+					"general": "El 37% de los alumnos corresponde al nivel inicial."
 				},
 				"genero": {
 					"femenino": "48% mujeres",
@@ -34,7 +34,7 @@
 			},
 			"nivel1": {
 				"estadoCero": {
-					"general": "El 35% del total de alumnos nuevos se incorporó al nivel primario."
+					"general": "El 35% de los alumnos corresponde al nivel primario."
 				},
 				"genero": {
 					"femenino": "49% mujeres",
@@ -47,7 +47,7 @@
 			},
 			"nivel2": {
 				"estadoCero": {
-					"general": "El 28% del total de alumnos nuevos se incorporó al nivel secundario."
+					"general": "El 28% de los alumnos corresponde al nivel secundario."
 				},
 				"genero": {
 					"femenino": "46% mujeres",
@@ -60,7 +60,7 @@
 			},
 			"nivel3": {
 				"estadoCero": {
-					"general": "El 23% del total de alumnos nuevos se incorporó al nivel terciario."
+					"general": "El 23% de los alumnos corresponde al nivel terciario."
 				},
 				"genero": {
 					"femenino": "50% mujeres",

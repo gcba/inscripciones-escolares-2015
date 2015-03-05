@@ -79,7 +79,10 @@ var grillaSvg = {
 
 var totalCirculos = grillaSvg.filasGeneral * grillaSvg.columnasGeneral;
 
-var svgGeneral = d3.select("svg#viz");
+var svgGeneral = d3.select("#viz")
+			   	   .append("svg")
+			   	   .attr("width", grillaSvg.ancho)
+			   	   .attr("height", grillaSvg.alto)
 
 var grilla = svgGeneral.append("g").attr("class", "contenedor");
 
@@ -89,7 +92,7 @@ var mapaComunas = svgGeneral.append("g")
 // Detalles de los círculos
 var circulo = {
 	radio: 7,
-	radioGrande: 150,
+	radioGrande: 100,
 	posx: 270,
 	posy: 50,
 	margin: 20
@@ -404,7 +407,52 @@ function juntarCirculitos() {
 	}).attr("cy", function(d,i){
 		return circulo.posy + (circulo.margin+circulo.radio) * (Math.floor(i/grillaSvg.columnasGeneral)+1);
 	});
-	d3.selectAll("circle").attr("class", currentSeccion + " " + "general");
+	d3.selectAll("circle").attr("class", currentSeccion + " " + "general").attr("nivel", "general");
+}
+
+function calcularPosxNivel(x0, index) {
+	return x0 + ((index+1)*(circulo.margin+circulo.radio) - (circulo.margin+circulo.radio)*grillaSvg.columnasPorNivel*Math.floor(index/grillaSvg.columnasPorNivel));
+}
+
+function calcularPosyNivel(index) {
+	return grillaSvg.alto -
+		   grillaSvg.labelSpace -
+		   (Math.floor(index/grillaSvg.columnasPorNivel) * (circulo.margin+circulo.radio));
+}
+
+function calcularNivel(index) {
+	var currentNivel = 0;
+	var currentCirculos = niveles[currentNivel].total;
+	while (index >= currentCirculos) {
+		currentNivel++;
+		currentCirculos += niveles[currentNivel].total;
+	}
+	return currentNivel;
+}
+
+function calcularNuevaPosicion(axis, index){
+	var result;
+	var currentNivel = calcularNivel(index);
+	var previousCirculos = 0;
+	if (currentNivel > 0) {
+		var count = currentNivel;
+		while (count > 0) {
+			previousCirculos += niveles[count-1].total;
+			count--;
+		}
+	}
+	currentIndex = index - previousCirculos;
+	if (axis == "x") {
+		x0 = niveles[currentNivel].x0;
+		result = calcularPosxNivel(x0,currentIndex);
+	}
+	else if (axis == "y"){
+		result = calcularPosyNivel(currentIndex);
+	}
+	else {
+		console.log("Hubo un error con el calculo de posiciones de los ejes X e Y");
+	}
+	return result;
 }
 
 // Función que divide los circulitos en niveles
@@ -433,46 +481,8 @@ function separarCirculitos() {
 
 		d3.selectAll("circle").attr("class", function(d,i){
 			return currentSeccion + " nivel" + calcularNivel(i) + " general";
-		})
+		}).attr("nivel", function(d,i){ return calcularNivel(i) });
 	});
-
-	function calcularNivel(index) {
-		var currentNivel = 0;
-		var currentCirculos = niveles[currentNivel].total;
-		while (index >= currentCirculos) {
-			currentNivel++;
-			currentCirculos += niveles[currentNivel].total;
-		}
-		return currentNivel;
-	}
-
-	function calcularNuevaPosicion(axis, index){
-		var result;
-		var currentNivel = calcularNivel(index);
-		if (currentNivel > 0) {
-			var count = currentNivel;
-			previousCirculos = 0;
-			while (count > 0) {
-				previousCirculos += niveles[count-1].total;
-				count--;
-			}
-		}
-		currentIndex = index - previousCirculos;
-		if (axis == "x") {
-			x0 = niveles[currentNivel].x0;
-			result = x0 +
-					 ((currentIndex+1)*(circulo.margin+circulo.radio)-(circulo.margin+circulo.radio)*grillaSvg.columnasPorNivel*Math.floor(currentIndex/grillaSvg.columnasPorNivel));
-		}
-		else if (axis == "y"){
-			result = grillaSvg.alto -
-					 grillaSvg.labelSpace -
-					 (Math.floor(currentIndex/grillaSvg.columnasPorNivel) * (circulo.margin+circulo.radio));
-		}
-		else {
-			console.log("Hubo un error con el calculo de posiciones de los ejes X e Y");
-		}
-		return result;
-	}
 }
 
 function mostrarMapaComunas() {
@@ -490,6 +500,17 @@ function mostrarMapaComunas() {
 	}
 	$(".circulo").hide();
 	$("circle.nivel_activo").parent().show();
+
+	d3.selectAll($("circle")).attr("cx", function(d,i){
+		return calcularNuevaPosicion("x", i);
+	});
+	d3.selectAll("rect").attr("x", function(d,i){
+		var circleNuevoX = $(this).parent().children("circle").attr("cx");
+		return circleNuevoX - circulo.radio - (circulo.margin-circulo.radio)/2;
+	});
+	d3.selectAll("circle.nivel_activo").transition().attr("cx", function(d,i){
+		return calcularNuevaPosicion("x", i);
+	});
 
 	d3.select("#mapaCABA svg").transition().duration(400).attr("x", 300);
 }
@@ -562,14 +583,16 @@ function generarInfoTextLanding() {
 	var texto = d3.select("g.info text").text(lineas[0])
 		.attr("x", posInfoX)
 		.attr("y", posInfoY)
-		.attr("class", currentSeccion + " general");
+		.attr("class", currentSeccion + " general")
+		.attr("nivel", "general");
 
 	for (var i=1; i<lineas.length; i++) {
 		texto.append("tspan")
 			.text(lineas[i])
 			.attr("x", posInfoX)
 			.attr("y", posInfoY + infoDetails.verticalMargin*i)
-			.attr("class", currentSeccion + " general");
+			.attr("class", currentSeccion + " general")
+			.attr("nivel", "general");
 	}
 }
 
@@ -606,6 +629,7 @@ function generarInfoTextGeneral(filtro) {
 			.attr("x", posInfoX)
 			.attr("y", posInfoY - (lineas.length-1)*infoDetails.verticalMargin)
 			.attr("class", currentSeccion + " " + explicativosKeys[i])
+			.attr("nivel", "general")
 			.on("mouseover", function(d){
 				// Buscar círculos que corresponden a este texto
 				var claseText = $(this).attr("class").split(' ').slice(0,2);
@@ -628,7 +652,8 @@ function generarInfoTextGeneral(filtro) {
 				.text(lineas[j])
 				.attr("x", posInfoX)
 				.attr("y", tspanY)
-				.attr("class", currentSeccion + " " + explicativosKeys[i]);
+				.attr("class", currentSeccion + " " + explicativosKeys[i])
+				.attr("nivel", "general");
 
 			counterLineas++;
 		}
@@ -663,6 +688,7 @@ function generarInfoTextNiveles(filtro) {
 					.attr("x", posInfoX)
 					.attr("y", posInfoY)
 					.attr("class", currentSeccion + " " + nivelesKeys[i] + " general")
+					.attr("nivel", nivelesKeys[i])
 					.on("mouseover", function(d){
 						// Buscar círculos que corresponden a este texto
 						var claseText = $(this).attr("class").split(' ').slice(0,2);
@@ -688,7 +714,8 @@ function generarInfoTextNiveles(filtro) {
 									.text(lineaText)
 									.attr("x", posInfoX)
 									.attr("y", tspanY)
-									.attr("class", currentSeccion + " " + nivelesKeys[i] + " general");
+									.attr("class", currentSeccion + " " + nivelesKeys[i] + " general")
+									.attr("nivel", nivelesKeys[i]);
 					if (j == lineas.length-1) {
 						tspan.append("tspan")
 							.text(nivelText)
@@ -744,6 +771,7 @@ function generarInfoTextNiveles(filtro) {
 					.attr("x", posInfoX)
 					.attr("y", posInfoY - (lineas.length-1)*infoDetails.verticalMargin)
 					.attr("class", currentSeccion + " " + nivelesKeys[i] + " " + explicativosNivelKeys[j])
+					.attr("nivel", nivelesKeys[i])
 					.on("mouseover", function(d){
 						// Buscar círculos que corresponden a este texto
 						var claseText = $(this).attr("class").split(' ');
@@ -766,7 +794,8 @@ function generarInfoTextNiveles(filtro) {
 						.text(lineas[k])
 						.attr("x", posInfoX)
 						.attr("y", tspanY)
-						.attr("class", currentSeccion + " " + nivelesKeys[i] + " " + explicativosNivelKeys[j]);
+						.attr("class", currentSeccion + " " + nivelesKeys[i] + " " + explicativosNivelKeys[j])
+						.attr("nivel", nivelesKeys[i]);
 
 					counterLineas++;
 				}
