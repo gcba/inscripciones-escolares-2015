@@ -179,6 +179,7 @@ text.masculino { fill: #522CA6; }
 text.caba { fill: #2C3C63; }
 text.provincia { fill: #FA5037; }
 
+
 #viz-container {
   top: 10%;
   left: 0px;
@@ -196,6 +197,7 @@ text.provincia { fill: #FA5037; }
       top: 20%;
       height: 80%;
   }
+
 
    svg#viz {
     // visibility: hidden;
@@ -217,9 +219,13 @@ text.provincia { fill: #FA5037; }
     margin: 0 auto;
     text-align: center;
     width: auto;
-    margin-top: 50px;
+    margin-top: 25px;
+    font-size: .95em;
     display: none;
     z-index: 701;
+    @include transition(all 1.0s ease-in-out);
+
+
 
 
 
@@ -237,11 +243,12 @@ text.provincia { fill: #FA5037; }
   }
 
 
+}
 
 
-
-
-
+.viewing-page-3 {
+  .filtro {
+    margin-top: 15px;
 }
 
 
@@ -544,7 +551,7 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
   }
   li {
     margin: 0 auto;
-    padding: 2em 1em;
+    padding: 2em 0.5em;
     position: relative;
     display: inline-block;
   }
@@ -557,7 +564,7 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
     padding-bottom: 0;
     // margin-top: -15px;
     vertical-align: top;
-    color: rgba(8, 19, 93, 0.5);
+    color: rgba(25,119,221, 0.5);
     -webkit-transition: color 0.3s;
     transition: color 0.3s;
     cursor: pointer;
@@ -594,7 +601,7 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
   }
   label::before {
     content: '';
-    border: 2px solid rgba(8, 19, 93, 0.5);
+    border: 2px solid rgba(25,119,221, 0.5);
     @include opacity(0.8);
     -webkit-transition: opacity 0.3s;
     transition: opacity 0.3s;
@@ -609,23 +616,23 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
   z-index: 800;
   input {
     &[type="radio"]:checked + label {
-      color: #08135D;
+      color: #1977DD;
     }
     &[type="radio"]:checked + label::before {
       // opacity: 0.8;
-      border: 2px solid rgba(8, 19, 93, 1);
+      border: 2px solid rgba(25,119,221, 1);
     }
   }
   svg {
     position: absolute;
-    width: 25px;
-    height: 25px;
+    width: 26px;
+    height: 26px;
     top: 50%;
-    margin-top: -16px;
-    left: 17px;
+    margin-top: -17px;
+    left: 10px;
     pointer-events: none;
     path {
-      stroke: #08135D;
+      stroke: #1977DD;
       stroke-width: 12px;
       stroke-linecap: round;
       stroke-linejoin: round;
