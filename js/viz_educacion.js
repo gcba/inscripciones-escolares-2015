@@ -24,9 +24,7 @@ $(".main").onepage_scroll({
 				break;
 			case "general":
 				$(".circulo").show();
-				setTimeout(function() { $(".filtro").show();}, 1500);
-
-				console.log('Delay filtro');
+				$(".filtro").show();
 				if (circuloMedio.attr("r") == circulo.radio) {
 					juntarCirculitos();
 				} else {
@@ -34,16 +32,18 @@ $(".main").onepage_scroll({
 				}
 				break;
 			case "niveles":
-				setTimeout(function() { $(".filtro").show();}, 1500);
+				$(".filtro").show();
 				$(".circulo").show();
 				$("g.labels").show();
+				$("g.labels text").show();
 				separarCirculitos();
 				break;
 			case "comuna":
 				$("#mapaCABA").show();
-				setTimeout(function() { $(".filtro").show();}, 1500);
+				$(".filtro").show();
 				$("#viz-container").show();
 				$("#dropdown-nivel").show();
+				agregarNivelActivo();
 				mostrarMapaComunas();
 				queue()
 					.defer(d3.json, "data/comunas.json")
@@ -219,6 +219,8 @@ function filtrarPorGenero() {
 		case "niveles":
 			filtrarNiveles();
 			break;
+		case "comuna":
+			filtrarComuna();
 		default:
 			break;
 	}
@@ -270,6 +272,25 @@ function filtrarPorGenero() {
 			if (currentIndex < femCurrentNivel) { return "femenino"; } else { return "masculino"; }
 		}
 	}
+
+	function filtrarComuna() {
+		var currentNivel = $("circle.nivel_activo").attr("nivel");
+
+		d3.selectAll("circle.nivel_activo").attr("class", function(d,i){
+			return currentSeccion + " nivel" + currentNivel + " " + calcularSexo(i) + " nivel_activo";
+		});
+
+		d3.selectAll("circle.nivel_activo").transition().attr("fill", function(d,i) {
+			if (calcularSexo(i) == "femenino") { return colores.femenino; } else { return colores.masculino; }
+		});
+
+		d3.selectAll("g.info text[nivel='"+currentNivel+"']").attr("class", function(){ return d3.select(this).attr("class") + " nivel_activo"});
+
+		function calcularSexo(index){
+			var femCurrentNivel = niveles[currentNivel].femenino;
+			if (index < femCurrentNivel) { return "femenino"; } else { return "masculino"; }
+		}
+	}
 }
 
 function filtrarPorProcedencia() {
@@ -280,6 +301,8 @@ function filtrarPorProcedencia() {
 	 	case "niveles":
 	 		filtrarNiveles();
 	 		break;
+	 	case "comuna":
+	 		filtrarComuna();
 	 	default:
 	 		break;
 	}
@@ -331,6 +354,23 @@ function filtrarPorProcedencia() {
 			if (currentIndex < cabaCurrentNivel) { return "caba"; } else { return "provincia"; }
 		}
 	}
+
+	function filtrarComuna() {
+		var currentNivel = $("circle.nivel_activo").attr("nivel");
+
+		d3.selectAll("circle.nivel_activo").attr("class", function(d,i){
+			return currentSeccion + " nivel" + currentNivel + " " + calcularProcedencia(i) + " nivel_activo";
+		});
+
+		d3.selectAll("circle.nivel_activo").transition().attr("fill", function(d,i) {
+			if (calcularProcedencia(i) == "caba") { return colores.caba; } else { return colores.provincia; }
+		});
+
+		function calcularProcedencia(index){
+			var cabaCurrentNivel = niveles[currentNivel].caba;
+			if (index < cabaCurrentNivel) { return "caba"; } else { return "provincia"; }
+		}
+	}
 }
 
 /*
@@ -379,6 +419,11 @@ function juntarCirculitos() {
 }
 
 function calcularPosxNivel(x0, index) {
+	return x0 + ((index+1)*(circulo.margin+circulo.radio) - (circulo.margin+circulo.radio)*grillaSvg.columnasPorNivel*Math.floor(index/grillaSvg.columnasPorNivel));
+}
+
+function calcularPosicionXComuna(index) {
+	var x0 = niveles[0].x0;
 	return x0 + ((index+1)*(circulo.margin+circulo.radio) - (circulo.margin+circulo.radio)*grillaSvg.columnasPorNivel*Math.floor(index/grillaSvg.columnasPorNivel));
 }
 
@@ -451,18 +496,30 @@ function separarCirculitos() {
 	});
 }
 
+function agregarNivelActivo() {
+	// Agregar clase nivel_activo en base a lo seleccionado en el dropdown
+	var nivelSeleccionado = $("#dropdown-nivel select option:selected").val();
+
+	// sacarle nivel_activo al nivel que estaba activo antes, si habia
+	var circulosActivos = $("circle.nivel_activo");
+	if (circulosActivos.length != 0) {
+		var removedClass = $("circle.nivel_activo").attr("class").replace(new RegExp('(\\s|^)' + "nivel_activo" + '(\\s|$)', 'g'), '$2');
+		d3.selectAll("circle." + removedClass.split(" ").join(".") + ".nivel_activo").attr("class", removedClass);
+	}
+
+	var circulosNivel = $("circle[nivel='" + nivelSeleccionado + "']");
+	var claseNivel = circulosNivel.attr("class");
+	d3.selectAll(circulosNivel).attr("class", claseNivel + " nivel_activo");
+}
+
 function mostrarMapaComunas() {
-	var dropdownTop = parseInt(d3.select("svg#viz").style("top").split("px")[0]) + grillaSvg.alto - grillaSvg.labelSpace + circulo.margin*2,
-		dropdownTopString = dropdownTop.toString() + "px",
-		dropdownLeft = $(window).width()/2 - grillaSvg.ancho/2 + circulo.margin,
-		dropdownLeftString = dropdownLeft.toString() + "px";
-
-	d3.select("#dropdown-nivel").style("top", dropdownTopString).style("left", dropdownLeftString);
-
+	// En este caso, el usuario llegó a esta sección bajando. Sin seleccionar un nivel.
 	if ($("circle.nivel_activo").length == 0){
-		var nivelComunas = "nivel0";
-		var claseNivel = $("circle." + nivelComunas).attr("class").split(" ").join(".");
-		d3.selectAll("circle." + claseNivel).attr("class", claseNivel.split(".").join(" ") + " nivel_activo");
+		// Seleccionamos el nivel inicial como nivel "default"
+		var nivelComunas = 0;
+		var circulosNivel = $("circle[nivel='" + nivelComunas + "']");
+		var claseNivel = circulosNivel.attr("class");
+		d3.selectAll(circulosNivel).attr("class", claseNivel + " nivel_activo");
 	}
 	$(".circulo").hide();
 	$("circle.nivel_activo").parent().show();
@@ -475,7 +532,12 @@ function mostrarMapaComunas() {
 		return circleNuevoX - circulo.radio - (circulo.margin-circulo.radio)/2;
 	});
 	d3.selectAll("circle.nivel_activo").transition().attr("cx", function(d,i){
-		return calcularNuevaPosicion("x", i);
+		return calcularPosicionXComuna(i);
+	}).call(endall, function() {
+		d3.selectAll("rect").attr("x", function(d,i){
+			var circleNuevoX = $(this).parent().children("circle").attr("cx");
+			return circleNuevoX - circulo.radio - (circulo.margin-circulo.radio)/2;
+		})
 	});
 
 	d3.select("#mapaCABA svg").transition().duration(400).attr("x", 300);
@@ -484,6 +546,23 @@ function mostrarMapaComunas() {
 	var nivelComuna = $("circle.nivel_activo").attr("nivel");
 	var opcionSeleccionar = $("#dropdown-nivel option[value='nivel"+nivelComuna+"']").attr("selected", "selected");
 	nivelActivo = $("#dropdown-nivel :selected").text().toLowerCase();
+
+	$("g.labels").show();
+	var textNivel = $("g.labels text[nivel='"+nivelComuna+"'] tspan.nivelLink")[0];
+	d3.select(textNivel)
+		.style("text-decoration", "none")
+		.style("font-weight", "normal")
+		.on("click", function(){});
+	$("g.labels text[nivel='"+nivelComuna+"']").show();
+	d3.selectAll("g.labels text[nivel='"+nivelComuna+"']").attr("x", function(){
+		return niveles[0].x0 + circulo.margin;
+	});
+	d3.selectAll("g.labels text[nivel='"+nivelComuna+"'] tspan").attr("x", function(){
+		return niveles[0].x0 + circulo.margin;
+	});
+	// HACK
+	$("tspan.nivelLink").removeAttr("x");
+	$("g.labels text:not([nivel='"+nivelComuna+"'])").hide();
 }
 
 function resetCambioSeccion() {
@@ -605,13 +684,13 @@ function generarInfoTextGeneral(filtro) {
 				// Buscar círculos que corresponden a este texto
 				var claseText = $(this).attr("class").split(' ').slice(0,2);
 				d3.selectAll($("circle:not(." + claseText.join('.') + ")"))
-					.transition().duration(500).delay(function(d, i) { return i * .5;}).ease("quad").style("opacity", 0.2);
+					.style("opacity", 0.2);
 				d3.selectAll($("text:not(." + claseText.join('.') + ")"))
-					.transition().duration(250).delay(function(d, i) { return i * .5;}).ease("quad").style("opacity", 0.2);
+					.style("opacity", 0.2);
 			})
 			.on("mouseout", function(d){
-				d3.selectAll("circle").transition(500).delay(function(d, i) { return i * .5;}).ease("quad").style("opacity", 1);
-				d3.selectAll("text").transition(500).delay(function(d, i) { return i * .5;}).ease("quad").style("opacity", 1);
+				d3.selectAll("circle").style("opacity", 1);
+				d3.selectAll("text").style("opacity", 1);
 			});
 
 		counterLineas++;
@@ -640,68 +719,70 @@ function generarInfoTextNiveles(filtro) {
 
 	if (filtro == "estadoCero") {
 		var labels = labelsGroup.selectAll("text");
-		if (labels.empty()) {
-			labels.data(nivelesKeys).enter().append("text");
-			var explicativoNivel = "";
+		if (labels.length != 0) {
+			labelsGroup.selectAll("text").remove();
+		}
 
-			for (var i=0; i<nivelesKeys.length; i++) {
-				explicativoNivel = explicativosSeccion[nivelesKeys[i]][filtro]["general"];
+		labelsGroup.selectAll("text").data(nivelesKeys).enter().append("text");
+		var explicativoNivel = "";
 
-				var lineas = calcularLineas(explicativoNivel),
-					lineaNivel = lineas[lineas.length-1].split(" "),
-					nivelText = lineaNivel[lineaNivel.length-1];
+		for (var i=0; i<nivelesKeys.length; i++) {
+			explicativoNivel = explicativosSeccion[nivelesKeys[i]][filtro]["general"];
 
-				posInfoX = coordenadasNiveles[i] + circulo.margin;
-				posInfoY = grillaSvg.alto - grillaSvg.labelSpace + infoDetails.verticalMargin*2;
+			var lineas = calcularLineas(explicativoNivel),
+				lineaNivel = lineas[lineas.length-1].split(" "),
+				nivelText = lineaNivel[lineaNivel.length-1];
 
-				var texto = d3.selectAll("g.labels text").filter(function(d,index){return index == i});
-				texto.text(lineas[0])
-					.attr("x", posInfoX)
-					.attr("y", posInfoY)
-					.attr("class", currentSeccion + " " + nivelesKeys[i] + " general")
-					.attr("nivel", nivelesKeys[i])
-					.on("mouseover", function(d){
-						// Buscar círculos que corresponden a este texto
-						var claseText = $(this).attr("class").split(' ').slice(0,2);
-						d3.selectAll($("circle:not(." + claseText.join('.') + ")"))
-							.transition(500).delay(function(d, i) { return i * .5;}).ease("quad").transition(500).delay(function(d, i) { return i * .5;}).ease("quad").style("opacity", 0.2);
-						d3.selectAll($("text:not(." + claseText.join('.') + ")"))
-							.transition(500).delay(function(d, i) { return i * .5;}).ease("quad").style("opacity", 0.2);
-					})
-					.on("mouseout", function(d){
-						d3.selectAll("circle")
-						.transition(500).delay(function(d, i) { return i * .5;}).ease("quad").style("opacity", 1);
-						d3.selectAll("text")
-						.transition(500).delay(function(d, i) { return i * .5;}).ease("quad").style("opacity", 1);
-					});
+			posInfoX = coordenadasNiveles[i] + circulo.margin;
+			posInfoY = grillaSvg.alto - grillaSvg.labelSpace + infoDetails.verticalMargin*2;
 
-				var tspanY = 0,
-					lineaText = "";
-				for (var j=1; j<lineas.length; j++) {
-					tspanY = posInfoY + infoDetails.verticalMargin*j;
-					lineaText = lineas[j];
-					if (j == lineas.length-1) {
-						lineaText = lineas[j].split(" ").slice(0,2).join(" ") + " ";
-					}
-					var tspan = texto.append("tspan")
-									.text(lineaText)
-									.attr("x", posInfoX)
-									.attr("y", tspanY)
-									.attr("class", currentSeccion + " " + nivelesKeys[i] + " general animated fadeIn")
-									.attr("nivel", nivelesKeys[i]);
-					if (j == lineas.length-1) {
-						tspan.append("tspan")
-							.text(nivelText)
-							.attr("font-weight", "bold")
-							.attr("text-decoration", "underline")
-							.attr("class", "nivelLink " + nivelText)
-							.on("click", function(d){
-								$(".main").moveDown();
-								// A un elemento de SVG no le puedo addClass, asi que apendo
-								var claseNivel = $(this).parent().attr("class").split(" ").join(".");
-								d3.selectAll("circle." + claseNivel).attr("class", claseNivel.split(".").join(" ") + " nivel_activo");
-							});
-					}
+			var texto = d3.selectAll("g.labels text").filter(function(d,index){return index == i});
+			texto.text(lineas[0])
+				.attr("x", posInfoX)
+				.attr("y", posInfoY)
+				.attr("class", currentSeccion + " " + nivelesKeys[i] + " general")
+				.attr("nivel", i)
+				.on("mouseover", function(d){
+					// Buscar círculos que corresponden a este texto
+					var claseText = $(this).attr("class").split(' ').slice(0,2);
+					d3.selectAll($("circle:not(." + claseText.join('.') + ")"))
+						.style("opacity", 0.2);
+					d3.selectAll($("text:not(." + claseText.join('.') + ")"))
+						.style("opacity", 0.2);
+				})
+				.on("mouseout", function(d){
+					d3.selectAll("circle").style("opacity", 1);
+					d3.selectAll("text").style("opacity", 1);
+				});
+
+			var tspanY = 0,
+				lineaText = "";
+			for (var j=1; j<lineas.length; j++) {
+				tspanY = posInfoY + infoDetails.verticalMargin*j;
+				lineaText = lineas[j];
+				if (j == lineas.length-1) {
+					lineaText = lineas[j].split(" ").slice(0,2).join(" ") + " ";
+				}
+				var tspan = texto.append("tspan")
+								.text(lineaText)
+								.attr("x", posInfoX)
+								.attr("y", tspanY)
+								.attr("class", currentSeccion + " " + nivelesKeys[i] + " general animated fadeIn")
+								.attr("nivel", i);
+				if (j == lineas.length-1) {
+					tspan.append("tspan")
+						.text(nivelText)
+						.attr("font-weight", "bold")
+						.attr("text-decoration", "underline")
+						.attr("class", "nivelLink " + nivelText)
+						.on("click", function(d){
+							$(".main").moveDown();
+							// A un elemento de SVG no le puedo addClass, asi que apendo
+							var nivelComunas = $(this).parent().attr("nivel");
+							var circulosNivel = $("circle[nivel='" + nivelComunas + "']");
+							var claseNivel = circulosNivel.attr("class");
+							d3.selectAll(circulosNivel).attr("class", claseNivel + " nivel_activo");
+						});
 				}
 			}
 		}
@@ -741,8 +822,10 @@ function generarInfoTextNiveles(filtro) {
 				texto.text(lineas[0])
 					.attr("x", posInfoX)
 					.attr("y", posInfoY - (lineas.length-1)*infoDetails.verticalMargin)
-					.attr("class", currentSeccion + " " + nivelesKeys[i] + " " + explicativosNivelKeys[j])
-					.attr("nivel", nivelesKeys[i])
+					.attr("class", function(){
+						return currentSeccion + " " + nivelesKeys[i] + " " + explicativosNivelKeys[j]
+					})
+					.attr("nivel", i)
 					.on("mouseover", function(d){
 						// Buscar círculos que corresponden a este texto
 						var claseText = $(this).attr("class").split(' ');
@@ -766,12 +849,47 @@ function generarInfoTextNiveles(filtro) {
 						.attr("x", posInfoX)
 						.attr("y", tspanY)
 						.attr("class", currentSeccion + " " + nivelesKeys[i] + " " + explicativosNivelKeys[j])
-						.attr("nivel", nivelesKeys[i]);
+						.attr("nivel", i);
 
 					counterLineas++;
 				}
 			}
 		}
+	}
+}
+
+function generarInfoTextComuna(filtro) {
+	generarInfoTextNiveles(filtro);
+
+	var nivelComuna = $("circle.nivel_activo").attr("nivel");
+	if (filtro == "estadoCero") {
+		var textNivel = $("g.labels text[nivel='"+nivelComuna+"'] tspan.nivelLink")[0];
+		d3.select(textNivel)
+			.style("text-decoration", "none")
+			.style("font-weight", "normal")
+			.on("click", function(){});
+		$("g.labels text[nivel='"+nivelComuna+"']").show();
+		d3.selectAll("g.labels text[nivel='"+nivelComuna+"']").attr("x", function(){
+			return niveles[0].x0 + circulo.margin;
+		});
+		d3.selectAll("g.labels text[nivel='"+nivelComuna+"'] tspan").attr("x", function(){
+			return niveles[0].x0 + circulo.margin;
+		});
+		// HACK
+		$("tspan.nivelLink").removeAttr("x");
+		$("g.labels text:not([nivel='"+nivelComuna+"'])").hide();
+	} else {
+		d3.selectAll("g.info text[nivel='"+nivelComuna+"']").attr("class", function(){
+			return d3.select(this).attr("class") + " nivel_activo";
+		});
+		$("g.info text[nivel='"+nivelComuna+"']").show();
+		d3.selectAll("g.info text[nivel='"+nivelComuna+"']").attr("x", function(){
+			return niveles[0].x0 + circulo.margin + grillaSvg.columnasPorNivel * (circulo.margin + circulo.radio);
+		});
+		d3.selectAll("g.info text[nivel='"+nivelComuna+"'] tspan").attr("x", function(){
+			return niveles[0].x0 + circulo.margin + grillaSvg.columnasPorNivel * (circulo.margin + circulo.radio);
+		});
+		$("g.info text:not([nivel='"+nivelComuna+"'])").hide();
 	}
 }
 
@@ -790,6 +908,10 @@ function generarInfoText(filtro) {
 			case "niveles":
 				generarInfoTextNiveles(filtro);
 				break;
+			case "comuna":
+				generarInfoTextComuna(filtro);
+			default:
+				break;
 		}
 }
 
@@ -799,14 +921,14 @@ function generarInfoText(filtro) {
  */
 
 $("#dropdown-nivel select").change(function(){
-	var nivelSeleccionado = $("#dropdown-nivel select option:selected").val();
+	// Reset filtros
+	d3.selectAll("input[type=radio]").property("checked", false);
+	d3.selectAll("circle").attr("fill", colores.neutro).attr("class", function(){
+		return currentSeccion + " nivel" + d3.select(this).attr("nivel") + " general";
+	});
+	$("g.info").hide();
 
-	// sacarle nivel_activo al nivel que estaba activo antes
-	var removedClass = $("circle.nivel_activo").attr("class").replace(new RegExp('(\\s|^)' + "nivel_activo" + '(\\s|$)', 'g'), '$2');
-	d3.selectAll("circle." + removedClass.split(" ").join(".") + ".nivel_activo").attr("class", removedClass);
-
-	var claseNivel = d3.select("circle." + nivelSeleccionado).attr("class").split(" ").join(".");
-	d3.selectAll("circle." + claseNivel).attr("class", claseNivel.split(".").join(" ") + " nivel_activo");
+	agregarNivelActivo();
 	mostrarMapaComunas();
 
     queue()

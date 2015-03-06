@@ -78,14 +78,16 @@
             <a href="#close" class="cartodb-popup-close-button close">x</a>
             <div class="cartodb-popup-content-wrapper">
                 <div class="cartodb-popup-content">
-                    <h4>{{comunaescu}}</h4>
-                    <p class="nombreEscuela">{{nombresc}}</p>
-                    <h4>modalidad</h4>
-                    <p>{{modalidadd}}</p>
-                    <h4>nivel</h4>
-                    <p>{{niveldescr}}</p>
-                    <h4>Dirección</h4>
+                    <h4>{{comuna}}</h4>
+                    <p class="nombreEscuela">{{nombre}}</p>
                     <p class="nombreEscuela">{{calle}}</p>
+                    <p id="mismacomuna">{{misma_comuna}}</p>
+                    <div id="graficoMigracion"></div>
+                    <script>
+                        dibujaGraficoInfowindow($("#mismacomuna").text());
+                    </script>
+                    -
+
                 </div>
             </div>
             <div class="cartodb-popup-tip-container"></div>

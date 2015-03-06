@@ -21,7 +21,7 @@
 		"niveles": {
 			"nivel0": {
 				"estadoCero": {
-					"general": "El 37% de los alumnos corresponde al nivel inicial."
+					"general": "El 35% de los alumnos corresponde al nivel inicial."
 				},
 				"genero": {
 					"femenino": "48% mujeres",
@@ -34,15 +34,15 @@
 			},
 			"nivel1": {
 				"estadoCero": {
-					"general": "El 35% de los alumnos corresponde al nivel primario."
+					"general": "El 37% de los alumnos corresponde al nivel primario."
 				},
 				"genero": {
-					"femenino": "49% mujeres",
-					"masculino": "51% varones"
+					"femenino": "48% mujeres",
+					"masculino": "52% varones"
 				},
 				"procedencia": {
-					"caba": "90% Ciudad Autónoma de Buenos Aires",
-					"provincia": "10% Otras jurisdicciones"
+					"caba": "89% Ciudad Autónoma de Buenos Aires",
+					"provincia": "11% Otras jurisdicciones"
 				}
 			},
 			"nivel2": {
