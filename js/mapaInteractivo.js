@@ -19,14 +19,14 @@ function loadMap() {
             var sublayer = layers[1].getSubLayer(0);
 
             sublayers.push( sublayer );
-
-            // Reescribo HTML de infowindows por el definido en el primer script
-            sublayer.infowindow.set('template', $('#infowindow_template').html());
 /*
             sublayer.on('featureClick', function(e, pos, latlng, data) {
-              //si hay click
+              dibujaGraficoInfowindow(80);
             });
 */
+            // Reescribo HTML de infowindows por el definido en el primer script
+            sublayer.infowindow.set('template', $('#infowindow_template').html());
+
         });
 }
  
@@ -159,4 +159,40 @@ function resetFiltros(){
 
   $("#filtro1 li a").parents('.btn-group').find('.dropdown-toggle').html('Ver todos <span class="caret"></span>');
   $("#filtro2 li a").parents('.btn-group').find('.dropdown-toggle').html('Ver todas <span class="caret"></span>');
+}
+
+function dibujaGraficoInfowindow(dato) {
+    // Dependiendo el dato saco el resto del fondo
+    // Falta realizar esto
+    var fondo = 10;
+
+
+
+    var w = 100;
+    var h = 100;
+    var r = h / 2;
+    var ir = 20;
+    var color = ["#cccccc", "#999999"] //d3.scale.category20c();
+
+    var data = [{
+        "value": fondo
+    }, {
+        "value": dato
+    }];
+
+
+    var vis = d3.select('#graficoMigracion').append("svg:svg").data([data]).attr("width", w).attr("height", h).append("svg:g").attr("transform", "translate(" + r + "," + r + ")");
+    var pie = d3.layout.pie().value(function(d) {
+        return d.value;
+    });
+    var arc = d3.svg.arc().innerRadius(r - ir).outerRadius(r);
+    var arcs = vis.selectAll("g.slice").data(pie).enter().append("svg:g").attr("class", "slice");
+    arcs.append("svg:path")
+        .attr("fill", function(d, i) {
+            return color[i];
+        })
+        .attr("d", function(d) {
+            return arc(d);
+        });
+
 }
