@@ -1,6 +1,7 @@
 @import "../public/components/bourbon/app/assets/stylesheets/_bourbon.scss";
 @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins";
 @import "mixins/breakpoint.scss";
+@import "mixins/opacity.scss";
 @import "animate.min.css";
 
 @include font-face('Gotham', 'fonts/gotham');
@@ -516,4 +517,153 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
 
 .nombreEscuela{
     text-transform: capitalize !important;
+}
+
+// Input
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  &:after, &::before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+}
+
+.ac-custom {
+  // padding: 0 3em;
+  // max-width: 900px;
+  // margin: 0 auto;
+  ul, ol {
+    list-style: none;
+    padding: 0;
+    // margin: 0 auto;
+    // max-width: 800px;
+  }
+  li {
+    margin: 0 auto;
+    padding: 2em 1em;
+    position: relative;
+    display: inline-block;
+  }
+  label {
+    display: inline-block;
+    position: relative;
+    padding-top: 0px;
+    padding-right: 0;
+    padding-left: 35px;
+    padding-bottom: 0;
+    // margin-top: -15px;
+    vertical-align: top;
+    color: rgba(8, 19, 93, 0.2);
+    cursor: pointer;
+    -webkit-transition: color 0.3s;
+    transition: color 0.3s;
+  }
+  input {
+    &[type="checkbox"], &[type="radio"] {
+      width: 30px;
+      height: 30px;
+      top: 50%;
+      left: 0;
+      margin-top: -25px;
+      position: absolute;
+      cursor: pointer;
+    }
+  }
+  label::before {
+    width: 30px;
+    height: 30px;
+    top: 50%;
+    left: 0;
+    margin-top: -17px;
+    position: absolute;
+    cursor: pointer;
+  }
+  input {
+    &[type="checkbox"], &[type="radio"] {
+      opacity: 0;
+      -webkit-appearance: none;
+      display: inline-block;
+      vertical-align: middle;
+      z-index: 100;
+    }
+  }
+  label::before {
+    content: '';
+    border: 2px solid rgba(8, 19, 93, 0.2);
+    @include opacity(0.8);
+    -webkit-transition: opacity 0.3s;
+    transition: opacity 0.3s;
+  }
+}
+
+.ac-radio label::before {
+  border-radius: 50%;
+}
+
+.ac-custom {
+  z-index: 800;
+  input {
+    &[type="checkbox"]:checked + label, &[type="radio"]:checked + label {
+      color: #08135D;
+    }
+    &[type="checkbox"]:checked + label::before, &[type="radio"]:checked + label::before {
+      opacity: 0.8;
+    }
+  }
+  svg {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    top: 50%;
+    margin-top: -16px;
+    left: 17px;
+    pointer-events: none;
+    path {
+      stroke: #08135D;
+      stroke-width: 12px;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+  }
+}
+
+/* General SVG and path styles */
+
+/* Specific input, SVG and path styles */
+
+/* Circle */
+
+.ac-circle {
+  input {
+    &[type="checkbox"], &[type="radio"] {
+      width: 30px;
+      height: 30px;
+      margin-top: -15px;
+      left: 10px;
+      position: absolute;
+    }
+  }
+  label::before {
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+    left: 10px;
+    position: absolute;
+    background-color: #fff;
+    border: none;
+  }
+  svg {
+    width: 70px;
+    height: 70px;
+    margin-top: -35px;
+    left: -10px;
+    path {
+      stroke-width: 5px;
+    }
+  }
 }

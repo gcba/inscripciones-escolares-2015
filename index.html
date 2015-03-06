@@ -36,13 +36,17 @@
 
   	<script type="text/javascript" src="js/global_settings.js"></script>
     <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+
     <script type="text/javascript" src="js/queue.v1.min.js"></script>
     <script type="text/javascript" src="js/d3.v3.min.js"></script>
     <script type="text/javascript" src="js/topojson.v1.min.js"></script>
     <script type="text/javascript" src="js/jquery-onepage-scroll.js"></script>
 
+
   </head>
   <body>
+
+
   <header>
     <div class="header-gcba navbar navbar-default navbar-static-top" id="top" role="navigation">
       <div class="header-inner">
@@ -64,15 +68,23 @@
 
 
 
-      <h1 class="animated fadeInUp">Inscripci&oacute;n Escolar 2015</h1>
+      <h1 class="animated fadeIn">Inscripci&oacute;n Escolar 2015</h1>
       <h2 class="animated fadeIn">Nuevos alumnos del sistema educativo de gestión estatal de la Ciudad.</h2>
 
 
 
 
 
+      <div class="controles filtro animated fadeInUp">
 
-      <div class="controles filtro animated fadeIn">
+        <form class="ac-custom ac-radio ac-fill" autocomplete="off">
+          Filtrar alumnos por:
+          <ul>
+            <li><input id="r1" name="r1" type="radio"><label for="r1">Género</label></li>
+            <li><input id="r2" name="r1" type="radio"><label for="r2">Procedencia</label></li>
+          </ul>
+        </form>
+
         <!-- Filtro por Género o Procedencia -->
         <div class="form-inline">
           <div class="form-group">
@@ -126,7 +138,7 @@
 	  		<iframe src="mapaInteractivo.html"></iframe>
 	  	</section>
 	</div>
-
+    <script type="text/javascript" src="js/svgcheckbx.js"></script>
     <script type="text/javascript" src="js/viz_educacion.js"></script>
     <script type="text/javascript" src="js/mapa_de_caba.js"></script>
 
