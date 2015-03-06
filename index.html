@@ -60,8 +60,6 @@
     </div>
   </header>
 
-
-
 	<!-- Visualización -->
   	<div id="viz-container">
 
@@ -80,13 +78,13 @@
         <form class="ac-custom ac-radio ac-fill" autocomplete="off">
           Filtrar alumnos por:
           <ul>
-            <li><input id="r1" name="r1" type="radio"><label for="r1">Género</label></li>
-            <li><input id="r2" name="r1" type="radio"><label for="r2">Procedencia</label></li>
+            <li><input id="radio-genero" name="r1" value="genero" type="radio"><label for="radio-genero">Género</label></li>
+            <li><input id="radio-procedencia" name="r1" value="procedencia" type="radio"><label for="radio-procedencia">Procedencia</label></li>
           </ul>
         </form>
 
         <!-- Filtro por Género o Procedencia -->
-        <div class="form-inline">
+<!--         <div class="form-inline">
           <div class="form-group">
             <label class="radio-inline">Filtrar alumnos por: </label>
             <label class="radio-inline">
@@ -95,14 +93,15 @@
             <label class="radio-inline">
               <input id="radio-procedencia" name="filtro" value="procedencia" type="radio">Procedencia
             </label>
-            <div id="dropdown-nivel" class="animated fadeIn">
-              <label class="radio-inline">Filtrar por nivel: </label>
-              <select>
-                <option value="nivel0" selected="selected">Inicial</option>
-                <option value="nivel1">Primario</option>
-                <option value="nivel2">Secundario</option>
-              </select>
-            </div>
+          </div>
+        </div> -->
+
+        <div id="dropdown-nivel" class="animated fadeIn">
+          <div id="select-dropdown" class="closed">
+            <div id="select-default" class="select default">Seleccionar nivel</div>
+            <div class="select option" data-id="inicial">Inicial</div>
+            <div class="select option" data-id="primario">Primario</div>
+            <div class="select option" data-id="secundario">Secundario</div>
           </div>
         </div>
 
@@ -138,7 +137,7 @@
 	  		<iframe src="mapaInteractivo.html"></iframe>
 	  	</section>
 	</div>
-    <script type="text/javascript" src="js/svgcheckbx.js"></script>
+    <script type="text/javascript" src="js/efectos-ui.js"></script>
     <script type="text/javascript" src="js/viz_educacion.js"></script>
     <script type="text/javascript" src="js/mapa_de_caba.js"></script>
 
