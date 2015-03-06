@@ -24,7 +24,9 @@ $(".main").onepage_scroll({
 				break;
 			case "general":
 				$(".circulo").show();
-				$(".filtro").show();
+				setTimeout(function() { $(".filtro").show();}, 1500);
+
+				console.log('Delay filtro');
 				if (circuloMedio.attr("r") == circulo.radio) {
 					juntarCirculitos();
 				} else {
@@ -32,14 +34,14 @@ $(".main").onepage_scroll({
 				}
 				break;
 			case "niveles":
-				$(".filtro").show();
+				setTimeout(function() { $(".filtro").show();}, 1500);
 				$(".circulo").show();
 				$("g.labels").show();
 				separarCirculitos();
 				break;
 			case "comuna":
 				$("#mapaCABA").show();
-				$(".filtro").show();
+				setTimeout(function() { $(".filtro").show();}, 1500);
 				$("#viz-container").show();
 				$("#dropdown-nivel").show();
 				mostrarMapaComunas();
@@ -604,13 +606,13 @@ function generarInfoTextGeneral(filtro) {
 				// Buscar círculos que corresponden a este texto
 				var claseText = $(this).attr("class").split(' ').slice(0,2);
 				d3.selectAll($("circle:not(." + claseText.join('.') + ")"))
-					.style("opacity", 0.2);
+					.transition().duration(500).delay(function(d, i) { return i * .5;}).ease("quad").style("opacity", 0.2);
 				d3.selectAll($("text:not(." + claseText.join('.') + ")"))
-					.style("opacity", 0.2);
+					.transition().duration(250).delay(function(d, i) { return i * .5;}).ease("quad").style("opacity", 0.2);
 			})
 			.on("mouseout", function(d){
-				d3.selectAll("circle").style("opacity", 1);
-				d3.selectAll("text").style("opacity", 1);
+				d3.selectAll("circle").transition(500).delay(function(d, i) { return i * .5;}).ease("quad").style("opacity", 1);
+				d3.selectAll("text").transition(500).delay(function(d, i) { return i * .5;}).ease("quad").style("opacity", 1);
 			});
 
 		counterLineas++;
@@ -663,13 +665,15 @@ function generarInfoTextNiveles(filtro) {
 						// Buscar círculos que corresponden a este texto
 						var claseText = $(this).attr("class").split(' ').slice(0,2);
 						d3.selectAll($("circle:not(." + claseText.join('.') + ")"))
-							.style("opacity", 0.2);
+							.transition(500).delay(function(d, i) { return i * .5;}).ease("quad").transition(500).delay(function(d, i) { return i * .5;}).ease("quad").style("opacity", 0.2);
 						d3.selectAll($("text:not(." + claseText.join('.') + ")"))
-							.style("opacity", 0.2);
+							.transition(500).delay(function(d, i) { return i * .5;}).ease("quad").style("opacity", 0.2);
 					})
 					.on("mouseout", function(d){
-						d3.selectAll("circle").style("opacity", 1);
-						d3.selectAll("text").style("opacity", 1);
+						d3.selectAll("circle")
+						.transition(500).delay(function(d, i) { return i * .5;}).ease("quad").style("opacity", 1);
+						d3.selectAll("text")
+						.transition(500).delay(function(d, i) { return i * .5;}).ease("quad").style("opacity", 1);
 					});
 
 				var tspanY = 0,
