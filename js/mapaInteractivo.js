@@ -8,7 +8,7 @@ var capaInfowindows;
 
 function loadMap() {
                   
-    var ulrViz = "http://gcba.cartodb.com/api/v2/viz/2d6d581c-bc5d-11e4-b17e-0e9d821ea90d/viz.json";
+    var ulrViz = "http://gcba.cartodb.com/api/v2/viz/7300df2c-c41c-11e4-8286-0e853d047bba/viz.json";
 
     cartodb.createVis('mapaInteractivo', ulrViz)
         .done(function(vis, layers) {
@@ -19,11 +19,6 @@ function loadMap() {
             var sublayer = layers[1].getSubLayer(0);
 
             sublayers.push( sublayer );
-/*
-            sublayer.on('featureClick', function(e, pos, latlng, data) {
-              dibujaGraficoInfowindow(80);
-            });
-*/
             // Reescribo HTML de infowindows por el definido en el primer script
             sublayer.infowindow.set('template', $('#infowindow_template').html());
 
@@ -48,11 +43,11 @@ $("#filtro2 li a").click(function(){
 
 function filtro (){
   $('.close')[0].click()  
-  var consulta = "SELECT * FROM escuelas";
+  var consulta = "SELECT * FROM escuelas_2015";
   var flag = false;
 
   if ( $("#filtro1 a")[0].text.trim() !== "Ver todos"){
-    consulta = consulta + " WHERE niveldescr LIKE '"+ $("#filtro1 a")[0].text.trim() +"'";
+    consulta = consulta + " WHERE nivel LIKE '"+ $("#filtro1 a")[0].text.trim() +"'";
     flag = true;
   }
 
@@ -62,7 +57,7 @@ function filtro (){
     }else{
       consulta = consulta + " WHERE"
     }
-    consulta = consulta + " modalidadd LIKE '"+ $("#filtro2 a")[0].text.trim() +"'";
+    consulta = consulta + " modalidad LIKE '"+ $("#filtro2 a")[0].text.trim() +"'";
   }
   sublayers[0].set({sql: consulta });
 }
@@ -91,7 +86,7 @@ function busquedaKeyword(key) {
     if ( $('#buscadorEscuelas').val() != ''){
         $("#listado").css("display","inline");
         key = key.toLowerCase();
-        var q = "SELECT * FROM escuelas WHERE LOWER(nombresc) LIKE '%" + key + "%'";
+        var q = "SELECT * FROM escuelas_2015 WHERE LOWER(nombre) LIKE '%" + key + "%'";
         sql.execute(q).done(function(data) {
             $('#resultados').text("");
             for (var i = 0; i < data.total_rows; i++) {
@@ -100,7 +95,7 @@ function busquedaKeyword(key) {
                         "<a href='#' id='ESC" +
                             data.rows[i].cartodb_id +
                             "' onclick='verEscuela(this.id)'>" + 
-                            data.rows[i].nombresc.toLowerCase() +
+                            data.rows[i].nombre.toLowerCase() +
                         "</a>" +
                     "</li>"
                 );
@@ -133,12 +128,13 @@ function verEscuela(escuela){
 
 function openInfowindow(layer, latlng, cartodb_id) {
     layer.trigger('featureClick', null, latlng, null, { cartodb_id: cartodb_id }, 0);
+    dibujaGraficoInfowindow($("#mismacomuna").text());
 }
 
 function verDetallesEscuela(idEscuela){
     var nro = idEscuela.split("ESC");
 
-    var sql_statement = "SELECT * FROM escuelas WHERE cartodb_id = " + nro[1];
+    var sql_statement = "SELECT * FROM escuelas_2015 WHERE cartodb_id = " + nro[1];
   
     resetFiltros();
     capas.setZoom(16);
@@ -155,44 +151,29 @@ function verDetallesEscuela(idEscuela){
 }
 
 function resetFiltros(){
-  sublayers[0].set({sql: "SELECT * FROM escuelas" });
+  sublayers[0].set({sql: "SELECT * FROM escuelas_2015" });
 
   $("#filtro1 li a").parents('.btn-group').find('.dropdown-toggle').html('Ver todos <span class="caret"></span>');
   $("#filtro2 li a").parents('.btn-group').find('.dropdown-toggle').html('Ver todas <span class="caret"></span>');
 }
 
 function dibujaGraficoInfowindow(dato) {
-    // Dependiendo el dato saco el resto del fondo
-    // Falta realizar esto
-    var fondo = 10;
-
-
-
+  var porcentaje = parseInt( dato.split("%")[0] );
+  var fondo = 100 - porcentaje;
+  if (porcentaje >= 0 && porcentaje <= 100){
     var w = 100;
     var h = 100;
     var r = h / 2;
     var ir = 20;
-    var color = ["#cccccc", "#999999"] //d3.scale.category20c();
-
-    var data = [{
-        "value": fondo
-    }, {
-        "value": dato
-    }];
-
-
+    var color = ["#999999", "#cccccc"] //d3.scale.category20c();
+    var data = [{ "value": porcentaje }, { "value": fondo }];
     var vis = d3.select('#graficoMigracion').append("svg:svg").data([data]).attr("width", w).attr("height", h).append("svg:g").attr("transform", "translate(" + r + "," + r + ")");
-    var pie = d3.layout.pie().value(function(d) {
-        return d.value;
-    });
+    var pie = d3.layout.pie().value(function(d) { return d.value; });
     var arc = d3.svg.arc().innerRadius(r - ir).outerRadius(r);
     var arcs = vis.selectAll("g.slice").data(pie).enter().append("svg:g").attr("class", "slice");
     arcs.append("svg:path")
-        .attr("fill", function(d, i) {
-            return color[i];
-        })
-        .attr("d", function(d) {
-            return arc(d);
-        });
-
+      .attr("fill", function(d, i) { return color[i]; })
+      .attr("d", function(d) { return arc(d); });
+  }
+ 
 }
