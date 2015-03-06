@@ -450,17 +450,13 @@ function separarCirculitos() {
 }
 
 function mostrarMapaComunas() {
-	var dropdownTop = parseInt(d3.select("svg#viz").style("top").split("px")[0]) + grillaSvg.alto - grillaSvg.labelSpace + circulo.margin*2,
-		dropdownTopString = dropdownTop.toString() + "px",
-		dropdownLeft = $(window).width()/2 - grillaSvg.ancho/2 + circulo.margin,
-		dropdownLeftString = dropdownLeft.toString() + "px";
-
-	d3.select("#dropdown-nivel").style("top", dropdownTopString).style("left", dropdownLeftString);
-
+	// En este caso, el usuario llegó a esta sección bajando. Sin seleccionar un nivel.
 	if ($("circle.nivel_activo").length == 0){
-		var nivelComunas = "nivel0";
-		var claseNivel = $("circle." + nivelComunas).attr("class").split(" ").join(".");
-		d3.selectAll("circle." + claseNivel).attr("class", claseNivel.split(".").join(" ") + " nivel_activo");
+		// Seleccionamos el nivel inicial como nivel "default"
+		var nivelComunas = 0;
+		var circulosNivel = $("circle[nivel='" + nivelComunas + "']");
+		var claseNivel = circulosNivel.attr("class");
+		d3.selectAll(circulosNivel).attr("class", claseNivel + " nivel_activo");
 	}
 	$(".circulo").hide();
 	$("circle.nivel_activo").parent().show();
@@ -657,7 +653,7 @@ function generarInfoTextNiveles(filtro) {
 					.attr("x", posInfoX)
 					.attr("y", posInfoY)
 					.attr("class", currentSeccion + " " + nivelesKeys[i] + " general")
-					.attr("nivel", nivelesKeys[i])
+					.attr("nivel", i)
 					.on("mouseover", function(d){
 						// Buscar círculos que corresponden a este texto
 						var claseText = $(this).attr("class").split(' ').slice(0,2);
@@ -684,7 +680,7 @@ function generarInfoTextNiveles(filtro) {
 									.attr("x", posInfoX)
 									.attr("y", tspanY)
 									.attr("class", currentSeccion + " " + nivelesKeys[i] + " general animated fadeIn")
-									.attr("nivel", nivelesKeys[i]);
+									.attr("nivel", i);
 					if (j == lineas.length-1) {
 						tspan.append("tspan")
 							.text(nivelText)
@@ -694,8 +690,10 @@ function generarInfoTextNiveles(filtro) {
 							.on("click", function(d){
 								$(".main").moveDown();
 								// A un elemento de SVG no le puedo addClass, asi que apendo
-								var claseNivel = $(this).parent().attr("class").split(" ").join(".");
-								d3.selectAll("circle." + claseNivel).attr("class", claseNivel.split(".").join(" ") + " nivel_activo");
+								var nivelComunas = $(this).parent().attr("nivel");
+								var circulosNivel = $("circle[nivel='" + nivelComunas + "']");
+								var claseNivel = circulosNivel.attr("class");
+								d3.selectAll(circulosNivel).attr("class", claseNivel + " nivel_activo");
 							});
 					}
 				}
