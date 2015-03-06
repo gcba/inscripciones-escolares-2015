@@ -380,13 +380,18 @@ function calcularPosxNivel(x0, index) {
 	return x0 + ((index+1)*(circulo.margin+circulo.radio) - (circulo.margin+circulo.radio)*grillaSvg.columnasPorNivel*Math.floor(index/grillaSvg.columnasPorNivel));
 }
 
+function calcularPosicionXComuna(index) {
+	var x0 = niveles[0].x0;
+	return x0 + ((index+1)*(circulo.margin+circulo.radio) - (circulo.margin+circulo.radio)*grillaSvg.columnasPorNivel*Math.floor(index/grillaSvg.columnasPorNivel));
+}
+
 function calcularPosyNivel(index) {
 	return grillaSvg.alto -
 		   grillaSvg.labelSpace -
 		   (Math.floor(index/grillaSvg.columnasPorNivel) * (circulo.margin+circulo.radio));
 }
 
-function calcularNivel(index) {
+function calcularNivel(index) {	
 	var currentNivel = 0;
 	var currentCirculos = niveles[currentNivel].total;
 	while (index >= currentCirculos) {
@@ -397,7 +402,7 @@ function calcularNivel(index) {
 }
 
 function calcularNuevaPosicion(axis, index){
-	var result;
+	var result;	
 	var currentNivel = calcularNivel(index);
 	var previousCirculos = 0;
 	if (currentNivel > 0) {
@@ -468,8 +473,8 @@ function mostrarMapaComunas() {
 		var circleNuevoX = $(this).parent().children("circle").attr("cx");
 		return circleNuevoX - circulo.radio - (circulo.margin-circulo.radio)/2;
 	});
-	d3.selectAll("circle.nivel_activo").transition().attr("cx", function(d,i){
-		return calcularNuevaPosicion("x", i);
+	d3.selectAll("circle.nivel_activo").transition().attr("cx", function(d,i){		
+		return calcularPosicionXComuna(i);
 	});
 
 	d3.select("#mapaCABA svg").transition().duration(400).attr("x", 300);
