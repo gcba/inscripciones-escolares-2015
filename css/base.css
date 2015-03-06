@@ -6045,6 +6045,12 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
     -moz-box-sizing: border-box;
     box-sizing: border-box; }
 
+.ac-custom .filtro-texto {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555; }
+.ac-custom .radio-inline + .radio-inline, .ac-custom .checkbox-inline + .checkbox-inline {
+  margin-left: 0; }
 .ac-custom ul, .ac-custom ol {
   list-style: none;
   padding: 0; }
@@ -6062,9 +6068,10 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
   padding-bottom: 0;
   vertical-align: top;
   color: rgba(8, 19, 93, 0.5);
-  cursor: pointer;
   -webkit-transition: color 0.3s;
-  transition: color 0.3s; }
+  transition: color 0.3s;
+  cursor: pointer;
+  cursor: hand; }
 .ac-custom input[type="checkbox"], .ac-custom input[type="radio"] {
   width: 30px;
   height: 30px;

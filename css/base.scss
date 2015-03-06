@@ -532,9 +532,18 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
 }
 
 .ac-custom {
-  // padding: 0 3em;
-  // max-width: 900px;
-  // margin: 0 auto;
+
+
+  .filtro-texto {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+  }
+
+  .radio-inline + .radio-inline, .checkbox-inline + .checkbox-inline {
+    margin-left: 0;
+  }
+
   ul, ol {
     list-style: none;
     padding: 0;
@@ -557,9 +566,10 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
     // margin-top: -15px;
     vertical-align: top;
     color: rgba(8, 19, 93, 0.5);
-    cursor: pointer;
     -webkit-transition: color 0.3s;
     transition: color 0.3s;
+    cursor: pointer;
+    cursor: hand;
   }
   input {
     &[type="checkbox"], &[type="radio"] {

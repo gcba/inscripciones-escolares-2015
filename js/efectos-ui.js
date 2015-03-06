@@ -21,20 +21,6 @@ if( document.createElement('svg').getAttributeNS ) {
 
 	}
 
-	function controlCheckbox( el, type, svgDef ) {
-		var svg = createSVGEl( svgDef );
-		el.parentNode.appendChild( svg );
-
-		el.addEventListener( 'change', function() {
-			if( el.checked ) {
-				draw( el, type );
-			}
-			else {
-				reset( el );
-			}
-		} );
-	}
-
 	function controlRadiobox( el, type ) {
 		var svg = createSVGEl();
 		el.parentNode.appendChild( svg );
