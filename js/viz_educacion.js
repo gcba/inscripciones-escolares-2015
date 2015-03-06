@@ -24,7 +24,7 @@ $(".main").onepage_scroll({
 				break;
 			case "general":
 				$(".circulo").show();
-				$("form.filtro").show();
+				$(".filtro").show();
 				if (circuloMedio.attr("r") == circulo.radio) {
 					juntarCirculitos();
 				} else {
@@ -32,15 +32,15 @@ $(".main").onepage_scroll({
 				}
 				break;
 			case "niveles":
-				$("form.filtro").show();
+				$(".filtro").show();
 				$(".circulo").show();
 				$("g.labels").show();
 				separarCirculitos();
 				break;
 			case "comuna":
 				$("#mapaCABA").show();
-				$("form.filtro").show();
-				$("svg").show();
+				$(".filtro").show();
+				$("#viz-container").show();
 				$("#dropdown-nivel").show();
 				mostrarMapaComunas();
 				queue()
@@ -147,7 +147,7 @@ var explicativos = (function() {
 // Generar todos los circulitos en estado cero (sin mostrarlos)
 for (i = 0; i < grillaSvg.filasGeneral; i++) {
 	for (j = 0; j < grillaSvg.columnasGeneral; j++) {
-		var grupo = grilla.append("g").attr("class", "circulo");
+		var grupo = grilla.append("g").attr("class", "circulo animated fadeIn");
 		grupo.append("circle")
 			.attr("fill", colores.neutro)
 			.attr("r", circulo.radio)
@@ -182,8 +182,8 @@ var posyMedio = circulo.posy + (circulo.margin+circulo.radio) * (Math.floor(midd
 juntarCirculitos();
 showOneCirculito();
 
-var infoGroup = svgGeneral.append("g").attr("class", "info");
-var labelsGroup = svgGeneral.append("g").attr("class", "labels");
+var infoGroup = svgGeneral.append("g").attr("class", "info animated fadeInUp");
+var labelsGroup = svgGeneral.append("g").attr("class", "labels  animated fadeInDown");
 
 generarInfoText();
 
@@ -368,9 +368,9 @@ function juntarCirculitos() {
 	}).attr("y", function(d,i){
 		return circulo.posy + (circulo.margin+circulo.radio) * (Math.floor(i/grillaSvg.columnasGeneral)+1) - circulo.radio - (circulo.margin-circulo.radio)/2;
 	});
-	d3.selectAll("circle").transition().attr("cx", function(d,i){
+	d3.selectAll("circle").transition(500).ease("quad-in").attr("cx", function(d,i){
 		return circulo.posx + (circulo.margin+circulo.radio) * ((i % grillaSvg.columnasGeneral)+1);
-	}).attr("cy", function(d,i){
+	}).transition(500).ease("quad-out").attr("cy", function(d,i){
 		return circulo.posy + (circulo.margin+circulo.radio) * (Math.floor(i/grillaSvg.columnasGeneral)+1);
 	});
 	d3.selectAll("circle").attr("class", currentSeccion + " " + "general").attr("nivel", "general");
@@ -428,7 +428,7 @@ function separarCirculitos() {
 		currentIndex;
 
 	//TODO: Arreglar el tema del reseteo de las variables para el cy
-	d3.selectAll("circle").transition().attr("cx", function(d,i){
+	d3.selectAll("circle").transition(1000).delay(function(d, i) { return i * .5;}).ease("quad").attr("cx", function(d,i){
 		return calcularNuevaPosicion("x", i);
 	}).attr("cy", function(d,i){
 		previousCirculos = 0;
@@ -497,7 +497,7 @@ function resetCambioSeccion() {
 
 	switch(currentSeccion) {
 		case "landing":
-			$("form.filtro").hide();
+			$(".filtro").hide();
 			break;
 		case "niveles":
 			resetCirculoMedio();
@@ -508,7 +508,7 @@ function resetCambioSeccion() {
 			break;
 		case "mapa":
 			$("#viz-container").hide();
-			$("form.filtro").hide();
+			$(".filtro").hide();
 			break;
 	}
 
@@ -683,7 +683,7 @@ function generarInfoTextNiveles(filtro) {
 									.text(lineaText)
 									.attr("x", posInfoX)
 									.attr("y", tspanY)
-									.attr("class", currentSeccion + " " + nivelesKeys[i] + " general")
+									.attr("class", currentSeccion + " " + nivelesKeys[i] + " general animated fadeIn")
 									.attr("nivel", nivelesKeys[i]);
 					if (j == lineas.length-1) {
 						tspan.append("tspan")

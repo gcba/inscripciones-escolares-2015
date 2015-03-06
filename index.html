@@ -56,14 +56,6 @@
     </div>
   </header>
 
-  <!-- Dropdown para ver comunas por nivel -->
-  <div id="dropdown-nivel">
-    <select>
-      <option value="nivel0" selected="selected">Inicial</option>
-      <option value="nivel1">Primario</option>
-      <option value="nivel2">Secundario</option>
-    </select>
-  </div>
 
 
 	<!-- Visualización -->
@@ -72,25 +64,40 @@
 
 
 
-      <h1>Inscripci&oacute;n Escolar 2015</h1>
-      <h2>Nuevos alumnos del sistema educativo de gestión estatal de la Ciudad.</h2>
+      <h1 class="animated fadeInUp">Inscripci&oacute;n Escolar 2015</h1>
+      <h2 class="animated fadeIn">Nuevos alumnos del sistema educativo de gestión estatal de la Ciudad.</h2>
 
 
 
 
 
-      <!-- Filtro por Género o Procedencia -->
-      <form class="form-inline filtro">
-      <div class="form-group">
-        <label class="radio-inline">Filtrar alumnos por: </label>
-        <label class="radio-inline">
-          <input id="radio-genero" name="filtro" value="genero" type="radio">G&eacute;nero
-        </label>
-        <label class="radio-inline">
-          <input id="radio-procedencia" name="filtro" value="procedencia" type="radio">Procedencia
-        </label>
+
+      <div class="controles filtro animated fadeIn">
+        <!-- Filtro por Género o Procedencia -->
+        <div class="form-inline">
+          <div class="form-group">
+            <label class="radio-inline">Filtrar alumnos por: </label>
+            <label class="radio-inline">
+              <input id="radio-genero" name="filtro" value="genero" type="radio">G&eacute;nero
+            </label>
+            <label class="radio-inline">
+              <input id="radio-procedencia" name="filtro" value="procedencia" type="radio">Procedencia
+            </label>
+            <div id="dropdown-nivel" class="animated fadeIn">
+              <label class="radio-inline">Filtrar por nivel: </label>
+              <select>
+                <option value="nivel0" selected="selected">Inicial</option>
+                <option value="nivel1">Primario</option>
+                <option value="nivel2">Secundario</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dropdown para ver comunas por nivel -->
+
+
       </div>
-      </form>
 
       <svg id="viz" width="90%" height="90%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 960 520"></svg>
 
@@ -101,16 +108,17 @@
   	<div class="main">
 	  	<!-- Secciones -->
 	  	<section id="landing" class="active">
-
-
         <a href="#" class="arrow next-section"><span class="glyphicon glyphicon-chevron-down"></span></a>
-
 	  	</section>
 	  	<section id="general">
           <a href="#" class="arrow next-section"><span class="glyphicon glyphicon-chevron-down"></span></a>
 	  	</section>
-	  	<section id="niveles"></section>
-	  	<section id="comuna"></section>
+	  	<section id="niveles">
+            <a href="#" class="arrow next-section"><span class="glyphicon glyphicon-chevron-down"></span></a>
+      </section>
+	  	<section id="comuna">
+            <a href="#" class="arrow next-section"><span class="glyphicon glyphicon-chevron-down"></span></a>
+      </section>
 	  	<section id="mapa">
 	  			<div id="volverDelMapa">
 	  				<a href="#" class="prev-section"><button class="btn btn-default"><span class="glyphicon glyphicon-menu-up"></span> VOLVER</button></a>

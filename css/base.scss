@@ -1,6 +1,7 @@
 @import "../public/components/bourbon/app/assets/stylesheets/_bourbon.scss";
 @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins";
 @import "mixins/breakpoint.scss";
+@import "animate.min.css";
 
 @include font-face('Gotham', 'fonts/gotham');
 @import url('http://fonts.googleapis.com/css?family=Lato:300,400,700');
@@ -64,6 +65,12 @@ body {
     }
     @include breakpoint(lg) {
       border-bottom: 15px solid #30013F;
+    }
+    @media (max-height:700px) {
+      border-bottom: 15px solid red;
+    }
+    @media (max-height:815px) {
+        border-bottom: 15px solid yellow;
     }
 }
 html,
@@ -136,9 +143,18 @@ h1 {
 
   font-size: 4.5rem;
 
-    @include breakpoint(xs) {
-      font-size: 3.5rem;
-    }
+  @include breakpoint(xs) {
+    font-size: 3.5rem;
+  }
+
+  @media (max-height:700px) {
+    margin-top: -50px;
+  }
+
+  @media (max-height:815px) {
+      margin-top: -100px;
+  }
+
 }
 
 h2 {
@@ -170,6 +186,16 @@ text.provincia { fill: #F2803A; }
   position: fixed;
   z-index: 700;
 
+  @media (max-height:700px) {
+      top: 15%;
+      height: 85%;
+  }
+
+  @media (max-height:815px) {
+      top: 20%;
+      height: 80%;
+  }
+
    svg#viz {
     // visibility: hidden;
     width: 90%;
@@ -189,10 +215,25 @@ text.provincia { fill: #F2803A; }
     position: relative;
     margin: 0 auto;
     text-align: center;
-    width: 100%;
+    width: auto;
     margin-top: 50px;
     display: none;
     z-index: 701;
+
+
+
+    @media (max-height:700px) {
+        margin-top: 20px;
+    }
+
+
+
+    #dropdown-nivel {
+      display: none;
+      display: inline-block;
+      z-index: 800;
+    }
+
   }
 
 
@@ -203,13 +244,6 @@ text.provincia { fill: #F2803A; }
 
 }
 
-#dropdown-nivel {
-  display: none;
-  position: relative;
-  top: 0;
-  left: 0;
-  z-index: 800;
-}
 
 
 section {
