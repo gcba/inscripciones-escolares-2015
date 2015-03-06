@@ -5753,16 +5753,16 @@ text.general {
   fill: #666666; }
 
 text.femenino {
-  fill: #BA1135; }
+  fill: #47E4C2; }
 
 text.masculino {
-  fill: #05a381; }
+  fill: #522CA6; }
 
 text.caba {
-  fill: #FFD300; }
+  fill: #2C3C63; }
 
 text.provincia {
-  fill: #F2803A; }
+  fill: #FA5037; }
 
 #viz-container {
   top: 10%;
@@ -6061,7 +6061,7 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
   padding-left: 35px;
   padding-bottom: 0;
   vertical-align: top;
-  color: rgba(8, 19, 93, 0.2);
+  color: rgba(8, 19, 93, 0.5);
   cursor: pointer;
   -webkit-transition: color 0.3s;
   transition: color 0.3s; }
@@ -6089,7 +6089,7 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
   z-index: 100; }
 .ac-custom label::before {
   content: '';
-  border: 2px solid rgba(8, 19, 93, 0.2);
+  border: 2px solid rgba(8, 19, 93, 0.5);
   opacity: 0.8;
   filter: alpha(opacity=80);
   -webkit-transition: opacity 0.3s;
@@ -6100,10 +6100,10 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
 
 .ac-custom {
   z-index: 800; }
-  .ac-custom input[type="checkbox"]:checked + label, .ac-custom input[type="radio"]:checked + label {
+  .ac-custom input[type="radio"]:checked + label {
     color: #08135D; }
-  .ac-custom input[type="checkbox"]:checked + label::before, .ac-custom input[type="radio"]:checked + label::before {
-    opacity: 0.8; }
+  .ac-custom input[type="radio"]:checked + label::before {
+    border: 2px solid #08135d; }
   .ac-custom svg {
     position: absolute;
     width: 25px;

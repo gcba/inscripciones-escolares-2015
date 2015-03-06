@@ -174,10 +174,10 @@ h2 {
 
 
 text.general { fill: #666666;}
-text.femenino { fill: #BA1135; }
-text.masculino { fill: #05a381; }
-text.caba { fill: #FFD300; }
-text.provincia { fill: #F2803A; }
+text.femenino { fill: #47E4C2; }
+text.masculino { fill: #522CA6; }
+text.caba { fill: #2C3C63; }
+text.provincia { fill: #FA5037; }
 
 #viz-container {
   top: 10%;
@@ -556,7 +556,7 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
     padding-bottom: 0;
     // margin-top: -15px;
     vertical-align: top;
-    color: rgba(8, 19, 93, 0.2);
+    color: rgba(8, 19, 93, 0.5);
     cursor: pointer;
     -webkit-transition: color 0.3s;
     transition: color 0.3s;
@@ -592,7 +592,7 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
   }
   label::before {
     content: '';
-    border: 2px solid rgba(8, 19, 93, 0.2);
+    border: 2px solid rgba(8, 19, 93, 0.5);
     @include opacity(0.8);
     -webkit-transition: opacity 0.3s;
     transition: opacity 0.3s;
@@ -606,11 +606,12 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
 .ac-custom {
   z-index: 800;
   input {
-    &[type="checkbox"]:checked + label, &[type="radio"]:checked + label {
+    &[type="radio"]:checked + label {
       color: #08135D;
     }
-    &[type="checkbox"]:checked + label::before, &[type="radio"]:checked + label::before {
-      opacity: 0.8;
+    &[type="radio"]:checked + label::before {
+      // opacity: 0.8;
+      border: 2px solid rgba(8, 19, 93, 1);
     }
   }
   svg {
