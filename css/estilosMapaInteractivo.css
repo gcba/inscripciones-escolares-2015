@@ -26,6 +26,9 @@ body {
 
 .cartodb-popup{
     width: 450px !important;
+    font-family: "Gotham",Helvetica,Arial;
+    font-size: 10px;
+
 }
 
 .cartodb-popup,
@@ -37,6 +40,8 @@ body {
 .cartodb-popup-content{
     max-width: 100% !important;
     width: 100% !important;
+    height: 2880px !important;
+    max-height: 550px !important;
 }
 
 .cartodb-popup-content p {
@@ -53,7 +58,7 @@ body {
 
 .cartodb-popup-cont{
     width: 450px !important;;
-    height: 250px !important;;
+    height: 300px !important;;
 }
 .cartodb-infowindow {
     position: fixed !important;
@@ -61,10 +66,12 @@ body {
 .cartodb-popup-content-wrapper {
     background: rgba(255, 255, 255, 1) !important;
     width: 450px !important;
+    height: 300px !important;
     max-width: 450px !important;
     -webkit-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.25);
     -moz-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.25);
-    box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.25)
+    box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.25);
+    overflow: hidden;
 }
 .cartodb-popup-cont .close {
     color: #000000;
@@ -103,6 +110,58 @@ body {
     text-transform: capitalize;
 }
 
-.nombreEscuela{
-    text-transform: capitalize !important;
+#nombreEscuela{
+    font-size: 12px;
+    text-transform: uppercase !important;
+    font-weight: bold;
 }
+#direccion{}
+#nivel{}
+#modalidad{}
+
+
+.cartodb-popup div .etiqueta{
+    font-size: 11px;
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+    color: #cccccc;    
+}
+
+.cartodb-popup hr{
+    margin: 5px; 
+}
+
+#graficosInfowindow{
+    word-wrap: break-word;    
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+    word-wrap: break-word;        
+}
+
+#graficosInfowindow span{
+    padding-left: 10px;
+    padding-right: 10px;    
+}
+
+#graficoDistancia{
+    height: 100px;
+    width: 100px;
+    background-image: url("img/walking.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: auto auto 4px;
+}
+
+#distancia{
+    width: 49%;
+    float: left;
+}
+
+#migracionComunas{
+    float: left;
+    width: 49%;
+}
+
+
