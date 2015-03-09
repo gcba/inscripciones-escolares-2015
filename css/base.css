@@ -5753,16 +5753,16 @@ text.general, text.descripcion {
   fill: #666666; }
 
 text.femenino {
-  fill: #BA1135; }
+  fill: #47E4C2; }
 
 text.masculino {
-  fill: #05a381; }
+  fill: #522CA6; }
 
 text.caba {
-  fill: #FFD300; }
+  fill: #2C3C63; }
 
 text.provincia {
-  fill: #F2803A; }
+  fill: #FA5037; }
 
 #viz-container {
   top: 10%;
