@@ -59,7 +59,8 @@
             </div>
             <div class="col-md-4">
                 <div id="listado">
-                    <ul class="nav nav-pills nav-stacked" id="resultados"></ul>
+                    
+                    <ul class="nav nav-pills nav-stacked" id="resultados"><div id="loading"></div></ul>
                 </div>
 
                 <div class="form-group">
@@ -91,23 +92,20 @@
                     <div id="graficosInfowindow">
                         <div id="migracionComunas">
                             <div id="graficoMigracion"></div>
-                            <span>Alumnos que viven en la misma comuna que el establecimiento</span>
+                            <span>El <strong>{{misma_comuna}}</strong> de los alumnos viven en la misma comuna donde se encuentra el establecimiento</span>
                         </div> 
                         <div id="distancia">
                             <div id="graficoDistancia"></div>
-                            <span><strong>{{distancia_mts}}</strong> metros es la distancia promedio recorrida para llegar al establecimiento</span>
+                            <span>Los nuevos alumnos recorren en promedio <strong>{{distancia_mts}}</strong> metros para llegar al establecimiento</span>
                         </div>
                     </div>
-
-
-
-                    <script>
-                        dibujaGraficoInfowindow($("#mismacomuna").text());
-                    </script>
                 </div>
             </div>
             <div class="cartodb-popup-tip-container"></div>
         </div>
+        <script>
+            dibujaGraficoInfowindow($("#mismacomuna").text());
+        </script>
     </script>
     <script type="text/javascript" src="js/mapaInteractivo.js"></script>
 </body>
