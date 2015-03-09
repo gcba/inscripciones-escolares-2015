@@ -14,9 +14,25 @@ $("input[name=filtro]").click(function(){
     $(this).removeAttr('checked');
     $(this).attr('previousValue', false);
     reset(this);
-    d3.selectAll("circle").attr("fill", colores.neutro);
+    
+    // Reset color de los circulos, clases, y esconder explicativos
+    d3.selectAll("circle")
+    	.attr("fill", colores.neutro)
+    	.attr("class", function(d) {
+    		var nuevaClase = currentSeccion + " general";
+    		if (currentSeccion != "general") {
+    			var nivel = d3.select(this).attr("nivel");
+    			nuevaClase += " nivel" + nivel;
+    			if (currentSeccion == "comuna") {
+    				var esNivelActivo = this.classList.contains("nivel_activo");
+	    			if (esNivelActivo) {
+	    				nuevaClase += " nivel_activo";
+	    			}	
+    			}
+    		}
+			return nuevaClase;
+    	});
     $("g.info").hide();
-
   }
   else
   {
