@@ -5862,7 +5862,7 @@ iframe {
   border: 0; }
 
 #volverDelMapa {
-  margin: 21px 45% auto;  
+  margin: 21px 45% auto;
   height: 50px;
   position: inherit;
   right: 0;
@@ -5874,10 +5874,7 @@ iframe {
   height: 40px;
   border-radius: 50%;
   border: 1px solid white;
-  box-shadow: 0 0 3px gray;
-}
-
-
+  box-shadow: 0 0 3px gray; }
 
 body, html {
   margin: 0;
