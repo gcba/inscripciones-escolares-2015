@@ -118,12 +118,16 @@ for (var i = 0; i < cantidadNiveles; i++) {
 		cantidadCABA = Math.round(nivelActual.procedencia.caba*cantidadTotal/100),
 		cantidadProvincia = Math.round(nivelActual.procedencia.provincia*cantidadTotal/100);
 
-	var newNivel = { x0: coordenadasNiveles[i],
-					 total: cantidadTotal,
-					 femenino: cantidadFemenino,
-					 masculino: cantidadMasculino,
-					 caba: cantidadCABA,
-					 provincia: cantidadProvincia };
+	var newNivel = {x0: coordenadasNiveles[i],
+					total: cantidadTotal,
+					genero: {
+					 	femenino: cantidadFemenino,
+					 	masculino: cantidadMasculino },
+					procedencia: {
+					 	caba: cantidadCABA,
+					 	provincia: cantidadProvincia}
+					};
+					 
 
 	niveles.push(newNivel);
 }
@@ -190,194 +194,6 @@ var infoGroup = svgGeneral.append("g").attr("class", "info animated fadeInUp"),
 	descripcionesGroup = svgGeneral.append("g").attr("class", "descripciones animated fadeInDown");
 
 generarInfoText();
-
-/***********************************************/
-
-/*
- * Filtros!
- */
-
-// Filtrar por genero
-d3.select("#radio-genero")
-	.on("click", function(){
-		filtrarPorGenero();
-		generarInfoText("genero");
-		$(this).blur();
-	});
-
-// Filtrar por procedencia
-d3.select("#radio-procedencia")
-	.on("click", function() {
-		filtrarPorProcedencia();
-		generarInfoText("procedencia")
-		$(this).blur();
-	});
-
-function filtrarPorGenero() {
-	switch (currentSeccion) {
-		case "general":
-			filtrarGeneral();
-			break;
-		case "niveles":
-			filtrarNiveles();
-			break;
-		case "comuna":
-			filtrarComuna();
-		default:
-			break;
-	}
-
-	function filtrarGeneral(){
-		d3.selectAll("circle").attr("class", function(d,i){
-			if (i < generalFemenino) { return currentSeccion + " femenino"; } else { return currentSeccion + " masculino"; }
-		});
-		d3.selectAll("circle").transition().attr("fill", function(d,i){
-			if (i < generalFemenino) { return colores.femenino; } else { return colores.masculino; }
-		});
-	}
-
-	function filtrarNiveles() {
-		var currentNivel = 0;
-		var currentCirculos = niveles[currentNivel].total;
-		var previousCirculos = 0;
-		var currentIndex;
-
-		d3.selectAll("circle").attr("class", function(d,i){
-			//TODO: utilizar RegEx para buscar la clase de nivel
-			var nivel = d3.select(this).attr("class").split(" ")[1];
-			return currentSeccion + " " + nivel + " " + calcularSexo(i);
-		});
-
-		currentNivel = 0;
-		currentCirculos = niveles[currentNivel].total;
-		previousCirculos = 0;
-
-		d3.selectAll("circle").transition().attr("fill", function(d,i) {
-			if (calcularSexo(i) == "femenino") { return colores.femenino; } else { return colores.masculino; }
-		});
-
-		function calcularSexo(index){
-			if (index >= currentCirculos) {
-				currentNivel++;
-				currentCirculos += niveles[currentNivel].total;
-			}
-			if (currentNivel > 0) {
-				var count = currentNivel;
-				previousCirculos = 0;
-				while (count > 0) {
-					previousCirculos += niveles[count-1].total;
-					count--;
-				}
-			}
-			currentIndex = index - previousCirculos;
-			var femCurrentNivel = niveles[currentNivel].femenino;
-			if (currentIndex < femCurrentNivel) { return "femenino"; } else { return "masculino"; }
-		}
-	}
-
-	function filtrarComuna() {
-		var currentNivel = $("circle.nivel_activo").attr("nivel");		
-
-		d3.selectAll("circle.nivel_activo").attr("class", function(d,i){
-			return currentSeccion + " nivel" + currentNivel + " " + calcularSexo(i) + " nivel_activo";
-		});
-
-		d3.selectAll("circle.nivel_activo").transition().attr("fill", function(d,i) {
-			if (calcularSexo(i) == "femenino") { return colores.femenino; } else { return colores.masculino; }
-		});
-
-		d3.selectAll("g.info text[nivel='"+currentNivel+"']").attr("class", function(){ return d3.select(this).attr("class") + " nivel_activo animated fadeInUp"});
-
-		function calcularSexo(index){
-			var femCurrentNivel = niveles[currentNivel].femenino;
-			if (index < femCurrentNivel) { return "femenino"; } else { return "masculino"; }
-		}
-	}
-}
-
-function filtrarPorProcedencia() {
-	switch (currentSeccion) {
-		case "general":
-			filtrarGeneral();
-	 		break;
-	 	case "niveles":
-	 		filtrarNiveles();
-	 		break;
-	 	case "comuna":
-	 		filtrarComuna();	 		
-	 	default:
-	 		break;
-	}
-
-	function filtrarGeneral() {
-		d3.selectAll("circle").attr("class", function(d,i){
- 			if (i < generalCABA) { return currentSeccion + " caba"; } else { return currentSeccion + " provincia"; }
- 		});
-		d3.selectAll("circle").transition().attr("fill", function(d,i){
-			if (i < generalCABA) { return colores.caba; } else { return colores.provincia; }
- 		});
-	}
-
-	function filtrarNiveles() {
-		var currentNivel = 0;
-		var currentCirculos = niveles[currentNivel].total;
-		var previousCirculos = 0;
-		var currentIndex;
-
-		d3.selectAll("circle").attr("class", function(d,i){
-			//TODO: utilizar RegEx para buscar la clase de nivel
-			var nivel = d3.select(this).attr("class").split(" ")[1];
-			return currentSeccion + " " + nivel + " " + calcularProcedencia(i);
-		});
-
-		currentNivel = 0;
-		currentCirculos = niveles[currentNivel].total;
-		previousCirculos = 0;
-
-		d3.selectAll("circle").transition().attr("fill", function(d,i){
-			if (calcularProcedencia(i) == "caba") { return colores.caba; } else { return colores.provincia; }
-		})
-
-		function calcularProcedencia(index) {
-			if (index >= currentCirculos) {
-				currentNivel++;
-				currentCirculos += niveles[currentNivel].total;
-			}
-			if (currentNivel > 0) {
-				var count = currentNivel;
-				previousCirculos = 0;
-				while (count > 0) {
-					previousCirculos += niveles[count-1].total;
-					count--;
-				}
-			}
-			currentIndex = index - previousCirculos;
-			var cabaCurrentNivel = niveles[currentNivel].caba;
-			if (currentIndex < cabaCurrentNivel) { return "caba"; } else { return "provincia"; }
-		}
-	}
-
-	function filtrarComuna() {
-		var currentNivel = $("circle.nivel_activo").attr("nivel");		
-
-		d3.selectAll("circle.nivel_activo").attr("class", function(d,i){
-			return currentSeccion + " nivel" + currentNivel + " " + calcularProcedencia(i) + " nivel_activo";
-		});
-
-		d3.selectAll("circle.nivel_activo").transition().attr("fill", function(d,i) {
-			if (calcularProcedencia(i) == "caba") { return colores.caba; } else { return colores.provincia; }
-		});
-
-		function calcularProcedencia(index){
-			var cabaCurrentNivel = niveles[currentNivel].caba;
-			if (index < cabaCurrentNivel) { return "caba"; } else { return "provincia"; }
-		}
-	}
-}
-
-/*
- * End Filtros!
- */
 
 /***********************************/
 
