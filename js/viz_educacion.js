@@ -392,8 +392,28 @@ function mostrarMapaComunas() {
 function resetCambioSeccion() {
 	currentSeccion = $("section.active").attr("id");
 
+	/*
+	if($("input:radio[name='filtro']").is(":checked")) {
+	  $("input[name='filtro']:checked").function() {
+	  	resetRadio(this);
+	  };
+	}
+	*/
+
+
 	d3.selectAll("input[type=radio]").property("checked", false);
-	d3.selectAll("circle").attr("fill", colores.neutro);
+	d3.selectAll("input[type=radio]").property("previousValue", false);
+	d3.selectAll("circle").transition().duration(500).attr("fill", colores.neutro);
+
+	// d3.selectAll("input[type=radio]")
+	// $("input[name=filtro]").reset(this);
+// ($("input[name=filtro]").reset(this);
+// 		console.log('Bla');
+// 	} else {
+// 		console.log('No bla');
+// 	}
+
+	//
 
 	if (currentSeccion != "comuna") {
 		resetMapaCaba();
@@ -799,7 +819,7 @@ function generarInfoText(filtro) {
 $("#dropdown-nivel select").change(function(){
 	// Reset filtros
 	d3.selectAll("input[type=radio]").property("checked", false);
-	d3.selectAll("circle").attr("fill", colores.neutro).attr("class", function(){
+	d3.selectAll("circle").transition().duration(500).attr("fill", colores.neutro).attr("class", function(){
 		return currentSeccion + " nivel" + d3.select(this).attr("nivel") + " general";
 	});
 	$("g.info").hide();

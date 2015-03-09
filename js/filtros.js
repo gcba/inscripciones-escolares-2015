@@ -13,8 +13,8 @@ $("input[name=filtro]").click(function(){
   {
     $(this).removeAttr('checked');
     $(this).attr('previousValue', false);
-    reset(this);
-    
+    resetRadio(this);
+
     // Reset color de los circulos, clases, y esconder explicativos
     d3.selectAll("circle")
     	.attr("fill", colores.neutro)
@@ -27,7 +27,7 @@ $("input[name=filtro]").click(function(){
     				var esNivelActivo = this.classList.contains("nivel_activo");
 	    			if (esNivelActivo) {
 	    				nuevaClase += " nivel_activo";
-	    			}	
+	    			}
     			}
     		}
 			return nuevaClase;
