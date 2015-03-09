@@ -1,7 +1,6 @@
 @import "../public/components/bourbon/app/assets/stylesheets/_bourbon.scss";
 @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins";
 @import "mixins/breakpoint.scss";
-@import "mixins/opacity.scss";
 @import "animate.min.css";
 
 @include font-face('Gotham', 'fonts/gotham');
@@ -172,12 +171,11 @@ h2 {
 }
 
 
-
-text.general { fill: #666666;}
-text.femenino { fill: #47E4C2; }
-text.masculino { fill: #522CA6; }
-text.caba { fill: #2C3C63; }
-text.provincia { fill: #FA5037; }
+text.general, text.descripcion { fill: #666666;}
+text.femenino { fill: #BA1135; }
+text.masculino { fill: #05a381; }
+text.caba { fill: #FFD300; }
+text.provincia { fill: #F2803A; }
 
 #viz-container {
   top: 10%;
@@ -231,6 +229,7 @@ text.provincia { fill: #FA5037; }
 
     #dropdown-nivel {
       display: none;
+      display: inline-block;
       z-index: 800;
     }
 
@@ -269,15 +268,11 @@ a.arrow {
   bottom: 150px;
 }
 
-
-
-.comuna {
-  fill: #c0c0c0;
-  stroke: #fafafa;
-  stroke-width: 1px;
+#mapaCABA {
+  display: none;
 }
 
-#mapaCABA {
+g.descripciones {
   display: none;
 }
 
@@ -516,209 +511,4 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
 
 .nombreEscuela{
     text-transform: capitalize !important;
-}
-
-// Input
-
-* {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  &:after, &::before {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
-}
-
-.ac-custom {
-  // padding: 0 3em;
-  // max-width: 900px;
-  // margin: 0 auto;
-  ul, ol {
-    list-style: none;
-    padding: 0;
-    // margin: 0 auto;
-    // max-width: 800px;
-  }
-  li {
-    margin: 0 auto;
-    padding: 2em 1em;
-    position: relative;
-    display: inline-block;
-  }
-  label {
-    display: inline-block;
-    position: relative;
-    padding-top: 0px;
-    padding-right: 0;
-    padding-left: 35px;
-    padding-bottom: 0;
-    // margin-top: -15px;
-    vertical-align: top;
-    color: rgba(8, 19, 93, 0.5);
-    cursor: pointer;
-    -webkit-transition: color 0.3s;
-    transition: color 0.3s;
-  }
-  input {
-    &[type="checkbox"], &[type="radio"] {
-      width: 30px;
-      height: 30px;
-      top: 50%;
-      left: 0;
-      margin-top: -25px;
-      position: absolute;
-      cursor: pointer;
-    }
-  }
-  label::before {
-    width: 30px;
-    height: 30px;
-    top: 50%;
-    left: 0;
-    margin-top: -17px;
-    position: absolute;
-    cursor: pointer;
-  }
-  input {
-    &[type="checkbox"], &[type="radio"] {
-      opacity: 0;
-      -webkit-appearance: none;
-      display: inline-block;
-      vertical-align: middle;
-      z-index: 100;
-    }
-  }
-  label::before {
-    content: '';
-    border: 2px solid rgba(8, 19, 93, 0.5);
-    @include opacity(0.8);
-    -webkit-transition: opacity 0.3s;
-    transition: opacity 0.3s;
-  }
-}
-
-.ac-radio label::before {
-  border-radius: 50%;
-}
-
-.ac-custom {
-  z-index: 800;
-  input {
-    &[type="radio"]:checked + label {
-      color: #08135D;
-    }
-    &[type="radio"]:checked + label::before {
-      // opacity: 0.8;
-      border: 2px solid rgba(8, 19, 93, 1);
-    }
-  }
-  svg {
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    top: 50%;
-    margin-top: -16px;
-    left: 17px;
-    pointer-events: none;
-    path {
-      stroke: #08135D;
-      stroke-width: 12px;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      fill: none;
-    }
-  }
-}
-
-/* General SVG and path styles */
-
-/* Specific input, SVG and path styles */
-
-/* Circle */
-
-.ac-circle {
-  input {
-    &[type="checkbox"], &[type="radio"] {
-      width: 30px;
-      height: 30px;
-      margin-top: -15px;
-      left: 10px;
-      position: absolute;
-    }
-  }
-  label::before {
-    width: 30px;
-    height: 30px;
-    margin-top: -15px;
-    left: 10px;
-    position: absolute;
-    background-color: #fff;
-    border: none;
-  }
-  svg {
-    width: 70px;
-    height: 70px;
-    margin-top: -35px;
-    left: -10px;
-    path {
-      stroke-width: 5px;
-    }
-  }
-}
-
-// Dropdown!
-
-#select-dropdown {
-  display: inline-block;
-  color: rgba(50, 50, 50, 1);
-  width: 250px;
-  margin: auto;
-  margin-top: 0px;
-  margin-left: 0px;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  cursor: pointer;
-  z-index: 800;
-}
-
-.select {
-  background-color: #fff;
-  text-align: center;
-  line-height: 40px;
-  height: 40px;
-  border-bottom: 1px solid rgba(230, 230, 230, 1);
-  -webkit-transition: top 0.2s, -webkit-transform 0.2s, color 0.2s, background-color 0.2s;
-  width: 230px;
-  margin: auto;
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
-  position: absolute;
-  left: 50%;
-  margin-left: -115px;
-  &:last-child {
-    border-bottom: none;
-  }
-}
-
-.open .option:hover {
-  background-color: #DE264C;
-  color: #fff;
-}
-
-.default {
-  -webkit-transform-style: preserve-3d;
-  -webkit-backface-visibility: hidden;
-  -webkit-transform-origin: 50% 0%;
-  -webkit-transition: transform 0.3s;
-  -webkit-transform: perspective(600px) rotateX(0deg);
-  z-index: 1000;
-  &:active {
-    -webkit-transform: perspective(600px) rotateX(45deg);
-    -webkit-perspective: 600px;
-  }
 }

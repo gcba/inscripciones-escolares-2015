@@ -5749,20 +5749,20 @@ h2 {
     h2 {
       font-size: 1.21rem; } }
 
-text.general {
+text.general, text.descripcion {
   fill: #666666; }
 
 text.femenino {
-  fill: #47E4C2; }
+  fill: #BA1135; }
 
 text.masculino {
-  fill: #522CA6; }
+  fill: #05a381; }
 
 text.caba {
-  fill: #2C3C63; }
+  fill: #FFD300; }
 
 text.provincia {
-  fill: #FA5037; }
+  fill: #F2803A; }
 
 #viz-container {
   top: 10%;
@@ -5802,6 +5802,7 @@ text.provincia {
         margin-top: 20px; } }
     #viz-container .filtro #dropdown-nivel {
       display: none;
+      display: inline-block;
       z-index: 800; }
 
 section {
@@ -5824,12 +5825,10 @@ a.arrow {
 .prev-section {
   bottom: 150px; }
 
-.comuna {
-  fill: #c0c0c0;
-  stroke: #fafafa;
-  stroke-width: 1px; }
-
 #mapaCABA {
+  display: none; }
+
+g.descripciones {
   display: none; }
 
 g.labels {
@@ -6035,158 +6034,3 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
 
 .nombreEscuela {
   text-transform: capitalize !important; }
-
-* {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box; }
-  *:after, *::before {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box; }
-
-.ac-custom ul, .ac-custom ol {
-  list-style: none;
-  padding: 0; }
-.ac-custom li {
-  margin: 0 auto;
-  padding: 2em 1em;
-  position: relative;
-  display: inline-block; }
-.ac-custom label {
-  display: inline-block;
-  position: relative;
-  padding-top: 0px;
-  padding-right: 0;
-  padding-left: 35px;
-  padding-bottom: 0;
-  vertical-align: top;
-  color: rgba(8, 19, 93, 0.5);
-  cursor: pointer;
-  -webkit-transition: color 0.3s;
-  transition: color 0.3s; }
-.ac-custom input[type="checkbox"], .ac-custom input[type="radio"] {
-  width: 30px;
-  height: 30px;
-  top: 50%;
-  left: 0;
-  margin-top: -25px;
-  position: absolute;
-  cursor: pointer; }
-.ac-custom label::before {
-  width: 30px;
-  height: 30px;
-  top: 50%;
-  left: 0;
-  margin-top: -17px;
-  position: absolute;
-  cursor: pointer; }
-.ac-custom input[type="checkbox"], .ac-custom input[type="radio"] {
-  opacity: 0;
-  -webkit-appearance: none;
-  display: inline-block;
-  vertical-align: middle;
-  z-index: 100; }
-.ac-custom label::before {
-  content: '';
-  border: 2px solid rgba(8, 19, 93, 0.5);
-  opacity: 0.8;
-  filter: alpha(opacity=80);
-  -webkit-transition: opacity 0.3s;
-  transition: opacity 0.3s; }
-
-.ac-radio label::before {
-  border-radius: 50%; }
-
-.ac-custom {
-  z-index: 800; }
-  .ac-custom input[type="radio"]:checked + label {
-    color: #08135D; }
-  .ac-custom input[type="radio"]:checked + label::before {
-    border: 2px solid #08135d; }
-  .ac-custom svg {
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    top: 50%;
-    margin-top: -16px;
-    left: 17px;
-    pointer-events: none; }
-    .ac-custom svg path {
-      stroke: #08135D;
-      stroke-width: 12px;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      fill: none; }
-
-/* General SVG and path styles */
-/* Specific input, SVG and path styles */
-/* Circle */
-.ac-circle input[type="checkbox"], .ac-circle input[type="radio"] {
-  width: 30px;
-  height: 30px;
-  margin-top: -15px;
-  left: 10px;
-  position: absolute; }
-.ac-circle label::before {
-  width: 30px;
-  height: 30px;
-  margin-top: -15px;
-  left: 10px;
-  position: absolute;
-  background-color: #fff;
-  border: none; }
-.ac-circle svg {
-  width: 70px;
-  height: 70px;
-  margin-top: -35px;
-  left: -10px; }
-  .ac-circle svg path {
-    stroke-width: 5px; }
-
-#select-dropdown {
-  display: inline-block;
-  color: #323232;
-  width: 250px;
-  margin: auto;
-  margin-top: 0px;
-  margin-left: 0px;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  cursor: pointer;
-  z-index: 800; }
-
-.select {
-  background-color: #fff;
-  text-align: center;
-  line-height: 40px;
-  height: 40px;
-  border-bottom: 1px solid #e6e6e6;
-  -webkit-transition: top 0.2s, -webkit-transform 0.2s, color 0.2s, background-color 0.2s;
-  width: 230px;
-  margin: auto;
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
-  position: absolute;
-  left: 50%;
-  margin-left: -115px; }
-  .select:last-child {
-    border-bottom: none; }
-
-.open .option:hover {
-  background-color: #DE264C;
-  color: #fff; }
-
-.default {
-  -webkit-transform-style: preserve-3d;
-  -webkit-backface-visibility: hidden;
-  -webkit-transform-origin: 50% 0%;
-  -webkit-transition: transform 0.3s;
-  -webkit-transform: perspective(600px) rotateX(0deg);
-  z-index: 1000; }
-  .default:active {
-    -webkit-transform: perspective(600px) rotateX(45deg);
-    -webkit-perspective: 600px; }
