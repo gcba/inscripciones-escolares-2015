@@ -41,6 +41,10 @@ $("#filtro2 li a").click(function(){
   filtro ();
 });
 
+function toggleFiltros(){
+  
+};
+
 function filtro (){
   $('.close')[0].click()  
   var consulta = "SELECT * FROM escuelas_2015";
@@ -114,8 +118,6 @@ function busquedaKeyword(key) {
  */
 
 function verEscuela(escuela){
-  // no pasa nada en esta esquina
-  // aqui mandan las divinas
   $("#listado").css("display","none");
   $('#buscadorEscuelas').val("");
   verDetallesEscuela(escuela)
@@ -152,7 +154,6 @@ function verDetallesEscuela(idEscuela){
 
 function resetFiltros(){
   sublayers[0].set({sql: "SELECT * FROM escuelas_2015" });
-
   $("#filtro1 li a").parents('.btn-group').find('.dropdown-toggle').html('Ver todos <span class="caret"></span>');
   $("#filtro2 li a").parents('.btn-group').find('.dropdown-toggle').html('Ver todas <span class="caret"></span>');
 }
