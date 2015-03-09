@@ -6051,6 +6051,11 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
     -moz-box-sizing: border-box;
     box-sizing: border-box; }
 
+.radio-inline {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555; }
+
 .ac-custom .filtro-texto {
   margin-bottom: 5px;
   font-weight: bold;
