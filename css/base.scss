@@ -171,8 +171,7 @@ h2 {
 }
 
 
-
-text.general { fill: #666666;}
+text.general, text.descripcion { fill: #666666;}
 text.femenino { fill: #BA1135; }
 text.masculino { fill: #05a381; }
 text.caba { fill: #FFD300; }
@@ -270,6 +269,10 @@ a.arrow {
 }
 
 #mapaCABA {
+  display: none;
+}
+
+g.descripciones {
   display: none;
 }
 

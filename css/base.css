@@ -5749,7 +5749,7 @@ h2 {
     h2 {
       font-size: 1.21rem; } }
 
-text.general {
+text.general, text.descripcion {
   fill: #666666; }
 
 text.femenino {
@@ -5826,6 +5826,9 @@ a.arrow {
   bottom: 150px; }
 
 #mapaCABA {
+  display: none; }
+
+g.descripciones {
   display: none; }
 
 g.labels {
