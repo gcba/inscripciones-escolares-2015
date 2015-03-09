@@ -132,6 +132,18 @@ body {
     margin: 5px 0px; 
 }
 
+.cartodb-tiles-loader{
+    height: 200px;
+    width: 100%;
+}
+
+.loader{
+    margin: 100px auto !important;
+    height: 100px !important;
+    width: 100px !important;
+    box-shadow: 0 0 4px 1000px rgba(0, 0, 0, 0.2) !important;
+}
+
 #nombreEscuela{
     font-size: 14px;
     text-transform: uppercase !important;
