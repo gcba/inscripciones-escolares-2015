@@ -8,7 +8,7 @@ var grillaSvg = {
 	alto: 470,
 	labelSpace: 110,
 	filasGeneral: 9,
-	columnasGeneral: 15,
+	columnasGeneral: 14,
 	columnasPorNivel: 4
 }
 
@@ -20,7 +20,7 @@ var coordenadasNiveles = [80,380,680];
 var circulo = {
 	radio: 7,
 	radioGrande: 100,
-	posx: 270,
+	posx: 285,
 	posy: 50,
 	margin: 20
 }

@@ -1,7 +1,6 @@
 @import "../public/components/bourbon/app/assets/stylesheets/_bourbon.scss";
 @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins";
 @import "mixins/breakpoint.scss";
-@import "mixins/opacity.scss";
 @import "animate.min.css";
 
 @include font-face('Gotham', 'fonts/gotham');
@@ -172,13 +171,11 @@ h2 {
 }
 
 
-
-text.general { fill: #666666;}
+text.general, text.descripcion { fill: #1977DD;}
 text.femenino { fill: #47E4C2; }
 text.masculino { fill: #522CA6; }
 text.caba { fill: #2C3C63; }
 text.provincia { fill: #FA5037; }
-
 
 #viz-container {
   top: 10%;
@@ -199,7 +196,7 @@ text.provincia { fill: #FA5037; }
   }
 
 
-   svg#viz {
+  svg#viz {
     // visibility: hidden;
     width: 90%;
     height: 90%;
@@ -225,30 +222,27 @@ text.provincia { fill: #FA5037; }
     z-index: 701;
     @include transition(all 1.0s ease-in-out);
 
-
-
-
-
     @media (max-height:700px) {
-        margin-top: 20px;
+      margin-top: 20px;
     }
-
-
 
     #dropdown-nivel {
       display: none;
+      display: inline-block;
       z-index: 800;
     }
-
   }
-
-
 }
+
+
+
+
 
 
 .viewing-page-3 {
   .filtro {
     margin-top: 15px;
+  }
 }
 
 
@@ -277,6 +271,10 @@ a.arrow {
 }
 
 #mapaCABA {
+  display: none;
+}
+
+g.descripciones {
   display: none;
 }
 
@@ -530,6 +528,8 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
   }
 }
 
+
+
 .ac-custom {
 
 
@@ -640,12 +640,6 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
     }
   }
 }
-
-/* General SVG and path styles */
-
-/* Specific input, SVG and path styles */
-
-/* Circle */
 
 .ac-circle {
   input {

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-   	<meta charset="utf-8">
-		<title>Inscripción Escolar 2015</title>
+    <meta charset="utf-8">
+    <title>Inscripción Escolar 2015</title>
 
     <meta http-equiv="cleartype" content="on">
     <meta name="HandheldFriendly" content="True">
@@ -34,7 +34,7 @@
     <meta property="og:url" content="http://gcba.github.io/presupuesto-gcba/">
 
 
-  	<script type="text/javascript" src="js/global_settings.js"></script>
+    <script type="text/javascript" src="js/global_settings.js"></script>
     <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
 
     <script type="text/javascript" src="js/queue.v1.min.js"></script>
@@ -60,8 +60,8 @@
     </div>
   </header>
 
-	<!-- Visualización -->
-  	<div id="viz-container">
+  <!-- Visualización -->
+    <div id="viz-container">
 
 
 
@@ -80,8 +80,8 @@
             <div class="form-group">
               <span class="radio-inline filtro-texto">Filtrar alumnos por:</span>
               <ul class="radio-inline">
-                <li><input id="radio-genero" name="r1" value="genero" type="radio"><label for="radio-genero">Género</label></li>
-                <li><input id="radio-procedencia" name="r1" value="procedencia" type="radio"><label for="radio-procedencia">Procedencia</label></li>
+                <li><input id="radio-genero" name="filtro" value="genero" type="radio"><label for="radio-genero">Género</label></li>
+                <li><input id="radio-procedencia" name="filtro" value="procedencia" type="radio"><label for="radio-procedencia">Procedencia</label></li>
               </ul>
              </div>
           </div>
@@ -131,30 +131,31 @@
 
     </div>
 
-  	<div class="main">
-	  	<!-- Secciones -->
-	  	<section id="landing" class="active">
+    <div class="main">
+      <!-- Secciones -->
+      <section id="landing" class="active">
         <a href="#" class="arrow next-section"><span class="glyphicon glyphicon-chevron-down"></span></a>
-	  	</section>
-	  	<section id="general">
+      </section>
+      <section id="general">
           <a href="#" class="arrow next-section"><span class="glyphicon glyphicon-chevron-down"></span></a>
-	  	</section>
-	  	<section id="niveles">
+      </section>
+      <section id="niveles">
             <a href="#" class="arrow next-section"><span class="glyphicon glyphicon-chevron-down"></span></a>
       </section>
-	  	<section id="comuna">
+      <section id="comuna">
             <a href="#" class="arrow next-section"><span class="glyphicon glyphicon-chevron-down"></span></a>
       </section>
-	  	<section id="mapa">
-	  			<div id="volverDelMapa">
-	  				<a href="#" class="prev-section"><button class="btn btn-default"><span class="glyphicon glyphicon-menu-up"></span> VOLVER</button></a>
-					</div>
-	  		<iframe src="mapaInteractivo.html"></iframe>
-	  	</section>
-	</div>
+      <section id="mapa">
+          <div id="volverDelMapa">
+            <a href="#" class="prev-section"><button class="btn btn-default"><span class="glyphicon glyphicon-menu-up"></span> VOLVER</button></a>
+          </div>
+        <iframe src="mapaInteractivo.html"></iframe>
+      </section>
+  </div>
     <script type="text/javascript" src="js/efectos-ui.js"></script>
     <script type="text/javascript" src="js/viz_educacion.js"></script>
     <script type="text/javascript" src="js/mapa_de_caba.js"></script>
+    <script type="text/javascript" src="js/filtros.js"></script>
 
   </body>
 </html>

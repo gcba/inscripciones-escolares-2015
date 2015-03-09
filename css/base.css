@@ -5749,8 +5749,8 @@ h2 {
     h2 {
       font-size: 1.21rem; } }
 
-text.general {
-  fill: #666666; }
+text.general, text.descripcion {
+  fill: #1977DD; }
 
 text.femenino {
   fill: #47E4C2; }
@@ -5797,13 +5797,20 @@ text.provincia {
     margin-top: 25px;
     font-size: .95em;
     display: none;
-    z-index: 701; }
+    z-index: 701;
+    -webkit-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out; }
     @media (max-height: 700px) {
       #viz-container .filtro {
         margin-top: 20px; } }
     #viz-container .filtro #dropdown-nivel {
       display: none;
+      display: inline-block;
       z-index: 800; }
+
+.viewing-page-3 .filtro {
+  margin-top: 15px; }
 
 section {
   width: 100%;
@@ -5826,6 +5833,9 @@ a.arrow {
   bottom: 150px; }
 
 #mapaCABA {
+  display: none; }
+
+g.descripciones {
   display: none; }
 
 g.labels {
@@ -6122,9 +6132,6 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
       stroke-linejoin: round;
       fill: none; }
 
-/* General SVG and path styles */
-/* Specific input, SVG and path styles */
-/* Circle */
 .ac-circle input[type="checkbox"], .ac-circle input[type="radio"] {
   width: 30px;
   height: 30px;

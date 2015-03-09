@@ -7,7 +7,7 @@
 			},
 		"general": {
 			"estadoCero": {
-				"general": "Este conjunto de círculos representa a los 70.000 nuevos alumnos del sistema."
+				"general": "Este conjunto de círculos representa a los 63.000 nuevos alumnos del sistema."
 				},
 			"genero": {
 				"femenino": "48% mujeres",
@@ -57,6 +57,24 @@
 					"caba": "87% Ciudad Autónoma de Buenos Aires",
 					"provincia": "13% Otras jurisdicciones"
 				}
+			}
+		},
+		"comuna": {
+			"nivel0": {
+				"descripcion": "Niños de 45 días a 5 años.",
+				"detalle": "Entre 2008 y 2014, la matrícula de nivel inicial aumentó en 19,7 %, haciendo eje en las Comunas 4, 8 y 9."
+			},	
+			"nivel1": {
+				"descripcion": "Niños a partir de los 6 años. De 1º a 7º grado.",
+				"detalle": ""
+			},
+			"nivel2": {
+				"descripcion": "Chicos a partir de los 13 años. De 1º a 5º o 6º año, dependiendo de la modalidad.",
+				"detalle": ""
+			},
+			"nivel3": {
+				"descripcion": "Egresados de nivel secundario sin límite de edad. Carreras de formación docente, artísticas y de formación técnica superior.",
+				"detalle": ""
 			}
 		}
 	}
