@@ -44,6 +44,7 @@ $(".main").onepage_scroll({
 				$("#viz-container").show();
 				$("#dropdown-nivel").show();
 				agregarNivelActivo();
+				generarInfoTextComuna("descripcion");
 				mostrarMapaComunas();
 				queue()
 					.defer(d3.json, "data/comunas.json")
@@ -117,12 +118,16 @@ for (var i = 0; i < cantidadNiveles; i++) {
 		cantidadCABA = Math.round(nivelActual.procedencia.caba*cantidadTotal/100),
 		cantidadProvincia = Math.round(nivelActual.procedencia.provincia*cantidadTotal/100);
 
-	var newNivel = { x0: coordenadasNiveles[i],
-					 total: cantidadTotal,
-					 femenino: cantidadFemenino,
-					 masculino: cantidadMasculino,
-					 caba: cantidadCABA,
-					 provincia: cantidadProvincia };
+	var newNivel = {x0: coordenadasNiveles[i],
+					total: cantidadTotal,
+					genero: {
+					 	femenino: cantidadFemenino,
+					 	masculino: cantidadMasculino },
+					procedencia: {
+					 	caba: cantidadCABA,
+					 	provincia: cantidadProvincia}
+					};
+					 
 
 	niveles.push(newNivel);
 }
@@ -184,198 +189,11 @@ var posyMedio = circulo.posy + (circulo.margin+circulo.radio) * (Math.floor(midd
 juntarCirculitos();
 showOneCirculito();
 
-var infoGroup = svgGeneral.append("g").attr("class", "info animated fadeInUp");
-var labelsGroup = svgGeneral.append("g").attr("class", "labels  animated fadeInDown");
+var infoGroup = svgGeneral.append("g").attr("class", "info animated fadeInUp"),
+	labelsGroup = svgGeneral.append("g").attr("class", "labels animated fadeInDown"),
+	descripcionesGroup = svgGeneral.append("g").attr("class", "descripciones animated fadeInDown");
 
 generarInfoText();
-
-/***********************************************/
-
-/*
- * Filtros!
- */
-
-// Filtrar por genero
-d3.select("#radio-genero")
-	.on("click", function(){
-		filtrarPorGenero();
-		generarInfoText("genero");
-		$(this).blur();
-	});
-
-// Filtrar por procedencia
-d3.select("#radio-procedencia")
-	.on("click", function() {
-		filtrarPorProcedencia();
-		generarInfoText("procedencia")
-		$(this).blur();
-	});
-
-function filtrarPorGenero() {
-	switch (currentSeccion) {
-		case "general":
-			filtrarGeneral();
-			break;
-		case "niveles":
-			filtrarNiveles();
-			break;
-		case "comuna":
-			filtrarComuna();
-		default:
-			break;
-	}
-
-	function filtrarGeneral(){
-		d3.selectAll("circle").attr("class", function(d,i){
-			if (i < generalFemenino) { return currentSeccion + " femenino"; } else { return currentSeccion + " masculino"; }
-		});
-		d3.selectAll("circle").transition().attr("fill", function(d,i){
-			if (i < generalFemenino) { return colores.femenino; } else { return colores.masculino; }
-		});
-	}
-
-	function filtrarNiveles() {
-		var currentNivel = 0;
-		var currentCirculos = niveles[currentNivel].total;
-		var previousCirculos = 0;
-		var currentIndex;
-
-		d3.selectAll("circle").attr("class", function(d,i){
-			//TODO: utilizar RegEx para buscar la clase de nivel
-			var nivel = d3.select(this).attr("class").split(" ")[1];
-			return currentSeccion + " " + nivel + " " + calcularSexo(i);
-		});
-
-		currentNivel = 0;
-		currentCirculos = niveles[currentNivel].total;
-		previousCirculos = 0;
-
-		d3.selectAll("circle").transition().attr("fill", function(d,i) {
-			if (calcularSexo(i) == "femenino") { return colores.femenino; } else { return colores.masculino; }
-		});
-
-		function calcularSexo(index){
-			if (index >= currentCirculos) {
-				currentNivel++;
-				currentCirculos += niveles[currentNivel].total;
-			}
-			if (currentNivel > 0) {
-				var count = currentNivel;
-				previousCirculos = 0;
-				while (count > 0) {
-					previousCirculos += niveles[count-1].total;
-					count--;
-				}
-			}
-			currentIndex = index - previousCirculos;
-			var femCurrentNivel = niveles[currentNivel].femenino;
-			if (currentIndex < femCurrentNivel) { return "femenino"; } else { return "masculino"; }
-		}
-	}
-
-	function filtrarComuna() {
-		var currentNivel = $("circle.nivel_activo").attr("nivel");		
-
-		d3.selectAll("circle.nivel_activo").attr("class", function(d,i){
-			return currentSeccion + " nivel" + currentNivel + " " + calcularSexo(i) + " nivel_activo";
-		});
-
-		d3.selectAll("circle.nivel_activo").transition().attr("fill", function(d,i) {
-			if (calcularSexo(i) == "femenino") { return colores.femenino; } else { return colores.masculino; }
-		});
-
-		d3.selectAll("g.info text[nivel='"+currentNivel+"']").attr("class", function(){ return d3.select(this).attr("class") + " nivel_activo"});
-
-		function calcularSexo(index){
-			var femCurrentNivel = niveles[currentNivel].femenino;
-			if (index < femCurrentNivel) { return "femenino"; } else { return "masculino"; }
-		}
-	}
-}
-
-function filtrarPorProcedencia() {
-	switch (currentSeccion) {
-		case "general":
-			filtrarGeneral();
-	 		break;
-	 	case "niveles":
-	 		filtrarNiveles();
-	 		break;
-	 	case "comuna":
-	 		filtrarComuna();	 		
-	 	default:
-	 		break;
-	}
-
-	function filtrarGeneral() {
-		d3.selectAll("circle").attr("class", function(d,i){
- 			if (i < generalCABA) { return currentSeccion + " caba"; } else { return currentSeccion + " provincia"; }
- 		});
-		d3.selectAll("circle").transition().attr("fill", function(d,i){
-			if (i < generalCABA) { return colores.caba; } else { return colores.provincia; }
- 		});
-	}
-
-	function filtrarNiveles() {
-		var currentNivel = 0;
-		var currentCirculos = niveles[currentNivel].total;
-		var previousCirculos = 0;
-		var currentIndex;
-
-		d3.selectAll("circle").attr("class", function(d,i){
-			//TODO: utilizar RegEx para buscar la clase de nivel
-			var nivel = d3.select(this).attr("class").split(" ")[1];
-			return currentSeccion + " " + nivel + " " + calcularProcedencia(i);
-		});
-
-		currentNivel = 0;
-		currentCirculos = niveles[currentNivel].total;
-		previousCirculos = 0;
-
-		d3.selectAll("circle").transition().attr("fill", function(d,i){
-			if (calcularProcedencia(i) == "caba") { return colores.caba; } else { return colores.provincia; }
-		})
-
-		function calcularProcedencia(index) {
-			if (index >= currentCirculos) {
-				currentNivel++;
-				currentCirculos += niveles[currentNivel].total;
-			}
-			if (currentNivel > 0) {
-				var count = currentNivel;
-				previousCirculos = 0;
-				while (count > 0) {
-					previousCirculos += niveles[count-1].total;
-					count--;
-				}
-			}
-			currentIndex = index - previousCirculos;
-			var cabaCurrentNivel = niveles[currentNivel].caba;
-			if (currentIndex < cabaCurrentNivel) { return "caba"; } else { return "provincia"; }
-		}
-	}
-
-	function filtrarComuna() {
-		var currentNivel = $("circle.nivel_activo").attr("nivel");		
-
-		d3.selectAll("circle.nivel_activo").attr("class", function(d,i){
-			return currentSeccion + " nivel" + currentNivel + " " + calcularProcedencia(i) + " nivel_activo";
-		});
-
-		d3.selectAll("circle.nivel_activo").transition().attr("fill", function(d,i) {
-			if (calcularProcedencia(i) == "caba") { return colores.caba; } else { return colores.provincia; }
-		});
-
-		function calcularProcedencia(index){
-			var cabaCurrentNivel = niveles[currentNivel].caba;
-			if (index < cabaCurrentNivel) { return "caba"; } else { return "provincia"; }
-		}
-	}
-}
-
-/*
- * End Filtros!
- */
 
 /***********************************/
 
@@ -563,6 +381,12 @@ function mostrarMapaComunas() {
 	// HACK
 	$("tspan.nivelLink").removeAttr("x");
 	$("g.labels text:not([nivel='"+nivelComuna+"'])").hide();
+
+	// Mostrar y esconder descripciones del nivel de acuerdo al que esté seleccionado
+	$("g.descripciones").show();
+	$("g.descripciones text[nivel='"+nivelComuna+"']").show();	
+	$("g.descripciones text:not([nivel='"+nivelComuna+"'])").hide();
+
 }
 
 function resetCambioSeccion() {
@@ -571,7 +395,11 @@ function resetCambioSeccion() {
 	d3.selectAll("input[type=radio]").property("checked", false);
 	d3.selectAll("circle").attr("fill", colores.neutro);
 
-	if (currentSeccion != "comuna") { resetMapaCaba(); $("#dropdown-nivel").hide(); }
+	if (currentSeccion != "comuna") { 
+		resetMapaCaba(); 
+		$("#dropdown-nivel").hide();
+		$("g.descripciones").hide(); 
+	}
 	if (currentSeccion != "niveles") { $("g.labels").hide(); }
 
 	$("g.info").hide();
@@ -634,7 +462,7 @@ function generarInfoTextLanding() {
 	var texto = d3.select("g.info text").text(lineas[0])
 		.attr("x", posInfoX)
 		.attr("y", posInfoY)
-		.attr("class", currentSeccion + " general")
+		.attr("class", currentSeccion + " general animated fadeInUp")
 		.attr("nivel", "general");
 
 	for (var i=1; i<lineas.length; i++) {
@@ -642,7 +470,7 @@ function generarInfoTextLanding() {
 			.text(lineas[i])
 			.attr("x", posInfoX)
 			.attr("y", posInfoY + infoDetails.verticalMargin*i)
-			.attr("class", currentSeccion + " general")
+			.attr("class", currentSeccion + " general animated fadeInUp")
 			.attr("nivel", "general");
 	}
 }
@@ -740,7 +568,7 @@ function generarInfoTextNiveles(filtro) {
 			texto.text(lineas[0])
 				.attr("x", posInfoX)
 				.attr("y", posInfoY)
-				.attr("class", currentSeccion + " " + nivelesKeys[i] + " general")
+				.attr("class", currentSeccion + " " + nivelesKeys[i] + " general animated fadeInUp")
 				.attr("nivel", i)
 				.on("mouseover", function(d){
 					// Buscar círculos que corresponden a este texto
@@ -858,11 +686,11 @@ function generarInfoTextNiveles(filtro) {
 	}
 }
 
-function generarInfoTextComuna(filtro) {
-	generarInfoTextNiveles(filtro);
-
+function generarInfoTextComuna(filtro) {	
+	// nivelComuna es un número del 0 al 3
 	var nivelComuna = $("circle.nivel_activo").attr("nivel");
 	if (filtro == "estadoCero") {
+		generarInfoTextNiveles(filtro);
 		var textNivel = $("g.labels text[nivel='"+nivelComuna+"'] tspan.nivelLink")[0];
 		d3.select(textNivel)
 			.style("text-decoration", "none")
@@ -878,7 +706,55 @@ function generarInfoTextComuna(filtro) {
 		// HACK
 		$("tspan.nivelLink").removeAttr("x");
 		$("g.labels text:not([nivel='"+nivelComuna+"'])").hide();	
+	} else if (filtro == "descripcion") {
+		// Texto que corresponde a la sección al lado del mapa de CABA,
+		// Donde se explican más detalles del nivel que se está viendo
+		var explicativosDescripcion = explicativos.secciones["comuna"],
+			nivelesKeys = Object.keys(explicativosDescripcion);
+
+		var posInfoX = 0,
+			posInfoY = 0;
+
+		var descripciones = descripcionesGroup.selectAll("text");
+		if (descripcionesGroup.length != 0) {
+			descripcionesGroup.selectAll("text").remove();
+		}
+
+		descripcionesGroup.selectAll("text").data(nivelesKeys).enter().append("text");
+		var explicativoNivel = "";
+
+		for (var i=0; i<nivelesKeys.length; i++) {
+			explicativoNivel = explicativosDescripcion[nivelesKeys[i]][filtro];
+
+			var lineas = calcularLineas(explicativoNivel, 5),
+				lineaNivel = lineas[lineas.length-1].split(" "),
+				nivelText = lineaNivel[lineaNivel.length-1];
+
+			posInfoX = niveles[2].x0;
+			posInfoY = mapaSvg.posInicialY;
+
+			var texto = d3.selectAll("g.descripciones text").filter(function(d,index){return index == i});
+			texto.text(lineas[0])
+				.attr("x", posInfoX)
+				.attr("y", posInfoY)
+				.attr("class", currentSeccion + " " + nivelesKeys[i] + " descripcion animated fadeIn")
+				.attr("nivel", i)				
+
+			var tspanY = 0,
+				lineaText = "";
+			for (var j=1; j<lineas.length; j++) {
+				tspanY = posInfoY + infoDetails.verticalMargin*j;
+				lineaText = lineas[j];
+				var tspan = texto.append("tspan")
+								.text(lineaText)
+								.attr("x", posInfoX)
+								.attr("y", tspanY)
+								.attr("class", currentSeccion + " " + nivelesKeys[i] + " descripcion animated fadeIn")
+								.attr("nivel", i);
+			}
+		}
 	} else {
+		generarInfoTextNiveles(filtro);
 		d3.selectAll("g.info text[nivel='"+nivelComuna+"']").attr("class", function(){
 			return d3.select(this).attr("class") + " nivel_activo";
 		});

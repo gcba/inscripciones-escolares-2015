@@ -165,15 +165,39 @@ function dibujaGraficoInfowindow(dato) {
     var h = 100;
     var r = h / 2;
     var ir = 20;
-    var color = ["#999999", "#cccccc"] //d3.scale.category20c();
+    var color = ["#999999", "#eeeeee"] //d3.scale.category20c();
+    if (porcentaje < fondo ){
+      porcentaje = porcentaje * -1;
+      fondo = fondo * -1;
+    }
+
     var data = [{ "value": porcentaje }, { "value": fondo }];
-    var vis = d3.select('#graficoMigracion').append("svg:svg").data([data]).attr("width", w).attr("height", h).append("svg:g").attr("transform", "translate(" + r + "," + r + ")");
+    var vis = d3.select('#graficoMigracion')
+                .append("svg:svg")
+                .data([data])
+                .attr("width", w)
+                .attr("height", h)
+                .append("svg:g")
+                .attr("transform", "translate(" + r + "," + r + ")");
     var pie = d3.layout.pie().value(function(d) { return d.value; });
+    
     var arc = d3.svg.arc().innerRadius(r - ir).outerRadius(r);
-    var arcs = vis.selectAll("g.slice").data(pie).enter().append("svg:g").attr("class", "slice");
+    var arcs = vis.selectAll("g").data(pie).enter().append("svg:g");
     arcs.append("svg:path")
       .attr("fill", function(d, i) { return color[i]; })
       .attr("d", function(d) { return arc(d); });
+
+
+     d3.select("g").append("text")
+      .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+      .attr("dy", ".35em")
+      .style("text-anchor", "middle")
+      .text(function(){
+        if (porcentaje < 0){
+          porcentaje =  porcentaje * -1;
+        }
+        return porcentaje +" %";
+      });
   }
  
 }
