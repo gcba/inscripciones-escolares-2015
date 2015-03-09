@@ -79,15 +79,31 @@
             <div class="cartodb-popup-content-wrapper">
                 <div class="cartodb-popup-content">
                     <h4>{{comuna}}</h4>
-                    <p class="nombreEscuela">{{nombre}}</p>
-                    <p class="nombreEscuela">{{calle}}</p>
-                    <p id="mismacomuna">{{misma_comuna}}</p>
-                    <div id="graficoMigracion"></div>
+
+                    <div id="nombreEscuela">{{nombre}}</div>
+                    <hr noshade>
+                    <div id="calle"><span class="etiqueta">Direccion:</span> {{calle}}</div>
+                    <div id="modalidad"><span class="etiqueta">Modalidad:</span> {{modalidad}}</div>
+                    <div id="nivel"><span class="etiqueta">Nivel:</span> {{nivel}}</div>
+                    <hr noshade>
+                    <div id="mismacomuna" style="display: none;">{{misma_comuna}}</div>
+
+                    <div id="graficosInfowindow">
+                        <div id="migracionComunas">
+                            <div id="graficoMigracion"></div>
+                            <span>Alumnos que viven en la misma comuna que el establecimiento</span>
+                        </div> 
+                        <div id="distancia">
+                            <div id="graficoDistancia"></div>
+                            <span><strong>{{distancia_mts}}</strong> metros es la distancia promedio recorrida para llegar al establecimiento</span>
+                        </div>
+                    </div>
+
+
+
                     <script>
                         dibujaGraficoInfowindow($("#mismacomuna").text());
                     </script>
-                    -
-
                 </div>
             </div>
             <div class="cartodb-popup-tip-container"></div>

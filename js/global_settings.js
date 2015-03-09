@@ -1,8 +1,8 @@
 /*
  * Global settings
- */ 
+ */
 
-// Detalles de la grilla de círculos 
+// Detalles de la grilla de círculos
 var grillaSvg = {
 	ancho: 960,
 	alto: 470,
@@ -27,11 +27,11 @@ var circulo = {
 
 // Colores
 var colores = {
-	femenino: "#BA1135",
-	masculino: "#05a381",
-	caba: "#FFD300",
-	provincia: "#F2803A",
-	neutro: "#666666"
+	femenino: "#47E4C2",
+	masculino: "#522CA6",
+	caba: "#2C3C63",
+	provincia: "#FA5037",
+	neutro: "#1977DD"
 }
 
 // Explicativos
