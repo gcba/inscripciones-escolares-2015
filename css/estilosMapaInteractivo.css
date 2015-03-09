@@ -25,9 +25,17 @@ body {
     bottom: 16px;
 }
 
+#loading {
+    background: url("img/loading.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    height: 32px;
+    margin: 30px auto;
+    width: 32px;
+}
+
+
 .cartodb-popup{
     width: 450px !important;
-    font-family: "Gotham",Helvetica,Arial;
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 10px;
 
 }
@@ -111,15 +119,6 @@ body {
     text-transform: capitalize;
 }
 
-#nombreEscuela{
-    font-size: 12px;
-    text-transform: uppercase !important;
-    font-weight: bold;
-}
-#direccion{}
-#nivel{}
-#modalidad{}
-
 
 .cartodb-popup div .etiqueta{
     font-size: 11px;
@@ -130,10 +129,33 @@ body {
 }
 
 .cartodb-popup hr{
-    margin: 5px; 
+    margin: 5px 0px; 
 }
 
+.cartodb-tiles-loader{
+    height: 200px;
+    width: 100%;
+}
+
+.loader{
+    margin: 100px auto !important;
+    height: 100px !important;
+    width: 100px !important;
+    box-shadow: 0 0 4px 1000px rgba(0, 0, 0, 0.2) !important;
+}
+
+#nombreEscuela{
+    font-size: 14px;
+    text-transform: uppercase !important;
+    font-weight: bold;
+}
+#direccion{}
+#nivel{}
+#modalidad{}
+
+
 #graficosInfowindow{
+    margin-top: 15px;    
     word-wrap: break-word;    
     width: 100%;
     overflow: hidden;

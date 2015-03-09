@@ -309,6 +309,7 @@ iframe {
 }
 
 #volverDelMapa{
+    margin: 21px 45% auto;
     height: 50px;
     position: inherit;
     right: 0;
@@ -316,6 +317,13 @@ iframe {
     width: 100px;
 }
 
+.volverMapa {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid white;
+  box-shadow: 0 0 3px gray;
+}
 
 
 body, html {
