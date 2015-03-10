@@ -393,8 +393,13 @@ function resetCambioSeccion() {
 	currentSeccion = $("section.active").attr("id");
 
 
-	if($("input:radio[name='filtro']").is(":checked")) {
-		$(this).find('svg > path').path.parentNode.removeChild('svg > path');
+	if($("li > input:radio[name='filtro']").is(":checked")) {
+		var path = $(".form-group li").find("svg:has(path)");
+
+		if( path ) {
+				console.log('Habemus path!');
+				path.children().remove();
+			}
 	}
 
 	//   	// resetRadio(this);
