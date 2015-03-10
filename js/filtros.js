@@ -3,11 +3,49 @@
  */
 
 $("input[name=filtro]").click(function(){
-	var tipoFiltro = $(this).val();
-	filtrar(tipoFiltro);
-	generarInfoText(tipoFiltro);
-	$(this).blur();
+
+	// Agrego flag
+  var previousValue = $(this).attr('previousValue');
+  var name = $(this).attr('name');
+
+  // Check flag, if true, reset radio, remove path, remove color, remove info.
+  if (previousValue == 'checked')
+  {
+    $(this).removeAttr('checked');
+    $(this).attr('previousValue', false);
+    resetRadio(this);
+
+    // Reset color de los circulos, clases, y esconder explicativos
+    d3.selectAll("circle")
+    	.attr("fill", colores.neutro)
+    	.attr("class", function(d) {
+    		var nuevaClase = currentSeccion + " general";
+    		if (currentSeccion != "general") {
+    			var nivel = d3.select(this).attr("nivel");
+    			nuevaClase += " nivel" + nivel;
+    			if (currentSeccion == "comuna") {
+    				var esNivelActivo = this.classList.contains("nivel_activo");
+	    			if (esNivelActivo) {
+	    				nuevaClase += " nivel_activo";
+	    			}
+    			}
+    		}
+			return nuevaClase;
+    	});
+    $("g.info").hide();
+  }
+  else
+  {
+  	// Check flag, if false, do the check, color and info.
+    $("input[name="+name+"]:radio").attr('previousValue', false);
+    $(this).attr('previousValue', 'checked');
+    var tipoFiltro = $(this).val();
+    filtrar(tipoFiltro);
+    generarInfoText(tipoFiltro);
+    $(this).blur();
+  }
 });
+
 
 function calcularCategoria(clavesCategoria, datosFiltro, index){
 	var currentNivel = 0,
@@ -33,7 +71,7 @@ function calcularCategoria(clavesCategoria, datosFiltro, index){
 function filtrar(filtro) {
 	if (currentSeccion == "general") {
 		var datosCategoria = json[currentSeccion][filtro],
-			clavesCategoria = Object.keys(datosCategoria),			
+			clavesCategoria = Object.keys(datosCategoria),
 			numCirculosCategoria = datosCategoria[clavesCategoria[0]]*totalCirculos/100;
 
 		d3.selectAll("circle").attr("class", function(d,i){
@@ -52,7 +90,7 @@ function filtrar(filtro) {
 			datosFiltro.push(datosCategoriaNivel[clavesCategoriaNivel[0]]);
 		}
 
-		d3.selectAll("circle").attr("class", function(d,i){			
+		d3.selectAll("circle").attr("class", function(d,i){
 			var nivel = d3.select(this).attr("nivel"),
 				esNivelActivo = this.classList.contains("nivel_activo"),
 				categoriaCirculo = calcularCategoria(clavesCategoriaNivel, datosFiltro, i),
@@ -62,14 +100,14 @@ function filtrar(filtro) {
 			}
 			return nuevaClase;
 		});
-		d3.selectAll("circle").transition().attr("fill", function(d,i) {			
+		d3.selectAll("circle").transition().attr("fill", function(d,i) {
 			return colores[calcularCategoria(clavesCategoriaNivel, datosFiltro, i)];
-		});	
+		});
 
 		if (currentSeccion == "comuna") {
 			var nivelSeleccionado = $("circle.nivel_activo").attr("nivel");
 			d3.selectAll("g.info text[nivel='"+nivelSeleccionado+"']").attr("class", function(){ return d3.select(this).attr("class") + " nivel_activo animated fadeInUp"});
-		}	
+		}
 	}
 }
 
