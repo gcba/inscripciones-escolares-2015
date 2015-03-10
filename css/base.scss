@@ -311,7 +311,11 @@ a.arrow {
   left: 50%;
   color: #333333;
   z-index: 701;
-  span {
+  span.referencia {
+    font-size: 2rem;
+    display: block;
+  }
+  span.glyphicon {
      font-size: 24px;
    }
 }

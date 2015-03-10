@@ -20,7 +20,7 @@ var coordenadasNiveles = [80,380,680];
 var circulo = {
 	radio: 7,
 	radioGrande: 100,
-	posx: 285,
+	posx: 270,
 	posy: 50,
 	margin: 20
 }
