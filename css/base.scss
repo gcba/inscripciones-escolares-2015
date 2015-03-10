@@ -32,8 +32,7 @@ $navbar-default-border: none;
 
 $icon-font-path: "fonts/" !default;
 
-
-// @import "../public/components/bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// Import custom bootstrap components
 
 // Core variables and mixins
 @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/variables";
@@ -41,7 +40,6 @@ $icon-font-path: "fonts/" !default;
 
 // Reset and dependencies
 @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/normalize";
-@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/print";
 @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/glyphicons";
 
 // Core CSS
@@ -49,7 +47,6 @@ $icon-font-path: "fonts/" !default;
 @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/type";
 @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/code";
 @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/grid";
-@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/tables";
 @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/forms";
 @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/buttons";
 
@@ -60,31 +57,20 @@ $icon-font-path: "fonts/" !default;
 @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/input-groups";
 @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/navs";
 @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/navbar";
-// @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/breadcrumbs";
-// @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/pagination";
-// @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/pager";
-// @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/labels";
-// @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/badges";
-// @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/jumbotron";
-// @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/thumbnails";
-// @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/alerts";
-// @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/progress-bars";
-// @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/media";
-// @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/list-group";
-// @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/panels";
 @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/responsive-embed";
-// @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/wells";
 @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/close";
 
 // Components w/ JavaScript
-// @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/modals";
 @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/tooltip";
 @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/popovers";
-// @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/carousel";
 
 // Utility classes
 @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/utilities";
 @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/responsive-utilities";
+
+/*
+ * Resets and custom setup for browser vendors
+ */
 
 
 html {
@@ -192,7 +178,6 @@ h1 {
   font-weight: 300;
   margin-top: 0px;
   padding-top: 0px;
-
   font-size: 4.5rem;
 
   @include breakpoint(xs) {
@@ -200,11 +185,12 @@ h1 {
   }
 
   @media (max-height:700px) {
+    font-size: 3.5rem;
     margin-top: -50px;
   }
 
   @media (max-height:815px) {
-      margin-top: -100px;
+      margin-top: -50px;
       font-size: 3.5rem;
   }
 
@@ -243,8 +229,8 @@ text.provincia { fill: #FA5037; }
   z-index: 700;
 
   @media (max-height:700px) {
-      top: 15%;
-      height: 85%;
+      top: 20%;
+      height: 80%;
   }
 
   @media (max-height:815px) {
@@ -261,11 +247,15 @@ text.provincia { fill: #FA5037; }
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    // max-width: 960px;
-    // height: 470px;
     box-sizing:border-box;
     -moz-box-sizing:border-box;
     -webkit-box-sizing:border-box;
+
+    @include breakpoint(lg) {
+      width: 85%;
+      height: 85%;
+    }
+
   }
 
   .filtro {
@@ -281,6 +271,11 @@ text.provincia { fill: #FA5037; }
 
     @media (max-height:700px) {
       margin-top: 0px;
+      font-size: .85em;
+    }
+    @media (max-height:815px) {
+      margin-top: 0px;
+      font-size: .85em;
     }
 
     #dropdown-nivel {
@@ -620,7 +615,7 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
   }
   li {
     margin: 0 auto;
-    padding: 2em 0.5em;
+    padding: 1em 0.5em;
     position: relative;
     display: inline-block;
   }
@@ -638,6 +633,14 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
     transition: color 0.3s;
     cursor: pointer;
     cursor: hand;
+    @media (max-height:700px) {
+      padding-left: 30px;
+      margin-top: 0px;
+    }
+    @media (max-height:815px) {
+      padding-left: 30px;
+      margin-top: 0px;
+    }
   }
   input {
     &[type="checkbox"], &[type="radio"] {
@@ -648,6 +651,12 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
       margin-top: -25px;
       position: absolute;
       cursor: pointer;
+      @media (max-height:700px) {
+        padding-left: 25px;
+      }
+      @media (max-height:815px) {
+        padding-left: 25px;
+      }
     }
   }
   label::before {
@@ -658,6 +667,16 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
     margin-top: -17px;
     position: absolute;
     cursor: pointer;
+    @media (max-height:700px) {
+      width: 25px;
+      height: 25px;
+      margin-top: -13px;
+    }
+    @media (max-height:815px) {
+      width: 25px;
+      height: 25px;
+      margin-top: -13px;
+    }
   }
   input {
     &[type="checkbox"], &[type="radio"] {
@@ -700,6 +719,18 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
     margin-top: -17px;
     left: 10px;
     pointer-events: none;
+    @media (max-height:700px) {
+      width: 22px;
+      height: 22px;
+      margin-top: -14px;
+      left: 8px;
+    }
+    @media (max-height:815px) {
+      width: 22px;
+      height: 22px;
+      margin-top: -13px;
+      left: 8px;
+    }
     path {
       stroke: #1977DD;
       stroke-width: 12px;

@@ -46,5 +46,5 @@ var mapaSvg = {
 	ancho: 300,
 	alto: 300,
 	posInicialX: grillaSvg.ancho,
-	posInicialY: grillaSvg.alto - grillaSvg.labelSpace - 300
+	posInicialY: grillaSvg.alto - grillaSvg.labelSpace - 280
 }

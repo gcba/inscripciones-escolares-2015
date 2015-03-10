@@ -408,33 +408,11 @@ function resetCambioSeccion() {
 
 	}
 
-	//   	// resetRadio(this);
-	//   	Array.prototype.slice.call(
-	//   		document.querySelectorAll( 'input:radio[name="filtro"]' ) ).forEach( function(  ) {
-	// 		var path = el.parentNode.querySelector( 'svg > path' );
-	// 		if( path ) {
-	// 			path.parentNode.removeChild( path );
-	// 		}
-	// 	}
-	// }
-
-
-
 
 
 	d3.selectAll("input[type=radio]").property("checked", false);
 	d3.selectAll("input[type=radio]").property("previousValue", false);
 	d3.selectAll("circle").transition().duration(500).attr("fill", colores.neutro);
-
-	// d3.selectAll("input[type=radio]")
-	// $("input[name=filtro]").reset(this);
-// ($("input[name=filtro]").reset(this);
-// 		console.log('Bla');
-// 	} else {
-// 		console.log('No bla');
-// 	}
-
-	//
 
 	if (currentSeccion != "comuna") {
 		resetMapaCaba();
@@ -848,8 +826,8 @@ $("#dropdown-nivel select").change(function(){
 	agregarNivelActivo();
 	mostrarMapaComunas();
 
-    queue()
-      .defer(d3.json, "data/comunas.json")
-      .defer(d3.json, "data/data.json")
-      .await(ready);
+    // queue()
+    //   .defer(d3.json, "data/comunas.json")
+    //   .defer(d3.json, "data/data.json")
+    //   .await(ready);
 });
