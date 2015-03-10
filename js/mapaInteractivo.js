@@ -31,22 +31,47 @@ window.onload = loadMap;
 $("#filtro1 li a").click(function(){
   var selText = $(this).text();
   $(this).parents('.btn-group').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
-  filtro ();
+  filtro (this);
 });
 
 
 $("#filtro2 li a").click(function(){
   var selText = $(this).text();
   $(this).parents('.btn-group').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
-  filtro ();
+  filtro (this);
 });
 
-function toggleFiltros(){
-  
+function toggleFiltros(claseado){
+  var clase = $("#filtro1 a")[0];
+  var menues = $("#filtro2 li");
+  var clases = [];
+
+  $("#filtro2 li").hide();
+  clase = $(clase).text().trim();
+
+  //recolecto las clases a mostrar
+  for (var i = 0 ; i < $("#filtro1 li").length; i++){
+    var f1 = $("#filtro1 li")[i];
+    if ($(f1).text().trim() == clase){
+      clases = $(f1).attr("class");
+    }
+  }
+
+  clases = clases.split(" ");
+
+  //muestro los menues con clase en **clases**
+  for (var i = 0 ; i < $(menues).length; i++){
+    for (var p = 0; p < clases.length; p++){
+      if ($(menues[i]).hasClass(clases[p])){
+        $(menues[i]).show();
+      }
+    }
+  }
+  $(menues[0]).show();
 };
 
-function filtro (){
-  $('.close')[0].click()  
+function filtro (obj){
+  $('.close')[0].click();
   var consulta = "SELECT * FROM escuelas_2015";
   var flag = false;
 
@@ -64,6 +89,7 @@ function filtro (){
     consulta = consulta + " modalidad LIKE '"+ $("#filtro2 a")[0].text.trim() +"'";
   }
   sublayers[0].set({sql: consulta });
+  toggleFiltros(obj);
 }
 
 
