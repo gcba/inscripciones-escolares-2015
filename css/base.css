@@ -4369,7 +4369,10 @@ a.arrow {
   left: 50%;
   color: #333333;
   z-index: 701; }
-  a.arrow span {
+  a.arrow span.referencia {
+    font-size: 2rem;
+    display: block; }
+  a.arrow span.glyphicon {
     font-size: 24px; }
 
 .next-section {

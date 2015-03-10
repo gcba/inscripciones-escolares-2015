@@ -826,8 +826,8 @@ $("#dropdown-nivel select").change(function(){
 	agregarNivelActivo();
 	mostrarMapaComunas();
 
-    // queue()
-    //   .defer(d3.json, "data/comunas.json")
-    //   .defer(d3.json, "data/data.json")
-    //   .await(ready);
+    queue()
+      .defer(d3.json, "data/comunas.json")
+      .defer(d3.json, "data/data.json")
+      .await(ready);
 });

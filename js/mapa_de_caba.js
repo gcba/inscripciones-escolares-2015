@@ -6,11 +6,6 @@ var svg = d3.select("#mapaCABA")
          .attr("x", mapaSvg.posInicialX)
          .attr("y", mapaSvg.posInicialY);
 
-queue()
-    .defer(d3.json, "data/comunas.json")
-    .defer(d3.json, "data/data.json")
-    .await(ready);
-
 function ready(error, comunas, data) {
   var maximo = 0,
       minimo = Number.MAX_VALUE;
