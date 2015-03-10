@@ -33,7 +33,59 @@ $navbar-default-border: none;
 $icon-font-path: "fonts/" !default;
 
 
-@import "../public/components/bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// @import "../public/components/bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+
+// Core variables and mixins
+@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/variables";
+@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins";
+
+// Reset and dependencies
+@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/normalize";
+@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/print";
+@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/glyphicons";
+
+// Core CSS
+@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/scaffolding";
+@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/type";
+@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/code";
+@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/grid";
+@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/tables";
+@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/forms";
+@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/buttons";
+
+// Components
+@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/component-animations";
+@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/dropdowns";
+@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/button-groups";
+@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/input-groups";
+@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/navs";
+@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/navbar";
+// @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/breadcrumbs";
+// @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/pagination";
+// @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/pager";
+// @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/labels";
+// @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/badges";
+// @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/jumbotron";
+// @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/thumbnails";
+// @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/alerts";
+// @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/progress-bars";
+// @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/media";
+// @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/list-group";
+// @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/panels";
+@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/responsive-embed";
+// @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/wells";
+@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/close";
+
+// Components w/ JavaScript
+// @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/modals";
+@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/tooltip";
+@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/popovers";
+// @import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/carousel";
+
+// Utility classes
+@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/utilities";
+@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/responsive-utilities";
+
 
 html {
     -webkit-font-smoothing: antialiased;
@@ -153,7 +205,9 @@ h1 {
 
   @media (max-height:815px) {
       margin-top: -100px;
+      font-size: 3.5rem;
   }
+
 
 }
 
@@ -168,6 +222,9 @@ h2 {
     @include breakpoint(xs) {
       font-size: 1.21rem;
     }
+    @media (max-height:815px) {
+      font-size: 1.21rem;
+  }
 }
 
 
@@ -223,7 +280,7 @@ text.provincia { fill: #FA5037; }
     @include transition(all 1.0s ease-in-out);
 
     @media (max-height:700px) {
-      margin-top: 20px;
+      margin-top: 0px;
     }
 
     #dropdown-nivel {
@@ -309,7 +366,7 @@ iframe {
 }
 
 #volverDelMapa{
-    margin: 21px 45% auto;
+    margin: 20px 50%;
     height: 50px;
     position: inherit;
     right: 0;
@@ -546,7 +603,7 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
 
 
   .filtro-texto {
-    margin-bottom: 5px;
+    margin-bottom: 11px;
     font-weight: bold;
     color: #555;
   }

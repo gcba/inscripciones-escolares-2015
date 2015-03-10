@@ -392,13 +392,23 @@ function mostrarMapaComunas() {
 function resetCambioSeccion() {
 	currentSeccion = $("section.active").attr("id");
 
-	/*
+
 	if($("input:radio[name='filtro']").is(":checked")) {
-	  $("input[name='filtro']:checked").function() {
-	  	resetRadio(this);
-	  };
+		$(this).find('svg > path').path.parentNode.removeChild('svg > path');
 	}
-	*/
+
+	//   	// resetRadio(this);
+	//   	Array.prototype.slice.call(
+	//   		document.querySelectorAll( 'input:radio[name="filtro"]' ) ).forEach( function(  ) {
+	// 		var path = el.parentNode.querySelector( 'svg > path' );
+	// 		if( path ) {
+	// 			path.parentNode.removeChild( path );
+	// 		}
+	// 	}
+	// }
+
+
+
 
 
 	d3.selectAll("input[type=radio]").property("checked", false);
