@@ -21,6 +21,7 @@ $(".main").onepage_scroll({
 		switch(currentSeccion) {
 			case "landing":
 				showOneCirculito();
+				$("span.referencia").text("Nuevos alumnos").show();
 				break;
 			case "general":
 				$(".circulo").show();
@@ -30,6 +31,7 @@ $(".main").onepage_scroll({
 				} else {
 					hideOneCirculitoYJuntar();
 				}
+				$("span.referencia").text("Niveles").show();
 				break;
 			case "niveles":
 				$(".filtro").show();
@@ -37,6 +39,7 @@ $(".main").onepage_scroll({
 				$("g.labels").show();
 				$("g.labels text").show();
 				separarCirculitos();
+				$("span.referencia").text("Comunas").show();
 				break;
 			case "comuna":
 				$("#mapaCABA").show();
@@ -50,6 +53,7 @@ $(".main").onepage_scroll({
 					.defer(d3.json, "data/comunas.json")
 					.defer(d3.json, "data/data.json")
 					.await(ready);
+				$("span.referencia").text("Escuelas").show();
 				break;
 			case "mapa":
 				break;
@@ -391,7 +395,7 @@ function mostrarMapaComunas() {
 
 function resetCambioSeccion() {
 	currentSeccion = $("section.active").attr("id");
-
+	$("span.referencia").hide();
 
 	if($("li > input:radio[name='filtro']").is(":checked")) {
 		var checkedInput = $("input:radio[name='filtro']:checked");

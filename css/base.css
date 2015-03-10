@@ -4365,15 +4365,23 @@ section {
   z-index: 699; }
 
 a.arrow {
+  text-decoration: none;
   position: absolute;
-  left: 50%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
   color: #333333;
   z-index: 701; }
   a.arrow span.referencia {
-    font-size: 2rem;
+    font-size: 1.3rem;
     display: block; }
   a.arrow span.glyphicon {
     font-size: 24px; }
+a.arrow:hover {
+  text-decoration: none;
+}
 
 .next-section {
   bottom: 50px; }
