@@ -1,4 +1,6 @@
 // Crear SVG para los circulos
+$("#tooltipCABA").hide();
+
 var svg = d3.select("#mapaCABA")
          .append("svg")
          .attr("width", mapaSvg.ancho)
@@ -11,7 +13,15 @@ queue()
     .defer(d3.json, "data/data.json")
     .await(ready);
 
+
 function ready(error, comunas, data) {
+  var mousePos = [];
+
+  $(document).mousemove(function(event) {
+    mousePos[0] = event.clientX;
+    mousePos[1] = event.clientY;
+  });
+
   var maximo = 0,
       minimo = Number.MAX_VALUE;
 
@@ -25,6 +35,8 @@ function ready(error, comunas, data) {
     }
   }
 
+
+
   var color = d3.scale.linear()
     .domain([minimo, maximo])
     .range(["#eaeaea", "#1977DD"]);
@@ -32,7 +44,6 @@ function ready(error, comunas, data) {
   svg.select(".caba").remove();
 
   svg.append("g")
-
       .attr("class", "caba")
     .selectAll("path")
       .data(topojson.feature(comunas, comunas.objects.comunas).features)
@@ -40,7 +51,23 @@ function ready(error, comunas, data) {
       .attr("d", d3.geo.path().projection(d3.geo.mercator().scale(157000/2).center([-58.20000,-34.68102])))
       .style("fill", function(d) { return color(data.comunas[nivelActivo][d.properties.comuna]);})
       .attr("title", function(d) { return data.comunas[nivelActivo][d.properties.comuna] + " nuevos alumnos";})
-      .on("mouseover", function(){d3.select(this).style("stroke", "#ffffff");})
-      .on("mouseout", function(){d3.select(this).style("stroke", "transparent");});
+      .on("mouseover", function(d){
+        $("#tooltipCABA").show();
+        d3.select(this).style("stroke", "#ffffff");
+        $("#tooltipCABA").text(data.comunas[nivelActivo][d.properties.comuna] + " nuevos alumnos");
+      })
+      .on("mouseout", function(){
+        $("#tooltipCABA").hide();
+        d3.select(this).style("stroke", "transparent");})
+      .on("mousemove", function(){
+        $("#tooltipCABA").show();
+        var mouse = d3.mouse(svg.node()).map( function(d) { return parseInt(d); } );
+        d3.select("#tooltipCABA")
+          .attr("style", 
+            function (){
+              return "left:"+ (mousePos[0]-60) +"px; top:"+ (mousePos[1]-50) +"px";
+            }
+            );
+      });
 }
 
