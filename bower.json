@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "dependencies": {
     "bootstrap-sass-official": "~>3.3.3",
-    "bourbon": "~4.2.0",
-    "gsap": "~1.15.1"
+    "bourbon": "~4.2.0"
   }
 }

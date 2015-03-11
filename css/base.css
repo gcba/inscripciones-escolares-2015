@@ -1,4 +1,4 @@
-@charset "CP850";
+@charset "UTF-8";
 @import url(animate.min.css);
 @import url("http://fonts.googleapis.com/css?family=Lato:300,400,700");
 @font-face {
@@ -4279,7 +4279,7 @@ h2 {
   color: #555;
   text-align: center;
   font-size: 1.45rem;
-  width: 40%; 
+  width: 40%;
   margin: auto;
   line-height: 1.4; }
   @media (max-width: 767px) {
@@ -4348,11 +4348,9 @@ text.provincia {
     transition: all 1s ease-in-out; }
     @media (max-height: 700px) {
       #viz-container .filtro {
-        margin-top: 0px;
         font-size: .85em; } }
     @media (max-height: 815px) {
       #viz-container .filtro {
-        margin-top: 0px;
         font-size: .85em; } }
     #viz-container .filtro #dropdown-nivel {
       display: none;
@@ -4383,9 +4381,9 @@ a.arrow {
     display: block; }
   a.arrow span.glyphicon {
     font-size: 24px; }
+
 a.arrow:hover {
-  text-decoration: none;
-}
+  text-decoration: none; }
 
 .next-section {
   bottom: 50px; }
@@ -4844,7 +4842,8 @@ iframe {
 .main section .arrow {
   pointer-events: auto !important; }
 
-.tituloLeyenda{
-  font-size: 12px; }
-.numeroLeyenda{
+.tituloLeyenda {
   font-size: 10px; }
+
+.numeroLeyenda {
+  font-size: 8px; }
