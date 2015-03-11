@@ -21,6 +21,7 @@ $(".main").onepage_scroll({
 		switch(currentSeccion) {
 			case "landing":
 				showOneCirculito();
+				$("span.referencia").text("Nuevos alumnos").show();
 				break;
 			case "general":
 				$(".circulo").show();
@@ -30,6 +31,7 @@ $(".main").onepage_scroll({
 				} else {
 					hideOneCirculitoYJuntar();
 				}
+				$("span.referencia").text("Niveles").show();
 				break;
 			case "niveles":
 				$(".filtro").show();
@@ -37,19 +39,20 @@ $(".main").onepage_scroll({
 				$("g.labels").show();
 				$("g.labels text").show();
 				separarCirculitos();
+				$("span.referencia").text("Comunas").show();
 				break;
 			case "comuna":
 				$("#mapaCABA").show();
 				$(".filtro").show();
 				$("#viz-container").show();
 				$("#dropdown-nivel").show();
-				agregarNivelActivo();
-				generarInfoTextComuna("descripcion");
+				generarInfoTextComuna("descripcion");				
 				mostrarMapaComunas();
 				queue()
 					.defer(d3.json, "data/comunas.json")
 					.defer(d3.json, "data/data.json")
 					.await(ready);
+				$("span.referencia").text("Escuelas").show();
 				break;
 			case "mapa":
 				break;
@@ -179,7 +182,7 @@ for (i = 0; i < grillaSvg.filasGeneral; i++) {
 	}
 }
 
-var middleIndex = (Math.floor(totalCirculos/2));
+var middleIndex = (Math.floor(totalCirculos/2)-1);
 var grupoCirculoMedio = d3.selectAll("g.circulo").filter(function(d, i){ return i == middleIndex; });
 var circuloMedio = d3.selectAll("circle").filter(function(d, i){ return i == middleIndex; });
 var posxMedio = circulo.posx + (circulo.margin+circulo.radio) * ((middleIndex % grillaSvg.columnasGeneral)+1);
@@ -362,7 +365,7 @@ function mostrarMapaComunas() {
 
 	// Make sure que la opcion seleccionada corresponde a los circulos activos
 	var nivelComuna = $("circle.nivel_activo").attr("nivel");
-	var opcionSeleccionar = $("#dropdown-nivel option[value='nivel"+nivelComuna+"']").attr("selected", "selected");
+	var opcionSeleccionar = $("#dropdown-nivel option[value='"+nivelComuna+"']").attr("selected", "selected");
 	nivelActivo = $("#dropdown-nivel :selected").text().toLowerCase();
 
 	$("g.labels").show();
@@ -391,7 +394,7 @@ function mostrarMapaComunas() {
 
 function resetCambioSeccion() {
 	currentSeccion = $("section.active").attr("id");
-
+	$("span.referencia").hide();
 
 	if($("li > input:radio[name='filtro']").is(":checked")) {
 		var checkedInput = $("input:radio[name='filtro']:checked");
@@ -481,7 +484,7 @@ function generarInfoTextLanding() {
 	var texto = d3.select("g.info text").text(lineas[0])
 		.attr("x", posInfoX)
 		.attr("y", posInfoY)
-		.attr("class", currentSeccion + " general animated fadeInUp")
+		.attr("class", currentSeccion + " general")
 		.attr("nivel", "general");
 
 	for (var i=1; i<lineas.length; i++) {
@@ -489,7 +492,7 @@ function generarInfoTextLanding() {
 			.text(lineas[i])
 			.attr("x", posInfoX)
 			.attr("y", posInfoY + infoDetails.verticalMargin*i)
-			.attr("class", currentSeccion + " general animated fadeInUp")
+			.attr("class", currentSeccion + " general")
 			.attr("nivel", "general");
 	}
 }
@@ -587,7 +590,7 @@ function generarInfoTextNiveles(filtro) {
 			texto.text(lineas[0])
 				.attr("x", posInfoX)
 				.attr("y", posInfoY)
-				.attr("class", currentSeccion + " " + nivelesKeys[i] + " general animated fadeInUp")
+				.attr("class", currentSeccion + " " + nivelesKeys[i] + " general")
 				.attr("nivel", i)
 				.on("mouseover", function(d){
 					// Buscar círculos que corresponden a este texto
@@ -818,7 +821,7 @@ function generarInfoText(filtro) {
 $("#dropdown-nivel select").change(function(){
 	// Reset filtros
 	d3.selectAll("input[type=radio]").property("checked", false);
-	d3.selectAll("circle").transition().duration(500).attr("fill", colores.neutro).attr("class", function(){
+	d3.selectAll("circle").attr("fill", colores.neutro).attr("class", function(){
 		return currentSeccion + " nivel" + d3.select(this).attr("nivel") + " general";
 	});
 	$("g.info").hide();

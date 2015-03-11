@@ -14,13 +14,13 @@ var grillaSvg = {
 
 var totalCirculos = grillaSvg.filasGeneral * grillaSvg.columnasGeneral;
 
-var coordenadasNiveles = [80,380,680];
+var coordenadasNiveles = [100,400,700];
 
 // Detalles de los círculos
 var circulo = {
 	radio: 7,
 	radioGrande: 100,
-	posx: 270,
+	posx: 280,
 	posy: 50,
 	margin: 20
 }

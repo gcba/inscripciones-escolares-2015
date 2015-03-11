@@ -42,7 +42,7 @@
 
   </head>
   <body>
-
+  
 
   <header>
     <div class="header-gcba navbar navbar-default navbar-static-top" id="top" role="navigation">
@@ -67,7 +67,10 @@
 
 
 
-       <a href="#" class="arrow next-section"><span class="glyphicon glyphicon-chevron-down"></span></a>
+      <a href="#" class="arrow next-section">
+      	<span class="referencia">Nuevos alumnos</span>
+      	<span class="glyphicon glyphicon-chevron-down"></span>
+      </a>
 
 
       <div class="controles filtro animated fadeIn">
@@ -110,6 +113,7 @@
 
     </div>
 
+    
     <div class="main">
       <!-- Secciones -->
       <section id="landing" class="active">
@@ -122,19 +126,22 @@
           <h2 class="animated fadeIn">Nuevos alumnos del sistema educativo de gestión estatal de la Ciudad.</h2>
       </section>
       <section id="comuna">
-          <h2 class="animated fadeIn">Nuevos alumnos del sistema educativo de gestión estatal de la Ciudad.</h2>
+            <div id="tooltipCABA"></div>
+            <h2 class="animated fadeIn">Nuevos alumnos del sistema educativo de gestión estatal de la Ciudad.</h2>
       </section>
       <section id="mapa">
           <div id="volverDelMapa">
             <a href="#" class="prev-section"><button class="btn btn-default volverMapa"><span class="glyphicon glyphicon-chevron-up"></span></button></a>
           </div>
-        <iframe src="mapaInteractivo.html"></iframe>
+          <iframe src="mapaInteractivo.html"></iframe>
       </section>
   </div>
+      
+
     <script type="text/javascript" src="js/efectos-ui.js"></script>
     <script type="text/javascript" src="js/viz_educacion.js"></script>
     <script type="text/javascript" src="js/mapa_de_caba.js"></script>
     <script type="text/javascript" src="js/filtros.js"></script>
-
+  
   </body>
 </html>
