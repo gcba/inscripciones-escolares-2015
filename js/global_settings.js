@@ -20,7 +20,7 @@ var coordenadasNiveles = [80,380,680];
 var circulo = {
 	radio: 7,
 	radioGrande: 100,
-	posx: 285,
+	posx: 270,
 	posy: 50,
 	margin: 20
 }
@@ -46,5 +46,5 @@ var mapaSvg = {
 	ancho: 300,
 	alto: 300,
 	posInicialX: grillaSvg.ancho,
-	posInicialY: grillaSvg.alto - grillaSvg.labelSpace - 300
+	posInicialY: grillaSvg.alto - grillaSvg.labelSpace - 280
 }

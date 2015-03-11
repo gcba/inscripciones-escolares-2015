@@ -21,6 +21,7 @@ $(".main").onepage_scroll({
 		switch(currentSeccion) {
 			case "landing":
 				showOneCirculito();
+				$("span.referencia").text("Nuevos alumnos").show();
 				break;
 			case "general":
 				$(".circulo").show();
@@ -30,6 +31,7 @@ $(".main").onepage_scroll({
 				} else {
 					hideOneCirculitoYJuntar();
 				}
+				$("span.referencia").text("Niveles").show();
 				break;
 			case "niveles":
 				$(".filtro").show();
@@ -37,19 +39,20 @@ $(".main").onepage_scroll({
 				$("g.labels").show();
 				$("g.labels text").show();
 				separarCirculitos();
+				$("span.referencia").text("Comunas").show();
 				break;
 			case "comuna":
 				$("#mapaCABA").show();
 				$(".filtro").show();
 				$("#viz-container").show();
 				$("#dropdown-nivel").show();
-				agregarNivelActivo();
-				generarInfoTextComuna("descripcion");
+				generarInfoTextComuna("descripcion");				
 				mostrarMapaComunas();
 				queue()
 					.defer(d3.json, "data/comunas.json")
 					.defer(d3.json, "data/data.json")
 					.await(ready);
+				$("span.referencia").text("Escuelas").show();
 				break;
 			case "mapa":
 				break;
@@ -362,7 +365,7 @@ function mostrarMapaComunas() {
 
 	// Make sure que la opcion seleccionada corresponde a los circulos activos
 	var nivelComuna = $("circle.nivel_activo").attr("nivel");
-	var opcionSeleccionar = $("#dropdown-nivel option[value='nivel"+nivelComuna+"']").attr("selected", "selected");
+	var opcionSeleccionar = $("#dropdown-nivel option[value='"+nivelComuna+"']").attr("selected", "selected");
 	nivelActivo = $("#dropdown-nivel :selected").text().toLowerCase();
 
 	$("g.labels").show();
@@ -391,44 +394,28 @@ function mostrarMapaComunas() {
 
 function resetCambioSeccion() {
 	currentSeccion = $("section.active").attr("id");
-
+	$("span.referencia").hide();
 
 	if($("li > input:radio[name='filtro']").is(":checked")) {
+		var checkedInput = $("input:radio[name='filtro']:checked");
+		var previousValue = checkedInput.attr('previousValue');
 		var path = $(".form-group li").find("svg:has(path)");
 
 		if( path ) {
-				console.log('Habemus path!');
 				path.children().remove();
 			}
+
+
+		checkedInput.removeAttr('checked');
+		checkedInput.attr('previousValue', false);
+
 	}
-
-	//   	// resetRadio(this);
-	//   	Array.prototype.slice.call(
-	//   		document.querySelectorAll( 'input:radio[name="filtro"]' ) ).forEach( function(  ) {
-	// 		var path = el.parentNode.querySelector( 'svg > path' );
-	// 		if( path ) {
-	// 			path.parentNode.removeChild( path );
-	// 		}
-	// 	}
-	// }
-
-
 
 
 
 	d3.selectAll("input[type=radio]").property("checked", false);
 	d3.selectAll("input[type=radio]").property("previousValue", false);
 	d3.selectAll("circle").transition().duration(500).attr("fill", colores.neutro);
-
-	// d3.selectAll("input[type=radio]")
-	// $("input[name=filtro]").reset(this);
-// ($("input[name=filtro]").reset(this);
-// 		console.log('Bla');
-// 	} else {
-// 		console.log('No bla');
-// 	}
-
-	//
 
 	if (currentSeccion != "comuna") {
 		resetMapaCaba();

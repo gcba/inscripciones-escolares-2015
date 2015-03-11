@@ -13,7 +13,6 @@ queue()
     .defer(d3.json, "data/data.json")
     .await(ready);
 
-
 function ready(error, comunas, data) {
   var mousePos = [];
 
