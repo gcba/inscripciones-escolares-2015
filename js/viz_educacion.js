@@ -18,10 +18,11 @@ $(".main").onepage_scroll({
 
 		$("section.active").removeClass("active");
 		$("section#" + currentSeccion).addClass("active");
+		$("#bajada").text(contenido.secciones[currentSeccion].bajada).fadeTo("fast", 1);
+		$("span.referencia").text(contenido.secciones[currentSeccion].proximaSeccion).fadeIn();
 		switch(currentSeccion) {
 			case "landing":
 				showOneCirculito();
-				$("span.referencia").text("Nuevos alumnos").show();
 				break;
 			case "general":
 				$(".circulo").show();
@@ -31,7 +32,6 @@ $(".main").onepage_scroll({
 				} else {
 					hideOneCirculitoYJuntar();
 				}
-				$("span.referencia").text("Niveles").show();
 				break;
 			case "niveles":
 				$(".filtro").show();
@@ -39,7 +39,6 @@ $(".main").onepage_scroll({
 				$("g.labels").show();
 				$("g.labels text").show();
 				separarCirculitos();
-				$("span.referencia").text("Comunas").show();
 				break;
 			case "comuna":
 				$("#mapaCABA").show();
@@ -52,7 +51,6 @@ $(".main").onepage_scroll({
 					.defer(d3.json, "data/comunas.json")
 					.defer(d3.json, "data/data.json")
 					.await(ready);
-				$("span.referencia").text("Escuelas").show();
 				break;
 			case "mapa":
 				break;
@@ -142,6 +140,21 @@ var explicativos = (function() {
         'async': false,
         'global': false,
         'url': "data/explicativos.json",
+        'dataType': "json",
+        'success': function (data) {
+            json = data;
+        }
+    });
+    return json;
+})();
+
+// Contenido
+var contenido = (function() {
+    var json = null;
+    $.ajax({
+        'async': false,
+        'global': false,
+        'url': "data/contenido.json",
         'dataType': "json",
         'success': function (data) {
             json = data;
@@ -394,17 +407,18 @@ function mostrarMapaComunas() {
 
 function resetRadios() {
 		if($("li > input:radio[name='filtro']").is(":checked")) {
-		var checkedInput = $("input:radio[name='filtro']:checked");
-		var previousValue = checkedInput.attr('previousValue');
-		var path = $(".form-group li").find("svg:has(path)");
 
-		if( path ) {
-				path.children().remove();
-			}
+			var checkedInput = $("input:radio[name='filtro']:checked");
+			var previousValue = checkedInput.attr('previousValue');
+			var path = $(".form-group li").find("svg:has(path)");
+
+			if( path ) {
+					path.children().remove();
+				}
 
 
-		checkedInput.removeAttr('checked');
-		checkedInput.attr('previousValue', false);
+			checkedInput.removeAttr('checked');
+			checkedInput.attr('previousValue', false);
 
 	}
 }
@@ -413,8 +427,10 @@ function resetCambioSeccion() {
 
 	resetRadios();
 
-	currentSeccion = $("section.active").attr("id");
 	$("span.referencia").hide();
+	$("#bajada").animate({ opacity: 0 })
+
+	currentSeccion = $("section.active").attr("id");
 
 
 	d3.selectAll("circle").transition().duration(500).attr("fill", colores.neutro);
@@ -755,7 +771,7 @@ function generarInfoTextComuna(filtro) {
 				nivelText = lineaNivel[lineaNivel.length-1];
 
 			posInfoX = niveles[2].x0;
-			posInfoY = mapaSvg.posInicialY;
+			posInfoY = grillaSvg.alto/2 - Math.floor(lineas.length/2) * infoDetails.verticalMargin;
 
 			var texto = d3.selectAll("g.descripciones text").filter(function(d,index){return index == i});
 			texto.text(lineas[0])

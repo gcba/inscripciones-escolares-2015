@@ -1,0 +1,20 @@
+{
+    "secciones": {
+        "landing": {
+            "bajada": "El 9 de marzo cerró el periodo de inscripción y asignación escolar de 2015, por el que pasaron todos aquellos alumnos que ingresaron por primera vez a una escuela de gestión estatal o quienes cambiaron de nivel educativo.",
+            "proximaSeccion": "Mirá el total de nuevos alumnos."
+        },
+        "general": {
+            "bajada": "Total de nuevos alumnos del sistema educativo de gestión estatal de la Ciudad.",
+            "proximaSeccion": "Mirá como se dividen en niveles."
+        },
+        "niveles": {
+            "bajada": "Nuevos alumnos del sistema educativo de gestión estatal de la Ciudad.",
+            "proximaSeccion": "Mirá como se distribuyen por comunas."
+        },
+        "comuna": {
+            "bajada": "Nuevos alumnos del sistema educativo de gestión estatal de la Ciudad, por nivel y comuna.",
+            "proximaSeccion": "Navegá el mapa de las escuelas."
+        }
+    }
+}
