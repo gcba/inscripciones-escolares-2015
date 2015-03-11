@@ -43,7 +43,7 @@ var infoDetails = {
 // Detalles Mapa de CABA SVG
 var nivelActivo = "inicial";
 var mapaSvg = {
-	ancho: 300,
+	ancho: 400,
 	alto: 300,
 	posInicialX: grillaSvg.ancho,
 	posInicialY: grillaSvg.alto - grillaSvg.labelSpace - 280
