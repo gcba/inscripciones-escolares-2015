@@ -46,7 +46,7 @@ $(".main").onepage_scroll({
 				$(".filtro").show();
 				$("#viz-container").show();
 				$("#dropdown-nivel").show();
-				generarInfoTextComuna("descripcion");				
+				generarInfoTextComuna("descripcion");
 				mostrarMapaComunas();
 				queue()
 					.defer(d3.json, "data/comunas.json")
@@ -392,11 +392,8 @@ function mostrarMapaComunas() {
 
 }
 
-function resetCambioSeccion() {
-	currentSeccion = $("section.active").attr("id");
-	$("span.referencia").hide();
-
-	if($("li > input:radio[name='filtro']").is(":checked")) {
+function resetRadios() {
+		if($("li > input:radio[name='filtro']").is(":checked")) {
 		var checkedInput = $("input:radio[name='filtro']:checked");
 		var previousValue = checkedInput.attr('previousValue');
 		var path = $(".form-group li").find("svg:has(path)");
@@ -410,11 +407,16 @@ function resetCambioSeccion() {
 		checkedInput.attr('previousValue', false);
 
 	}
+}
+
+function resetCambioSeccion() {
+
+	resetRadios();
+
+	currentSeccion = $("section.active").attr("id");
+	$("span.referencia").hide();
 
 
-
-	d3.selectAll("input[type=radio]").property("checked", false);
-	d3.selectAll("input[type=radio]").property("previousValue", false);
 	d3.selectAll("circle").transition().duration(500).attr("fill", colores.neutro);
 
 	if (currentSeccion != "comuna") {
@@ -820,6 +822,7 @@ function generarInfoText(filtro) {
 
 $("#dropdown-nivel select").change(function(){
 	// Reset filtros
+	resetRadios();
 	d3.selectAll("input[type=radio]").property("checked", false);
 	d3.selectAll("circle").attr("fill", colores.neutro).attr("class", function(){
 		return currentSeccion + " nivel" + d3.select(this).attr("nivel") + " general";
