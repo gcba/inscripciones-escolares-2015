@@ -821,7 +821,7 @@ function generarInfoText(filtro) {
 $("#dropdown-nivel select").change(function(){
 	// Reset filtros
 	d3.selectAll("input[type=radio]").property("checked", false);
-	d3.selectAll("circle").transition().duration(500).attr("fill", colores.neutro).attr("class", function(){
+	d3.selectAll("circle").attr("fill", colores.neutro).attr("class", function(){
 		return currentSeccion + " nivel" + d3.select(this).attr("nivel") + " general";
 	});
 	$("g.info").hide();
