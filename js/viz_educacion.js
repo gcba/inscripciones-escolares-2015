@@ -484,7 +484,7 @@ function generarInfoTextLanding() {
 	var texto = d3.select("g.info text").text(lineas[0])
 		.attr("x", posInfoX)
 		.attr("y", posInfoY)
-		.attr("class", currentSeccion + " general animated fadeInUp")
+		.attr("class", currentSeccion + " general")
 		.attr("nivel", "general");
 
 	for (var i=1; i<lineas.length; i++) {
@@ -492,7 +492,7 @@ function generarInfoTextLanding() {
 			.text(lineas[i])
 			.attr("x", posInfoX)
 			.attr("y", posInfoY + infoDetails.verticalMargin*i)
-			.attr("class", currentSeccion + " general animated fadeInUp")
+			.attr("class", currentSeccion + " general")
 			.attr("nivel", "general");
 	}
 }
@@ -590,7 +590,7 @@ function generarInfoTextNiveles(filtro) {
 			texto.text(lineas[0])
 				.attr("x", posInfoX)
 				.attr("y", posInfoY)
-				.attr("class", currentSeccion + " " + nivelesKeys[i] + " general animated fadeInUp")
+				.attr("class", currentSeccion + " " + nivelesKeys[i] + " general")
 				.attr("nivel", i)
 				.on("mouseover", function(d){
 					// Buscar círculos que corresponden a este texto
