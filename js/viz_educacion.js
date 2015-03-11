@@ -182,7 +182,7 @@ for (i = 0; i < grillaSvg.filasGeneral; i++) {
 	}
 }
 
-var middleIndex = (Math.floor(totalCirculos/2));
+var middleIndex = (Math.floor(totalCirculos/2)-1);
 var grupoCirculoMedio = d3.selectAll("g.circulo").filter(function(d, i){ return i == middleIndex; });
 var circuloMedio = d3.selectAll("circle").filter(function(d, i){ return i == middleIndex; });
 var posxMedio = circulo.posx + (circulo.margin+circulo.radio) * ((middleIndex % grillaSvg.columnasGeneral)+1);
