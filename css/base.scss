@@ -202,15 +202,18 @@ h2 {
   font-weight: 400;
   color: #555;
   text-align: center;
-
   font-size: 1.45rem;
+  width: 40%; 
+  margin: auto;
+  line-height: 1.4;
 
     @include breakpoint(xs) {
       font-size: 1.21rem;
+      width: 50%;
     }
     @media (max-height:815px) {
       font-size: 1.21rem;
-  }
+    }
 }
 
 

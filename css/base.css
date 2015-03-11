@@ -4278,10 +4278,14 @@ h2 {
   font-weight: 400;
   color: #555;
   text-align: center;
-  font-size: 1.45rem; }
+  font-size: 1.45rem;
+  width: 40%; 
+  margin: auto;
+  line-height: 1.4; }
   @media (max-width: 767px) {
     h2 {
-      font-size: 1.21rem; } }
+      font-size: 1.21rem;
+      width: 50%; } }
   @media (max-height: 815px) {
     h2 {
       font-size: 1.21rem; } }
