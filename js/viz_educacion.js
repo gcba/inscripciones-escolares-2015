@@ -46,8 +46,7 @@ $(".main").onepage_scroll({
 				$(".filtro").show();
 				$("#viz-container").show();
 				$("#dropdown-nivel").show();
-				agregarNivelActivo();
-				generarInfoTextComuna("descripcion");
+				generarInfoTextComuna("descripcion");				
 				mostrarMapaComunas();
 				queue()
 					.defer(d3.json, "data/comunas.json")
@@ -366,7 +365,7 @@ function mostrarMapaComunas() {
 
 	// Make sure que la opcion seleccionada corresponde a los circulos activos
 	var nivelComuna = $("circle.nivel_activo").attr("nivel");
-	var opcionSeleccionar = $("#dropdown-nivel option[value='nivel"+nivelComuna+"']").attr("selected", "selected");
+	var opcionSeleccionar = $("#dropdown-nivel option[value='"+nivelComuna+"']").attr("selected", "selected");
 	nivelActivo = $("#dropdown-nivel :selected").text().toLowerCase();
 
 	$("g.labels").show();
