@@ -4839,3 +4839,8 @@ iframe {
 
 .main section .arrow {
   pointer-events: auto !important; }
+
+.tituloLeyenda{
+  font-size: 12px; }
+.numeroLeyenda{
+  font-size: 10px; }
