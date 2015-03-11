@@ -59,7 +59,8 @@ function ready(error, comunas, data) {
         .on("mouseover", function(d) {
             $("#tooltipCABA").show();
             d3.select(this).style("stroke", "#ffffff");
-            $("#tooltipCABA").text(data.comunas[nivelActivo][d.properties.comuna] + " nuevos alumnos");
+            var htmlStr = "<div style='font-size: 10px; text-transform: uppercase; color: #999999;'> comuna " + d.properties.comuna + " </div> " + data.comunas[nivelActivo][d.properties.comuna] + " nuevos alumnos";
+            $("#tooltipCABA").html(htmlStr);
         })
         .on("mouseout", function() {
             $("#tooltipCABA").hide();
@@ -73,7 +74,7 @@ function ready(error, comunas, data) {
             d3.select("#tooltipCABA")
                 .attr("style",
                     function() {
-                        return "left:" + (mousePos[0] - 60) + "px; top:" + (mousePos[1] - 50) + "px";
+                        return "left:" + (mousePos[0] - 60) + "px; top:" + (mousePos[1] - 70) + "px";
                     }
                 );
         });
