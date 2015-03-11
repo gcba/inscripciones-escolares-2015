@@ -185,7 +185,9 @@ for (i = 0; i < grillaSvg.filasGeneral; i++) {
 				var claseCirculo = circulo.attr("class");
 				d3.selectAll($("circle:not(." + claseCirculo.split(' ').join('.') + ")"))
 					.style("opacity", 0.2);
-				d3.selectAll($("text:not(." + claseCirculo.split(' ').join('.') + ")"))
+				d3.selectAll($("g.labels text:not(." + claseCirculo.split(' ').join('.') + ")"))
+					.style("opacity", 0.2);
+				d3.selectAll($("g.info text:not(." + claseCirculo.split(' ').join('.') + ")"))
 					.style("opacity", 0.2);
 			})
 			.on("mouseout", function(d){
@@ -553,7 +555,9 @@ function generarInfoTextGeneral(filtro) {
 				var claseText = $(this).attr("class").split(' ').slice(0,2);
 				d3.selectAll($("circle:not(." + claseText.join('.') + ")"))
 					.style("opacity", 0.2);
-				d3.selectAll($("text:not(." + claseText.join('.') + ")"))
+				d3.selectAll($("g.labels text:not(." + claseText.join('.') + ")"))
+					.style("opacity", 0.2);
+				d3.selectAll($("g.info text:not(." + claseText.join('.') + ")"))
 					.style("opacity", 0.2);
 			})
 			.on("mouseout", function(d){
@@ -615,7 +619,9 @@ function generarInfoTextNiveles(filtro) {
 					var claseText = $(this).attr("class").split(' ').slice(0,2);
 					d3.selectAll($("circle:not(." + claseText.join('.') + ")"))
 						.style("opacity", 0.2);
-					d3.selectAll($("text:not(." + claseText.join('.') + ")"))
+					d3.selectAll($("g.labels text:not(." + claseText.join('.') + ")"))
+						.style("opacity", 0.2);
+					d3.selectAll($("g.info text:not(." + claseText.join('.') + ")"))
 						.style("opacity", 0.2);
 				})
 				.on("mouseout", function(d){
@@ -699,7 +705,9 @@ function generarInfoTextNiveles(filtro) {
 						var claseText = $(this).attr("class").split(' ');
 						d3.selectAll($("circle:not(." + claseText.join('.') + ")"))
 							.style("opacity", 0.2);
-						d3.selectAll($("text:not(." + claseText.join('.') + ")"))
+						d3.selectAll($("g.labels text:not(." + claseText.join('.') + ")"))
+							.style("opacity", 0.2);
+						d3.selectAll($("g.info text:not(." + claseText.join('.') + ")"))
 							.style("opacity", 0.2);
 					})
 					.on("mouseout", function(d){
