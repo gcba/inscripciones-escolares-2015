@@ -202,7 +202,7 @@ h2 {
   font-weight: 400;
   color: #555;
   text-align: center;
-
+  margin-top: 10%;
   font-size: 1.45rem;
 
     @include breakpoint(xs) {
@@ -270,11 +270,9 @@ text.provincia { fill: #FA5037; }
     @include transition(all 1.0s ease-in-out);
 
     @media (max-height:700px) {
-      margin-top: 0px;
       font-size: .85em;
     }
     @media (max-height:815px) {
-      margin-top: 0px;
       font-size: .85em;
     }
 
@@ -285,9 +283,6 @@ text.provincia { fill: #FA5037; }
     }
   }
 }
-
-
-
 
 
 
@@ -858,20 +853,20 @@ iframe {
 }
 
 #tooltipCABA {
-  color: #222; 
-  background: #fff; 
-  padding: .5em; 
+  color: #222;
+  background: #fff;
+  padding: .5em;
   text-shadow: #f5f5f5 0 1px 0;
-  border-radius: 2px; 
-  box-shadow: 0px 0px 2px 0px #a6a6a6; 
-  opacity: 0.9; 
+  border-radius: 2px;
+  box-shadow: 0px 0px 2px 0px #a6a6a6;
+  opacity: 0.9;
   position: absolute;
   z-index: 999;
 }
 
 .main{
   pointer-events: none;
-  z-index: 800;  
+  z-index: 800;
 }
 
 .main section .arrow{
