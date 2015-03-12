@@ -7,7 +7,7 @@
         },
         "general": {
             "estadoCero": {
-                "general": "Con este conjunto de círculos representamos los 63000 nuevos alumnos del sistema educativo."
+                "general": "Con este conjunto de círculos representamos a los 63.000 alumnos nuevos."
             },
             "genero": {
                 "femenino": "48% mujeres",
@@ -61,13 +61,13 @@
         },
         "comuna": {
             "nivel0": {
-                "descripcion": "Las comunas 4, 7 y 8 concentran el 37% de los nuevos alumnos de nivel inicial."
+                "descripcion": "Las comunas 4, 7 y 8 concentran el 37% de los alumnos nuevos de nivel inicial."
             },
             "nivel1": {
-                "descripcion": "Las comunas 4, 8 y 9 concentran el 33% de los nuevos alumnos de nivel primario."
+                "descripcion": "Las comunas 4, 8 y 9 concentran el 33% de los alumnos nuevos de nivel primario."
             },
             "nivel2": {
-                "descripcion": "Las comunas 3, 4 y 9 concentran el 30% de los nuevos alumnos de nivel secundario."
+                "descripcion": "Las comunas 3, 4 y 9 concentran el 30% de los alumnos nuevos de nivel secundario."
             }
         }
     }
