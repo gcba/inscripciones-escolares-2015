@@ -79,46 +79,66 @@ function ready(error, comunas, data) {
                 );
         });
 
- var gradient = svg.append("svg:defs")
-  .append("svg:linearGradient")
-    .attr("id", "gradient")
-    .attr("x1", "0%")
-    .attr("x2", "100%");
+    var gradient = svg.append("svg:defs")
+        .append("svg:linearGradient")
+        .attr("id", "gradient")
+        .attr("x1", "0%")
+        .attr("x2", "100%");
 
-gradient.append("svg:stop")
-    .attr("offset", "20%")
-    .attr("stop-color", coloresCABA[0])
-    .attr("stop-opacity", 1);
+    gradient.append("svg:stop")
+        .attr("offset", "20%")
+        .attr("stop-color", coloresCABA[0])
+        .attr("stop-opacity", 1);
 
-gradient.append("svg:stop")
-    .attr("offset", "80%")
-    .attr("stop-color", coloresCABA[1])
-    .attr("stop-opacity", 1);
+    gradient.append("svg:stop")
+        .attr("offset", "80%")
+        .attr("stop-color", coloresCABA[1])
+        .attr("stop-opacity", 1);
 
-var leyenda = svg.append("g")
-  .attr("class","etiqueta")
-    .attr("transform", "translate(170,267)");
+    var leyenda = svg.append("g")
+        .attr("class", "etiqueta")
+        .attr("transform", "translate(170,267)");
 
-leyenda.append("rect")
-    .attr("height", 7)
-    .attr("x", 0)
-    .attr("width", "130")
-    .style("fill", "url(#gradient)")
-    .style("stroke", "white");
-        
-leyenda.append("text")
-    .attr("class", "tituloLeyenda")
-    .attr("y", -6)
-    .text("Alumnos por comuna");
+    leyenda.append("rect")
+        .attr("height", 7)
+        .attr("x", 0)
+        .attr("width", "130")
+        .style("fill", "url(#gradient)")
+        .style("stroke", "white");
 
-leyenda.append("text")
-    .attr("class", "numeroLeyenda")
-    .attr("y", 20)
-    .attr("x", 0)
-    .text(minimo);
-leyenda.append("text")
-    .attr("class", "numeroLeyenda")
-    .attr("y", 20)
-    .attr("x", 105)
-    .text(maximo);
+    leyenda.append("text")
+        .attr("class", "tituloLeyenda")
+        .attr("y", -6)
+        .text("Alumnos por comuna");
+
+    leyenda.append("text")
+        .attr("class", "numeroLeyenda")
+        .attr("y", 20)
+        .attr("x", 0)
+        .text(
+            function (){
+                return redondeo(minimo,"DOWN")
+            });
+
+    leyenda.append("text")
+        .attr("class", "numeroLeyenda")
+        .attr("y", 20)
+        .attr("x", 95)
+        .text(
+            function(){
+                return redondeo(maximo,"UP")
+            });
+}
+
+function redondeo(valor,direccion){
+    switch (direccion){
+        case "UP":
+            var resultado = "+ de " + ((Math.round(valor / 100)*100)-100).toString();
+            break;
+        case "DOWN":
+            var resultado = "- de " + ((Math.round(valor / 100)*100)).toString();
+            break;
+    }
+    return resultado;
+
 }
