@@ -1,19 +1,19 @@
 {
     "secciones": {
         "landing": {
-            "bajada": "El 9 de marzo cerró el periodo de inscripción y asignación escolar de 2015, por el que pasaron todos aquellos alumnos que ingresaron por primera vez a una escuela de gestión estatal o quienes cambiaron de nivel educativo.",
+            "bajada": "La inscripción al ciclo lectivo 2015 se realiza a través de un sistema en línea por el que deben anotarse alumnos que ingresan por primera vez a una escuela de gestión estatal o quienes cambian de nivel educativo. Este año, 63.000 nuevos alumnos utilizaron el sistema para inscribirse."
             "proximaSeccion": "Mirá el total de nuevos alumnos."
         },
         "general": {
-            "bajada": "Total de nuevos alumnos del sistema educativo de gestión estatal de la Ciudad.",
-            "proximaSeccion": "Mirá como se dividen en niveles."
+            "bajada": "63.000 alumnos se incorporaron al sistema educativo de gestión estatal de la Ciudad.",
+            "proximaSeccion": "Mirá cómo se dividen en niveles."
         },
         "niveles": {
-            "bajada": "Nuevos alumnos del sistema educativo de gestión estatal de la Ciudad.",
+            "bajada": "63.000 alumnos se incorporaron al sistema educativo de gestión estatal de la Ciudad.",
             "proximaSeccion": "Mirá como se distribuyen por comunas."
         },
         "comuna": {
-            "bajada": "Nuevos alumnos del sistema educativo de gestión estatal de la Ciudad, por nivel y comuna.",
+            "bajada": "63.000 alumnos se incorporaron al sistema educativo de gestión estatal de la Ciudad.",
             "proximaSeccion": "Navegá el mapa de las escuelas."
         }
     }
