@@ -1,0 +1,193 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+#mapaInteractivo {
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    z-index: 900;
+}
+
+#filtros{
+    padding: 10px;
+    position: absolute;
+    background-color: rgba(255,255,255,0.8);
+    border-top: 1px solid #c0c0c0;
+    border-bottom: 1px solid #c0c0c0;
+    width: 100%;
+    height: 56px;
+    margin: 0px;
+    bottom: 16px;
+}
+
+#loading {
+    background: url("img/loading.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    height: 32px;
+    margin: 30px auto;
+    width: 32px;
+}
+
+
+.cartodb-popup{
+    width: 450px !important;
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 10px;
+
+}
+
+.cartodb-popup,
+.cartodb-popup-tip-container {
+    z-index: 999;
+    background: rgba(255, 255, 255, 0) !important;
+}
+
+.cartodb-popup-content{
+    max-width: 100% !important;
+    width: 100% !important;
+    height: 2880px !important;
+    max-height: 550px !important;
+}
+
+.cartodb-popup-content p {
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+.cartodb-popup-close-button{
+    background: url("img/light.png") no-repeat scroll 0 -23px rgba(255, 255, 255, 0) !important;
+}
+.cartodb-popup-tip-container{
+    background: url("img/light.png") no-repeat scroll 0 0 rgba(255, 255, 255, 0) !important;
+}
+
+.cartodb-popup-cont{
+    width: 450px !important;;
+    height: 320px !important;;
+}
+.cartodb-infowindow {
+    position: fixed !important;
+}
+.cartodb-popup-content-wrapper {
+    background: rgba(255, 255, 255, 1) !important;
+    width: 450px !important;
+    height: 320px !important;
+    max-width: 450px !important;
+    -webkit-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.25);
+    box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.25);
+    overflow: hidden;
+}
+.cartodb-popup-cont .close {
+    color: #000000;
+    text-align: right;
+}
+
+.etiquetaFiltro{
+    font-size: 10px;
+    color: #999999;
+    text-transform: uppercase;
+}
+
+.cartodb-logo{
+    display: none !important;
+}
+
+#listado{
+    display: none;
+    height: 170px;
+    position: fixed;
+    bottom: 70px;
+    overflow: scroll;
+    overflow-x: hidden;
+    background-color: rgb(255, 255, 255);
+    opacity: 0.95;
+    overflow-y: scroll;
+    width: 33%;    
+    -webkit-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.25);
+    box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.25);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid #c0c0c0;
+    font-size: 12px;
+    text-transform: capitalize;
+}
+
+
+.cartodb-popup div .etiqueta{
+    font-size: 11px;
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+    color: #cccccc;    
+}
+
+.cartodb-popup hr{
+    margin: 5px 0px; 
+}
+
+.cartodb-tiles-loader{
+    height: 200px;
+    width: 100%;
+}
+
+.loader{
+    margin: 100px auto !important;
+    height: 100px !important;
+    width: 100px !important;
+    box-shadow: 0 0 4px 5000px rgba(0, 0, 0, 0.2) !important;
+}
+
+#nombreEscuela{
+    font-size: 14px;
+    text-transform: uppercase !important;
+    font-weight: bold;
+}
+#direccion{}
+#nivel{}
+#modalidad{}
+
+
+#graficosInfowindow{
+    margin-top: 15px;    
+    word-wrap: break-word;    
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+    word-wrap: break-word;        
+}
+
+#graficosInfowindow span{
+    padding-left: 10px;
+    padding-right: 10px;    
+}
+
+#graficoDistancia{
+    height: 100px;
+    width: 100px;
+    background-image: url("img/walking.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: auto auto 4px;
+}
+
+#distancia{
+    width: 49%;
+    float: left;
+}
+
+#migracionComunas{
+    float: left;
+    width: 49%;
+}
+
+
+#escuelas_2015:hover {
+   marker-width: 100;
+}

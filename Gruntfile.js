@@ -5,7 +5,8 @@ module.exports = function (grunt) {
         sass: {
             dist: {
                 files: {
-                    'css/base.css': 'css/base.scss'
+                    'css/base.css': 'css/base.scss',
+                    'css/estilosMapaInteractivo.css': 'css/estilosMapaInteractivo.scss'
                 }
             }
         },
@@ -19,19 +20,23 @@ module.exports = function (grunt) {
             }
         },
         cssmin: {
-            css:{
-                src: 'css/base.css',
-                dest: 'css/base.min.css'
+            target:{
+                files:{
+                'css/base.min.css': 'css/base.css',
+                'css/estilosMapaInteractivo.min.css': 'css/estilosMapaInteractivo.css'
+                }
             }
         },
 
-        // uglify: {
-        //     my_target: {
-        //       files: {
-        //         'js/script.min.js': ['js/script.js']
-        //       }
-        //     }
-        // }
+        uglify: {
+            dist: {
+              files: {
+                'js/mapaInteractivo.min.js': 'js/mapaInteractivo.js',
+                'js/filtros.min.js': 'js/filtros.js',
+                'js/mapa_de_caba.min.js': 'js/mapa_de_caba.js'
+              }
+            }
+        }
 
     });
 
