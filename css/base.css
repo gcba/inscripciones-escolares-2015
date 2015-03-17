@@ -4389,7 +4389,8 @@ a.arrow:hover {
   bottom: 50px; }
 
 .prev-section {
-  bottom: 150px; }
+  top: 20px;
+  display: none; }
 
 #mapaCABA {
   display: none; }

@@ -19,14 +19,18 @@ $(".main").onepage_scroll({
 		$("section.active").removeClass("active");
 		$("section#" + currentSeccion).addClass("active");
 		$("#bajada").text(contenido.secciones[currentSeccion].bajada).fadeTo("fast", 1);
-		$("span.referencia").text(contenido.secciones[currentSeccion].proximaSeccion).fadeIn();
+		$("a.arrow").fadeIn();
+		$(".prev-section span.referencia").text(contenido.secciones[currentSeccion].anteriorSeccion).fadeIn();
+		$(".next-section span.referencia").text(contenido.secciones[currentSeccion].proximaSeccion).fadeIn();
 		switch(currentSeccion) {
 			case "landing":
 				showOneCirculito();
+				$(".prev-section").hide();
 				break;
 			case "general":
 				$(".circulo").show();
 				$(".filtro").show();
+				$(".prev-section").show();
 				if (circuloMedio.attr("r") == circulo.radio) {
 					juntarCirculitos();
 				} else {
@@ -38,6 +42,7 @@ $(".main").onepage_scroll({
 				$(".circulo").show();
 				$("g.labels").show();
 				$("g.labels text").show();
+				$(".prev-section").show();
 				separarCirculitos();
 				break;
 			case "comuna":
@@ -45,6 +50,7 @@ $(".main").onepage_scroll({
 				$(".filtro").show();
 				$("#viz-container").show();
 				$("#dropdown-nivel").show();
+				$(".prev-section").show();
 				generarInfoTextComuna("descripcion");
 				mostrarMapaComunas();
 				queue()
@@ -429,11 +435,10 @@ function resetCambioSeccion() {
 
 	resetRadios();
 
-	$("span.referencia").hide();
+	$("a.arrow").hide();
 	$("#bajada").animate({ opacity: 0 })
 
 	currentSeccion = $("section.active").attr("id");
-
 
 	d3.selectAll("circle").transition().duration(500).attr("fill", colores.neutro);
 
