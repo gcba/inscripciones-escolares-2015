@@ -65,29 +65,61 @@ function calcularCategoria(clavesCategoria, datosFiltro, index){
 		}
 	}
 	currentIndex = index - previousCirculos;
-	if (currentIndex < datosFiltro[currentNivel]) { return clavesCategoria[0]; } else { return clavesCategoria[1]; }
+	indexInvertido = niveles[currentNivel].total - currentIndex;
+
+	var currentCategoria = 0;
+	var circulosSuma = datosFiltro[currentNivel][currentCategoria];
+	while (indexInvertido > circulosSuma) {
+		currentCategoria++;
+		circulosSuma += datosFiltro[currentNivel][currentCategoria];
+	}
+	return clavesCategoria[currentCategoria];
 }
 
 function filtrar(filtro) {
 	if (currentSeccion == "general") {
 		var datosCategoria = json[currentSeccion][filtro],
-			clavesCategoria = Object.keys(datosCategoria),
-			numCirculosCategoria = datosCategoria[clavesCategoria[0]]*totalCirculos/100;
+			clavesCategoria = Object.keys(datosCategoria);
+		
+		var circulosPorCategoria = [];
+		for (var i=0; i < clavesCategoria.length; i++) {
+			circulosPorCategoria.push(datosCategoria[clavesCategoria[i]]*totalCirculos/100);
+		}	
 
 		d3.selectAll("circle").attr("class", function(d,i){
-			if (i < numCirculosCategoria) { return currentSeccion + " " + clavesCategoria[0]; } else { return currentSeccion + " " + clavesCategoria[1]; }
+			var currentCategoria = 0;
+			var circulosSuma = circulosPorCategoria[currentCategoria];
+			while (i > circulosSuma) {
+				currentCategoria++;
+				circulosSuma += circulosPorCategoria[currentCategoria];
+			}
+			return currentSeccion + " " + clavesCategoria[currentCategoria];
 		});
 		d3.selectAll("circle").transition().attr("fill", function(d,i){
-			if (i < numCirculosCategoria) { return colores[clavesCategoria[0]]; } else { return colores[clavesCategoria[1]]; }
+			var currentCategoria = 0;
+			var circulosSuma = circulosPorCategoria[currentCategoria];
+			while (i > circulosSuma) {
+				currentCategoria++;
+				circulosSuma += circulosPorCategoria[currentCategoria];
+			}
+			return colores[clavesCategoria[currentCategoria]];
 		});
 	} else {
 		var datosFiltro = [],
 			clavesCategoriaNivel = [];
 
 		for (var i=0; i<niveles.length; i++) {
-			var datosCategoriaNivel = niveles[i][filtro];
+			var nivelesKeys = Object.keys(json.niveles); 
+			var datosCategoriaNivel = json.niveles[nivelesKeys[i]][filtro];
 			clavesCategoriaNivel = Object.keys(datosCategoriaNivel);
-			datosFiltro.push(datosCategoriaNivel[clavesCategoriaNivel[0]]);
+			
+			var nivelCategoriaDatos = [];
+			var numCirculosCategoria = 0;
+			for (var j=0; j<clavesCategoriaNivel.length; j++) {
+				numCirculosCategoria = Math.round(datosCategoriaNivel[clavesCategoriaNivel[j]]*niveles[i].total/100);
+				nivelCategoriaDatos.push(numCirculosCategoria)
+			}
+			datosFiltro.push(nivelCategoriaDatos);
 		}
 
 		d3.selectAll("circle").attr("class", function(d,i){

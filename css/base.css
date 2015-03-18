@@ -4305,6 +4305,18 @@ text.caba {
 text.provincia {
   fill: #FA5037; }
 
+text.primeraOpcion {
+  fill: #FFAF19; }
+
+text.segundaOpcion {
+  fill: #A1E000; }
+
+text.terceraOpcion {
+  fill: #9500F2; }
+
+text.cuartaOpcion {
+  fill: #F20071; }
+  
 #viz-container {
   top: 10%;
   left: 0px;
