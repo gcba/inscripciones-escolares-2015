@@ -7,40 +7,64 @@
 		"procedencia": {
 			"caba": 90,
 			"provincia": 10
+		},
+		"preferencia": {
+			"primeraOpcion": 82,
+			"segundaOpcion": 7,
+			"terceraOpcion": 3,
+			"cuartaOpcion": 8
 		}
 	},
 	"niveles": {
 		"inicial": {
 			"total": 35,
 			"genero": {
-				"masculino": 52,
-				"femenino": 48
+				"femenino": 48,
+				"masculino": 52
 			},
 			"procedencia": {
-				"provincia": 7,
-				"caba": 93
+				"caba": 93,
+				"provincia": 7
+			},
+			"preferencia": {
+				"primeraOpcion": 80,
+				"segundaOpcion": 8,
+				"terceraOpcion": 4,
+				"cuartaOpcion": 8
 			}
 		},
 		"primario": {
 			"total": 37,
 			"genero": {
-				"masculino": 52,
-				"femenino": 48
+				"femenino": 48,
+				"masculino": 52
 			},
 			"procedencia": {
-				"provincia": 11,
-				"caba": 89
+				"caba": 89,
+				"provincia": 11
+			},
+			"preferencia": {
+				"primeraOpcion": 83,
+				"segundaOpcion": 6,
+				"terceraOpcion": 3,
+				"cuartaOpcion": 8
 			}
 		},
 		"secundario": {
 			"total": 28,
 			"genero": {
-				"masculino": 54,
-				"femenino": 46
+				"femenino": 46,
+				"masculino": 54
 			},
 			"procedencia": {
-				"provincia": 13,
-				"caba": 87
+				"caba": 87,
+				"provincia": 13
+			},
+			"preferencia": {
+				"primeraOpcion": 83,
+				"segundaOpcion": 6,
+				"terceraOpcion": 3,
+				"cuartaOpcion": 8
 			}
 		}
 	},

@@ -31,7 +31,11 @@ var colores = {
 	masculino: "#522CA6",
 	caba: "#2C3C63",
 	provincia: "#FA5037",
-	neutro: "#1977DD"
+	neutro: "#1977DD",
+	primeraOpcion: "#FFAF19",
+	segundaOpcion: "#A1E000",
+	terceraOpcion: "#9500F2",
+	cuartaOpcion: "#F20071"
 }
 
 // Explicativos

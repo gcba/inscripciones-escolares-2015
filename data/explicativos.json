@@ -16,6 +16,12 @@
             "procedencia": {
                 "caba": "90% Ciudad Autónoma de Buenos Aires.",
                 "provincia": "10% Otras jurisdicciones."
+            },
+            "preferencia": {
+                "primeraOpcion": "82% 1ra opción",
+                "segundaOpcion": "7% 2da opción",
+                "terceraOpcion": "3% 3ra opción",
+                "cuartaOpcion": "8% 4ta o más"
             }
         },
         "niveles": {
@@ -24,12 +30,18 @@
                     "general": "El 35% de los alumnos corresponde al nivel inicial."
                 },
                 "genero": {
-                    "femenino": "48% mujeres",
-                    "masculino": "52% varones"
+                    "masculino": "52% varones",
+                    "femenino": "48% mujeres"
                 },
                 "procedencia": {
-                    "caba": "93% Ciudad Autónoma de Buenos Aires",
-                    "provincia": "7% Otras jurisdicciones"
+                    "provincia": "7% Otras jurisdicciones",
+                    "caba": "93% Ciudad Autónoma de Buenos Aires"
+                },
+                "preferencia": {
+                    "cuartaOpcion": "8% 4ta o más",
+                    "terceraOpcion": "4% 3ra opción",
+                    "segundaOpcion": "8% 2da opción",
+                    "primeraOpcion": "80% 1ra opción"                    
                 }
             },
             "nivel1": {
@@ -37,12 +49,18 @@
                     "general": "El 37% de los alumnos corresponde al nivel primario."
                 },
                 "genero": {
-                    "femenino": "48% mujeres",
-                    "masculino": "52% varones"
+                    "masculino": "52% varones",
+                    "femenino": "48% mujeres"
                 },
                 "procedencia": {
-                    "caba": "89% Ciudad Autónoma de Buenos Aires",
-                    "provincia": "11% Otras jurisdicciones"
+                    "provincia": "11% Otras jurisdicciones",
+                    "caba": "89% Ciudad Autónoma de Buenos Aires"                    
+                },
+                "preferencia": {
+                    "cuartaOpcion": "8% 4ta o más",
+                    "terceraOpcion": "3% 3ra opción",
+                    "segundaOpcion": "6% 2da opción",
+                    "primeraOpcion": "83% 1ra opción"                    
                 }
             },
             "nivel2": {
@@ -50,12 +68,18 @@
                     "general": "El 28% de los alumnos corresponde al nivel secundario."
                 },
                 "genero": {
-                    "femenino": "46% mujeres",
-                    "masculino": "54% varones"
+                    "masculino": "54% varones",
+                    "femenino": "46% mujeres"
                 },
                 "procedencia": {
-                    "caba": "87% Ciudad Autónoma de Buenos Aires",
-                    "provincia": "13% Otras jurisdicciones"
+                    "provincia": "13% Otras jurisdicciones",
+                    "caba": "87% Ciudad Autónoma de Buenos Aires"
+                },
+                "preferencia": {
+                    "cuartaOpcion": "8% 4ta o más",
+                    "terceraOpcion": "3% 3ra opción",
+                    "segundaOpcion": "6% 2da opción",
+                    "primeraOpcion": "83% 1ra opción"
                 }
             }
         },

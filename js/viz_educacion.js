@@ -533,7 +533,12 @@ function generarInfoTextGeneral(filtro) {
 		counterLineas = 0;
 
 	for (var i = explicativosKeys.length - 1; i >= 0; i--) {
-		var lineas = calcularLineas(explicativosSeccion[explicativosKeys[i]]);
+		var lineas = "";
+		if (filtro == "preferencia") {
+			lineas = calcularLineas(explicativosSeccion[explicativosKeys[i]], 4);
+		} else {
+			lineas = calcularLineas(explicativosSeccion[explicativosKeys[i]]);
+		}
 
 		posInfoX = grillaSvg.columnasGeneral * (circulo.radio + circulo.margin) +
 				   circulo.posx + circulo.radio + circulo.margin*2 ;
@@ -689,6 +694,8 @@ function generarInfoTextNiveles(filtro) {
 				var lineas = [];
 				if (filtro == "procedencia"){
 					lineas = calcularLineas(explicativosNivel[explicativosNivelKeys[j]], 2);
+				} else if (filtro == "preferencia") {
+					lineas = calcularLineas(explicativosNivel[explicativosNivelKeys[j]], 4);
 				} else {
 					lineas = calcularLineas(explicativosNivel[explicativosNivelKeys[j]]);
 				}
