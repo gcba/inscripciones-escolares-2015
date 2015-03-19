@@ -213,6 +213,9 @@ h2 {
     @media (max-height:815px) {
       font-size: 1.21rem;
     }
+    @include breakpoint(nb) {
+      font-size: 1.05rem;
+    }
 }
 
 
@@ -257,6 +260,10 @@ text.provincia { fill: #FA5037; }
       width: 85%;
       height: 85%;
     }
+    @include breakpoint(nb) {
+      width: 80%;
+      height: 80%;
+    }
 
   }
 
@@ -277,20 +284,26 @@ text.provincia { fill: #FA5037; }
     @media (max-height:815px) {
       font-size: .85em;
     }
+      @include breakpoint(nb) {
+        margin-top: 0px;
+      }
+
 
     #dropdown-nivel {
       display: none;
       display: inline-block;
       z-index: 800;
+      @include breakpoint(nb) {
+        margin-top: 20px;
+      }
     }
   }
 }
 
 
-
 .viewing-page-3 {
   .filtro {
-    margin-top: 15px;
+    margin-top: 0px;
   }
 }
 
@@ -327,10 +340,17 @@ a.arrow:hover {
 
 .next-section {
   bottom: 50px;
+  @include breakpoint(nb) {
+    bottom: 10px;
+  }
 }
+
 .prev-section {
   top: 20px;
   display: none; 
+  @include breakpoint(nb) {
+    top: 10px;
+  }
 }
 
 #mapaCABA {
@@ -607,7 +627,6 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
 
 .ac-custom {
 
-
   .filtro-texto {
     margin-bottom: 11px;
     font-weight: bold;
@@ -705,6 +724,11 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
     -webkit-transition: opacity 0.3s;
     transition: opacity 0.3s;
   }
+
+  @include breakpoint(nb) {
+    height: 0px;
+  }
+
 }
 
 .ac-radio label::before {

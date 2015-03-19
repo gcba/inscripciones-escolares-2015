@@ -18,9 +18,17 @@
       @media (min-width: 1200px) { @content; }      // Widescreen Desktops
     }
 
+    @else if $min == nb {
+      @media (max-height: 510px) { @content; }      // Netbooks
+    }
+
+    @else if $min == mp {
+      @media (max-height: 510px) { @content; }      // map
+    }
+
     // Otherwise pass a warning to the compiler as to the appropriate options
     @else {
-      @warn "The breakpoint mixin supports the following attributes: xs, sm, md, lg";
+      @warn "The breakpoint mixin supports the following attributes: xs, sm, md, lg, nb";
     }
   }
   @else if $type == number {
