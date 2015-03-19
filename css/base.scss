@@ -219,12 +219,36 @@ h2 {
 }
 
 
-text.general, text.descripcion { fill: #1977DD;}
-text.femenino { fill: #47E4C2; }
-text.masculino { fill: #522CA6; }
-text.caba { fill: #2C3C63; }
-text.provincia { fill: #FA5037; }
+text {
+  &.general, &.descripcion {
+    fill: #1977DD;
+  }
+  &.femenino {
+    fill: #47E4C2;
 
+  }
+  &.masculino {
+    fill: #522CA6;
+  }
+  &.caba {
+    fill: #2C3C63;
+  }
+  &.provincia {
+    fill: #FA5037;
+  }
+  &.primeraOpcion {
+    fill: #2e9ccf;
+  }
+  &.segundaOpcion {
+    fill: #4ba9b2;
+  }
+  &.terceraOpcion {
+    fill: #1549a3;
+  }
+  &.cuartaOpcion {
+    fill: #a133b8;
+  }
+}
 #viz-container {
   top: 10%;
   left: 0px;
@@ -347,7 +371,7 @@ a.arrow:hover {
 
 .prev-section {
   top: 20px;
-  display: none; 
+  display: none;
   @include breakpoint(nb) {
     top: 10px;
   }
