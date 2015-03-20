@@ -33,7 +33,9 @@ module.exports = function (grunt) {
               files: {
                 'js/mapaInteractivo.min.js': 'js/mapaInteractivo.js',
                 'js/filtros.min.js': 'js/filtros.js',
-                'js/mapa_de_caba.min.js': 'js/mapa_de_caba.js'
+                'js/mapa_de_caba.min.js': 'js/mapa_de_caba.js',
+                'js/viz_educacion.min.js': 'js/viz_educacion.js',
+                'js/global_settings.min.js': 'js/global_settings.js'
               }
             }
         }
@@ -42,7 +44,7 @@ module.exports = function (grunt) {
 
 
     //Register modules to user
-    grunt.loadNpmTasks('grunt-beep');    
+    grunt.loadNpmTasks('grunt-beep');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
