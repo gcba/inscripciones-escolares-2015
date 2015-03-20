@@ -228,3 +228,4 @@ function dibujaGraficoInfowindow(dato) {
   }
  
 }
+

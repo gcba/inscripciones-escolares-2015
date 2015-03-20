@@ -4184,32 +4184,36 @@ html {
 body {
   background-image: url("img/linedpaper.png");
   background-image: url("img/linedpaper.png");
-  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif; }
-  @media (max-width: 767px) {
-    body {
-      border-bottom: 15px solid #F17E2A; } }
-  @media (min-width: 768px) {
-    body {
-      border-bottom: 15px solid #CC4A59; } }
-  @media (min-width: 992px) {
-    body {
-      border-bottom: 15px solid #772626; } }
-  @media (min-width: 1200px) {
-    body {
-      border-bottom: 15px solid #30013F; } }
-  @media (max-height: 700px) {
-    body {
-      border-bottom: 15px solid red; } }
-  @media (max-height: 815px) {
-    body {
-      border-bottom: 15px solid yellow; } }
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /*
+      // Breakpoints en la base del cuerpo, para referenciar cambios.
+      @include breakpoint(xs) {
+        border-bottom: 15px solid #F17E2A;
+      }
+      @include breakpoint(sm) {
+        border-bottom: 15px solid #CC4A59;
+      }
+      @include breakpoint(md) {
+        border-bottom: 15px solid #772626;
+      }
+      @include breakpoint(lg) {
+        border-bottom: 15px solid #30013F;
+      }
+      @media (max-height:700px) {
+        border-bottom: 15px solid red;
+      }
+      @media (max-height:815px) {
+          border-bottom: 15px solid yellow;
+      }
+  */ }
 
 html,
 body {
   width: 100%;
   height: 100%;
   padding: 0;
-  margin: 0; }
+  margin: 0;
+  background-color: #ffffff; }
 
 header {
   pointer-events: none;
@@ -4224,8 +4228,7 @@ header {
   header .header-gcba {
     height: 50px;
     padding: 10px 0;
-    overflow: visible;
-    background-color: transparent; }
+    overflow: visible; }
   header .header-inner {
     padding-right: 20px;
     padding-left: 20px; }
@@ -4308,18 +4311,6 @@ text.caba {
 text.provincia {
   fill: #FA5037; }
 
-text.primeraOpcion {
-  fill: #FFAF19; }
-
-text.segundaOpcion {
-  fill: #A1E000; }
-
-text.terceraOpcion {
-  fill: #9500F2; }
-
-text.cuartaOpcion {
-  fill: #F20071; }
-  
 #viz-container {
   top: 10%;
   left: 0px;
@@ -4348,11 +4339,13 @@ text.cuartaOpcion {
     @media (min-width: 1200px) {
       #viz-container svg#viz {
         width: 85%;
-        height: 85%; } }
+        height: 85%;
+        transform: translate(-50%, -50%); } }
     @media (max-height: 510px) {
       #viz-container svg#viz {
         width: 80%;
-        height: 80%; } }
+        height: 80%;
+        transform: translate(-50%, -45%); } }
   #viz-container .filtro {
     position: relative;
     margin: 0 auto;
@@ -4407,21 +4400,24 @@ a.arrow {
   a.arrow span.glyphicon {
     font-size: 24px; }
 
+a.arrow {
+  opacity: 0.5; }
+
 a.arrow:hover {
   text-decoration: none; }
 
 .next-section {
-  bottom: 50px; }
+  bottom: 10px; }
   @media (max-height: 510px) {
     .next-section {
-      bottom: 10px; } }
+      bottom: 5px; } }
 
 .prev-section {
-  top: 20px;
+  top: 10px;
   display: none; }
   @media (max-height: 510px) {
     .prev-section {
-      top: 10px; } }
+      top: 5px; } }
 
 #mapaCABA {
   display: none; }
