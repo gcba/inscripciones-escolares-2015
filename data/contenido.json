@@ -7,17 +7,17 @@
         },
         "general": {
             "bajada": "63.000 alumnos se incorporaron al sistema educativo de gestión estatal de la Ciudad.",
-            "anteriorSeccion": "Volvé al inicio.",
+            "anteriorSeccion": "",
             "proximaSeccion": "Mirá cómo se dividen en niveles."
         },
         "niveles": {
             "bajada": "63.000 alumnos se incorporaron al sistema educativo de gestión estatal de la Ciudad.",
-            "anteriorSeccion": "Mirá el total de nuevos alumnos.",
+            "anteriorSeccion": "",
             "proximaSeccion": "Mirá como se distribuyen por comunas."
         },
         "comuna": {
             "bajada": "63.000 alumnos se incorporaron al sistema educativo de gestión estatal de la Ciudad.",
-            "anteriorSeccion": "Mirá cómo se dividen en niveles.",
+            "anteriorSeccion": "",
             "proximaSeccion": "Navegá el mapa de las escuelas."
         },
         "mapa": {
