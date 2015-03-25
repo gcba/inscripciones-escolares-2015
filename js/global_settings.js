@@ -9,7 +9,7 @@ var grillaSvg = {
 	labelSpace: 110,
 	filasGeneral: 9,
 	columnasGeneral: 14,
-	columnasPorNivel: 4
+	columnasPorNivel: 5
 }
 
 var totalCirculos = grillaSvg.filasGeneral * grillaSvg.columnasGeneral;
@@ -32,10 +32,10 @@ var colores = {
 	caba: "#2C3C63",
 	provincia: "#FA5037",
 	neutro: "#1977DD",
-	primeraOpcion: "#FFAF19",
-	segundaOpcion: "#A1E000",
-	terceraOpcion: "#9500F2",
-	cuartaOpcion: "#F20071"
+	primeraOpcion: "#2e9ccf",
+	segundaOpcion: "#4ba9b2",
+	terceraOpcion: "#1549a3",
+	cuartaOpcion: "#a133b8"
 }
 
 // Explicativos
