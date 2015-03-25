@@ -7,7 +7,7 @@ var currentSeccion = $("section.active").attr("id");
 $(".main").onepage_scroll({
 	sectionContainer: "section",
 	easing: "ease",
-	animationTime: 1000,
+	animationTime: 300,
 	pagination: true,
 	updateURL: false,
 	beforeMove: function(index) {
@@ -382,7 +382,7 @@ function mostrarMapaComunas() {
 		})
 	});
 
-	d3.select("#mapaCABA svg").transition().duration(400).attr("x", 300);
+	d3.select("#mapaCABA svg").transition().duration(400).attr("x", 350);
 
 	// Make sure que la opcion seleccionada corresponde a los circulos activos
 	var nivelComuna = $("circle.nivel_activo").attr("nivel");

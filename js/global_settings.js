@@ -9,7 +9,7 @@ var grillaSvg = {
 	labelSpace: 110,
 	filasGeneral: 9,
 	columnasGeneral: 14,
-	columnasPorNivel: 4
+	columnasPorNivel: 5
 }
 
 var totalCirculos = grillaSvg.filasGeneral * grillaSvg.columnasGeneral;
