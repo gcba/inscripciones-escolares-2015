@@ -43,6 +43,7 @@ $(".main").onepage_scroll({
 				$("g.labels").show();
 				$("g.labels text").show();
 				$(".prev-section").show();
+				$("#dropdown-grado").show();
 				separarCirculitos();
 				break;
 			case "comuna":
@@ -447,7 +448,10 @@ function resetCambioSeccion() {
 		$("#dropdown-nivel").hide();
 		$("g.descripciones").hide();
 	}
-	if (currentSeccion != "niveles") { $("g.labels").hide(); }
+	if (currentSeccion != "niveles") { 
+		$("#dropdown-grado").hide();
+		$("g.labels").hide();
+	}
 
 	$("g.info").hide();
 
