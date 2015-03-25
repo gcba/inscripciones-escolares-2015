@@ -318,11 +318,18 @@ text {
 
 
     #dropdown-nivel {
-      display: none;
       display: inline-block;
       z-index: 800;
       @include breakpoint(nb) {
         margin-top: 20px;
+      }
+    }
+
+    #dropdown-grado {
+      display: inline-block;
+      z-index: 800;
+      @include breakpoint(nb) {
+        margin-top: 40px;
       }
     }
   }

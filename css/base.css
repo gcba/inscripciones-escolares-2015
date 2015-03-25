@@ -4372,12 +4372,17 @@ text.cuartaOpcion {
       #viz-container .filtro {
         margin-top: 0px; } }
     #viz-container .filtro #dropdown-nivel {
-      display: none;
       display: inline-block;
       z-index: 800; }
       @media (max-height: 510px) {
         #viz-container .filtro #dropdown-nivel {
           margin-top: 20px; } }
+    #viz-container .filtro #dropdown-grado {
+      display: inline-block;
+      z-index: 800; }
+      @media (max-height: 510px) {
+        #viz-container .filtro #dropdown-grado {
+          margin-top: 40px; } }
 
 .viewing-page-3 .filtro {
   margin-top: 0px; }
