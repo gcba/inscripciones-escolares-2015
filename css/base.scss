@@ -351,7 +351,7 @@ section {
   z-index: 699;
 }
 
-a.arrow {
+a.arrow , a.arrowMap{
   text-decoration: none;
   position: absolute;
   left: 0;
@@ -361,6 +361,7 @@ a.arrow {
   text-align: center;
   color: #333333;
   z-index: 701;
+  opacity: 0.5;
   span.referencia {
     font-size: 1.3rem;
     display: block;
@@ -369,10 +370,8 @@ a.arrow {
      font-size: 24px;
    }
 }
-a.arrow {
-  opacity: 0.5;
-}
-a.arrow:hover {
+
+a.arrow:hover , a.arrowMap:hover {
   text-decoration: none;
 }
 
@@ -430,7 +429,7 @@ iframe {
 }
 
 #volverDelMapa{
-    margin: 20px 50%;
+    margin: 0px 50%;
     height: 50px;
     position: inherit;
     right: 0;
