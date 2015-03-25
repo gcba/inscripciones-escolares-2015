@@ -465,9 +465,11 @@ function resetCambioSeccion() {
 		case "comuna":
 			resetCirculoMedio();
 			nivelMapaCaba = "inicial";
+			$("svg").show();
 			break;
 		case "mapa":
 			$("#viz-container").hide();
+			$("svg").hide();
 			$(".filtro").hide();
 			break;
 	}
@@ -877,3 +879,4 @@ $("#dropdown-nivel select").change(function(){
       .defer(d3.json, "data/data.json")
       .await(ready);
 });
+

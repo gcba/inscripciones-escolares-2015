@@ -10,7 +10,7 @@
    Colores
    ######## */
 
-$black: #000;
+$black: #000;    // voy a matar a quien hizo esto! ^_^
 $white: #FFF;
 
 
@@ -90,6 +90,7 @@ body {
   @include background-image(url("img/linedpaper.png"));
   font-family: $fontset-default;
 
+/*
     // Breakpoints en la base del cuerpo, para referenciar cambios.
     @include breakpoint(xs) {
       border-bottom: 15px solid #F17E2A;
@@ -109,6 +110,7 @@ body {
     @media (max-height:815px) {
         border-bottom: 15px solid yellow;
     }
+*/    
 }
 html,
 body {
@@ -116,6 +118,7 @@ body {
     height: 100%;
     padding: 0;
     margin: 0;
+    background-color: #ffffff;
 }
 
 header{
@@ -135,7 +138,6 @@ header{
         height:50px;
         padding:10px 0;
         overflow:visible;
-        background-color: transparent;
     }
 
     .header-inner {
@@ -283,10 +285,12 @@ text {
     @include breakpoint(lg) {
       width: 85%;
       height: 85%;
+      transform: translate(-50%, -50%);      
     }
     @include breakpoint(nb) {
       width: 80%;
       height: 80%;
+      transform: translate(-50%, -45%);      
     }
 
   }
@@ -358,22 +362,25 @@ a.arrow {
      font-size: 24px;
    }
 }
+a.arrow {
+  opacity: 0.5;
+}
 a.arrow:hover {
   text-decoration: none;
 }
 
 .next-section {
-  bottom: 50px;
+  bottom: 10px;
   @include breakpoint(nb) {
-    bottom: 10px;
+    bottom: 5px;
   }
 }
 
 .prev-section {
-  top: 20px;
-  display: none;
+  top: 10px;
+  display: none; 
   @include breakpoint(nb) {
-    top: 10px;
+    top: 5px;
   }
 }
 
@@ -778,18 +785,21 @@ body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
     margin-top: -17px;
     left: 10px;
     pointer-events: none;
+
     @media (max-height:700px) {
       width: 22px;
       height: 22px;
       margin-top: -14px;
       left: 8px;
     }
+
     @media (max-height:815px) {
       width: 22px;
       height: 22px;
       margin-top: -13px;
       left: 8px;
     }
+
     path {
       stroke: #1977DD;
       stroke-width: 12px;
