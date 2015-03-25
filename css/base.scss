@@ -351,7 +351,7 @@ section {
   z-index: 699;
 }
 
-a.arrow {
+a.arrow , a.arrowMapa{
   text-decoration: none;
   position: absolute;
   left: 0;
@@ -360,7 +360,8 @@ a.arrow {
   margin-right: auto;
   text-align: center;
   color: #333333;
-  z-index: 701;
+  z-index: 999;
+  opacity: 0.5;
   span.referencia {
     font-size: 1.3rem;
     display: block;
@@ -369,10 +370,7 @@ a.arrow {
      font-size: 24px;
    }
 }
-a.arrow {
-  opacity: 0.5;
-}
-a.arrow:hover {
+a.arrow:hover ,a.arrowMapa:hover {
   text-decoration: none;
 }
 
@@ -430,7 +428,7 @@ iframe {
 }
 
 #volverDelMapa{
-    margin: 20px 50%;
+    margin: 0px 50%;
     height: 50px;
     position: inherit;
     right: 0;
