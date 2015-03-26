@@ -351,19 +351,28 @@ function agregarNivelActivo() {
 	}
 
 	// sacarle nivel_activo a los textos que estaban activo antes, si habia
-	var textosActivos = $("text.nivel_activo");
-	if (textosActivos.length != 0) {
-		var removedClass = $("text.nivel_activo").attr("class").replace(new RegExp('(\\s|^)' + "nivel_activo" + '(\\s|$)', 'g'), '$2');
-		d3.selectAll("text." + removedClass.split(" ").join(".") + ".nivel_activo").attr("class", removedClass);
+	var textosLabelsActivos = $("g.labels text.nivel_activo");
+	if (textosLabelsActivos.length != 0) {
+		var removedClass = $("g.labels text.nivel_activo").attr("class").replace(new RegExp('(\\s|^)' + "nivel_activo" + '(\\s|$)', 'g'), '$2');
+		d3.selectAll("g.labels text." + removedClass.split(" ").join(".") + ".nivel_activo").attr("class", removedClass);
+	}
+	var textosInfoActivos = $("g.info text.nivel_activo");
+	if (textosInfoActivos.length != 0) {
+		var removedClass = $("g.info text.nivel_activo").attr("class").replace(new RegExp('(\\s|^)' + "nivel_activo" + '(\\s|$)', 'g'), '$2');
+		d3.selectAll("g.info text." + removedClass.split(" ").join(".") + ".nivel_activo").attr("class", removedClass);
 	}
 
 	var circulosNivel = $("circle[nivel='" + nivelSeleccionado + "']");
 	var claseNivel = circulosNivel.attr("class");
 	d3.selectAll(circulosNivel).attr("class", claseNivel + " nivel_activo");
 
-	var textosNivel = $("text[nivel='" + nivelSeleccionado + "']");
-	var claseNivel = textosNivel.attr("class");
-	d3.selectAll(textosNivel).attr("class", claseNivel + " nivel_activo");
+	var textosLabelsNivel = $("g.labels text[nivel='" + nivelSeleccionado + "']");
+	var claseNivel = textosLabelsNivel.attr("class");
+	d3.selectAll(textosLabelsNivel).attr("class", claseNivel + " nivel_activo");
+	
+	var textosInfoNivel = $("g.info text[nivel='" + nivelSeleccionado + "']");
+	var claseNivel = textosInfoNivel.attr("class");
+	d3.selectAll(textosInfoNivel).attr("class", claseNivel + " nivel_activo");
 }
 
 function mostrarMapaComunas() {
@@ -894,6 +903,7 @@ $("#dropdown-nivel select").change(function(){
 	d3.selectAll("circle").attr("fill", colores.neutro).attr("class", function(){
 		return currentSeccion + " nivel" + d3.select(this).attr("nivel") + " general";
 	});
+
 	$("g.info").hide();
 
 	agregarNivelActivo();
