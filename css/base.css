@@ -4315,39 +4315,39 @@ text.terceraOpcion, circle.terceraOpcion {
 text.cuartaOpcion, circle.cuartaOpcion {
   fill: #a133b8; }
 text.lactario, circle.lactario {
-  fill: "#233150"; }
+  fill: #233150; }
 text.sala1, circle.sala1 {
-  fill: "#3F568E"; }
+  fill: #3F568E; }
 text.sala2, circle.sala2 {
-  fill: "#2F416B"; }
+  fill: #2F416B; }
 text.sala3, circle.sala3 {
-  fill: "#5473BD"; }
+  fill: #5473BD; }
 text.sala4, circle.sala4 {
-  fill: "#7099FC"; }
+  fill: #7099FC; }
 text.sala5, circle.sala5 {
-  fill: "#8DADFD"; }
+  fill: #8DADFD; }
 text.grado1, circle.grado1 {
-  fill: "#4B1A06"; }
+  fill: #4B1A06; }
 text.grado2, circle.grado2 {
-  fill: "#852F0A"; }
+  fill: #852F0A; }
 text.grado3, circle.grado3 {
-  fill: "#642308"; }
+  fill: #642308; }
 text.grado4, circle.grado4 {
-  fill: "#B23F0D"; }
+  fill: #B23F0D; }
 text.grado5, circle.grado5 {
-  fill: "#ED5411"; }
+  fill: #ED5411; }
 text.grado6, circle.grado6 {
-  fill: "#F17641"; }
+  fill: #F17641; }
 text.grado7, circle.grado7 {
-  fill: "#F49167"; }
+  fill: #F49167; }
 text.ano1, circle.ano1 {
-  fill: "#473372"; }
+  fill: #473372; }
 text.ano2, circle.ano2 {
-  fill: "#5F4498"; }
+  fill: #5F4498; }
 text.ano3, circle.ano3 {
-  fill: "#7E5BCA"; }
+  fill: #7E5BCA; }
 text.ano4, circle.ano4 {
-  fill: "#9E84D7"; }
+  fill: #9E84D7; }
 
 #viz-container {
   top: 10%;
@@ -4908,7 +4908,7 @@ iframe {
   z-index: 999; }
 
 ul.radio-inline:last-child {
-  display: none; }
+  display: inline; }
 
 .main {
   pointer-events: none;
