@@ -4296,24 +4296,58 @@ h2 {
     h2 {
       font-size: 1.05rem; } }
 
-text.general, text.descripcion {
+text.general, text.descripcion, circle.general, circle.descripcion {
   fill: #1977DD; }
-text.femenino {
+text.femenino, circle.femenino {
   fill: #47E4C2; }
-text.masculino {
+text.masculino, circle.masculino {
   fill: #522CA6; }
-text.caba {
+text.caba, circle.caba {
   fill: #2C3C63; }
-text.provincia {
+text.provincia, circle.provincia {
   fill: #FA5037; }
-text.primeraOpcion {
+text.primeraOpcion, circle.primeraOpcion {
   fill: #2e9ccf; }
-text.segundaOpcion {
+text.segundaOpcion, circle.segundaOpcion {
   fill: #4ba9b2; }
-text.terceraOpcion {
+text.terceraOpcion, circle.terceraOpcion {
   fill: #1549a3; }
-text.cuartaOpcion {
+text.cuartaOpcion, circle.cuartaOpcion {
   fill: #a133b8; }
+text.lactario, circle.lactario {
+  fill: #233150; }
+text.sala1, circle.sala1 {
+  fill: #2F416B; }
+text.sala2, circle.sala2 {
+  fill: #3F568E; }
+text.sala3, circle.sala3 {
+  fill: #5473BD; }
+text.sala4, circle.sala4 {
+  fill: #7099FC; }
+text.sala5, circle.sala5 {
+  fill: #8DADFD; }
+text.grado1, circle.grado1 {
+  fill: #4B1A06; }
+text.grado2, circle.grado2 {
+  fill: #642308; }
+text.grado3, circle.grado3 {
+  fill: #852F0A; }
+text.grado4, circle.grado4 {
+  fill: #B23F0D; }
+text.grado5, circle.grado5 {
+  fill: #ED5411; }
+text.grado6, circle.grado6 {
+  fill: #F17641; }
+text.grado7, circle.grado7 {
+  fill: #F49167; }
+text.ano1, circle.ano1 {
+  fill: #473372; }
+text.ano2, circle.ano2 {
+  fill: #5F4498; }
+text.ano3, circle.ano3 {
+  fill: #7E5BCA; }
+text.ano4, circle.ano4 {
+  fill: #9E84D7; }
 
 #viz-container {
   top: 10%;
@@ -4874,8 +4908,7 @@ iframe {
   z-index: 999; }
 
 ul.radio-inline:last-child {
-  display: none;
-}
+  display: inline; }
 
 .main {
   pointer-events: none;

@@ -95,15 +95,6 @@ function filtrar(filtro) {
 			}
 			return currentSeccion + " " + clavesCategoria[currentCategoria];
 		});
-		d3.selectAll("circle").transition().attr("fill", function(d,i){
-			var currentCategoria = 0;
-			var circulosSuma = circulosPorCategoria[currentCategoria];
-			while (i > circulosSuma) {
-				currentCategoria++;
-				circulosSuma += circulosPorCategoria[currentCategoria];
-			}
-			return colores[clavesCategoria[currentCategoria]];
-		});
 	} else {
 		var datosFiltro = [],
 			clavesCategoriaNiveles = [];
@@ -132,9 +123,6 @@ function filtrar(filtro) {
 				nuevaClase += " nivel_activo";
 			}
 			return nuevaClase;
-		});
-		d3.selectAll("circle").transition().attr("fill", function(d,i) {
-			return colores[calcularCategoria(clavesCategoriaNivel, datosFiltro, i)];
 		});
 
 		if (currentSeccion == "comuna") {

@@ -10,18 +10,18 @@
                 "general": "Con este conjunto de círculos representamos a los 63.000 alumnos nuevos."
             },
             "genero": {
-                "femenino": "48% mujeres",
-                "masculino": "52% varones"
+                "femenino": "Mujeres: 48%",
+                "masculino": "Varones: 52%"
             },
             "procedencia": {
-                "caba": "90% Ciudad Autónoma de Buenos Aires.",
-                "provincia": "10% Otras jurisdicciones."
+                "caba": "Ciudad Autónoma de Buenos Aires: 90%",
+                "provincia": "Otras jurisdicciones: 10%."
             },
             "preferencia": {
-                "primeraOpcion": "82% 1ra opción",
-                "segundaOpcion": "7% 2da opción",
-                "terceraOpcion": "3% 3ra opción",
-                "cuartaOpcion": "8% 4ta o más"
+                "primeraOpcion": "1ra opción: 82%",
+                "segundaOpcion": "2da opción: 7%",
+                "terceraOpcion": "3ra opción: 3%",
+                "cuartaOpcion": "4ta o más: 8%"
             }
         },
         "niveles": {
@@ -30,26 +30,26 @@
                     "general": "El 35% de los alumnos corresponde al nivel inicial."
                 },
                 "genero": {
-                    "masculino": "52% varones",
-                    "femenino": "48% mujeres"
+                    "masculino": "Varones: 52%",
+                    "femenino": "Mujeres: 48%"
                 },
                 "procedencia": {
-                    "provincia": "7% Otras jurisdicciones",
-                    "caba": "93% Ciudad Autónoma de Buenos Aires"
+                    "provincia": "Otras jurisdicciones: 7%",
+                    "caba": "Ciudad Autónoma de Buenos Aires: 93%"
                 },
                 "preferencia": {
-                    "cuartaOpcion": "8% 4ta o más",
-                    "terceraOpcion": "4% 3ra opción",
-                    "segundaOpcion": "8% 2da opción",
-                    "primeraOpcion": "80% 1ra opción"                    
+                    "cuartaOpcion": "4ta o más: 8%",
+                    "terceraOpcion": "3ra opción: 4%",
+                    "segundaOpcion": "2da opción: 8%",
+                    "primeraOpcion": "1ra opción: 80%"                      
                 },
                 "grados": {
-                    "lactario": "5% Lactario",
-                    "sala-1": "3% 1 año",
-                    "sala-2": "15% 2 años",
-                    "sala-3": "30% 3 años",
-                    "sala-4": "29% 4 años",
-                    "sala-5": "18% 5 años" 
+                    "sala5": "5 años: 18%",
+                    "sala4": "4 años: 29%",
+                    "sala3": "3 años: 30%",
+                    "sala2": "2 años: 15%",
+                    "sala1": "1 año: 3%",
+                    "lactario": "Lactario: 5%"
                 }
             },
             "nivel1": {
@@ -57,27 +57,27 @@
                     "general": "El 37% de los alumnos corresponde al nivel primario."
                 },
                 "genero": {
-                    "masculino": "52% varones",
-                    "femenino": "48% mujeres"
+                    "masculino": "Varones: 52%",
+                    "femenino": "Mujeres: 48%"
                 },
                 "procedencia": {
-                    "provincia": "11% Otras jurisdicciones",
-                    "caba": "89% Ciudad Autónoma de Buenos Aires"                    
+                    "provincia": "Otras jurisdicciones: 11%",
+                    "caba": "Ciudad Autónoma de Buenos Aires: 89%"                    
                 },
                 "preferencia": {
-                    "cuartaOpcion": "8% 4ta o más",
-                    "terceraOpcion": "3% 3ra opción",
-                    "segundaOpcion": "6% 2da opción",
-                    "primeraOpcion": "83% 1ra opción"                    
+                    "cuartaOpcion": "4ta o más: 8%",
+                    "terceraOpcion": "3ra opción: 3%",
+                    "segundaOpcion": "2da opción: 6%",
+                    "primeraOpcion": "1ra opción: 83%"
                 },
                 "grados": {
-                    "1-grado": "87% 1er grado",
-                    "2-grado": "3% 2do grado",
-                    "3-grado": "2% 3er grado",
-                    "4-grado": "2% 4to grado",
-                    "5-grado": "2% 5to grado",
-                    "6-grado": "2% 6to grado",
-                    "7-grado": "2% 7mo grado"
+                    "grado7": "7mo grado: 2%",
+                    "grado6": "6to grado: 2%",
+                    "grado5": "5to grado: 2%",
+                    "grado4": "4to grado: 2%",
+                    "grado3": "3er grado: 2%",
+                    "grado2": "2do grado: 3%",
+                    "grado1": "1er grado: 87%"
                 }
             },
             "nivel2": {
@@ -85,24 +85,24 @@
                     "general": "El 28% de los alumnos corresponde al nivel secundario."
                 },
                 "genero": {
-                    "masculino": "54% varones",
-                    "femenino": "46% mujeres"
+                    "masculino": "Varones: 54%",
+                    "femenino": "Mujeres: 46%"
                 },
                 "procedencia": {
-                    "provincia": "13% Otras jurisdicciones",
-                    "caba": "87% Ciudad Autónoma de Buenos Aires"
+                    "provincia": "Otras jurisdicciones: 13%",
+                    "caba": "Ciudad Autónoma de Buenos Aires: 87%"
                 },
                 "preferencia": {
-                    "cuartaOpcion": "8% 4ta o más",
-                    "terceraOpcion": "3% 3ra opción",
-                    "segundaOpcion": "6% 2da opción",
-                    "primeraOpcion": "83% 1ra opción"
+                    "cuartaOpcion": "4ta o más: 8%",
+                    "terceraOpcion": "3ra opción: 3%",
+                    "segundaOpcion": "2da opción: 6%",
+                    "primeraOpcion": "1ra opción: 83%"
                 },
                 "grados": {
-                    "1-año": "95% 1er año",
-                    "2-año": "2% 2do año",
-                    "3-año": "2% 3er año",
-                    "4-año": "1% 4to año"
+                    "ano4": "4to año: 1%",
+                    "ano3": "3er año: 2%",
+                    "ano2": "2do año: 2%",
+                    "ano1": "1er año: 95%"
                 }
             }
         },
