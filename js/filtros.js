@@ -106,12 +106,12 @@ function filtrar(filtro) {
 		});
 	} else {
 		var datosFiltro = [],
-			clavesCategoriaNivel = [];
+			clavesCategoriaNiveles = [];
 
 		for (var i=0; i<niveles.length; i++) {
 			var nivelesKeys = Object.keys(json.niveles); 
 			var datosCategoriaNivel = json.niveles[nivelesKeys[i]][filtro];
-			clavesCategoriaNivel = Object.keys(datosCategoriaNivel);
+			var clavesCategoriaNivel = Object.keys(datosCategoriaNivel);
 			
 			var nivelCategoriaDatos = [];
 			var numCirculosCategoria = 0;
@@ -120,12 +120,13 @@ function filtrar(filtro) {
 				nivelCategoriaDatos.push(numCirculosCategoria)
 			}
 			datosFiltro.push(nivelCategoriaDatos);
+			clavesCategoriaNiveles.push(clavesCategoriaNivel);
 		}
 
 		d3.selectAll("circle").attr("class", function(d,i){
 			var nivel = d3.select(this).attr("nivel"),
 				esNivelActivo = this.classList.contains("nivel_activo"),
-				categoriaCirculo = calcularCategoria(clavesCategoriaNivel, datosFiltro, i),
+				categoriaCirculo = calcularCategoria(clavesCategoriaNiveles[nivel], datosFiltro, i),
 				nuevaClase = currentSeccion + " nivel" + nivel + " " + categoriaCirculo;
 			if (esNivelActivo) {
 				nuevaClase += " nivel_activo";

@@ -16,8 +16,16 @@
 		}
 	},
 	"niveles": {
-		"inicial": {
+		"inicial": {			
 			"total": 35,
+			"grados": {
+				"lactario": 5,
+				"sala-1": 3,
+				"sala-2": 15,
+				"sala-3": 30,
+				"sala-4": 29,
+				"sala-5": 18 
+			},
 			"genero": {
 				"femenino": 48,
 				"masculino": 52
@@ -35,6 +43,15 @@
 		},
 		"primario": {
 			"total": 37,
+			"grados": {
+				"1-grado": 87,
+				"2-grado": 3,
+				"3-grado": 2,
+				"4-grado": 2,
+				"5-grado": 2,
+				"6-grado": 2,
+				"7-grado": 2
+			},
 			"genero": {
 				"femenino": 48,
 				"masculino": 52
@@ -52,6 +69,12 @@
 		},
 		"secundario": {
 			"total": 28,
+			"grados": {
+				"1-año": 95,
+				"2-año": 2,
+				"3-año": 2,
+				"4-año": 1
+			},
 			"genero": {
 				"femenino": 46,
 				"masculino": 54
@@ -121,5 +144,4 @@
 			"15": 664
 		}
 	}
-
 }
