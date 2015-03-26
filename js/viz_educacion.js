@@ -350,19 +350,31 @@ function agregarNivelActivo() {
 		d3.selectAll("circle." + removedClass.split(" ").join(".") + ".nivel_activo").attr("class", removedClass);
 	}
 
+	// sacarle nivel_activo a los textos que estaban activo antes, si habia
+	var textosActivos = $("text.nivel_activo");
+	if (textosActivos.length != 0) {
+		var removedClass = $("text.nivel_activo").attr("class").replace(new RegExp('(\\s|^)' + "nivel_activo" + '(\\s|$)', 'g'), '$2');
+		d3.selectAll("text." + removedClass.split(" ").join(".") + ".nivel_activo").attr("class", removedClass);
+	}
+
 	var circulosNivel = $("circle[nivel='" + nivelSeleccionado + "']");
 	var claseNivel = circulosNivel.attr("class");
 	d3.selectAll(circulosNivel).attr("class", claseNivel + " nivel_activo");
+
+	var textosNivel = $("text[nivel='" + nivelSeleccionado + "']");
+	var claseNivel = textosNivel.attr("class");
+	d3.selectAll(textosNivel).attr("class", claseNivel + " nivel_activo");
 }
 
 function mostrarMapaComunas() {
 	// En este caso, el usuario llegó a esta sección bajando. Sin seleccionar un nivel.
 	if ($("circle.nivel_activo").length == 0){
 		// Seleccionamos el nivel inicial como nivel "default"
-		var nivelComunas = 0;
-		var circulosNivel = $("circle[nivel='" + nivelComunas + "']");
-		var claseNivel = circulosNivel.attr("class");
-		d3.selectAll(circulosNivel).attr("class", claseNivel + " nivel_activo");
+		var circulosNivel = $("circle[nivel='0']");
+		d3.selectAll(circulosNivel).attr("class", "comuna nivel0 general nivel_activo");
+
+		var textoNivel = $("g.labels text[nivel='0']");
+		d3.selectAll(textoNivel).attr("class", "comuna nivel0 general nivel_activo");
 	}
 	$(".circulo").hide();
 	$("circle.nivel_activo").parent().show();
@@ -831,6 +843,9 @@ function generarInfoTextComuna(filtro) {
 		}
 	} else {
 		generarInfoTextNiveles(filtro);
+		d3.selectAll("g.labels text[nivel='"+nivelComuna+"']").attr("class", function(){
+			return d3.select(this).attr("class") + " nivel_activo";
+		});
 		d3.selectAll("g.info text[nivel='"+nivelComuna+"']").attr("class", function(){
 			return d3.select(this).attr("class") + " nivel_activo";
 		});
