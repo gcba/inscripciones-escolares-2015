@@ -4317,9 +4317,9 @@ text.cuartaOpcion, circle.cuartaOpcion {
 text.lactario, circle.lactario {
   fill: #233150; }
 text.sala1, circle.sala1 {
-  fill: #3F568E; }
-text.sala2, circle.sala2 {
   fill: #2F416B; }
+text.sala2, circle.sala2 {
+  fill: #3F568E; }
 text.sala3, circle.sala3 {
   fill: #5473BD; }
 text.sala4, circle.sala4 {
@@ -4329,9 +4329,9 @@ text.sala5, circle.sala5 {
 text.grado1, circle.grado1 {
   fill: #4B1A06; }
 text.grado2, circle.grado2 {
-  fill: #852F0A; }
-text.grado3, circle.grado3 {
   fill: #642308; }
+text.grado3, circle.grado3 {
+  fill: #852F0A; }
 text.grado4, circle.grado4 {
   fill: #B23F0D; }
 text.grado5, circle.grado5 {
