@@ -43,7 +43,7 @@ $(".main").onepage_scroll({
 				$("g.labels").show();
 				$("g.labels text").show();
 				$(".prev-section").show();
-				$("#dropdown-grado").show();
+				$("#radio-grados").parent().show();
 				separarCirculitos();
 				break;
 			case "comuna":
@@ -449,8 +449,8 @@ function resetCambioSeccion() {
 		$("g.descripciones").hide();
 	}
 	if (currentSeccion != "niveles") { 
-		$("#dropdown-grado").hide();
 		$("g.labels").hide();
+		$("#radio-grados").parent().hide();
 	}
 
 	$("g.info").hide();
@@ -678,9 +678,11 @@ function generarInfoTextNiveles(filtro) {
 		}
 	} else {
 		var filtroKeys = [];
+		var explicativosNivelesKeys = [];
 		for (var i=0; i<nivelesKeys.length; i++) {
 			var explicativosNivel = explicativosSeccion[nivelesKeys[i]][filtro],
 				explicativosNivelKeys = Object.keys(explicativosNivel);
+			explicativosNivelesKeys.push(explicativosNivelKeys);	
 			for (var j=0; j<explicativosNivelKeys.length; j++) {
 				filtroKeys.push(explicativosNivelKeys[j]);
 			}
@@ -710,7 +712,15 @@ function generarInfoTextNiveles(filtro) {
 				posInfoY = grillaSvg.alto - grillaSvg.labelSpace -
 						   counterLineas*infoDetails.verticalMargin;
 
-				var texto = d3.selectAll("g.info text").filter(function(d,index){return index == i*explicativosNivelKeys.length + j});
+				var texto = d3.selectAll("g.info text").filter(function(d,index){
+					var count = 0,
+						sumaExplicativos = 0;
+					while (i > count) {
+						sumaExplicativos += explicativosNivelesKeys[count].length;
+						count ++;
+					}
+					return index == sumaExplicativos + j;
+				});
 				texto.text(lineas[0])
 					.attr("x", posInfoX)
 					.attr("y", posInfoY - (lineas.length-1)*infoDetails.verticalMargin)

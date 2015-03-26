@@ -930,6 +930,10 @@ iframe {
   z-index: 999;
 }
 
+ul.radio-inline:last-child {
+  display: none;
+}
+
 .main{
   pointer-events: none;
   z-index: 800;
