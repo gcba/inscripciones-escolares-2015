@@ -402,6 +402,7 @@ a.arrow:hover ,a.arrowMapa:hover {
 .prev-section {
   top: 10px;
   display: none; 
+  width: 50px;
   @include breakpoint(nb) {
     top: 5px;
   }

@@ -4455,7 +4455,8 @@ a.arrow:hover, a.arrowMapa:hover {
 
 .prev-section {
   top: 10px;
-  display: none; }
+  display: none;
+  width: 50px; }
   @media (max-height: 510px) {
     .prev-section {
       top: 5px; } }
