@@ -1,22 +1,22 @@
 {
     "secciones": {
         "landing": {
-            "bajada": "El sistema de inscripción en línea está destinado a alumnos que ingresan por primera vez a una escuela de gestión estatal o quienes cambian de nivel educativo. Este año, 62.745 nuevos alumnos ingresaron a las escuelas de la Ciudad a través de este sistema.",
+            "bajada": "El sistema de inscripción en línea está destinado a alumnos que ingresan por primera vez a una escuela de gestión estatal o quienes cambian de nivel educativo. Este año, 66.191 nuevos alumnos ingresaron a las escuelas de la Ciudad a través de este sistema.",
             "anteriorSeccion": "",
             "proximaSeccion": "Mirá el total de nuevos alumnos."
         },
         "general": {
-            "bajada": "62.745 alumnos se incorporaron al sistema educativo de gestión estatal de la Ciudad.",
+            "bajada": "66.191 alumnos se incorporaron al sistema educativo de gestión estatal de la Ciudad.",
             "anteriorSeccion": "",
             "proximaSeccion": "Mirá cómo se dividen en niveles."
         },
         "niveles": {
-            "bajada": "62.745 alumnos se incorporaron al sistema educativo de gestión estatal de la Ciudad.",
+            "bajada": "66.191 alumnos se incorporaron al sistema educativo de gestión estatal de la Ciudad.",
             "anteriorSeccion": "",
             "proximaSeccion": "Mirá como se distribuyen por comunas."
         },
         "comuna": {
-            "bajada": "62.745 alumnos se incorporaron al sistema educativo de gestión estatal de la Ciudad.",
+            "bajada": "66.191 alumnos se incorporaron al sistema educativo de gestión estatal de la Ciudad.",
             "anteriorSeccion": "",
             "proximaSeccion": "Navegá el mapa de las escuelas."
         },

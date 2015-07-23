@@ -54,12 +54,12 @@ function ready(error, comunas, data) {
             return color(data.comunas[nivelActivo][d.properties.comuna]);
         })
         .attr("title", function(d) {
-            return data.comunas[nivelActivo][d.properties.comuna] + " nuevos alumnos";
+            return data.comunas[nivelActivo][d.properties.comuna] + "% nuevos alumnos";
         })
         .on("mouseover", function(d) {
             $("#tooltipCABA").show();
             d3.select(this).style("stroke", "#ffffff");
-            var htmlStr = "<div style='font-size: 10px; text-transform: uppercase; color: #999999;'> comuna " + d.properties.comuna + " </div> " + data.comunas[nivelActivo][d.properties.comuna] + " nuevos alumnos";
+            var htmlStr = "<div style='font-size: 10px; text-transform: uppercase; color: #999999;'> comuna " + d.properties.comuna + " </div> " + data.comunas[nivelActivo][d.properties.comuna] + "% nuevos alumnos";
             $("#tooltipCABA").html(htmlStr);
         })
         .on("mouseout", function() {

@@ -562,7 +562,7 @@ function generarInfoTextGeneral(filtro) {
 	for (var i = explicativosKeys.length - 1; i >= 0; i--) {
 		var lineas = "";
 		if (filtro == "preferencia") {
-			lineas = calcularLineas(explicativosSeccion[explicativosKeys[i]], 4);
+			lineas = calcularLineas(explicativosSeccion[explicativosKeys[i]], 5);
 		} else {
 			lineas = calcularLineas(explicativosSeccion[explicativosKeys[i]]);
 		}
@@ -724,7 +724,7 @@ function generarInfoTextNiveles(filtro) {
 				if (filtro == "procedencia"){
 					lineas = calcularLineas(explicativosNivel[explicativosNivelKeys[j]], 2);
 				} else if (filtro == "preferencia") {
-					lineas = calcularLineas(explicativosNivel[explicativosNivelKeys[j]], 4);
+					lineas = calcularLineas(explicativosNivel[explicativosNivelKeys[j]], 5);
 				} else {
 					lineas = calcularLineas(explicativosNivel[explicativosNivelKeys[j]]);
 				}

@@ -9,21 +9,20 @@
 			"provincia": 10
 		},
 		"preferencia": {
-			"primeraOpcion": 82,
-			"segundaOpcion": 7,
-			"terceraOpcion": 3,
-			"cuartaOpcion": 8
+			"primeraOpcion": 81,
+			"segundaOpcion": 10,
+			"terceraOpcion": 9
 		}
 	},
 	"niveles": {
 		"inicial": {			
-			"total": 35,
+			"total": 37,
 			"grados": {
 				"lactario": 5,
 				"sala1": 3,
 				"sala2": 15,
-				"sala3": 30,
-				"sala4": 29,
+				"sala3": 29,
+				"sala4": 30,
 				"sala5": 18 
 			},
 			"genero": {
@@ -35,18 +34,17 @@
 				"provincia": 7
 			},
 			"preferencia": {
-				"primeraOpcion": 80,
-				"segundaOpcion": 8,
-				"terceraOpcion": 4,
-				"cuartaOpcion": 8
+				"primeraOpcion": 78,
+				"segundaOpcion": 11,
+				"terceraOpcion": 11
 			}
 		},
 		"primario": {
-			"total": 37,
+			"total": 36,
 			"grados": {
-				"grado1": 87,
-				"grado2": 3,
-				"grado3": 2,
+				"grado1": 86,
+				"grado2": 4,
+				"grado3": 3,
 				"grado4": 2,
 				"grado5": 2,
 				"grado6": 2,
@@ -61,14 +59,13 @@
 				"provincia": 11
 			},
 			"preferencia": {
-				"primeraOpcion": 83,
-				"segundaOpcion": 6,
-				"terceraOpcion": 3,
-				"cuartaOpcion": 8
+				"primeraOpcion": 82,
+				"segundaOpcion": 9,
+				"terceraOpcion": 9
 			}
 		},
 		"secundario": {
-			"total": 28,
+			"total": 27,
 			"grados": {
 				"ano1": 95,
 				"ano2": 2,
@@ -84,64 +81,63 @@
 				"provincia": 13
 			},
 			"preferencia": {
-				"primeraOpcion": 83,
-				"segundaOpcion": 6,
-				"terceraOpcion": 3,
-				"cuartaOpcion": 8
+				"primeraOpcion": 85,
+				"segundaOpcion": 9,
+				"terceraOpcion": 6
 			}
 		}
 	},
 	"comunas": {
 		"inicial":{
-			"1": 1514,
-			"2": 448,
-			"3": 1289,
-			"4": 2871,
-			"5": 1180,
-			"6": 1097,
-			"7": 1573,
-			"8": 3601,
-			"9": 1392,
-			"10": 1463,
-			"11": 1161,
-			"12": 1242,
-			"13": 910,
-			"14": 1138,
-			"15": 824
+			"1": 7,
+			"2": 2,
+			"3": 6,
+			"4": 13,
+			"5": 5,
+			"6": 5,
+			"7": 7,
+			"8": 17,
+			"9": 6,
+			"10": 7,
+			"11": 5,
+			"12": 6,
+			"13": 4,
+			"14": 5,
+			"15": 4
 		},
 		"primario":{
-			"1": 1469,
-			"2": 510,
-			"3": 1596,
-			"4": 2987,
-			"5": 1039,
-			"6": 1069,
-			"7": 1768,
-			"8": 2764,
-			"9": 1848,
-			"10": 1684,
-			"11": 1641,
-			"12": 1554,
-			"13": 1068,
-			"14": 1188,
-			"15": 1108
+			"1": 6,
+			"2": 2,
+			"3": 7,
+			"4": 13,
+			"5": 4,
+			"6": 5,
+			"7": 8,
+			"8": 12,
+			"9": 8,
+			"10": 7,
+			"11": 7,
+			"12": 6,
+			"13": 4,
+			"14": 5,
+			"15": 5
 		},
 		"secundario":{
-			"1": 1377,
-			"2": 399,
-			"3": 1648,
-			"4": 1995,
-			"5": 806,
-			"6": 1196,
-			"7": 1242,
-			"8": 1591,
-			"9": 1631,
-			"10": 1288,
-			"11": 958,
-			"12": 821,
-			"13": 1293,
-			"14": 840,
-			"15": 664
+			"1": 8,
+			"2": 2,
+			"3": 9,
+			"4": 11,
+			"5": 5,
+			"6": 7,
+			"7": 7,
+			"8": 9,
+			"9": 9,
+			"10": 7,
+			"11": 5,
+			"12": 5,
+			"13": 7,
+			"14": 5,
+			"15": 4
 		}
 	}
 }
