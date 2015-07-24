@@ -1,5 +1,6 @@
-@import "../public/components/bourbon/app/assets/stylesheets/_bourbon.scss";
-@import "../public/components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins";
+@import "../node_modules/node-bourbon/node_modules/bourbon/app/assets/stylesheets/_bourbon.scss";
+@import "../node_modules/bootstrap/less/mixins";
+
 @import "mixins/breakpoint.scss";
 @import "animate.min.css";
 
