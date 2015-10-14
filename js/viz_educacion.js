@@ -23,9 +23,14 @@ $(".main").onepage_scroll({
 		$(".prev-section span.referencia").text(contenido.secciones[currentSeccion].anteriorSeccion).fadeIn();
 		$(".next-section span.referencia").text(contenido.secciones[currentSeccion].proximaSeccion).fadeIn();
 		switch(currentSeccion) {
+			case "barchart":
+				$(".prev-section").hide();
+				console.log("hiding circulos");
+				$(".circulo").hide();
+				break;
 			case "landing":
 				showOneCirculito();
-				$(".prev-section").hide();
+				$(".prev-section").show();
 				break;
 			case "general":
 				$(".circulo").show();
@@ -219,6 +224,8 @@ var infoGroup = svgGeneral.append("g").attr("class", "info animated fadeInUp"),
 	descripcionesGroup = svgGeneral.append("g").attr("class", "descripciones animated fadeInDown");
 
 generarInfoText();
+$(".prev-section").hide();
+$(".circulo").hide();		
 
 /***********************************/
 
@@ -234,6 +241,7 @@ function endall(transition, callback) {
 }
 
 function showOneCirculito() {
+	console.log("showing one circulito");
 	d3.selectAll("circle").attr("class", currentSeccion + " " + "general");
 	$(".circulo").hide();
 	grupoCirculoMedio.style("display", "block");
@@ -477,6 +485,7 @@ function resetCambioSeccion() {
 	$("g.info").hide();
 
 	switch(currentSeccion) {
+		case "barchart":
 		case "landing":
 			$(".filtro").hide();
 			break;
