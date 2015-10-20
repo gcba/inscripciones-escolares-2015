@@ -25,8 +25,8 @@ $(".main").onepage_scroll({
 		switch(currentSeccion) {
 			case "barchart":
 				$(".prev-section").hide();
-				console.log("hiding circulos");
 				$(".circulo").hide();
+				$("#barChart").fadeIn();
 				break;
 			case "landing":
 				showOneCirculito();
@@ -93,6 +93,9 @@ var grilla = svgGeneral.append("g").attr("class", "contenedor");
 
 var mapaComunas = svgGeneral.append("g")
 					.attr("id", "mapaCABA");
+
+var barChart = svgGeneral.append("g")
+						.attr("id", "barChart");
 
 /*
  *	Datos
@@ -241,7 +244,6 @@ function endall(transition, callback) {
 }
 
 function showOneCirculito() {
-	console.log("showing one circulito");
 	d3.selectAll("circle").attr("class", currentSeccion + " " + "general");
 	$(".circulo").hide();
 	grupoCirculoMedio.style("display", "block");
@@ -256,7 +258,7 @@ function hideOneCirculitoYJuntar() {
 }
 
 function juntarCirculitos() {
-	d3.selectAll("rect").transition().attr("x", function(d,i){
+	d3.selectAll("g.contenedor rect").transition().attr("x", function(d,i){
 		return circulo.posx + (circulo.margin+circulo.radio) * ((i % grillaSvg.columnasGeneral)+1) - circulo.radio - (circulo.margin-circulo.radio)/2;
 	}).attr("y", function(d,i){
 		return circulo.posy + (circulo.margin+circulo.radio) * (Math.floor(i/grillaSvg.columnasGeneral)+1) - circulo.radio - (circulo.margin-circulo.radio)/2;
@@ -333,7 +335,7 @@ function separarCirculitos() {
 		return calcularNuevaPosicion("y", i);
 	})
 	.call(endall, function() {
-		d3.selectAll("rect").attr("x", function(d,i){
+		d3.selectAll("g.contenedor rect").attr("x", function(d,i){
 			var circleNuevoX = $(this).parent().children("circle").attr("cx");
 			return circleNuevoX - circulo.radio - (circulo.margin-circulo.radio)/2;
 		}).attr("y", function(d,i){
@@ -399,14 +401,14 @@ function mostrarMapaComunas() {
 	d3.selectAll($("circle")).attr("cx", function(d,i){
 		return calcularNuevaPosicion("x", i);
 	});
-	d3.selectAll("rect").attr("x", function(d,i){
+	d3.selectAll("g.contenedor rect").attr("x", function(d,i){
 		var circleNuevoX = $(this).parent().children("circle").attr("cx");
 		return circleNuevoX - circulo.radio - (circulo.margin-circulo.radio)/2;
 	});
 	d3.selectAll("circle.nivel_activo").transition().attr("cx", function(d,i){
 		return calcularPosicionXComuna(i);
 	}).call(endall, function() {
-		d3.selectAll("rect").attr("x", function(d,i){
+		d3.selectAll("g.contenedor rect").attr("x", function(d,i){
 			var circleNuevoX = $(this).parent().children("circle").attr("cx");
 			return circleNuevoX - circulo.radio - (circulo.margin-circulo.radio)/2;
 		})
@@ -472,6 +474,9 @@ function resetCambioSeccion() {
 
 	d3.selectAll("circle").transition().duration(500).attr("fill", colores.neutro);
 
+	if (currentSeccion != "barchart") {
+		$("#barChart").hide();
+	}
 	if (currentSeccion != "comuna") {
 		resetMapaCaba();
 		$("#dropdown-nivel").hide();

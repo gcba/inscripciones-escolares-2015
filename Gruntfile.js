@@ -35,7 +35,8 @@ module.exports = function (grunt) {
                 'js/filtros.min.js': 'js/filtros.js',
                 'js/mapa_de_caba.min.js': 'js/mapa_de_caba.js',
                 'js/viz_educacion.min.js': 'js/viz_educacion.js',
-                'js/global_settings.min.js': 'js/global_settings.js'
+                'js/global_settings.min.js': 'js/global_settings.js',
+                'js/barchart.min.js': 'js/barchart.js'
               }
             }
         }

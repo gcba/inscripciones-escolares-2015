@@ -64,10 +64,10 @@
     <div id="viz-container">
 
       <h1 class="animated fadeIn">Inscripci&oacute;n Escolar Ciclo Lectivo 2015</h1>
-      <h2 id="bajada" class="">A finales del año 2013 se implemento por primera vez el sistema de inscripción escolar en linea, mediante el cual podés preinscribir a tus hijos desde un solo lugar y en el horario que más te convenga, expresando y ordenando tus preferencias para luego ser evaluado y asignado objetivamente de acuerdo con el reglamento escolar. Desde entonces venimos trabajando para mejorar la matrícula disponible. <br/>Mediante este sistema se inscribieron para el Ciclo Lectivo 2015 66.191 alumnos que ingresaron por primera vez o que cambiaron de nivel educativo en las escuelas de gestión estatal de la Ciudad.</h2>
+      <h2 id="bajada" class="">A finales del 2013 se implementó por primera vez el sistema de inscripción escolar en línea, mediante el cual podés preinscribir a tus hijos desde un solo lugar y en el horario que más te convenga, para luego ser evaluado y asignado de acuerdo con el reglamento escolar. Desde entonces venimos trabajando para mejorar la matrícula disponible.</h2>
 
       <a href="#" class="arrow next-section">
-      	<span class="referencia">Conoce más de los resultados de la inscripción en línea para el ciclo lectivo 2015.</span>
+      	<span class="referencia">Conocé la inscripción para el ciclo lectivo 2015.</span>
       	<span class="glyphicon glyphicon-chevron-down"></span>
       </a>
 
@@ -105,8 +105,6 @@
 
       </div>
 
-
-
       <svg id="viz" width="90%" height="90%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 960 520"></svg>
 
 
@@ -115,7 +113,9 @@
 
     <div class="main">
       <!-- Secciones -->
-      <section id="barchart" class="active"></section>
+      <section id="barchart" class="active">
+        <div id="tooltipChart"></div>
+      </section>
       <section id="landing"></section>
       <section id="general"></section>
       <section id="niveles"></section>
@@ -132,8 +132,8 @@
 
     <script type="text/javascript" src="js/efectos-ui.js"></script>
     <script type="text/javascript" src="js/viz_educacion.js"></script>
+    <script type="text/javascript" src="js/barchart.js"></script>
     <script type="text/javascript" src="js/mapa_de_caba.js"></script>
     <script type="text/javascript" src="js/filtros.js"></script>
-
   </body>
 </html>

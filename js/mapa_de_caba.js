@@ -1,10 +1,9 @@
-// Crear SVG para los circulos
+// TOOLTIP CABA
 $("#tooltipCABA").hide();
-
 
 var coloresCABA = ["#eaeaea", "#1977DD"]
 
-var svg = d3.select("#mapaCABA")
+var svgCABA = d3.select("#mapaCABA")
     .append("svg")
     .attr("width", mapaSvg.ancho)
     .attr("height", mapaSvg.alto)
@@ -41,10 +40,10 @@ function ready(error, comunas, data) {
         .domain([minimo, maximo])
         .range(coloresCABA);
 
-    svg.select(".caba").remove();
-    svg.select(".etiqueta").remove();
+    svgCABA.select(".caba").remove();
+    svgCABA.select(".etiqueta").remove();
 
-    svg.append("g")
+    svgCABA.append("g")
         .attr("class", "caba")
         .selectAll("path")
         .data(topojson.feature(comunas, comunas.objects.comunas).features)
@@ -68,7 +67,7 @@ function ready(error, comunas, data) {
         })
         .on("mousemove", function() {
             $("#tooltipCABA").show();
-            var mouse = d3.mouse(svg.node()).map(function(d) {
+            var mouse = d3.mouse(svgCABA.node()).map(function(d) {
                 return parseInt(d);
             });
             d3.select("#tooltipCABA")
@@ -79,7 +78,7 @@ function ready(error, comunas, data) {
                 );
         });
 
-    var gradient = svg.append("svg:defs")
+    var gradient = svgCABA.append("svg:defs")
         .append("svg:linearGradient")
         .attr("id", "gradient")
         .attr("x1", "0%")
@@ -95,7 +94,7 @@ function ready(error, comunas, data) {
         .attr("stop-color", coloresCABA[1])
         .attr("stop-opacity", 1);
 
-    var leyenda = svg.append("g")
+    var leyenda = svgCABA.append("g")
         .attr("class", "etiqueta")
         .attr("transform", "translate(170,267)");
 
