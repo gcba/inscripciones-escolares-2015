@@ -4253,7 +4253,8 @@ header {
     font-size: 1.3rem;
     color: #000;
     text-transform: uppercase;
-    min-width: 150px; }
+    min-width: 150px;
+    text-align: right; }
     @media (max-width: 767px) {
       header .header-gcba h2.slogan {
         font-size: 1rem; } }
@@ -4462,6 +4463,8 @@ a.arrow:hover, a.arrowMapa:hover {
       top: 5px; } }
 
 #mapaCABA {
+  display: none; }
+#barChart {
   display: none; }
 
 g.descripciones {

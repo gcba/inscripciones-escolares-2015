@@ -2,6 +2,9 @@
  * Global settings
  */
 
+// Keep track de la seccion en la está la viz
+var currentSeccion;
+
 // Detalles de la grilla de círculos
 var grillaSvg = {
 	ancho: 960,
@@ -24,6 +27,8 @@ var circulo = {
 	posy: 50,
 	margin: 20
 }
+// To be defined en el init de viz_educacion
+var middleIndex, circuloMedio;
 
 // Colores
 var colores = {
@@ -43,6 +48,9 @@ var infoDetails = {
 	verticalMargin: 20,
 	palabrasPorLinea: 3
 }
+
+// Variables para los grupos de textos que describen la viz
+var infoGroup, labelsGroup, descripcionesGroup;
 
 // Detalles Mapa de CABA SVG
 var nivelActivo = "inicial";

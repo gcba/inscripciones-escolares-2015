@@ -1,10 +1,5 @@
 {
     "secciones": {
-        "barchart": {
-            "bajada": "A finales del 2013 se implementó por primera vez el sistema de inscripción escolar en línea, mediante el cual podés preinscribir a tus hijos desde un solo lugar y en el horario que más te convenga, para luego ser evaluado y asignado de acuerdo con el reglamento escolar. Desde entonces venimos trabajando para mejorar la matrícula disponible.",
-            "anteriorSeccion": "",
-            "proximaSeccion": "Conocé la inscripción para el ciclo lectivo 2015."
-        },
         "landing": {
             "bajada": "El sistema de inscripción en línea está destinado a alumnos que ingresan por primera vez a una escuela de gestión estatal o quienes cambian de nivel educativo. Este año, 66.191 nuevos alumnos ingresaron a las escuelas de la Ciudad a través de este sistema.",
             "anteriorSeccion": "",
@@ -27,6 +22,10 @@
         },
         "mapa": {
             "anteriorSeccion": "Volver."
+        },
+        "barchart": {
+            "bajada": "A finales del 2013 se implementó por primera vez el sistema de inscripción escolar en línea, mediante el cual podés preinscribir a tus hijos desde un solo lugar y en el horario que más te convenga, para luego ser evaluado y asignado de acuerdo con el reglamento escolar. Desde entonces venimos trabajando para mejorar la matrícula disponible.",
+            "anteriorSeccion": ""
         }
     }
 }

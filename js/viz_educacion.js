@@ -1,9 +1,6 @@
 /*
  * JS para scrolling
  */
-
-var currentSeccion = $("section.active").attr("id");
-
 $(".main").onepage_scroll({
 	sectionContainer: "section",
 	easing: "ease",
@@ -18,19 +15,14 @@ $(".main").onepage_scroll({
 
 		$("section.active").removeClass("active");
 		$("section#" + currentSeccion).addClass("active");
-		$("#bajada").text(contenido.secciones[currentSeccion].bajada).fadeTo("fast", 1);
-		$("a.arrow").fadeIn();
-		$(".prev-section span.referencia").text(contenido.secciones[currentSeccion].anteriorSeccion).fadeIn();
-		$(".next-section span.referencia").text(contenido.secciones[currentSeccion].proximaSeccion).fadeIn();
+		
+		// Cambiar el texto y flechas que explica de qué se trata esta sección
+		actualizarBajadaYFlechas();
+
 		switch(currentSeccion) {
-			case "barchart":
-				$(".prev-section").hide();
-				$(".circulo").hide();
-				$("#barChart").fadeIn();
-				break;
 			case "landing":
 				showOneCirculito();
-				$(".prev-section").show();
+				$(".prev-section").hide();
 				break;
 			case "general":
 				$(".circulo").show();
@@ -66,6 +58,13 @@ $(".main").onepage_scroll({
 				break;
 			case "mapa":
 				break;
+			case "barchart":
+				$(".prev-section").show();
+				$(".circulo").hide();
+				$("#viz-container").show();
+				$("#barChart").fadeIn();
+				$(".next-section").hide();
+				break;
 		}
 		generarInfoText();
 	},
@@ -88,12 +87,9 @@ $('.prev-section').click(function(e){
  */
 
 var svgGeneral = d3.select("svg#viz");
-
 var grilla = svgGeneral.append("g").attr("class", "contenedor");
-
 var mapaComunas = svgGeneral.append("g")
 					.attr("id", "mapaCABA");
-
 var barChart = svgGeneral.append("g")
 						.attr("id", "barChart");
 
@@ -114,13 +110,13 @@ var json = (function() {
     return json;
 })();
 
-// General
+// Circulitos General
 var generalFemenino = Math.round(json.general.genero.femenino*totalCirculos/100),
 	generalMasculino = Math.round(json.general.genero.masculino*totalCirculos/100),
 	generalCABA = Math.round(json.general.procedencia.caba*totalCirculos/100),
 	generalProvincia = Math.round(json.general.procedencia.provincia*totalCirculos/100);
 
-// Niveles
+// Circulitos Niveles
 var jsonNiveles = json.niveles;
 var cantidadNiveles = Object.keys(jsonNiveles).length;
 var niveles = [];
@@ -148,7 +144,7 @@ for (var i = 0; i < cantidadNiveles; i++) {
 	niveles.push(newNivel);
 }
 
-// Explicativos
+// Datos Explicativos
 var explicativos = (function() {
     var json = null;
     $.ajax({
@@ -163,7 +159,7 @@ var explicativos = (function() {
     return json;
 })();
 
-// Contenido
+// Contenido: bajada, proxima seccion, etc
 var contenido = (function() {
     var json = null;
     $.ajax({
@@ -182,59 +178,76 @@ var contenido = (function() {
  *	End Datos
  */
 
-// Generar todos los circulitos en estado cero (sin mostrarlos)
-for (i = 0; i < grillaSvg.filasGeneral; i++) {
-	for (j = 0; j < grillaSvg.columnasGeneral; j++) {
-		var grupo = grilla.append("g").attr("class", "circulo animated fadeIn");
-		grupo.append("circle")
-			.attr("fill", colores.neutro)
-			.attr("r", circulo.radio)
-			.attr("class", currentSeccion);
-		grupo.append("rect")
-			.attr("width", circulo.radio*2+circulo.margin-circulo.radio)
-			.attr("height", circulo.radio*2+circulo.margin-circulo.radio)
-			.attr("fill", "transparent")
-			.on("mouseover", function(d){
-				// Buscar círculo que corresponde a este rectángulo
-				var circulo = $(this).parent().children("circle");
-				var claseCirculo = circulo.attr("class");
-				d3.selectAll($("circle:not(." + claseCirculo.split(' ').join('.') + ")"))
-					.style("opacity", 0.2);
-				d3.selectAll($("g.labels text:not(." + claseCirculo.split(' ').join('.') + ")"))
-					.style("opacity", 0.2);
-				d3.selectAll($("g.info text:not(." + claseCirculo.split(' ').join('.') + ")"))
-					.style("opacity", 0.2);
-			})
-			.on("mouseout", function(d){
-				d3.selectAll("circle").style("opacity", 1);
-				d3.selectAll("text").style("opacity", 1);
-			});
-	}
+// Genera todos los circulitos en estado cero
+function generarCirculos() {
+	for (i = 0; i < grillaSvg.filasGeneral; i++) {
+		for (j = 0; j < grillaSvg.columnasGeneral; j++) {
+			var grupo = grilla.append("g").attr("class", "circulo animated fadeIn");
+			grupo.append("circle")
+				.attr("fill", colores.neutro)
+				.attr("r", circulo.radio)
+				.attr("class", currentSeccion);
+			grupo.append("rect")
+				.attr("width", circulo.radio*2+circulo.margin-circulo.radio)
+				.attr("height", circulo.radio*2+circulo.margin-circulo.radio)
+				.attr("fill", "transparent")
+				.on("mouseover", function(d){
+					// Buscar círculo que corresponde a este rectángulo
+					var circulo = $(this).parent().children("circle");
+					var claseCirculo = circulo.attr("class");
+					d3.selectAll($("circle:not(." + claseCirculo.split(' ').join('.') + ")"))
+						.style("opacity", 0.2);
+					d3.selectAll($("g.labels text:not(." + claseCirculo.split(' ').join('.') + ")"))
+						.style("opacity", 0.2);
+					d3.selectAll($("g.info text:not(." + claseCirculo.split(' ').join('.') + ")"))
+						.style("opacity", 0.2);
+				})
+				.on("mouseout", function(d){
+					d3.selectAll("circle").style("opacity", 1);
+					d3.selectAll("text").style("opacity", 1);
+				});
+		}
+	}	
 }
 
-var middleIndex = (Math.floor(totalCirculos/2)-1);
-var grupoCirculoMedio = d3.selectAll("g.circulo").filter(function(d, i){ return i == middleIndex; });
-var circuloMedio = d3.selectAll("circle").filter(function(d, i){ return i == middleIndex; });
-var posxMedio = circulo.posx + (circulo.margin+circulo.radio) * ((middleIndex % grillaSvg.columnasGeneral)+1);
-var posyMedio = circulo.posy + (circulo.margin+circulo.radio) * (Math.floor(middleIndex/grillaSvg.columnasGeneral)+1);
+function init() {
+	currentSeccion = $("section.active").attr("id");
+	generarCirculos();
 
-//TODO: Extraer a funcion de init
-juntarCirculitos();
-showOneCirculito();
+	// Guardar cual es el circulo del medio para futura referencia 
+	middleIndex = (Math.floor(totalCirculos/2)-1);
+	circuloMedio = d3.selectAll("circle").filter(function(d, i){ return i == middleIndex; });
 
-var infoGroup = svgGeneral.append("g").attr("class", "info animated fadeInUp"),
-	labelsGroup = svgGeneral.append("g").attr("class", "labels animated fadeInDown"),
+	$(".circulo").hide();
+	// La viz arranca con todos los circulos juntos
+	juntarCirculitos();
+	// Y todos escondidos menos el del medio
+	showOneCirculito();
+
+	// Agregamos los grupos de textos que explicaran la viz
+	infoGroup = svgGeneral.append("g").attr("class", "info animated fadeInUp");
+	labelsGroup = svgGeneral.append("g").attr("class", "labels animated fadeInDown");
 	descripcionesGroup = svgGeneral.append("g").attr("class", "descripciones animated fadeInDown");
 
-generarInfoText();
-$(".prev-section").hide();
-$(".circulo").hide();		
+	actualizarBajadaYFlechas();
+	// No mostrar flecha para atrás ya que en init estamos en la primera sección
+	$(".prev-section").hide();
+	// Generar primeros explicativos
+	generarInfoTextLanding();
+}		
 
 /***********************************/
 
 /*
  * Funciones
  */
+
+function actualizarBajadaYFlechas() {
+	$("#bajada").text(contenido.secciones[currentSeccion].bajada).fadeTo("fast", 1);
+	$("a.arrow").fadeIn();
+	$(".prev-section span.referencia").text(contenido.secciones[currentSeccion].anteriorSeccion).fadeIn();
+	$(".next-section span.referencia").text(contenido.secciones[currentSeccion].proximaSeccion).fadeIn();
+}
 
 function endall(transition, callback) {
 	var n = 0;
@@ -246,6 +259,11 @@ function endall(transition, callback) {
 function showOneCirculito() {
 	d3.selectAll("circle").attr("class", currentSeccion + " " + "general");
 	$(".circulo").hide();
+	
+	var grupoCirculoMedio = d3.selectAll("g.circulo").filter(function(d, i){ return i == middleIndex; });
+	var posxMedio = circulo.posx + (circulo.margin+circulo.radio) * ((middleIndex % grillaSvg.columnasGeneral)+1);
+	var posyMedio = circulo.posy + (circulo.margin+circulo.radio) * (Math.floor(middleIndex/grillaSvg.columnasGeneral)+1);
+
 	grupoCirculoMedio.style("display", "block");
 	circuloMedio.attr("cx", posxMedio).attr("cy", posyMedio);
 	circuloMedio.transition().duration(500).attr("r", circulo.radioGrande);
@@ -500,11 +518,11 @@ function resetCambioSeccion() {
 		case "comuna":
 			resetCirculoMedio();
 			nivelMapaCaba = "inicial";
-			$("svg").show();
+			$("#mapaCABA svg").show();
 			break;
 		case "mapa":
 			$("#viz-container").hide();
-			$("svg").hide();
+			$("#mapaCABA svg").hide();
 			$(".filtro").hide();
 			break;
 	}
@@ -929,3 +947,4 @@ $("#dropdown-nivel select").change(function(){
       .await(ready);
 });
 
+init();
