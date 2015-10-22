@@ -4277,6 +4277,16 @@ footer {
   footer .hacienda {
     text-align: right; }
 
+p.mas-info {
+  display: none;
+  position: absolute;
+  bottom: 100px;
+  text-align: center;
+  width: 80%;
+  margin: 0% 10% 0% 10%;
+  z-index: 900;
+}
+
 h1 {
   text-align: center;
   font-weight: 300;
@@ -4483,6 +4493,11 @@ a.arrow:hover, a.arrowMapa:hover {
   display: none; }
 #barChart {
   display: none; }
+
+#barChart g.inscripciones rect {
+  stroke: #ccc;
+  cursor: pointer;
+}
 
 g.descripciones {
   display: none; }

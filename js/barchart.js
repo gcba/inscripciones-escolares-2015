@@ -7,7 +7,7 @@ $(document).mousemove(function(event) {
 });
 
 // Dimensiones del grafico
-var marginChart = {top: 100, right: 70, bottom: 40, left: 170},
+var marginChart = {top: 60, right: 100, bottom: 150, left: 180},
     widthChart = grillaSvg.ancho - marginChart.left - marginChart.right,
     heightChart = grillaSvg.alto - marginChart.top - marginChart.bottom;
 
@@ -44,7 +44,6 @@ d3.csv("data/datos-por-ano.csv", function(error, data) {
 
   data.forEach(function(d) {
     var y0 = 0;
-    var ano = "2013";
     d.anos = color.domain().map(function(name) { return {name: name, y0: y0, y1: y0 += +d[name], ano: d.Nivel} });
     d.total = d.anos[d.anos.length - 1].y1;
   });
@@ -64,7 +63,7 @@ d3.csv("data/datos-por-ano.csv", function(error, data) {
   var state = svg.selectAll(".state")
       .data(data)
     .enter().append("g")
-      .attr("class", "g")
+      .attr("class", function(data) { if (data.Nivel == "2016") { return "inscripciones"; } else { return "g" }})
       .attr("transform", function(d) { return "translate(" + x(d.Nivel) + ",0)"; });
 
   state.selectAll("rect")
@@ -77,14 +76,14 @@ d3.csv("data/datos-por-ano.csv", function(error, data) {
       .on("mouseover", function(d) {
         $("#tooltipChart").show();
         d3.select(this).style("stroke", "#ffffff");
-        var htmlStr = "<div><b>" + (d.y1 - d.y0) + "</b> inscriptos <br/>en <b>" + d.name.toLowerCase() + "</b></br>en <b>" + d.ano + "</b></div> ";
-        $("#tooltipChart").html(htmlStr);
+        var htmlStr = "<div><b>" + (d.y1 - d.y0) + "</b> alumnos <br/>en <b>" + d.name.toLowerCase() + "</b></br>en <b>" + d.ano + "</b></div> ";
+        $("#tooltipChart").html(htmlStr);   
       })
       .on("mouseout", function() {
         $("#tooltipChart").hide();
-        d3.select(this).style("stroke", "transparent");
+        d3.select(this).style("stroke", "transparent");  
       })
-      .on("mousemove", function() {
+      .on("mousemove", function(d) {
         $("#tooltipChart").show();
         var mouse = d3.mouse(svg.node()).map(function(d) {
             return parseInt(d);
@@ -93,8 +92,30 @@ d3.csv("data/datos-por-ano.csv", function(error, data) {
             .attr("style",
                 function() {
                     return "left:" + (mousePos[0] - 60) + "px; top:" + (mousePos[1] - 80) + "px";
-                });
+                });  
       });
+
+  var textBotonInscrip = ["calendario de", "inscripción", "online", "2016"];
+
+  d3.select("g.inscripciones").append("rect")
+    .attr("width", x.rangeBand())
+    .attr("y", y(d3.max(data, function(d) { return d.total; })))
+    .attr("height", y(0))
+    .attr("class", "boton-inscripciones")
+    .style("fill", "#ffffff");
+  d3.select("g.inscripciones").append("a")
+    .attr("xlink:href", "http://www.buenosaires.gob.ar/educacion/estudiantes")
+    .attr("target", "_blank")
+    .append("text")
+      .text("Conocé el")
+      .attr("x", 20)
+      .attr("y", 80)
+      .selectAll("tspan")
+        .data(textBotonInscrip)
+        .enter().append("tspan")
+          .text(function(d) { return d; })  
+          .attr("x", 20)
+          .attr("y", function(d,i) { return (100 + 20*i); });
 
   var legend = svg.selectAll(".legend")
       .data(color.domain().slice().reverse())

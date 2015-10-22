@@ -65,6 +65,7 @@ $(".main").onepage_scroll({
 				$("#barChart").fadeIn();
 				$(".next-section").hide();
 				$("footer").show();
+				$("p.mas-info").show();
 				break;
 		}
 		generarInfoText();
@@ -497,6 +498,7 @@ function resetCambioSeccion() {
 	if (currentSeccion != "barchart") {
 		$("#barChart").hide();
 		$("footer").hide();
+		$("p.mas-info").hide();
 	}
 	if (currentSeccion != "comuna") {
 		resetMapaCaba();
