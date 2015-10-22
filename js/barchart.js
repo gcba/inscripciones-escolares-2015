@@ -49,8 +49,6 @@ d3.csv("data/datos-por-ano.csv", function(error, data) {
     d.total = d.anos[d.anos.length - 1].y1;
   });
 
-  data.sort(function(a, b) { return a.total - b.total; });
-
   x.domain(data.map(function(d) { return d.Nivel; }));
   y.domain([0, d3.max(data, function(d) { return d.total; })]);
 

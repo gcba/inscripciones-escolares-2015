@@ -17,7 +17,7 @@ $(".main").onepage_scroll({
 		$("section#" + currentSeccion).addClass("active");
 		
 		// Cambiar el texto y flechas que explica de qué se trata esta sección
-		actualizarBajadaYFlechas();
+		actualizarTextos();
 
 		switch(currentSeccion) {
 			case "landing":
@@ -64,6 +64,7 @@ $(".main").onepage_scroll({
 				$("#viz-container").show();
 				$("#barChart").fadeIn();
 				$(".next-section").hide();
+				$("footer").show();
 				break;
 		}
 		generarInfoText();
@@ -229,7 +230,7 @@ function init() {
 	labelsGroup = svgGeneral.append("g").attr("class", "labels animated fadeInDown");
 	descripcionesGroup = svgGeneral.append("g").attr("class", "descripciones animated fadeInDown");
 
-	actualizarBajadaYFlechas();
+	actualizarTextos();
 	// No mostrar flecha para atrás ya que en init estamos en la primera sección
 	$(".prev-section").hide();
 	// Generar primeros explicativos
@@ -242,7 +243,8 @@ function init() {
  * Funciones
  */
 
-function actualizarBajadaYFlechas() {
+function actualizarTextos() {
+	$("#titulo").text(contenido.secciones[currentSeccion].titulo).fadeTo("fast", 1);
 	$("#bajada").text(contenido.secciones[currentSeccion].bajada).fadeTo("fast", 1);
 	$("a.arrow").fadeIn();
 	$(".prev-section span.referencia").text(contenido.secciones[currentSeccion].anteriorSeccion).fadeIn();
@@ -494,6 +496,7 @@ function resetCambioSeccion() {
 
 	if (currentSeccion != "barchart") {
 		$("#barChart").hide();
+		$("footer").hide();
 	}
 	if (currentSeccion != "comuna") {
 		resetMapaCaba();
