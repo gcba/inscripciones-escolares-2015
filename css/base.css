@@ -4269,6 +4269,15 @@ footer {
   background-color: #333333; }
   footer .ministerio {
     padding: 20px 50px; }
+    @media (max-width: 767px) {
+      footer .ministerio {
+        padding: 20px 20px; } 
+    }
+    @media (max-width: 480px) {
+      footer .ministerio {
+        padding: 20px 10px;
+      }
+    }
   footer .modernizacion {
     text-align: left; }
   footer .labgcba {
@@ -4466,7 +4475,8 @@ a.arrow, a.arrowMapa {
   text-align: center;
   color: #333333;
   z-index: 999;
-  opacity: 0.5; }
+  opacity: 0.5; 
+  width: 32%; }
   a.arrow span.referencia, a.arrowMapa span.referencia {
     font-size: 1.3rem;
     display: block; }
