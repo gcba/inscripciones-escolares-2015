@@ -4325,11 +4325,11 @@ h2 {
   line-height: 1.4; }
   @media (max-width: 767px) {
     h2 {
-      font-size: 1.21rem;
+      font-size: 1.30rem;
       width: 50%; } }
   @media (max-height: 815px) {
     h2 {
-      font-size: 1.21rem; } }
+      font-size: 1.30rem; } }
   @media (max-height: 510px) {
     h2 {
       font-size: 1.05rem; } }
@@ -4509,11 +4509,15 @@ a.arrow:hover, a.arrowMapa:hover {
   cursor: pointer;
 }
 
-g.descripciones {
-  display: none; }
-
-g.labels {
-  display: none; }
+#barChart .y.axis, 
+#barChart .x.axis g.tick text, 
+#barChart .x.axis g.tick line, 
+#barChart g.inscripciones,
+g.descripciones, 
+g.labels 
+{
+  display: none;
+}
 
 g.labels text, g.info text {
   cursor: default; }

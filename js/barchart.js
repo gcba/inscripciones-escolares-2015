@@ -72,6 +72,7 @@ d3.csv("data/datos-por-ano.csv", function(error, data) {
       .attr("width", x.rangeBand())
       .attr("y", function(d) { return y(d.y1); })
       .attr("height", function(d) { return y(d.y0) - y(d.y1); })
+      .attr("class", function(d, i) { return "rect" + d.ano + i; })
       .style("fill", function(d) { return color(d.name); })
       .on("mouseover", function(d) {
         $("#tooltipChart").show();

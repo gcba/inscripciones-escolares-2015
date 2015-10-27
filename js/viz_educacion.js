@@ -66,6 +66,7 @@ $(".main").onepage_scroll({
 				$(".next-section").hide();
 				$("footer").show();
 				$("p.mas-info").show();
+				animarGraficoBarras();
 				break;
 		}
 		generarInfoText();
@@ -243,6 +244,48 @@ function init() {
 /*
  * Funciones
  */
+
+function animarBarras(barras, orden, labelsAnos) {
+	var clasesBarras = [];
+	for (var i = 0; i < orden[0].length; i++) {
+		var claseBarra = "." + d3.select(barras[orden[0][i]]).attr("class");
+		clasesBarras.push(claseBarra);
+	}
+	clasesBarras = clasesBarras.join(", ");
+
+	if (labelsAnos.length > 1) {
+		d3.select(labelsAnos[0]).transition().duration(500).attr("style", "display: block; text-anchor: middle;");
+	}
+
+	d3.selectAll(clasesBarras)
+		.transition()
+		.duration(300)
+		.ease("linear")
+		.attr("height", function(d) { return y(d.y0) - y(d.y1); })
+		.attr("y", function(d) { return y(d.y1); })
+		.each("end", function() {
+			if (labelsAnos.length > 2) {
+				labelsAnos = labelsAnos.slice(1);
+			}
+			if (orden.length > 1) {
+				animarBarras(barras, orden.slice(1), labelsAnos);
+			}
+		});	
+}
+
+function animarGraficoBarras() {
+	var barras = $("#barChart g.g rect");
+	var labelsAnos = $("#barChart .x.axis g.tick text");
+	barras.hide();
+	for (var i = 0; i < barras.length; i++ ) {
+		var heightBarra = d3.select(barras[i]).attr("height");
+		var yBarra = d3.select(barras[i]).attr("y");
+		d3.select(barras[i]).attr("y", parseInt(yBarra)+parseInt(heightBarra)).attr("height", 0);
+	}
+	barras.show();
+	var orden = [[0], [1, 3],[2, 4, 6], [5, 7], [8]];
+	animarBarras(barras, orden, labelsAnos);
+}
 
 function actualizarTextos() {
 	$("#titulo").text(contenido.secciones[currentSeccion].titulo).fadeTo("fast", 1);
