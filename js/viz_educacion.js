@@ -269,6 +269,9 @@ function animarBarras(barras, orden, labelsAnos) {
 			}
 			if (orden.length > 1) {
 				animarBarras(barras, orden.slice(1), labelsAnos);
+			} else {
+				// Animar el boton de 2016
+				$("g.inscripciones").delay(500).fadeIn();
 			}
 		});	
 }
@@ -542,6 +545,7 @@ function resetCambioSeccion() {
 		$("#barChart").hide();
 		$("footer").hide();
 		$("p.mas-info").hide();
+		$("g.inscripciones").hide();
 	}
 	if (currentSeccion != "comuna") {
 		resetMapaCaba();

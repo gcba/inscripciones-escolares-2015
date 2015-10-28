@@ -1,3 +1,16 @@
+// Funcion que agrega comas para mil
+function addCommas(nStr) {
+    nStr += '';
+    var x = nStr.split(',');
+    var x1 = x[0];
+    var x2 = x.length > 1 ? ',' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + '.' + '$2');
+    }
+    return x1 + x2;
+}
+
 // Technicalities del tooltip y la posicion del mouse
 $("#tooltipChart").hide();
 var mousePos = [];
@@ -77,7 +90,7 @@ d3.csv("data/datos-por-ano.csv", function(error, data) {
       .on("mouseover", function(d) {
         $("#tooltipChart").show();
         d3.select(this).style("stroke", "#ffffff");
-        var htmlStr = "<div><b>" + (d.y1 - d.y0) + "</b> alumnos <br/>en <b>" + d.name.toLowerCase() + "</b></br>en <b>" + d.ano + "</b></div> ";
+        var htmlStr = "<div><b>" + addCommas((d.y1 - d.y0)) + "</b> alumnos <br/>en <b>" + d.name.toLowerCase() + "</b></br>en <b>" + d.ano + "</b></div> ";
         $("#tooltipChart").html(htmlStr);   
       })
       .on("mouseout", function() {
@@ -96,7 +109,8 @@ d3.csv("data/datos-por-ano.csv", function(error, data) {
                 });  
       });
 
-  var textBotonInscrip = ["calendario de", "inscripción", "online", "2016"];
+  var textBotonInscrip = ["calendario de", "inscripción", "online 2016"];
+  var coordenadasBtn = [12, 21, 19];
 
   d3.select("g.inscripciones").append("rect")
     .attr("width", x.rangeBand())
@@ -104,19 +118,22 @@ d3.csv("data/datos-por-ano.csv", function(error, data) {
     .attr("height", y(0))
     .attr("class", "boton-inscripciones")
     .style("fill", "#ffffff");
+  // Apendeo el texto a mano porque son solo 4 lineas 
+  // y sino no se puede centrar =/
   d3.select("g.inscripciones").append("a")
     .attr("xlink:href", "http://www.buenosaires.gob.ar/educacion/estudiantes")
     .attr("target", "_blank")
+    .attr("style", "font-size: 16px;")
     .append("text")
       .text("Conocé el")
-      .attr("x", 20)
-      .attr("y", 80)
+      .attr("x", 22)
+      .attr("y", 100)
       .selectAll("tspan")
         .data(textBotonInscrip)
         .enter().append("tspan")
           .text(function(d) { return d; })  
-          .attr("x", 20)
-          .attr("y", function(d,i) { return (100 + 20*i); });
+          .attr("x", function(d,i) { return coordenadasBtn[i]; })
+          .attr("y", function(d,i) { return (120 + 20*i); });
 
   var legend = svg.selectAll(".legend")
       .data(color.domain().slice().reverse())

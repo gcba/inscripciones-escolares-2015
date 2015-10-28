@@ -4476,7 +4476,7 @@ a.arrow, a.arrowMapa {
   color: #333333;
   z-index: 999;
   opacity: 0.5; 
-  width: 32%; }
+  width: 28%; }
   a.arrow span.referencia, a.arrowMapa span.referencia {
     font-size: 1.3rem;
     display: block; }
@@ -4506,7 +4506,15 @@ a.arrow:hover, a.arrowMapa:hover {
 
 #barChart g.inscripciones rect {
   stroke: #ccc;
-  cursor: pointer;
+}
+
+#barChart g.inscripciones a {
+  text-decoration: none;
+  fill: #333333;
+}
+#barChart g.inscripciones a:hover {
+  text-decoration: none;
+  fill: #555555;
 }
 
 #barChart .y.axis, 
