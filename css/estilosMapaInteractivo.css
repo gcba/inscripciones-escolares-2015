@@ -5679,6 +5679,9 @@ body {
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 10px; }
 
+.cartodb-infowindow {
+  z-index: 990;
+}
 .cartodb-popup,
 .cartodb-popup-tip-container {
   z-index: 999;
